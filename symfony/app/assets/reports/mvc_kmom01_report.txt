@@ -1,0 +1,38 @@
+<h2>MVC Kmom01</h2>
+
+<h3>Generella intryck</h3>
+<p>Ny kurs, nya språk och nya ramverk. Denna gången är det php (nygammalt), js (mest bekant) twig (bekant) och symfony (nytt) som gäller.
+Jag hoppas under detta tillfälle kunna sätta mig in bättre i php vilket jag upplevde som svårt i inledningen av programmet.</p>
+
+<h3>Förkunskaper</h3>
+<p>Samtliga mina förkunskaper i objektorienterad programmering kommer från denna programutbildning. Jag har således koncepten
+friska i minnet men med en sen lekmans förståelse för tillämpningen och dess gränsvärden.</p>
+            
+<h3>Objektmodellen</h3>
+<p>Det mesta kändes igen och egentligen endast delarna om objekt utan klasser som inte var helt tydligt i nuläget.</p>
+
+Modellen för klasser och objekt känns igen från våra kurser i Javascript och Python men med sina egenheter:
+<ul>
+    <li>En klass är en mall för (oftast) ett objekt.</li>
+    <li>Ett objekt är en instansifiering av en klass.</li>
+    <li>Ett objekt kan ses som ett användargränssnitt mot användaren och kapslar in kod i funktioner som, när vi talar om klasser, istället benämns metoder.</li>
+    <li>Den inledande instansifierande metoden benämns konstruktor</li>
+    <li>Metoder kan vara begränsade till att endast nås inom en instans eller vara tillgängliga genom anrop av klassen utifrån.</li>
+    <li>Objektet kan ha en uppsättning variabler som den bär med sig (bestäms av användare) t.ex.: player1, backpack, items_list, next_node.</li>
+    <li>Objektets form och värden kan ändras efter instansifiering.</li>
+    <li>Klasser/objekt använder ett referensord för sig själv eller den variabel som använts som argument, i detta fall 'this'.</li>
+</ul>
+
+<h3>Uppgiftsvärdering</h3>
+<p>Vad kodbas för kursmomentets uppgift 'me/report' anbelangar upplevde jag den vara välstrukturerad och direkt applicerbar
+på uppgiften vi sedan genomförde. Lagom nivå på en kursinledning enligt min uppfattning.</p>
+
+<h3>Övriga intryck</h3>
+<p>Från läsningen av 'PHP The Right Way' tar jag framförallt med mig att det finns många versioner av php i omlopp och det gäller att hålla
+kolla på vilken man jobbar med då funktionalitet kan saknas i tidigare utgåvor samt att det finns en debugger för php som heter Xdebug.</p>
+
+<h3>Today I learned</h3>
+<p>TIL för momentet är att mycket av routemetodiken som de olika ramverken använder är snarlika och ju fler som introduceras
+desto tydligare blir konceptet. Det går utmärkt att kombinera hashing med att hämta id:n i url:en, det går dock inte att hämta själva hashen. Noterar även en
+ sektion om dokumentation av koden samt en sektion om säkerhet där vi kan läsa om hashing vilket vi till del gick igenom under momentet. Man kan även följa en länk till
+ en trevlig <a href="https://github.com/smknstd/modern-php-cheatsheet">PHP-lathund</a>.</p>

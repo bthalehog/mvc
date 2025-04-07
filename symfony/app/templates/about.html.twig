@@ -3,11 +3,28 @@
 {% block title %}About{% endblock %}
 
 {% block body %}
-    <h1>About</h1>
-    <p>An image which can be clicked on.</p>
-    <a href="{{ asset('img/glider.svg') }}">
-        <img src="{{ asset('img/glider.svg') }}" alt="">
-    </a>
 
-    <img src="{{ asset('build/images/background.jpg') }}" alt="">
+    <div class="aboutView">
+        <article class="aboutArticle">
+            <p>The following information has been confirmed:</p>
+            <ul>
+                <li>The scripture uses langugages and frameworks like Symfony, twig, php and html.</li>
+                <li>MVC is an abbreviation meaning Model-View Controller.</li>
+                <li>There is a course with the same name given at BTH this semester.</li>
+                <li>This course uses langugages like Symfony, twig, php and html.</li>
+            </ul>
+            
+            <p>Coincidence? I think not.</p>
+            
+            <p>Reports on further findings are filed under report.</p>
+
+            <p>Stay on your toes.</p>
+            <a href="https://github.com/dbwebb-se/mvc" alt="">dbwebb</a>
+            <a href="https://github.com/bthalehog/mvc" alt="">bthalehog</a> 
+        </article>
+  
+        <img class="aboutPic" src="{{ asset('img/bwrepair.png') }}" alt=""></img>
+
+    </div>    
+
 {% endblock %}

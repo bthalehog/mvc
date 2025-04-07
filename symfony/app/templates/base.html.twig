@@ -14,17 +14,21 @@
         {% endblock %}
     </head>
     <body>
-        <header class="site-header" style="background-image: url({{ asset('img/background.jpg') }})">
-            <span class="site-title">My Symfony Site</span>
+        <header class="site-header" style="background-image: url({{ asset('img/bwlunarsurface.png') }})">
+            <span class="site-title">    </span>
         </header>
-        <nav>
-            <ul>
+        <nav class="nav">
+            <ul class="nav">
                 <li><a href="{{ path('home') }}">Home</a></li>
                 <li><a href="{{ path('about') }}">About</a></li>
-                <li><a href="{{ path('lucky_number') }}">Lucky number</a></li>
+                <li><a href="{{ path('report') }}">Report</a></li>
+                <li><a href="{{ path('lucky') }}">Lucky</a></li>
             </ul>
         </nav>
         
         {% block body %}{% endblock %}
     </body>
+    <footer class="footer">
+        <p>&copy; 2025</p>    
+    </footer>
 </html>

@@ -8,14 +8,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyControllerJson
 {
-    #[Route("/api/lucky/number")]
+    #[Route("/api")]
     public function jsonNumber(): Response
     {
         $number = random_int(0, 100);
 
         $data = [
-            'lucky-number' => $number,
-            'lucky-message' => 'Hi there!',
+            '/api' => 'This page',
+            '/api/quote' => 'Libraries for quotes and pictures',
         ];
 
         // return new JsonResponse($data);
@@ -25,5 +25,24 @@ class LuckyControllerJson
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
+    }
+
+    #[Route('/api/quote')]
+    public function quote(): Response
+    {
+        $quote = random_int(0, 4);
+        $quoteslist = ['Håll ut kosack, en dag blir du hövding', 'Själv är bäste dräng', 'Rötterna blir starka när det blåser', 'Ingen rök utan eld', 'Tala är silver, tiga är guld'];
+        $artlist = ['bwrepair', 'bwtakeoff', 'bwstruggle', 'bwtailgun', 'bwbrainscan'];
+        $selected = $quoteslist[$quote];
+        $picture = $artlist[$quote];
+        $data = [
+            'quote' => $selected,
+            'library' => $quoteslist,
+            'picture' => $picture,
+            'gallery' => $artlist,
+            'timestamp' => date('c'),
+        ];
+
+        return new JsonResponse($data);
     }
 }

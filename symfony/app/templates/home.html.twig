@@ -1,7 +1,25 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Home</h1>
+    <div class="homeView">
+        <article class="homeArticle">
+            It was early april, spring approaching, still no sun shone on our antagonist..<br>
+            <br>
+            For nights on end he had been hunkered down, digging through manuals and notes,<br>
+            trying to decipher the secrets that lie within this hidden code.<br>
+            <br>
+            As his eyes finally gazed upon it, his face lit up from behind the pages.
+            "M..v.."<br>
+            "mv..c, mvc.."<br>
+            "mvc, mvc!, MVC!<br>
+            <br>
+            M for the model to be viewed<br>
+            V for the view which we just.. modeled<br>
+            C for the heart of it - the Controller.<br>
+        </article>
+
+        <img class="homePic" src="{{ asset('build/images/tiredhero.png') }}" alt=""></img>
+    </div>
 {% endblock %}

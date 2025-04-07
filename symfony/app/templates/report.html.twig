@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Report{% endblock %}
+
+{% block body %}
+    <div class="reportView">
+        <article class="reportArticle">
+            <a href="{{ path('report-view', {'reportId': 'report1'}) }}#report1" class="reportBtn" id="btn01" onclick="loadRep('report1')">
+                Kmom01
+            </a>
+     
+            <a href="{{ path('report-view', {'reportId': 'report2'}) }}#report2" class="reportBtn" id="btn02" onclick="loadRep('report2')">
+                Kmom02
+            </a>
+
+            <a href="{{ path('report-view', {'reportId': 'report3'}) }}#report3" class="reportBtn" id="btn03" onclick="loadRep('report3')">
+                Kmom03
+            </a>
+
+            <a href="{{ path('report-view', {'reportId': 'report4'}) }}#report4" class="reportBtn" id="btn04" onclick="loadRep('report4')">
+                Kmom04
+            </a>
+
+            <a href="{{ path('report-view', {'reportId': 'report5'}) }}#report5" class="reportBtn" id="btn05" onclick="loadRep('report5')">
+                Kmom05
+            </a>
+        </article>
+    </div>
+{% endblock %}

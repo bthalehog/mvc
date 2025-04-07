@@ -7,11 +7,35 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyController
 {
-    #[Route("/lucky/hi")]
-    public function hi(): Response
+    #[Route("/")]
+    public function start(): Response
     {
         return new Response(
-            '<html><body>Hi to you!</body></html>'
+            '<html><body>Start</body></html>'
+        );
+    }
+
+    #[Route('/about')]
+    public function about(): Response
+    {
+        return new Response(
+            '<html><body>About</body></html>'
+        );
+    }
+
+    #[Route('/me')]
+    public function me(): Response
+    {
+        return new Response(
+            '<html><body>Me</body></html>'
+        );
+    }
+
+    #[Route('/report')]
+    public function report(): Response
+    {
+        return new Response(
+            '<html><body>Report</body></html>'
         );
     }
 
