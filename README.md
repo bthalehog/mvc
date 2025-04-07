@@ -5,7 +5,9 @@ https://github.com/bthalehog/mvc
 
 All information regarding version-handling for the webpage will be kept here.
 
-<div>
+![](../report/public/img/bwtailgun.png)
+
+<div style="background-color: f0f0f0">
     <img src="../report/public/img/bwtailgun.png" alt="Tailgun" width="300" height="200" />
 </div>
 
