@@ -5,7 +5,7 @@ https://github.com/bthalehog/mvc
 
 All information regarding version-handling for the webpage will be kept here.
 
-![](./public/img/bwtailgun.png)
+![](../report/symfony/app/public/img/bwtailgun.png)
 
 ## Tags:
 
