@@ -5,7 +5,7 @@ https://github.com/bthalehog/mvc
 
 All information regarding version-handling for the webpage will be kept here.
 
-![Tailgunner](../report/public/img/bwtailgun.png)
+![Tailgunner](/report/public/img/bwtailgun.png)
 
 ## Tags:
 
