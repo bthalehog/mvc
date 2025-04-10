@@ -34,7 +34,9 @@ class LuckyControllerTwig extends AbstractController
             "report2"=>"mvc_kmom02_report.txt",
             "report3"=>"mvc_kmom03_report.txt",
             "report4"=>"mvc_kmom04_report.txt",
+            "report5"=>"mvc_kmom05_report.txt"
         ];
+
         $selector = isset($_GET['reportId']) ? $_GET['reportId'] : null;
         $selected = $reportdict[$selector];
         $repPath = $this->getParameter('kernel.project_dir') . '/assets/reports/' . $selected;

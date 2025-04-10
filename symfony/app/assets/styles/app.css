@@ -163,6 +163,14 @@ h3 {
     margin: 1em;
 }
 
+.hashviewer {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: auto;
+    width: auto;
+}
+
 /* AUSPICIOUS */
 .luckyView {
     height: 60%;
