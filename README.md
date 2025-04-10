@@ -23,9 +23,9 @@ All subs actions listed below.
 20250407 Uploaded kmom01.  
 20250409 Fixed path picture in README.  
 20250410 Fixed hash-routing for report viewing.  
-20250410 Introduced new tag v1.0.1 for finalizing before hand in.
-20250410 Fixed report view background by adding article-element to report.
-20250410 Introduced new tag v1.0.2 for backup before handing in.
+20250410 Introduced new tag v1.0.1 for finalizing before hand in.  
+20250410 Fixed report view background by adding article-element to report.  
+20250410 Introduced new tag v1.0.2 for backup before handing in.  
 
 ### _Kmom02_
 ...  
