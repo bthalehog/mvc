@@ -1,0 +1,56 @@
+Ramverk: Symfony (installeras med composer)
+Script: PHP
+
+serverkommando:	php -S localhost:8888 -t public
+symfony server:start		(runs on own http://127.0.0.1:8000)
+
+
+Composer:
+---------
+
+composer show		show all packages
+composer --version	show version
+
+SYMFONY (handle routers)
+-------
+bin/console					show commands
+bin/console debug:router			Show routes
+bin/console router:match /lucky/number		Match specific route
+bin/console cache:clear				Clear cache
+symfony server:start
+
+Twig (handles active resources, php template engine)
+----
+https://github.com/dbwebb-se/mvc/tree/main/example/symfony	Grundexempel
+
+http://127.0.0.1:8000/lucky/number/twig
+
+Encore (handles static resources)
+
+Set .setPublicPath('/build') to .setPublicPath('build') to allow to build assets using 'npm run build'
+
+npm run build krävs efter ändringar i .css (assets/style) för att se implementering vid omstart av servern
+
+KOM IHÅG ATT run build och starta om server OFTA!!!
+
+
+GIT
+# Gå till me/report
+git init
+touch README.md
+git add .
+git commit -m "First commit"
+
+Om något går fel kan du alltid ta bort katalogen .git/ och starta om.
+
+# me/report
+rm -rf .git
+
+ADD/COMMIT
+
+git add . 				Lägg till alla ändringar (eller specifik fil)
+git commit -a -m "Meddelande för logg" 	Commit (-a står för all, -m för message)
+git status				Show status
+git push				Send to repo
+
+

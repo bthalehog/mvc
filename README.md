@@ -11,9 +11,11 @@ All information regarding version-handling for the webpage will be kept here.
 
 ### v1.0.0
 Tag for uploading report on kmom01.
+All subs actions listed below.
 
 ### v2.0.0
 Tag for uploading report on kmom02.
+All subs actions listed below.
 
 ## Actions log:
 
@@ -21,7 +23,10 @@ Tag for uploading report on kmom02.
 20250402 Added base structure for webpage (Symfony)
 20250402 Created routes
 20250407 Uploaded kmom01
-20250407 Updated README
+20250409 Fixed path picture in README.
+20250410 Fixed hash-routing for report viewing.
+20250410 Introduced new tag v1.0.1 for finalizing before hand in.
+
 
 ### _Kmom02_
 ...
