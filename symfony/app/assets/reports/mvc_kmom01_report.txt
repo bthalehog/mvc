@@ -1,3 +1,5 @@
+<article class="hashView">
+
 <h2>MVC Kmom01</h2>
 
 <h3>Generella intryck</h3>
@@ -37,3 +39,4 @@ desto tydligare blir konceptet. Det går utmärkt att kombinera hashing med att 
  sektion om dokumentation av koden samt en sektion om säkerhet där vi kan läsa om hashing vilket vi till del gick igenom under momentet. Man kan även följa en länk till
  en trevlig <a href="https://github.com/smknstd/modern-php-cheatsheet">PHP-lathund</a>.</p>
 <p>Jag har även lärt mig att webbläsaren läser allting fram till # och att hashen och dess data helt behandlas på frontendsidan.
+</article>

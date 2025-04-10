@@ -25,7 +25,6 @@
                     })
                     .then(text => {
                         document.querySelector('.reportArticle').innerHTML = text
-                        document.querySelector('.reportArticle').style.backgroundImage = "none"
                     })
                     .catch(error => {
                         document.querySelector('.reportArticle').innerHTML = "File not found"
@@ -36,6 +35,8 @@
         }
     </script>
         <article class="reportArticle">
+            <a href= "{{ path('report') }}#report1" onclick="loadRepHash('report1')" class="reportBtn">Kmom01</a>
+             
             <a href="{{ path('report-view', {'reportId': 'report1'}) }}#report1" class="reportBtn" id="btn01">
                 Kmom01
             </a>
@@ -55,8 +56,6 @@
             <a href="{{ path('report-view', {'reportId': 'report5'}) }}#report5" class="reportBtn" id="btn05">
                 Kmom05
             </a>
-
-            <a href= "{{ path('report') }}#report1" onclick="loadRepHash('report1')" class="reportBtn">Kmom01</a>
         </article>
     </div>
 {% endblock %}

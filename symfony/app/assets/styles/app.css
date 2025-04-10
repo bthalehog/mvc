@@ -97,24 +97,26 @@ h3 {
 /* ABOUT */
 .aboutView {
     height: 60%;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    margin: 1rem;
 }
 
 .aboutPic {
     order: 2;
-    height: 30%;
+    height: auto;
     width: 30%;
 }
 
 .aboutArticle {
     order: 1;
-    height: 30%;
-    width: 70%;
-    
+    margin: 1rem;
+    height: 40%;
+    width: 30%;
 }
 
 /* REPORT */
@@ -163,23 +165,28 @@ h3 {
     margin: 1em;
 }
 
-.hashviewer {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    height: auto;
+.hashView {
+    height: 100%;
     width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    gap: 1em;
+    background-color: white;
+    border: 2rem solid black;
+    padding: 1rem;
 }
 
 /* AUSPICIOUS */
 .luckyView {
-    height: 60%;
-    width: 85%;
+    height: 55vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5rem;
     background-image: url('../images/bwpulse.gif');
     background-position: center;
     background-repeat: no-repeat;
@@ -189,4 +196,5 @@ h3 {
     height: 15%;
     width: auto;
     justify-content: center;
+    align-items: center;
 }
