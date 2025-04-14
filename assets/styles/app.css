@@ -67,6 +67,8 @@ h3 {
 .footer p {
     padding: 1rem;
     align-items: center;
+    justify-content: left;
+    color: white;
 }
 
 /* HOME */
@@ -197,4 +199,16 @@ h3 {
     width: auto;
     justify-content: center;
     align-items: center;
+}
+
+.archiveHeadline {
+    font-size: 3rem;
+    font-weight: 900;
+    background-color: white;
+    width: 50%;
+    height: 20%;
+    border: 0.5rem double black; 
+    padding: 1rem;
+    text-align: center;
+    margin: 1rem;
 }

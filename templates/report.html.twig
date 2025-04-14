@@ -18,7 +18,7 @@
                 console.log("Report exists.");
                 let selection = repdict[id]
 
-                fetch(`/assets/reports/${selection}`)
+                fetch(`../public/assets/reports/${selection}`)
                     .then(response => {
                         if (!response.ok) throw new Error("No such report.");
                         return response.text();
@@ -34,6 +34,7 @@
             }
         }
     </script>
+        <h1 class="archiveHeadline">Research archive</h1>
         <article class="reportArticle">
             <a href= "{{ path('report') }}#report1" onclick="loadRepHash('report1')" class="reportBtn">Kmom01</a>
              

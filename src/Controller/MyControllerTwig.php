@@ -6,27 +6,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LuckyControllerTwig extends AbstractController
+class MyControllerTwig extends AbstractController
 {
-    #[Route("/twig", name: "home")]
+    #[Route("/", name: "home")]
     public function home(): Response
     {
         return $this->render('home.html.twig');
     }
 
-    #[Route("/about/twig", name: "about")]
+    #[Route("/about", name: "about")]
     public function about(): Response
     {
         return $this->render('about.html.twig');
     }
 
-    #[Route("/report/twig", name: "report")]
+    #[Route("/report", name: "report")]
     public function report(): Response
     {
         return $this->render('report.html.twig');
     }
 
-    #[Route("/report/report-view/twig", name: "report-view")]
+    #[Route("/report/report-view", name: "report-view")]
     public function viewReport(): Response
     {
         $reportdict = [
@@ -39,7 +39,7 @@ class LuckyControllerTwig extends AbstractController
 
         $selector = isset($_GET['reportId']) ? $_GET['reportId'] : null;
         $selected = $reportdict[$selector];
-        $repPath = $this->getParameter('kernel.project_dir') . '/assets/reports/' . $selected;
+        $repPath = $this->getParameter('kernel.project_dir') . '/public/assets/reports/' . $selected;
         $report = file_get_contents($repPath);
         
         return $this->render('report-view.html.twig', [
@@ -47,7 +47,7 @@ class LuckyControllerTwig extends AbstractController
         ]);
     }
     
-    #[Route("/lucky/twig", name: "lucky")]
+    #[Route("/lucky", name: "lucky")]
     public function number(): Response
     {
         $number = random_int(0, 100);

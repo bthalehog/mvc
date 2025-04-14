@@ -12,7 +12,7 @@ class ReportsController extends AbstractController
     #[Route("/report", name: "report")]
     public function showSelected($filename): Response
     {
-        $currPath = $this->getParameter('kernel.project_dir') . 'public/reports/' . $filename;
+        $currPath = $this->getParameter('kernel.project_dir') . 'public/assets/reports/' . $filename;
 
         if (!file_exists($currPath)) {
             throw new NotFoundHttpException("No such report");
