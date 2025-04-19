@@ -26,10 +26,12 @@ All subs actions listed below.
 20250410 Introduced new tag v1.0.1 for finalizing before hand in.  
 20250410 Fixed report view background by adding article-element to report.  
 20250410 Introduced new tag v1.0.2 for backup before handing in.  
+20250414 Added tag for finalized version, uploaded finalized version.
 20250414 Added tag for finalized version, uploaded finalized version.  
 
-### _Kmom02_
-...  
+### _Kmom02_  
+20250419 Initial upload Kmom02 - Controller and Classes  
+20250419 Updated README  
 
 
 ![](./public/img/bwtailgun.png)

@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ReportsController extends AbstractController
-{   
+{
     #[Route("/report", name: "report")]
     public function showSelected($filename): Response
     {

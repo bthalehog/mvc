@@ -33,6 +33,17 @@ npm run build krävs efter ändringar i .css (assets/style) för att se implemen
 
 KOM IHÅG ATT run build och starta om server OFTA!!!
 
+Composer
+--------
+You should run composer dump-autoload when:
+
+    You’ve added new classes
+
+    You changed your composer.json "autoload" section
+
+    You renamed namespaces or folders
+
+    Things just “aren’t being found” that should be
 
 GIT
 # Gå till me/report
