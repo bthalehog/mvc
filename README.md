@@ -32,6 +32,7 @@ All subs actions listed below.
 ### _Kmom02_  
 20250419 Initial upload Kmom02 - Controller and Classes  
 20250419 Updated README  
+20250420 Updated Classes (not yet in use) for cardgame, Updated README.
 
 
 ![](./public/img/bwtailgun.png)

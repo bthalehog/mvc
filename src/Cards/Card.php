@@ -2,6 +2,8 @@
 
 namespace App\Cards;
 
+
+// Need to implement control and remove structure of already drawn cards, similar to the one made in deckofcards where we pop all used values and rand-chose from the remaining until no more cards?
 /**
  * Card-class
  */

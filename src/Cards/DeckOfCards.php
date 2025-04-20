@@ -17,10 +17,9 @@ class DeckOfCards
      * @var integer $deckSize       Defining the size of the deck used (better as tuple?).
      * @var array $lastDraw         Array holding the last cards drawn (also writes draws to histogram).
      */
-
-    protected array  $deck;
     private ?int $deckSize = null;
     protected array $lastDraw;
+    protected array $lastDeal;
 
     public function __construct(int $deckSize = 52)
     {
@@ -40,21 +39,31 @@ class DeckOfCards
 
         $carrier = rtrim($carrier, ", ");
 
-        return $carrier; // might have to add (string)
+        return (string) $carrier; // might have to add (string)
     }
 
     // Also writes to histogram interface.
-    public function draw(): int
+    // Decide whether it deals one card and is called repeatedly or if it takes argument and repeats call inside.
+    public function dealCards(int $amount): void
     {
-        $this->lastDraw = rand(1, $this->deckSize);
-        // $this->addToHistogram($this->lastDraw);
+        $carrier = "";
 
-        return $this->lastDraw;
+        for ($i=0; $i<$amount; $i++) {
+            $randInd = array_rand($this->deck);
+            $dealtCard = $this->deck[$randInd];
+            unset($this->deck[$randInd]);
+            array_push($this->lastDeal, $dealtCard);
+            $this->deckSize = count($this->deck);
+        }
+
+        // $this->addToHistogram($this->lastDraw); 
+
+        // return $this->lastDeal; // Make to own method
     }
 
-    public function getLastDraw(): ?array
+    public function getLastDeal(): array
     {
 
-        return (array) $this->lastDraw;
+        return (array) $this->lastDeal;
     }
 }

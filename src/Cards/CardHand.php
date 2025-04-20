@@ -18,34 +18,56 @@ class CardHand
      * @var array $currentHand      The cards on hand.
      * @var integer $lastDraw       The value of the last draw and the last sacrifice (better as tuple?).
      */
-    protected array  $currentHand;
-    private ?int $lastDraw = null;
+    protected array     $currentHand;
+    private   array     $lastDraw;
+    private   ?int      $handSize = null;
+    private   array     $lastSacrifice;
 
     public function __construct(int $numberOfCards = 3)
     {
+        $this->handSize = $numberOfCards;
+
         for ($i = 0; $i < $numberOfCards; $i++) {
             $this->currentHand[] = new Card();
         }
-
-        $this->currentHand = $deckCount;
     }
 
     public function asString(): string
     {
-        return (string) $this->lastDraw;
+        foreach ($this->currentHand as $card) {
+            echo (string) $card; //print_r?
+        }
+        return (string) $this->currentHand; //print_r
     }
 
-    // Also writes to histogram interface.
-    public function draw(): int
-    {
-        $this->lastDraw = rand(1, $this->deckCount);
-        // $this->addToHistogram($this->lastRoll);
+    public function sacrifice(array $sacrifice): void
+    {   
+        $this->lastSacrifice = $sacrifice;
 
+        foreach ($sacrifice as $card) {
+            unset($this->currentHand[$card]);
+            echo "Sacrificing: $card";
+        }
+
+        for ($i=0; $i<$sacrifice; $i++) {
+            
+        }
+    }
+
+    public function cardToHand($numberOfCards): void {
+        for($i=0; $i < ($this->handSize - $this->lastSacrifice); $i++) {
+            // array_push($this->currentHand, new Card());
+            array_push($this->lastDraw, (array_push($this->currentHand, new Card())));
+        }
+    }
+
+    public function getLastSacrifice(): array
+    {
+        return $this->lastSacrifice;
+    }
+
+    public function getLastDraw(): array
+    {
         return $this->lastDraw;
-    }
-
-    public function getLastDraw(): ?int
-    {
-        return (int) $this->lastDraw;
     }
 }
