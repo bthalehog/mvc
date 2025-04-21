@@ -55,6 +55,18 @@ class CardHand
         return (string) $stringer;
     }
 
+    public function asCards(): string {
+        $stringer = "";
+
+        foreach ($this->currentHand as $card) {
+            $stringer .= $card->getGraphics() . " ";
+            // echo $card->value;
+            // echo "stringed";
+        }
+
+        return (string) $stringer;
+    }
+
     public function getHand(): array {
         return (array) $this->currentHand;
     }

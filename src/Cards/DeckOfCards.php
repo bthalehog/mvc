@@ -55,7 +55,7 @@ class DeckOfCards
             // $this->cardIndex[$randSelector]["status"] = "out";
             // FIX THIS - $this->lastDraw = $this->value;
             // OPTION $this->addToHistogram($this->lastDraw);
-            array_push($this->deck, new Card($this->deckMap[$randSelector]["value"] ?? null));
+            array_push($this->deck, new Card($this->deckMap[$randSelector]["value"] ?? null, $this->deckMap[$randSelector]["status"] ?? null));
             unset($this->deckMap[$randSelector]);
         }
 
@@ -68,6 +68,20 @@ class DeckOfCards
 
         foreach ($this->deck as $card) {
             $carrier .= ($card->getValue() . ", ");
+            // echo $carrier;
+        }
+
+        $carrier = rtrim($carrier, ", ");
+
+        return (string) $carrier;
+    }
+
+    public function asCards(): string
+    {
+        $carrier = "";
+
+        foreach ($this->deck as $card) {
+            $carrier .= ($card->getGraphics() . " ");
             // echo $carrier;
         }
 
@@ -110,17 +124,17 @@ class DeckOfCards
     public function decks(string $type = 'Trad52'): array {    
         $decks = [
             "Trad52" => [
-                ["value" => "s1", "status" => "in"], ["value" => "s2", "status" => "in"], ["value" => "s3", "status" => "in"], ["value" => "s4", "status" => "in"], ["value" => "s5", "status" => "in"], ["value" => "s6", "status" => "in"], ["value" => "s7", "status" => "in"], ["value" => "s8", "status" => "in"], ["value" => "s9", "status" => "in"], ["value" => "s10", "status" => "in"], ["value" => "s11", "status" => "in"], ["value" => "s12", "status" => "in"], ["value" => "s13", "status" => "in"],
-                ["value" => "c1", "status" => "in"], ["value" => "c2", "status" => "in"], ["value" => "c3", "status" => "in"], ["value" => "c4", "status" => "in"], ["value" => "c5", "status" => "in"], ["value" => "c6", "status" => "in"], ["value" => "c7", "status" => "in"], ["value" => "c8", "status" => "in"], ["value" => "c9", "status" => "in"], ["value" => "c10", "status" => "in"], ["value" => "c11", "status" => "in"], ["value" => "c12", "status" => "in"], ["value" => "c13", "status" => "in"],
-                ["value" => "d1", "status" => "in"], ["value" => "d2", "status" => "in"], ["value" => "d3", "status" => "in"], ["value" => "d4", "status" => "in"], ["value" => "d5", "status" => "in"], ["value" => "d6", "status" => "in"], ["value" => "d7", "status" => "in"], ["value" => "d8", "status" => "in"], ["value" => "d9", "status" => "in"], ["value" => "d10", "status" => "in"], ["value" => "d11", "status" => "in"], ["value" => "d12", "status" => "in"], ["value" => "d13", "status" => "in"],
-                ["value" => "h1", "status" => "in"], ["value" => "h2", "status" => "in"], ["value" => "h3", "status" => "in"], ["value" => "h4", "status" => "in"], ["value" => "h5", "status" => "in"], ["value" => "h6", "status" => "in"], ["value" => "h7", "status" => "in"], ["value" => "h8", "status" => "in"], ["value" => "h9", "status" => "in"], ["value" => "h10", "status" => "in"], ["value" => "h11", "status" => "in"], ["value" => "h12", "status" => "in"], ["value" => "h13", "status" => "in"]
+                ["value" => "s1", "status" => "🂡"], ["value" => "s2", "status" => "🂢"], ["value" => "s3", "status" => "🂣"], ["value" => "s4", "status" => "🂤"], ["value" => "s5", "status" => "🂥"], ["value" => "s6", "status" => "🂦"], ["value" => "s7", "status" => "🂧"], ["value" => "s8", "status" => "🂨"], ["value" => "s9", "status" => "🂩"], ["value" => "s10", "status" => "🂪"], ["value" => "s11", "status" => "🂫"], ["value" => "s12", "status" => "🂭"], ["value" => "s13", "status" => "🂮"],
+                ["value" => "c1", "status" => "🃑"], ["value" => "c2", "status" => "🃒"], ["value" => "c3", "status" => "🃓"], ["value" => "c4", "status" => "🃔"], ["value" => "c5", "status" => "🃕"], ["value" => "c6", "status" => "🃖"], ["value" => "c7", "status" => "🃗"], ["value" => "c8", "status" => "🃘"], ["value" => "c9", "status" => "🃙"], ["value" => "c10", "status" => "🃚"], ["value" => "c11", "status" => "🃛"], ["value" => "c12", "status" => "🃝"], ["value" => "c13", "status" => "🃞"],
+                ["value" => "d1", "status" => "🃁"], ["value" => "d2", "status" => "🃂"], ["value" => "d3", "status" => "🃃"], ["value" => "d4", "status" => "🃄"], ["value" => "d5", "status" => "🃅"], ["value" => "d6", "status" => "🃆"], ["value" => "d7", "status" => "🃇"], ["value" => "d8", "status" => "🃈"], ["value" => "d9", "status" => "🃉"], ["value" => "d10", "status" => "🃊"], ["value" => "d11", "status" => "🃋"], ["value" => "d12", "status" => "🃍"], ["value" => "d13", "status" => "🃎"],
+                ["value" => "h1", "status" => "🂱"], ["value" => "h2", "status" => "🂲"], ["value" => "h3", "status" => "🂳"], ["value" => "h4", "status" => "🂴"], ["value" => "h5", "status" => "🂵"], ["value" => "h6", "status" => "🂶"], ["value" => "h7", "status" => "🂷"], ["value" => "h8", "status" => "🂸"], ["value" => "h9", "status" => "🂹"], ["value" => "h10", "status" => "🂺"], ["value" => "h11", "status" => "🂻"], ["value" => "h12", "status" => "🂽"], ["value" => "h13", "status" => "🂾"]
             ],
             "Trad54" => [
-                ["value" => "s1", "status" => "in"], ["value" => "s2", "status" => "in"], ["value" => "s3", "status" => "in"], ["value" => "s4", "status" => "in"], ["value" => "s5", "status" => "in"], ["value" => "s6", "status" => "in"], ["value" => "s7", "status" => "in"], ["value" => "s8", "status" => "in"], ["value" => "s9", "status" => "in"], ["value" => "s10", "status" => "in"], ["value" => "s11", "status" => "in"], ["value" => "s12", "status" => "in"], ["value" => "s13", "status" => "in"],
-                ["value" => "c1", "status" => "in"], ["value" => "c2", "status" => "in"], ["value" => "c3", "status" => "in"], ["value" => "c4", "status" => "in"], ["value" => "c5", "status" => "in"], ["value" => "c6", "status" => "in"], ["value" => "c7", "status" => "in"], ["value" => "c8", "status" => "in"], ["value" => "c9", "status" => "in"], ["value" => "c10", "status" => "in"], ["value" => "c11", "status" => "in"], ["value" => "c12", "status" => "in"], ["value" => "c13", "status" => "in"],
-                ["value" => "d1", "status" => "in"], ["value" => "d2", "status" => "in"], ["value" => "d3", "status" => "in"], ["value" => "d4", "status" => "in"], ["value" => "d5", "status" => "in"], ["value" => "d6", "status" => "in"], ["value" => "d7", "status" => "in"], ["value" => "d8", "status" => "in"], ["value" => "d9", "status" => "in"], ["value" => "d10", "status" => "in"], ["value" => "d11", "status" => "in"], ["value" => "d12", "status" => "in"], ["value" => "d13", "status" => "in"],
-                ["value" => "h1", "status" => "in"], ["value" => "h2", "status" => "in"], ["value" => "h3", "status" => "in"], ["value" => "h4", "status" => "in"], ["value" => "h5", "status" => "in"], ["value" => "h6", "status" => "in"], ["value" => "h7", "status" => "in"], ["value" => "h8", "status" => "in"], ["value" => "h9", "status" => "in"], ["value" => "h10", "status" => "in"], ["value" => "h11", "status" => "in"], ["value" => "h12", "status" => "in"], ["value" => "h13", "status" => "in"],
-                ["value" => "joker1", "status" => "in"], ["value" => "joker2", "status" => "in"]]
+                ["value" => "s1", "status" => "🂡"], ["value" => "s2", "status" => "🂢"], ["value" => "s3", "status" => "🂣"], ["value" => "s4", "status" => "🂤"], ["value" => "s5", "status" => "🂥"], ["value" => "s6", "status" => "🂦"], ["value" => "s7", "status" => "🂧"], ["value" => "s8", "status" => "🂨"], ["value" => "s9", "status" => "🂩"], ["value" => "s10", "status" => "🂪"], ["value" => "s11", "status" => "🂫"], ["value" => "s12", "status" => "🂭"], ["value" => "s13", "status" => "🂮"],
+                ["value" => "c1", "status" => "🃑"], ["value" => "c2", "status" => "🃒"], ["value" => "c3", "status" => "🃓"], ["value" => "c4", "status" => "🃔"], ["value" => "c5", "status" => "🃕"], ["value" => "c6", "status" => "🃖"], ["value" => "c7", "status" => "🃗"], ["value" => "c8", "status" => "🃘"], ["value" => "c9", "status" => "🃙"], ["value" => "c10", "status" => "🃚"], ["value" => "c11", "status" => "🃛"], ["value" => "c12", "status" => "🃝"], ["value" => "c13", "status" => "🃞"],
+                ["value" => "d1", "status" => "🃁"], ["value" => "d2", "status" => "🃂"], ["value" => "d3", "status" => "🃃"], ["value" => "d4", "status" => "🃄"], ["value" => "d5", "status" => "🃅"], ["value" => "d6", "status" => "🃆"], ["value" => "d7", "status" => "🃇"], ["value" => "d8", "status" => "🃈"], ["value" => "d9", "status" => "🃉"], ["value" => "d10", "status" => "🃊"], ["value" => "d11", "status" => "🃋"], ["value" => "d12", "status" => "🃍"], ["value" => "d13", "status" => "🃎"],
+                ["value" => "h1", "status" => "🂱"], ["value" => "h2", "status" => "🂲"], ["value" => "h3", "status" => "🂳"], ["value" => "h4", "status" => "🂴"], ["value" => "h5", "status" => "🂵"], ["value" => "h6", "status" => "🂶"], ["value" => "h7", "status" => "🂷"], ["value" => "h8", "status" => "🂸"], ["value" => "h9", "status" => "🂹"], ["value" => "h10", "status" => "🂺"], ["value" => "h11", "status" => "🂻"], ["value" => "h12", "status" => "🂽"], ["value" => "h13", "status" => "🂾"],
+                ["value" => "joker1", "status" => "🃟"], ["value" => "joker2", "status" => "🃏"]]
         ];
     
         echo "Available deck types: 'Trad52', 'Trad54' \n";

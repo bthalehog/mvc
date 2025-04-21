@@ -234,10 +234,14 @@ h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: left;
+    text-align: center;
     background-color: white;
-    border: 1rem solid black;
-    padding: 1rem;
+    border: 0.5rem solid black;
+    font-size: 5rem;
+    margin: 0.5rem;
+    line-height: 6rem;
 }
 
-/* CARD GRAPHICS */
+.cardView .graphics {
+    font-size: 32px;
+}

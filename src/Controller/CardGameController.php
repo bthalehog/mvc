@@ -17,12 +17,12 @@ class CardGameController extends AbstractController
     {
         $deck = new DeckOfCards('Trad52');
         $hand = new CardHand($deck, 3);
-        $card = new Card("s5");
-
+        $card = $deck->dealCard();
+        
         $data = [
-            "deck" => $deck->asString(),
-            "hand" => $hand->asString(),
-            "card" => $card->getValue(),
+            "deck" => $deck->asCards(),
+            "hand" => $hand->asCards(),
+            "card" => $card->getGraphics(),
         ];
 
         return $this->render('cards/CardsHome.html.twig', $data);
