@@ -227,6 +227,19 @@ h3 {
     padding: 1rem;
 }
 
+.cardHome {
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    background-color: white;
+    border: 2rem solid black;
+    padding: 1rem;
+}
+
 .cardView {
     height: auto;
     width: auto;
@@ -243,5 +256,24 @@ h3 {
 }
 
 .cardView .graphics {
+    font-size: 32px;
+}
+
+.specView {
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    border: 0.5rem solid black;
+    font-size: 5rem;
+    margin: 0.5rem;
+    line-height: 6rem;
+}
+
+.specView .graphics {
     font-size: 32px;
 }

@@ -144,6 +144,18 @@ class DeckOfCards
         return $this;
     }
 
+    public function findByOrder($order): object {
+        $specific = new Card;
+
+        foreach ($this->deck as $card) {
+            if ($card->getOrder() == $order) {
+                $specific = $card;
+            }
+        }
+
+        return (object) $specific;
+    }
+
     public function decks(string $type = 'Trad52'): array {    
         $decks = [
             "Trad52" => [

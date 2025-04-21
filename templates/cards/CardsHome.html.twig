@@ -47,6 +47,14 @@
                     <li>
                         <a href="{{path('cards_start')}}#sort">Sort deck!</a>
                     </li>
+                    <li>
+                        <a href="{{ path('draw_specific', { 'number': 3 }) }}">Draw specific card by :number-route!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('shuffle_deck') }}">Shuffle deck by adding: /deck/shuffle to URL!</a>
+                    </li>
+
+    
                 </ul>
 
             <div id="card" class="cardView">
