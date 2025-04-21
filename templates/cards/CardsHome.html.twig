@@ -5,8 +5,7 @@
 {% block body %}
     <div id="cardViewer" class="cardLanding">
         <div id="cardHome" class="cardHome">
-            <h1>Card game</h1>
-            <p>This is a the landing page for my cardgame from kmom02</p>
+            <h1>Cardgame</h1>
             
             <h2>About my cardgame</h3>
             <h3>Classes</h3>
@@ -53,8 +52,16 @@
                     <li>
                         <a href="{{ path('shuffle_deck') }}">Shuffle deck by adding: /deck/shuffle to URL!</a>
                     </li>
-
-    
+                    <li>
+                        <a href="{{ path('sort_deck') }}">Sort deck in template!</a>
+                    </li>   
+                </ul>
+            
+            <p>Or view cardgame-classes as UML-diagrams</p>
+                <ul>
+                    <li>
+                        <a href="{{ path('cards_start') }}#uml">Show UML of cardgame-classes!</a>
+                    </li>
                 </ul>
 
             <div id="card" class="cardView">
@@ -77,6 +84,11 @@
             </div>
             <div id="shuffle" class="cardView">
                 {{ shuffled }}
+            </div>
+            <div id="sorted" class="cardView">
+                {{ sorted }}
+            </div>
+            <div id="uml" class="UMLView">
             </div>
 
             <p>You can see the code at my github-repo <a href="https://www.dbwebb.se">github-repo</a>.</p>

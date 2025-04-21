@@ -37,6 +37,7 @@ All subs actions listed below.
 20250421 New tag v2.0.3, Controller and views working, starting on graphics.  
 20250421 New tag v2.0.3, Graphics working, routes working, need final functionality to classes.  
 20250421 New tag v2.0.4, Fixed overflow of echo/print_r leaking into hmtl. Added functionality to classes for final criteria. Views working.  
-20250421 New tag v2.0.5, Routing to other templates for card working. 
+20250421 New tag v2.0.5, Routing to other templates for card working.   
+20250421 New tag v2.0.6, All routes for cardgame-func done, UML-created and published.     
 
 ![](./public/img/bwtailgun.png)

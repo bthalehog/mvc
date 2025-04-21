@@ -277,3 +277,16 @@ h3 {
 .specView .graphics {
     font-size: 32px;
 }
+
+.UMLView {
+    height: 55rem;
+    width: 100%;
+    background-image: url('../images/kmom02UML.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
