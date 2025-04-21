@@ -64,5 +64,5 @@ git commit -a -m ".." 	Commit (-a står för all, -m för message)
 git status				Show status
 git push				Send to repo
 git tag -a v1.0 -m ".." Tag with comment
-git tag v1.0            Lightweight tag
+git tag v1.0.0          Lightweight tag
 

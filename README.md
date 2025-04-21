@@ -33,6 +33,6 @@ All subs actions listed below.
 20250419 Updated README  
 20250420 Updated Classes (not yet in use) for cardgame, Updated README.  
 20250421 Introduced new tag v2.0.1, updated cardgame classes.  
-
+20250421 New tag v2.0.2, shifted complexity from card- to deck-class, turned deck-function into deck-method, all classes now functional.  
 
 ![](./public/img/bwtailgun.png)

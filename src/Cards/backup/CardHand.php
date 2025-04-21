@@ -20,7 +20,7 @@ class CardHand
      * @var integer $handSize       The amount of cards on hand.
      * @var array   $lastSacrifice  The last cards sacrificed.
      */
-    protected array     $currentHand;
+    protected array     $currentHand=[];
     private   array     $lastDraw=[];
     public    ?int      $handSize = null;
     private   array     $lastSacrifice = [];
@@ -28,12 +28,15 @@ class CardHand
     /**
      * Constructor to create instance of CardHand holding Card-objects.
      */
-    public function __construct(int $handSize = 3, $currentDeck)
+    public function __construct(int $handSize = 3)
     {
-        $this->currentHand = [];
         $this->handSize = $handSize;
-        $this->cardToHand($handSize, $currentDeck);
+        $this->cardToHand($handSize);
+        // $this->deck = $deck;
 
+        // for ($i = 0; $i < $numberOfCards; $i++) {
+        //    $this->currentHand[] = new Card();
+        // }
         // return $this;
     }
 
@@ -80,9 +83,9 @@ class CardHand
      *
      * @return void
      */
-    public function cardToHand($amount, $currentDeck): void {
+    public function cardToHand($amount): void {
         for($i=0; $i < $amount; $i++) {
-            $card = $currentDeck->dealCard(); // This needs fixing, myst be able to deal from one deck from inside hand. Trait?
+            $card = new Card; // THis needs fixing, myst be able to deal from one deck from inside hand. Trait?
             array_push($this->currentHand, $card);
             // array_push($this->lastDraw, (array_push($this->currentHand, $this->dealCard())));
             $this->lastDraw[] = $card;
