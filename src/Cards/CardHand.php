@@ -6,7 +6,7 @@ namespace App\Cards;
 
 // require_once(__DIR__ . '/Card.php');
 
-// use App\Cards\Card;
+use App\Cards\DeckOfCards;
 
 /**
  * CardHand-class
@@ -15,57 +15,98 @@ namespace App\Cards;
 class CardHand
 {
     /**
-     * @var array $currentHand      The cards on hand.
-     * @var integer $lastDraw       The value of the last draw and the last sacrifice (better as tuple?).
+     * @var array   $currentHand    The cards on hand.
+     * @var integer $lastDraw       The value of the last draw.
+     * @var integer $handSize       The amount of cards on hand.
+     * @var array   $lastSacrifice  The last cards sacrificed.
      */
-    protected array     $currentHand;
-    private   array     $lastDraw;
-    private   ?int      $handSize = null;
-    private   array     $lastSacrifice;
+    protected array     $currentHand=[];
+    private   array     $lastDraw=[];
+    public    ?int      $handSize = null;
+    private   array     $lastSacrifice = [];
 
-    public function __construct(int $numberOfCards = 3)
+    /**
+     * Constructor to create instance of CardHand holding Card-objects.
+     */
+    public function __construct(int $handSize = 3)
     {
-        $this->handSize = $numberOfCards;
+        $this->handSize = $handSize;
+        $this->cardToHand($handSize);
+        // $this->deck = $deck;
 
-        for ($i = 0; $i < $numberOfCards; $i++) {
-            $this->currentHand[] = new Card();
-        }
+        // for ($i = 0; $i < $numberOfCards; $i++) {
+        //    $this->currentHand[] = new Card();
+        // }
+        // return $this;
     }
 
+    /**
+     * Return cards on hand as string.
+     *
+     * @return string as representation of cards on hand.
+     */
     public function asString(): string
     {
+        $stringer = "";
+
         foreach ($this->currentHand as $card) {
-            echo (string) $card; //print_r?
+            $stringer .= $card->value;
+            // echo $card->value;
+            // echo "stringed";
         }
-        return (string) $this->currentHand; //print_r
+
+        return (string) $stringer;
     }
 
+    public function getHand(): array {
+        return (array) $this->currentHand;
+    }
+
+    /**
+     * Sacrifices cards (array).
+     *
+     * @return void
+     */
     public function sacrifice(array $sacrifice): void
     {   
         $this->lastSacrifice = $sacrifice;
 
         foreach ($sacrifice as $card) {
             unset($this->currentHand[$card]);
+            $this->handSize - 1;
             echo "Sacrificing: $card";
         }
+    }
 
-        for ($i=0; $i<$sacrifice; $i++) {
-            
+    /**
+     * Draw cards to hand to restore hand-size.
+     *
+     * @return void
+     */
+    public function cardToHand($amount): void {
+        for($i=0; $i < $amount; $i++) {
+            $card = new Card; // THis needs fixing, myst be able to deal from one deck from inside hand. Trait?
+            array_push($this->currentHand, $card);
+            // array_push($this->lastDraw, (array_push($this->currentHand, $this->dealCard())));
+            $this->lastDraw[] = $card;
         }
     }
 
-    public function cardToHand($numberOfCards): void {
-        for($i=0; $i < ($this->handSize - $this->lastSacrifice); $i++) {
-            // array_push($this->currentHand, new Card());
-            array_push($this->lastDraw, (array_push($this->currentHand, new Card())));
-        }
-    }
-
+    /**
+     * Show last sacrificed cards from hand.
+     *
+     * @return array as representation of the cards sacrificed.
+     */
     public function getLastSacrifice(): array
     {
         return $this->lastSacrifice;
     }
 
+    /**
+     * Show last cards drawn to hand.
+     *
+     * @return array as representation of the cards drawn and added.
+     */
     public function getLastDraw(): array
     {
         return $this->lastDraw;

@@ -2,8 +2,8 @@
 
 namespace App\Cards;
 
-
 // Need to implement control and remove structure of already drawn cards, similar to the one made in deckofcards where we pop all used values and rand-chose from the remaining until no more cards?
+
 /**
  * Card-class
  */
@@ -27,6 +27,9 @@ class Card
         ["value" => "h1", "status" => "in"], ["value" => "h2", "status" => "in"], ["value" => "h3", "status" => "in"], ["value" => "h4", "status" => "in"], ["value" => "h5", "status" => "in"], ["value" => "h6", "status" => "in"], ["value" => "h7", "status" => "in"], ["value" => "h8", "status" => "in"], ["value" => "h9", "status" => "in"], ["value" => "h10", "status" => "in"], ["value" => "h11", "status" => "in"], ["value" => "h12", "status" => "in"], ["value" => "h13", "status" => "in"]
     ];
 
+    /**
+     * Constructor to create instance of card.
+     */
     public function __construct(int $possibilities = 52)
     {
         $this->deckSize = $possibilities;
@@ -40,7 +43,7 @@ class Card
     {
         // This need selection
         $randSelector = rand(0, $this->deckSize - 1);
-        $this->value = $this->cardIndex[$randSelector]["value"]; // "value" instead? "value"=>"s1"
+        $this->value = $this->cardIndex[$randSelector]["value"]; // "value" instead? "value"=>"s1" or better to pop?
         $this->cardIndex[$randSelector]["status"] = "out";
 
         $this->lastDraw = $this->value;
@@ -49,11 +52,11 @@ class Card
 
     public function asString(): string
     {
-        return (string) $this->value;
+        return $this->value;
     }
 
     public function getLastDraw(): string
     {
-        return (string) $this->value;
+        return $this->value;
     }
 }
