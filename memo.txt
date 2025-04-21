@@ -20,7 +20,7 @@ bin/console cache:clear				Clear cache
 symfony server:start
 
 
-php bin/console debug:container ControllerName Show available services.
+php bin/console debug:container Controller Show available services.
 
 Twig (handles active resources, php template engine)
 ----

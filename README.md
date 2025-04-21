@@ -36,5 +36,6 @@ All subs actions listed below.
 20250421 New tag v2.0.2, shifted complexity from card- to deck-class, turned deck-function into deck-method, all classes now functional.  
 20250421 New tag v2.0.3, Controller and views working, starting on graphics.  
 20250421 New tag v2.0.3, Graphics working, routes working, need final functionality to classes.  
+20250421 New tag v2.0.4, Fixed overflow of echo/print_r leaking into hmtl. Added functionality to classes for final criteria. Views working.  
 
 ![](./public/img/bwtailgun.png)

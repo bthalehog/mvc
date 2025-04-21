@@ -25,16 +25,18 @@ class Card
     protected string $status = "";
     protected array $relations = [];
     protected ?string $graphics = "";
+    private ?int $order;
 
     /**
      * Constructor to create instance of card.
      */
-    public function __construct(string $value = null, string $graphics = null)
+    public function __construct(string $value = null, string $graphics = null, int $order = null)
     {
         $this->value = $value;
         $this->status = "optional - list or string";
         $this->relations = ["optional"=>"arrayform"];
         $this->graphics = $graphics;
+        $this->order = $order;
     }
 
     public function asString(): string
@@ -48,6 +50,10 @@ class Card
 
     public function getGraphics(): string {
         return (string) $this->graphics;
+    }
+
+    public function getOrder(): int {
+        return (int) $this->order;
     }
 
     public function getStatus(): string {

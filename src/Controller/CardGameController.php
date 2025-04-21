@@ -18,11 +18,17 @@ class CardGameController extends AbstractController
         $deck = new DeckOfCards('Trad52');
         $hand = new CardHand($deck, 3);
         $card = $deck->dealCard();
-        
+        $sorted = $deck->sortDeck();
+        $sorted = $sorted->asCards();
+        $shuffled = $deck->shuffleDeck();
+        $shuffled = $shuffled->asCards();
+
         $data = [
             "deck" => $deck->asCards(),
             "hand" => $hand->asCards(),
             "card" => $card->getGraphics(),
+            "sorted" => $sorted,
+            "shuffled" => $shuffled,
         ];
 
         return $this->render('cards/CardsHome.html.twig', $data);

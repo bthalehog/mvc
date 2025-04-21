@@ -36,15 +36,15 @@ class DeckOfCards
     public function __construct($deckType)
     {   
         $this->deckType = $deckType;
-        echo $this->deckType . "\n";
+        // echo $this->deckType . "\n";
 
         $this->deckMap = $this->decks($this->deckType);
 
-        print_r($this->deckMap);
+        // print_r($this->deckMap);
         
         // Set deck size by count
         $this->deckSize = count($this->deckMap);
-        echo ((string) $this->deckSize) . "\n";;
+        // echo ((string) $this->deckSize) . "\n";;
 
         // Card should be given value from DoC->cardInd, therefore randSelect inside this loop.
         while (count($this->deckMap) > 0) {
@@ -55,11 +55,11 @@ class DeckOfCards
             // $this->cardIndex[$randSelector]["status"] = "out";
             // FIX THIS - $this->lastDraw = $this->value;
             // OPTION $this->addToHistogram($this->lastDraw);
-            array_push($this->deck, new Card($this->deckMap[$randSelector]["value"] ?? null, $this->deckMap[$randSelector]["status"] ?? null));
+            array_push($this->deck, new Card($this->deckMap[$randSelector]["value"] ?? null, $this->deckMap[$randSelector]["status"] ?? null, $this->deckMap[$randSelector]["order"] ?? null));
             unset($this->deckMap[$randSelector]);
         }
 
-        echo "Created deck \n";
+        // echo "Created deck \n";
     }
 
     public function asString(): string
@@ -121,26 +121,49 @@ class DeckOfCards
         return (string) $this->deckType;
     }
 
+    public function sortDeck(int $order = 1): object {
+        $carrier = $this->deck;
+
+        usort($carrier, function($a, $b) use ($order) {
+            // return $a['order'] <=> $b['order'];
+            return $a->getOrder() <=> $b->getOrder();
+        });
+
+        $this->deck = $carrier;
+
+        return $this;
+    }
+
+    public function shuffleDeck(): object {
+        $carrier = $this->deck;
+
+        shuffle($carrier);
+
+        $this->deck = $carrier;
+
+        return $this;
+    }
+
     public function decks(string $type = 'Trad52'): array {    
         $decks = [
             "Trad52" => [
-                ["value" => "s1", "status" => "🂡"], ["value" => "s2", "status" => "🂢"], ["value" => "s3", "status" => "🂣"], ["value" => "s4", "status" => "🂤"], ["value" => "s5", "status" => "🂥"], ["value" => "s6", "status" => "🂦"], ["value" => "s7", "status" => "🂧"], ["value" => "s8", "status" => "🂨"], ["value" => "s9", "status" => "🂩"], ["value" => "s10", "status" => "🂪"], ["value" => "s11", "status" => "🂫"], ["value" => "s12", "status" => "🂭"], ["value" => "s13", "status" => "🂮"],
-                ["value" => "c1", "status" => "🃑"], ["value" => "c2", "status" => "🃒"], ["value" => "c3", "status" => "🃓"], ["value" => "c4", "status" => "🃔"], ["value" => "c5", "status" => "🃕"], ["value" => "c6", "status" => "🃖"], ["value" => "c7", "status" => "🃗"], ["value" => "c8", "status" => "🃘"], ["value" => "c9", "status" => "🃙"], ["value" => "c10", "status" => "🃚"], ["value" => "c11", "status" => "🃛"], ["value" => "c12", "status" => "🃝"], ["value" => "c13", "status" => "🃞"],
-                ["value" => "d1", "status" => "🃁"], ["value" => "d2", "status" => "🃂"], ["value" => "d3", "status" => "🃃"], ["value" => "d4", "status" => "🃄"], ["value" => "d5", "status" => "🃅"], ["value" => "d6", "status" => "🃆"], ["value" => "d7", "status" => "🃇"], ["value" => "d8", "status" => "🃈"], ["value" => "d9", "status" => "🃉"], ["value" => "d10", "status" => "🃊"], ["value" => "d11", "status" => "🃋"], ["value" => "d12", "status" => "🃍"], ["value" => "d13", "status" => "🃎"],
-                ["value" => "h1", "status" => "🂱"], ["value" => "h2", "status" => "🂲"], ["value" => "h3", "status" => "🂳"], ["value" => "h4", "status" => "🂴"], ["value" => "h5", "status" => "🂵"], ["value" => "h6", "status" => "🂶"], ["value" => "h7", "status" => "🂷"], ["value" => "h8", "status" => "🂸"], ["value" => "h9", "status" => "🂹"], ["value" => "h10", "status" => "🂺"], ["value" => "h11", "status" => "🂻"], ["value" => "h12", "status" => "🂽"], ["value" => "h13", "status" => "🂾"]
+                ["order" => 1, "value" => "s1", "status" => "🂡"], ["order" => 2, "value" => "s2", "status" => "🂢"], ["order" => 3, "value" => "s3", "status" => "🂣"], ["order" => 4, "value" => "s4", "status" => "🂤"], ["order" => 5, "value" => "s5", "status" => "🂥"], ["order" => 6, "value" => "s6", "status" => "🂦"], ["order" => 7, "value" => "s7", "status" => "🂧"], ["order" => 8, "value" => "s8", "status" => "🂨"], ["order" => 9, "value" => "s9", "status" => "🂩"], ["order" => 10, "value" => "s10", "status" => "🂪"], ["order" => 11, "value" => "s11", "status" => "🂫"], ["order" => 12, "value" => "s12", "status" => "🂭"], ["order" => 13, "value" => "s13", "status" => "🂮"],
+                ["order" => 14, "value" => "c1", "status" => "🃑"], ["order" => 15, "value" => "c2", "status" => "🃒"], ["order" => 16, "value" => "c3", "status" => "🃓"], ["order" => 17, "value" => "c4", "status" => "🃔"], ["order" => 18, "value" => "c5", "status" => "🃕"], ["order" => 19, "value" => "c6", "status" => "🃖"], ["order" => 20, "value" => "c7", "status" => "🃗"], ["order" => 21, "value" => "c8", "status" => "🃘"], ["order" => 22, "value" => "c9", "status" => "🃙"], ["order" => 23, "value" => "c10", "status" => "🃚"], ["order" => 24, "value" => "c11", "status" => "🃛"], ["order" => 25, "value" => "c12", "status" => "🃝"], ["order" => 26, "value" => "c13", "status" => "🃞"],
+                ["order" => 27, "value" => "d1", "status" => "🃁"], ["order" => 28, "value" => "d2", "status" => "🃂"], ["order" => 29, "value" => "d3", "status" => "🃃"], ["order" => 30, "value" => "d4", "status" => "🃄"], ["order" => 31, "value" => "d5", "status" => "🃅"], ["order" => 32, "value" => "d6", "status" => "🃆"], ["order" => 33, "value" => "d7", "status" => "🃇"], ["order" => 34, "value" => "d8", "status" => "🃈"], ["order" => 35, "value" => "d9", "status" => "🃉"], ["order" => 36, "value" => "d10", "status" => "🃊"], ["order" => 37, "value" => "d11", "status" => "🃋"], ["order" => 38, "value" => "d12", "status" => "🃍"], ["order" => 39, "value" => "d13", "status" => "🃎"],
+                ["order" => 40, "value" => "h1", "status" => "🂱"], ["order" => 41, "value" => "h2", "status" => "🂲"], ["order" => 42, "value" => "h3", "status" => "🂳"], ["order" => 43, "value" => "h4", "status" => "🂴"], ["order" => 44, "value" => "h5", "status" => "🂵"], ["order" => 45, "value" => "h6", "status" => "🂶"], ["order" => 46, "value" => "h7", "status" => "🂷"], ["order" => 47, "value" => "h8", "status" => "🂸"], ["order" => 48, "value" => "h9", "status" => "🂹"], ["order" => 49, "value" => "h10", "status" => "🂺"], ["order" => 50, "value" => "h11", "status" => "🂻"], ["order" => 51, "value" => "h12", "status" => "🂽"], ["order" => 52, "value" => "h13", "status" => "🂾"]
             ],
             "Trad54" => [
-                ["value" => "s1", "status" => "🂡"], ["value" => "s2", "status" => "🂢"], ["value" => "s3", "status" => "🂣"], ["value" => "s4", "status" => "🂤"], ["value" => "s5", "status" => "🂥"], ["value" => "s6", "status" => "🂦"], ["value" => "s7", "status" => "🂧"], ["value" => "s8", "status" => "🂨"], ["value" => "s9", "status" => "🂩"], ["value" => "s10", "status" => "🂪"], ["value" => "s11", "status" => "🂫"], ["value" => "s12", "status" => "🂭"], ["value" => "s13", "status" => "🂮"],
-                ["value" => "c1", "status" => "🃑"], ["value" => "c2", "status" => "🃒"], ["value" => "c3", "status" => "🃓"], ["value" => "c4", "status" => "🃔"], ["value" => "c5", "status" => "🃕"], ["value" => "c6", "status" => "🃖"], ["value" => "c7", "status" => "🃗"], ["value" => "c8", "status" => "🃘"], ["value" => "c9", "status" => "🃙"], ["value" => "c10", "status" => "🃚"], ["value" => "c11", "status" => "🃛"], ["value" => "c12", "status" => "🃝"], ["value" => "c13", "status" => "🃞"],
-                ["value" => "d1", "status" => "🃁"], ["value" => "d2", "status" => "🃂"], ["value" => "d3", "status" => "🃃"], ["value" => "d4", "status" => "🃄"], ["value" => "d5", "status" => "🃅"], ["value" => "d6", "status" => "🃆"], ["value" => "d7", "status" => "🃇"], ["value" => "d8", "status" => "🃈"], ["value" => "d9", "status" => "🃉"], ["value" => "d10", "status" => "🃊"], ["value" => "d11", "status" => "🃋"], ["value" => "d12", "status" => "🃍"], ["value" => "d13", "status" => "🃎"],
-                ["value" => "h1", "status" => "🂱"], ["value" => "h2", "status" => "🂲"], ["value" => "h3", "status" => "🂳"], ["value" => "h4", "status" => "🂴"], ["value" => "h5", "status" => "🂵"], ["value" => "h6", "status" => "🂶"], ["value" => "h7", "status" => "🂷"], ["value" => "h8", "status" => "🂸"], ["value" => "h9", "status" => "🂹"], ["value" => "h10", "status" => "🂺"], ["value" => "h11", "status" => "🂻"], ["value" => "h12", "status" => "🂽"], ["value" => "h13", "status" => "🂾"],
-                ["value" => "joker1", "status" => "🃟"], ["value" => "joker2", "status" => "🃏"]]
+                ["order" => 1, "value" => "s1", "status" => "🂡"], ["order" => 2, "value" => "s2", "status" => "🂢"], ["order" => 3, "value" => "s3", "status" => "🂣"], ["order" => 4, "value" => "s4", "status" => "🂤"], ["order" => 5, "value" => "s5", "status" => "🂥"], ["order" => 6, "value" => "s6", "status" => "🂦"], ["order" => 7, "value" => "s7", "status" => "🂧"], ["order" => 8, "value" => "s8", "status" => "🂨"], ["order" => 9, "value" => "s9", "status" => "🂩"], ["order" => 10, "value" => "s10", "status" => "🂪"], ["order" => 11, "value" => "s11", "status" => "🂫"], ["order" => 12, "value" => "s12", "status" => "🂭"], ["order" => 13, "value" => "s13", "status" => "🂮"],
+                ["order" => 14, "value" => "c1", "status" => "🃑"], ["order" => 15, "value" => "c2", "status" => "🃒"], ["order" => 16, "value" => "c3", "status" => "🃓"], ["order" => 17, "value" => "c4", "status" => "🃔"], ["order" => 18, "value" => "c5", "status" => "🃕"], ["order" => 19, "value" => "c6", "status" => "🃖"], ["order" => 20, "value" => "c7", "status" => "🃗"], ["order" => 21, "value" => "c8", "status" => "🃘"], ["order" => 22, "value" => "c9", "status" => "🃙"], ["order" => 23, "value" => "c10", "status" => "🃚"], ["order" => 24, "value" => "c11", "status" => "🃛"], ["order" => 25, "value" => "c12", "status" => "🃝"], ["order" => 26, "value" => "c13", "status" => "🃞"],
+                ["order" => 27, "value" => "d1", "status" => "🃁"], ["order" => 28, "value" => "d2", "status" => "🃂"], ["order" => 29, "value" => "d3", "status" => "🃃"], ["order" => 30, "value" => "d4", "status" => "🃄"], ["order" => 31, "value" => "d5", "status" => "🃅"], ["order" => 32, "value" => "d6", "status" => "🃆"], ["order" => 33, "value" => "d7", "status" => "🃇"], ["order" => 34, "value" => "d8", "status" => "🃈"], ["order" => 35, "value" => "d9", "status" => "🃉"], ["order" => 36, "value" => "d10", "status" => "🃊"], ["order" => 37, "value" => "d11", "status" => "🃋"], ["order" => 38, "value" => "d12", "status" => "🃍"], ["order" => 39, "value" => "d13", "status" => "🃎"],
+                ["order" => 40, "value" => "h1", "status" => "🂱"], ["order" => 41, "value" => "h2", "status" => "🂲"], ["order" => 42, "value" => "h3", "status" => "🂳"], ["order" => 43, "value" => "h4", "status" => "🂴"], ["order" => 44, "value" => "h5", "status" => "🂵"], ["order" => 45, "value" => "h6", "status" => "🂶"], ["order" => 46, "value" => "h7", "status" => "🂷"], ["order" => 47, "value" => "h8", "status" => "🂸"], ["order" => 48, "value" => "h9", "status" => "🂹"], ["order" => 49, "value" => "h10", "status" => "🂺"], ["order" => 50, "value" => "h11", "status" => "🂻"], ["order" => 51, "value" => "h12", "status" => "🂽"], ["order" => 52, "value" => "h13", "status" => "🂾"],
+                ["order" => 53, "value" => "joker1", "status" => "🃟"], ["order" => 54, "value" => "joker2", "status" => "🃏"]]
         ];
     
-        echo "Available deck types: 'Trad52', 'Trad54' \n";
+        // echo "Available deck types: 'Trad52', 'Trad54' \n";
     
         if (array_key_exists($type, $decks)) {
-            echo "You selected: $type \n";
+            // echo "You selected: $type \n";
             return (array) $decks[$type];
         } else {
             echo "No such deck type.";
