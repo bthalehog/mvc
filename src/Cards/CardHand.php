@@ -28,7 +28,7 @@ class CardHand
     /**
      * Constructor to create instance of CardHand holding Card-objects.
      */
-    public function __construct(int $handSize = 3, $currentDeck)
+    public function __construct($currentDeck, int $handSize = 3)
     {
         $this->currentHand = [];
         $this->handSize = $handSize;
@@ -47,7 +47,7 @@ class CardHand
         $stringer = "";
 
         foreach ($this->currentHand as $card) {
-            $stringer .= $card->value;
+            $stringer .= $card->asString();
             // echo $card->value;
             // echo "stringed";
         }

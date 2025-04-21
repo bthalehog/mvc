@@ -3,12 +3,93 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Card game</h1>
+    <div id="cardViewer" class="cardLanding">
+        <div id="cardHome" class="cardHome">
+            <h1>Card game</h1>
+            <p>This is a the landing page for my cardgame from kmom02</p>
+            
+            <h2>About my cardgame</h3>
+            <h3>Classes</h3>
+            <p>The cardgame consists of the classes: Card, CardHand, DeckOfCards.</p>
+            <p><i>Card</i> - has added optional variabes for future use in the form of $status and $relations since the assignment is likely to grow and include more complex handling. The class has been kept as simple as possible and all instantiation set to singular in methods throughout script to retain simplicity. Multiple calls are made through looping.
+            <br>
+            <p><i>CardHand</i> - takes the argument $handSize to enable playing different type of games.  added optional variabes for future use in the form of $status and $relations since the assignment is likely to grow and include more complex handling.
+            <br>
+            <p><i>DeckOfCards</i> - takes the argument "$deckType" which defines the type of deck to be created. The functionality can be extended to encompass more decktypes, the current available types are: 'Trad52' and 'Trad54' (Jokers).</p>
+            <p>All CardGameController functionality is directed toward DeckOfCards and CardHand, the base-class Card is only called from within DeckOfCards on creation of a new deck. Post creation all card-functionality is done
+            via objects in current deck.</p>
+            
+            <h3>Namespace App/Cards</h3>
+            <ul>
+                <li>App/Cards/Card</li>
+                <li>App/Cards/CardHand</li>
+                <li>App/Cards/DeckOfCards</li>
+            </ul>
 
-    <p>This is a classical dice game called "Game" where you do stuff
-    for other stuff to happen.</p>
-    
-    <p>You can read more on the <a href="https://en.wikipedia.org/wiki/Pig_(dice_game)"> 
-    basics of the game on Wikipedia</a>.</p>
+            <p>Below you can test the functionality built:</p>
+                <ul>
+                    <li>
+                        <a href="{{path('cards_start')}}#deck">Create a deck!</a>
+                    </li>
+                    <li>
+                        <a href="{{path('cards_start')}}#card">Draw a card!</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{path('cards_start')}}#hand">Deal a hand!</a>
+                    </li>
+                    <li>
+                        <a href="{{path('cards_start')}}#sacrifice">Sacrifice cards!</a>
+                    </li>
+                    <li>
+                        <a href="{{path('cards_start')}}#draw">Draw from deck!</a>
+                    </li>
+                </ul>
+
+            <div id="card" class="cardView">
+                {{ card }}
+            </div>
+            <div id="deck" class="cardView">
+                {{ deck }}
+            </div>
+            <div id="hand" class="cardView">
+                {{ hand }}
+            </div>
+            <div id="sacrifice" class="cardView">
+                <p>Sacrifice</p>
+            </div>
+            <div id="draw" class="cardView">
+                <p>Draw</p>
+            </div>
+
+            <p>You can see the code at my github-repo <a href="https://www.dbwebb.se">github-repo</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        function viewSelector(id) {
+            document.querySelectorAll('.cardView').forEach(cardView => {
+                cardView.classList.remove('active');
+                cardView.style.display = 'none';
+            });
+
+            const current = document.getElementById(id);
+
+            if (current != null) {
+                current.classList.add('active');
+                current.style.display = 'flex';
+            }
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            viewSelector(hash);
+        });
+        
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1) || 'cardHome';
+            viewSelector(hash);
+        });
+    </script>
 
 {% endblock %}

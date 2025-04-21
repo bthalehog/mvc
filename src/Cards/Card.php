@@ -19,10 +19,12 @@ class Card
      * @var string  $value          The cards value.
      * @var string  $status         Reserved for optionals (["show", "hide", "sacrifice", "hold"]).
      * @var string  $relations      Reserved for optionals (["parent", ["myDeck", "diamonds"], "child", ["bare", "royal"], "sibling", [$value+1, $value-1]]]).
+     * @var string  $graphics       Holds graphical representation in utf-8.
      */
-    protected string $value = "";
+    protected ?string $value = "";
     protected string $status = "";
     protected array $relations = [];
+    protected string $graphics = "";
 
     /**
      * Constructor to create instance of card.

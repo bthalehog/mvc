@@ -214,22 +214,30 @@ h3 {
 }
 
 /* CARDGAME */
-/*
-body {
-    margin: 0 auto;
-    max-width: 800px;
-    background-color: #eee;
-    font-size: 2em;
+.cardLanding {
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    background-color: white;
+    border: 2rem solid black;
+    padding: 1rem;
 }
 
-input {
-    font-size: 1em;
+.cardView {
+    height: auto;
+    width: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    background-color: white;
+    border: 1rem solid black;
+    padding: 1rem;
 }
 
-h1 {
-    border-bottom: 4px double green;
-}
-*/
-.die {
-    font-size: 2em;
-}
+/* CARD GRAPHICS */
