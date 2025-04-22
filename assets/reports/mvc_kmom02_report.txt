@@ -39,16 +39,19 @@
             <p>Jag tycker om mitt avskalade grafiska upplägg på sidan som är tänkt att illustrera en sorts äventyr i det okända. Det är fortfarande lite struligt att hålla isär relativa sökgenvägar för de olika twig/css/symfony/php. 
             CSS som bakgrundsbild i en tom div är ett enkelt sätt att visa bilder.</p>
 
+            Den främsta direkt förbättringen bör vara att flytta ut session till ett trait och återanvända detta istället för att upprepa koden för sessions-verifiering.
+
             <i>Arv</i>
-                <p>Arv innebär att en klass subklasser ärver av sin överordnade klass. Arvet kan bestå av variabler och metoder som kan vara såväl privata som publika.</p>
+                <p>Arv innebär att en klass subklasser ärver av sin överordnade klass. Arvet kan bestå av variabler och metoder som kan vara såväl privata som publika och görs genom att klassnamnet "extends InheritedClass".</p>
 
             <i>Komposition</i>
                 <p>Komposition beskriver ett förhållande mellan, i vårt fall, objektinstanser. Komposition är ett så kallat 'has-a'-förhållande vilket innebär att en objektinstans har/"has" en eller flera andra objektinstanser men inte är beroende av dessa för
                 sitt eget självberättigande. Ett vanligt exempel är bilen som är ett chassi fyllt med massa komponenter, även om du plockar bort alla komponenter så kvarstår bilen(chassit) om än med nedsatt funktion. Komposition bör eftersträvas framför arv då det är enklare att testa mindre avskalade delar av koden.</p>
 
             <i>Interface</i>
-                <p>Ett interface kan sägas vara ett paraply för flera classer som delar funktionalitet. Den delade funktionaliteten (måste vara exakt avseende retur och format) fungerar som ett medlemskapsintyg för interfaceklubben
-                och innebär att ...</p>
+                <p>Ett interface kan sägas vara ett paraply för flera klasser som delar funktionalitet. 
+                Den delade funktionaliteten är tvingande (måste vara exakt avseende retur och format) fungerar som ett klassens medlemskap för interfaceföreningen
+                och används för att skapa "kontrakt" vilket i detta fall syftar på att garantera en viss funktionalitet hos alla ingående klasser.</p>
 
             <i>Trait</i>
                 <p>Ett trait är en egenskap som inte är bunden till en specifik class utan hämtas från en egen class för användning i andra klasser eller med andra objekt.
@@ -59,10 +62,9 @@
             <ul>
                 <li>Man måste OFTA in och rensa cache och köra compose eller ta bort historik för att vara säker på att ändringar man gjort har implementerats eller ger fel. Frustrerande ur felsökningshänseende.</li>
                 <li>Geany är en ganska trevlig debugger för php.</li>
-                <li>PHP kan hantera "/:number" på serversidan men då bara som en sträng. För att agera på :number måste kodbehandlingen ske på användarsidan och således med JavaScript för vår del.</li>
                 <li>Symfony verkar begränsat avseende vad den kan mata in som data i routerna (kräver strängifiering), därför behöver arbetet på objekten ske i routerna i större utsträckning.</li>
-                <li>Objektets klassbeskrivningar krävs för att serialisering vid sessionshantering ska kunna ske.</li>
+                <li>Objektets klassbeskrivningar krävs för att serialisering vid sessionshantering ska kunna ske (verkar dock inte gälla med Symfony).</li>
                 <li>Autoloadern måste vara inkluderad för att ovan ska ske med automatik.</li>
-                <li>Symfony har en egen lösning kallad <i>sessionStorage</i></li>
+                <li>Symfony har en egen lösning för sessionshantering kallad <i>sessionStorage</i></li>
             </ul>
 </article>

@@ -39,7 +39,9 @@ All subs actions listed below.
 20250421 New tag v2.0.4, Fixed overflow of echo/print_r leaking into hmtl. Added functionality to classes for final criteria. Views working.  
 20250421 New tag v2.0.5, Routing to other templates for card working.   
 20250421 New tag v2.0.6, All routes for cardgame-func done, UML-created and published.  
-20250422 New tag v2.0.7, Implementing session for selected functionality.
-20250422 New tag v2.1.0, Session implemented. Report embryo added. Initializing final touches.
+20250422 New tag v2.0.7, Implementing session for selected functionality.  
+20250422 New tag v2.1.0, Session implemented. Report embryo added. Initializing final touches.  
+20250422 New tag v2.1.1, Kmom02 done, report finished, uploaded to server.  
+
 
 ![](./public/img/bwtailgun.png)

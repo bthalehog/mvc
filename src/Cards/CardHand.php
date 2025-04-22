@@ -20,10 +20,10 @@ class CardHand
      * @var integer $handSize       The amount of cards on hand.
      * @var array   $lastSacrifice  The last cards sacrificed.
      */
-    protected array     $currentHand=[];
-    private   array     $lastDraw=[];
-    public    ?int      $handSize = null;
-    private   array     $lastSacrifice = [];
+    protected array     $currentHand = [];
+    private array     $lastDraw = [];
+    public ?int      $handSize = null;
+    private array     $lastSacrifice = [];
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -54,7 +54,8 @@ class CardHand
         return (string) $stringer;
     }
 
-    public function asCards(): string {
+    public function asCards(): string
+    {
         $stringer = "";
 
         foreach ($this->currentHand as $card) {
@@ -66,7 +67,8 @@ class CardHand
         return (string) $stringer;
     }
 
-    public function getHand(): array {
+    public function getHand(): array
+    {
         return (array) $this->currentHand;
     }
 
@@ -76,7 +78,7 @@ class CardHand
      * @return void
      */
     public function sacrifice(array $sacrifice): void
-    {   
+    {
         $this->lastSacrifice = $sacrifice;
 
         foreach ($sacrifice as $card) {
@@ -91,7 +93,8 @@ class CardHand
      *
      * @return void
      */
-    public function cardToHand($amount, ?DeckOfCards $currentDeck = null): void {
+    public function cardToHand($amount, ?DeckOfCards $currentDeck = null): void
+    {
         /// draw from Deck three times and
         $card = null;
 
@@ -100,7 +103,7 @@ class CardHand
         }
 
         // Draw method is singular, loop amount of card times.
-        for($i=0; $i < $amount; $i++) {
+        for ($i = 0; $i < $amount; $i++) {
             $card = $currentDeck->dealCard();
             array_push($this->currentHand, $card);
             // array_push($this->lastDraw, (array_push($this->currentHand, $this->dealCard())));

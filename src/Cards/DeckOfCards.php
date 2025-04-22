@@ -8,7 +8,7 @@ use App\Cards\Card; // Import specific class
 
 // Keep all complezity in deckofcards, let card be simple, cardhand simple.
 // Added decks() for selecting between jokers or no jokers, prepped to be extended.
-// 
+//
 
 /**
  * CardHand-class
@@ -34,21 +34,22 @@ class DeckOfCards implements \JsonSerializable
      * Constructor to create a deck of $deckType.
      */
     public function __construct($deckType)
-    {   
+    {
         $this->deckType = $deckType;
         // echo $this->deckType . "\n";
 
         $this->deckMap = $this->decks($this->deckType);
 
         // print_r($this->deckMap);
-        
+
         // Set deck size by count
         $this->deckSize = count($this->deckMap);
         // echo ((string) $this->deckSize) . "\n";;
 
         // Card should be given value from DoC->cardInd, therefore randSelect inside this loop.
+
         while (count($this->deckMap) > 0) {
-        // for ($i = 0; $i <= ($this->deckSize + 1); $i++) {
+            // for ($i = 0; $i <= ($this->deckSize + 1); $i++) {
             // Selection from cardIndex
             $randSelector = array_rand($this->deckMap);
             //$this->value = $this->cardIndex[$randSelector]["value"]; // "value" instead? "value"=>"s1" or better to pop?
@@ -93,7 +94,7 @@ class DeckOfCards implements \JsonSerializable
     // Decide whether it deals one card and is called repeatedly or if it takes argument and repeats call inside.
     public function dealCard(int $amount = 1)
     {
-        for ($i=0; $i < $amount; $i++) {
+        for ($i = 0; $i < $amount; $i++) {
             $randInd = array_rand($this->deck);
             $dealtCard = $this->deck[$randInd];
             array_push($this->lastDeal, $dealtCard);
@@ -109,24 +110,29 @@ class DeckOfCards implements \JsonSerializable
         return $this->lastDeal;
     }
 
-    public function getDeck(): array {
+    public function getDeck(): array
+    {
         return $this->deck;
     }
 
-    public function getSize(): int {
+    public function getSize(): int
+    {
         return count($this->deck);
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return (string) $this->deckType;
     }
 
-    public function sortDeck(int $order = 1): object {
+    public function sortDeck(int $order = 1): object
+    {
         $carrier = $this->deck;
 
-        usort($carrier, function($a, $b) use ($order) {
+        // Use ($order) removed / from arg- int $order = 1
+        usort($carrier, function ($alfa, $beta) {
             // return $a['order'] <=> $b['order'];
-            return $a->getOrder() <=> $b->getOrder();
+            return $alfa->getOrder() <=> $beta->getOrder();
         });
 
         $this->deck = $carrier;
@@ -134,7 +140,8 @@ class DeckOfCards implements \JsonSerializable
         return $this;
     }
 
-    public function shuffleDeck(): object {
+    public function shuffleDeck(): object
+    {
         $carrier = $this->deck;
 
         shuffle($carrier);
@@ -144,8 +151,9 @@ class DeckOfCards implements \JsonSerializable
         return $this;
     }
 
-    public function findByOrder($order): object {
-        $specific = new Card;
+    public function findByOrder($order): object
+    {
+        $specific = new Card();
 
         foreach ($this->deck as $card) {
             if ($card->getOrder() == $order) {
@@ -156,7 +164,8 @@ class DeckOfCards implements \JsonSerializable
         return (object) $specific;
     }
 
-    public function decks(string $type = 'Trad52'): array {    
+    public function decks(string $type = 'Trad52'): array
+    {
         $decks = [
             "Trad52" => [
                 ["order" => 1, "value" => "s1", "status" => "🂡"], ["order" => 2, "value" => "s2", "status" => "🂢"], ["order" => 3, "value" => "s3", "status" => "🂣"], ["order" => 4, "value" => "s4", "status" => "🂤"], ["order" => 5, "value" => "s5", "status" => "🂥"], ["order" => 6, "value" => "s6", "status" => "🂦"], ["order" => 7, "value" => "s7", "status" => "🂧"], ["order" => 8, "value" => "s8", "status" => "🂨"], ["order" => 9, "value" => "s9", "status" => "🂩"], ["order" => 10, "value" => "s10", "status" => "🂪"], ["order" => 11, "value" => "s11", "status" => "🂫"], ["order" => 12, "value" => "s12", "status" => "🂭"], ["order" => 13, "value" => "s13", "status" => "🂮"],
@@ -171,9 +180,9 @@ class DeckOfCards implements \JsonSerializable
                 ["order" => 40, "value" => "h1", "status" => "🂱"], ["order" => 41, "value" => "h2", "status" => "🂲"], ["order" => 42, "value" => "h3", "status" => "🂳"], ["order" => 43, "value" => "h4", "status" => "🂴"], ["order" => 44, "value" => "h5", "status" => "🂵"], ["order" => 45, "value" => "h6", "status" => "🂶"], ["order" => 46, "value" => "h7", "status" => "🂷"], ["order" => 47, "value" => "h8", "status" => "🂸"], ["order" => 48, "value" => "h9", "status" => "🂹"], ["order" => 49, "value" => "h10", "status" => "🂺"], ["order" => 50, "value" => "h11", "status" => "🂻"], ["order" => 51, "value" => "h12", "status" => "🂽"], ["order" => 52, "value" => "h13", "status" => "🂾"],
                 ["order" => 53, "value" => "joker1", "status" => "🃟"], ["order" => 54, "value" => "joker2", "status" => "🃏"]]
         ];
-    
+
         // echo "Available deck types: 'Trad52', 'Trad54' \n";
-    
+
         if (array_key_exists($type, $decks)) {
             // echo "You selected: $type \n";
             return (array) $decks[$type];
@@ -186,5 +195,4 @@ class DeckOfCards implements \JsonSerializable
     {
         return $this->getDeck(); // or however you want to expose it
     }
-    
 }

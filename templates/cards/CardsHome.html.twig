@@ -60,7 +60,10 @@
                     </li>
                     <li>
                         <a href="{{ path('session_delete') }}">Destroy your session!</a>
-                    </li>  
+                    </li>
+                    <li>
+                        <a href="{{ path('debug_session') }}">Debug view!</a>
+                    </li> 
                 </ul>
             
             <p>Or view cardgame-classes as UML-diagrams</p>
@@ -94,8 +97,7 @@
             <div id="sorted" class="cardView">
                 {{ sorted }}
             </div>
-            <div id="uml" class="UMLView">
-            </div>
+            <div id="uml" class="UMLView"> </div>
 
             <p>You can see the code at my github-repo <a href="https://github.com/bthalehog/mvc">MVC</a>.</p>
         </div>

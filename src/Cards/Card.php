@@ -34,7 +34,7 @@ class Card
     {
         $this->value = $value;
         $this->status = "optional - list or string";
-        $this->relations = ["optional"=>"arrayform"];
+        $this->relations = ["optional" => "arrayform"];
         $this->graphics = $graphics;
         $this->order = $order;
     }
@@ -44,23 +44,28 @@ class Card
         return (string) $this->value;
     }
 
-    public function getValue(): string {
+    public function getValue(): string
+    {
         return (string) $this->value;
     }
 
-    public function getGraphics(): string {
+    public function getGraphics(): string
+    {
         return (string) $this->graphics;
     }
 
-    public function getOrder(): int {
+    public function getOrder(): int
+    {
         return (int) $this->order;
     }
 
-    public function getStatus(): string {
+    public function getStatus(): string
+    {
         return (string) $this->status;
     }
 
-    public function getRelations(): array {
+    public function getRelations(): array
+    {
         return $this->relations;
     }
 }

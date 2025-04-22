@@ -79,6 +79,6 @@ tools/php-cs-fixer/vendor/bin/php-cs-fixer --help To display help in symfony php
 
 Dry run fixer to identify files needing fixing: 
 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v             Show files needing fixing
-Run fixer for php: tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src       Fix files
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src                          Fix files
 
 PHP_CodeSniffer to check for commentign syntax

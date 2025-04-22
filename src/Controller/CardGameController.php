@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Cards\Card;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
@@ -14,7 +13,7 @@ use App\Cards\DeckOfCards;
 class CardGameController extends AbstractController
 {
     #[Route("/game/cards", name: "cards_start")]
-    public function CardsHome(SessionInterface $session): Response
+    public function cardsHome(SessionInterface $session): Response
     {
         // Replace deck with session-deck
         // $deck = new DeckOfCards('Trad52');
@@ -30,7 +29,7 @@ class CardGameController extends AbstractController
         }
 
         $hand = new CardHand($deck, 3);
-        print_r($hand);
+        // print_r($hand);
         $card = $deck->dealCard();
         $sorted = $deck->sortDeck();
         $sorted = $sorted->asCards();
@@ -46,7 +45,7 @@ class CardGameController extends AbstractController
             "shuffled" => $shuffled,
             "imgPath" => $imgPath,
         ];
-        
+
         $session->set('deck', $deck);
 
         return $this->render('cards/CardsHome.html.twig', $data);
@@ -64,7 +63,7 @@ class CardGameController extends AbstractController
         } else {
             $deck = $session->get('deck', new DeckOfCards('Trad52'));
         }
-        
+
         $deck = $deck->sortDeck();
         $data = [
             "deck" => $deck->asCards(),
@@ -77,7 +76,7 @@ class CardGameController extends AbstractController
 
     #[Route("/game/cards/deck/draw/{number}", name: "draw_specific")]
     public function drawCard($number, SessionInterface $session): Response
-    {   
+    {
         // $deck = new DeckOfCards('Trad52');
         if (!$session->has('deck')) {
             $deck = new DeckOfCards('Trad52');
@@ -116,9 +115,9 @@ class CardGameController extends AbstractController
         } else {
             $deck = $session->get('deck', new DeckOfCards('Trad52'));
         }
-
-        $hand = new CardHand(5, $deck);
-        $card = $deck->de; // Also has to pop from deck!!?
+        // POKED AROUND HERE
+        // $hand = new CardHand($number, $deck);
+        $card = $deck->cardToHand($deck, $number); // Also has to pop from deck!!?
         $remainder = count($deck->getDeck());
 
         $data = [

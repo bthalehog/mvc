@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Cards\Card;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
@@ -16,7 +15,7 @@ class MyControllerJson
     #[Route("/api")]
     public function jsonNumber(): Response
     {
-        $number = random_int(0, 100);
+        // $number = random_int(0, 100);
 
         $data = [
             '/api' => 'This page',
@@ -58,7 +57,15 @@ class MyControllerJson
     #[Route('/api/deck')]
     public function deck(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards('Trad52');
+        if (!$session->has('deck')) {
+            $deck = new DeckOfCards('Trad52');
+            $session->set('deck', $deck);
+            // echo "No deck in session, rerouting...";
+        } else {
+            $deck = $session->get('deck', new DeckOfCards('Trad52'));
+            // echo "Loaded from session";
+        }
+        // $deck = new DeckOfCards('Trad52');
         $data = [
             'deck' => $deck->asCards(),
             'timestamp' => date('c'),
@@ -70,7 +77,15 @@ class MyControllerJson
     #[Route('/api/deck/shuffle')]
     public function shuffle(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards('Trad52');
+        if (!$session->has('deck')) {
+            $deck = new DeckOfCards('Trad52');
+            $session->set('deck', $deck);
+            // echo "No deck in session, rerouting...";
+        } else {
+            $deck = $session->get('deck', new DeckOfCards('Trad52'));
+            // echo "Loaded from session";
+        }
+        // $deck = new DeckOfCards('Trad52');
         $deck->shuffleDeck();
         $data = [
             'deck' => $deck->asCards(),
@@ -83,7 +98,15 @@ class MyControllerJson
     #[Route('/api/deck/draw')]
     public function draw1(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards('Trad52');
+        if (!$session->has('deck')) {
+            $deck = new DeckOfCards('Trad52');
+            $session->set('deck', $deck);
+            // echo "No deck in session, rerouting...";
+        } else {
+            $deck = $session->get('deck', new DeckOfCards('Trad52'));
+            // echo "Loaded from session";
+        }
+        // $deck = new DeckOfCards('Trad52');
         $card = $deck->dealCard();
         $data = [
             'card' => $card->getGraphics(),

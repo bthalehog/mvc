@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Cards\Card;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
@@ -16,7 +15,7 @@ class SessionController extends AbstractController
 {
     #[Route("/session", name: "session_start")]
     public function sessionStart(SessionInterface $session): Response
-    {   
+    {
         if (!$session) {
             $deck = new DeckOfCards('Trad52');
             $this->initSession($session, $deck);
@@ -43,13 +42,12 @@ class SessionController extends AbstractController
         $sessionData = [
             "sessionData" => new JsonResponse($session->all()),
         ];
-        
+
         return $this->render('cards/session.html.twig', $sessionData);
     }
 
-    private function initSession(SessionInterface $session, $deck) {
-        // $data = "";
-
+    private function initSession(SessionInterface $session, $deck)
+    {
         $session->set('deck', $deck->asCards());
         echo "New";
     }
@@ -63,12 +61,13 @@ class SessionController extends AbstractController
 
         if ($session == null) {
             echo "No session to destroy. Visit /session to initiate.";
-        }        
+        }
 
         return $this->render('cards/delsession.html.twig');
     }
 
-    private function deleteSession(SessionInterface $session): void {
+    private function deleteSession(SessionInterface $session): void
+    {
         $session->invalidate();
         // $session->clear();
         echo "Session DEL";

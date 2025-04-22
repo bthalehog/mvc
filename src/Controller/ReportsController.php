@@ -19,7 +19,7 @@ class ReportsController extends AbstractController
         };
 
         return new Response(
-            file_get_contents($filePath),
+            file_get_contents($currPath),
             200,
             ['Content-Type' => 'text/html'] // Using html in text-doc
         );
