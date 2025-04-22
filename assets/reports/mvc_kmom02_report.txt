@@ -1,2 +1,68 @@
-MVC KMOM02
-            
+<article class="hashView">
+
+    <h2>MVC Kmom02</h2>
+        <h3>Generella intryck och egna reflektioner</h3>
+            <p>Kmom02 innebar ett omfattande kursmoment där flera stora grundläggande delar gicks igenom och sedan övades. Frör mig innebar detta
+            ett betydligt större tidsuttag än de 20 angivna timmarna. Lyckligtvis kom momentet med mycket väl formulerade instruktioner
+            och exempelmaterial, väl anpassade för lösandet av uppgiften.</p>
+
+            <p>Jag upplever under detta moment att flera av de "praxis"-moment vi gick igenom i guiden "Kom igång med Php" (avseende autoloader, namespaces och session)
+            inte vara särskilt lätt att implementera på vår MVC då vi använder Symfony som har egna prioriterade lösningar för detta vilka svårligen kombineras med alternativa
+            metoder då det inte går att blanda anrop när man redan har autoload och symfony har egna förprogrammerade preferenser för exempelvis namespace och referenser.
+            Jag försökte använda multipla <i>namespace</i> genom att lägga till dessa i composer.json och min .yaml men symfony hade ändå ständiga problem troligen beroende på hård 
+            styrning mot App-namespacet. Jag valde till slut att inte implementera mitt eget namespace parallellt med symfonys App.</p>
+
+            <p>Jag känner mig ganska bekväm med klasser och objekt, även controller upplägget börjar klarna. Detta innebär att jag kan lägga lite mer tid på min nemesis - ramverket.
+            Jag får nog ändå säga att Symfony är det trevligaste ramverket så här långt, jag tycker även att php börjar bli ett ganska trevligt språk även om det ofta har mer skillnader
+            gentemot python och js än vad python och JavaScript har sinsemellan.</p>
+
+            <p>Mycket bra och tydlig förklaring av hur namespace används, hela den biten blev mycket tydligare för mig nu än det var under JS-delarna där det primärt verkade handla om dokumentationshantering.</p>
+
+        <h3>Uppgiften</h3>
+            <p>Jag känner mig ganska bekväm med klasser och objekt, även controller upplägget börjar klarna. Detta innebär att jag kan lägga lite mer tid på min nemesis - ramverket.
+            Jag får nog ändå säga att Symfony är det trevligaste ramverket så här långt, jag tycker även att php börjar bli ett ganska trevligt språk även om det ofta har mer skillnader
+            gentemot python och js än vad python och JavaScript har sinsemellan.</p>
+
+            <p>Bortsett från att det tog mig mycket längre tid än tänkt så är jag relativt nöjd med mitt upplägg. Jag valde att hålla Card-klassen så enkel som möjligt men förbereda objektet
+            för mer avancerad användning genom att tillskriva extra värden. Merparten av de komplexa metoderna återfinns nu i DeckOfCards och Card-objektet anropas egentligen bara härifrån
+            (utom i särskilda förevisningsfall).</p>
+
+            <p>Efter att ha fått bukt på php:s lösning för tupler lyckades jag även skapa en funktion för olika sorters kortlekar (i dagsläget bara traditionell med eller utan jokrar)
+            och skickade med värden för intern ordning i kortleken (hierarki - i händelse av att sortering på värden påverkas av färg) vilket även underlättade sorteringsfunktionerna.
+            Objekten som skapas får via kortleksarrayen även variabel för status som jag hoppas kunna använda för att indikera om kortet är spelat/sakat alternativt öppet/dolt längre fram.</p>
+
+            <p>Jag har nu försökt tänka framåt när jag kodar och tycker att jag har tagit höjd för flera tänkbara scenarier framgent. Det är dock svårt att säga huruvida mina lösningar är "bra" ännu
+            men jag hoppas på att mindre omarbetning av grundläggande kod ska behövas denna gång. Det finns gott om förbättringspotential avseende kommentarer och dokumentation i klasserna.
+            Säkerligen har jag flera skript som inte är DRY med tanke på mina begränsade php-kunskaper, det är i vart fall betydligt enklare att manövrera ett främmande språk när man är mer bekant med
+            terminologin för logiken och därför enkelt kan hitta motsvarigheten till bekanta metoder såsom length() fast för php.</p>
+
+            <p>Jag tycker om mitt avskalade grafiska upplägg på sidan som är tänkt att illustrera en sorts äventyr i det okända. Det är fortfarande lite struligt att hålla isär relativa sökgenvägar för de olika twig/css/symfony/php. 
+            CSS som bakgrundsbild i en tom div är ett enkelt sätt att visa bilder.</p>
+
+            <i>Arv</i>
+                <p>Arv innebär att en klass subklasser ärver av sin överordnade klass. Arvet kan bestå av variabler och metoder som kan vara såväl privata som publika.</p>
+
+            <i>Komposition</i>
+                <p>Komposition beskriver ett förhållande mellan, i vårt fall, objektinstanser. Komposition är ett så kallat 'has-a'-förhållande vilket innebär att en objektinstans har/"has" en eller flera andra objektinstanser men inte är beroende av dessa för
+                sitt eget självberättigande. Ett vanligt exempel är bilen som är ett chassi fyllt med massa komponenter, även om du plockar bort alla komponenter så kvarstår bilen(chassit) om än med nedsatt funktion. Komposition bör eftersträvas framför arv då det är enklare att testa mindre avskalade delar av koden.</p>
+
+            <i>Interface</i>
+                <p>Ett interface kan sägas vara ett paraply för flera classer som delar funktionalitet. Den delade funktionaliteten (måste vara exakt avseende retur och format) fungerar som ett medlemskapsintyg för interfaceklubben
+                och innebär att ...</p>
+
+            <i>Trait</i>
+                <p>Ett trait är en egenskap som inte är bunden till en specifik class utan hämtas från en egen class för användning i andra klasser eller med andra objekt.
+                Traitklassen kan ses som en verktygslåda med universalverktyg(metoder) som kan tänkas behövas ofta och i samband med fler än en klasstyp. Klasser kan sedan
+                använda metoder(trait) från Traitklassen som vore de egna genom att ange use NameOfTrait.</p>
+
+        <h3>TIL</h3>
+            <ul>
+                <li>Man måste OFTA in och rensa cache och köra compose eller ta bort historik för att vara säker på att ändringar man gjort har implementerats eller ger fel. Frustrerande ur felsökningshänseende.</li>
+                <li>Geany är en ganska trevlig debugger för php.</li>
+                <li>PHP kan hantera "/:number" på serversidan men då bara som en sträng. För att agera på :number måste kodbehandlingen ske på användarsidan och således med JavaScript för vår del.</li>
+                <li>Symfony verkar begränsat avseende vad den kan mata in som data i routerna (kräver strängifiering), därför behöver arbetet på objekten ske i routerna i större utsträckning.</li>
+                <li>Objektets klassbeskrivningar krävs för att serialisering vid sessionshantering ska kunna ske.</li>
+                <li>Autoloadern måste vara inkluderad för att ovan ska ske med automatik.</li>
+                <li>Symfony har en egen lösning kallad <i>sessionStorage</i></li>
+            </ul>
+</article>

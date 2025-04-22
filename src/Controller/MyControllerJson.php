@@ -6,6 +6,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Cards\Card;
+use App\Cards\CardHand;
+use App\Cards\DeckOfCards;
+
 class MyControllerJson
 {
     #[Route("/api")]
@@ -16,6 +20,10 @@ class MyControllerJson
         $data = [
             '/api' => 'This page',
             '/api/quote' => 'Libraries for quotes and pictures',
+            '/api/deck' => 'Deck of Cards',
+            '/api/deck/shuffle' => 'Shuffled deck',
+            '/api/deck/draw' => 'Draw singular card',
+            '/api/deck/draw/number' => 'Draw amount of cards',
         ];
 
         // return new JsonResponse($data);
@@ -41,6 +49,59 @@ class MyControllerJson
             'picture' => $picture,
             'gallery' => $artlist,
             'timestamp' => date('c'),
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route('/api/deck')]
+    public function deck(): Response
+    {
+        $deck = new DeckOfCards('Trad52');
+        $data = [
+            'deck' => $deck->asCards(),
+            'timestamp' => date('c'),
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route('/api/deck/shuffle')]
+    public function shuffle(): Response
+    {
+        $deck = new DeckOfCards('Trad52');
+        $deck->shuffleDeck();
+        $data = [
+            'deck' => $deck->asCards(),
+            'timestamp' => date('c'),
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route('/api/deck/draw')]
+    public function draw1(): Response
+    {
+        $deck = new DeckOfCards('Trad52');
+        $card = $deck->dealCard();
+        $data = [
+            'card' => $card->getGraphics(),
+            'timestamp' => date('c'),
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route('/api/deck/draw/{number}')] //has to be frontend if :number not just treated as string.
+    public function draw($number): Response
+    {
+        $deck = new DeckOfCards('Trad52');
+        $hand = new CardHand($deck, $number);
+        $remainder = count($deck->getDeck());
+        $data = [
+            'hand' => $hand->asCards(),
+            'timestamp' => date('c'),
+            'remainder' => $remainder,
         ];
 
         return new JsonResponse($data);

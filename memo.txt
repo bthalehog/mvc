@@ -5,39 +5,11 @@ serverkommando:	php -S localhost:8888 -t public
 symfony server:start		(runs on own http://127.0.0.1:8000)
 
 
-Composer:
+COMPOSER
 ---------
-
 composer show		show all packages
 composer --version	show version
 
-SYMFONY (handle routers)
--------
-bin/console					show commands
-bin/console debug:router			Show routes
-bin/console router:match /lucky/number		Match specific route
-bin/console cache:clear				Clear cache
-symfony server:start
-
-
-php bin/console debug:container Controller Show available services.
-
-Twig (handles active resources, php template engine)
-----
-https://github.com/dbwebb-se/mvc/tree/main/example/symfony	Grundexempel
-
-http://127.0.0.1:8000/lucky/number/twig
-
-Encore (handles static resources)
-
-Set .setPublicPath('/build') to .setPublicPath('build') to allow to build assets using 'npm run build'
-
-npm run build krävs efter ändringar i .css (assets/style) för att se implementering vid omstart av servern
-
-KOM IHÅG ATT run build och starta om server OFTA!!!
-
-Composer
---------
 You should run composer dump-autoload when:
 
     You’ve added new classes
@@ -48,24 +20,65 @@ You should run composer dump-autoload when:
 
     Things just “aren’t being found” that should be
 
-GIT
+
+SYMFONY (handle routers)
+-------
+bin/console					                show commands
+bin/console debug:router			        Show routes
+bin/console router:match /lucky/number		Match specific route
+bin/console cache:clear				        Clear cache
+bin/console cache:warmup                    Warm-up cache
+bin/console debug:container Controller      Show available services
+
+symfony server:start                        Start server
+symfony server:stop                         Stop server
+symfony server:status                       Server status
+
+
+TWIG (handles active resources, php template engine)
+----
+https://github.com/dbwebb-se/mvc/tree/main/example/symfony	Grundexempel
+
+
+
+ENCORE (handles static resources)
+------------
+
+Set .setPublicPath('/build') to .setPublicPath('build') to allow to build assets using 'npm run build'
+
+npm run build krävs efter ändringar i .css (assets/style) för att se implementering vid omstart av servern
+
+KOM IHÅG ATT run build och starta om server OFTA!!!
+
+GIT (version handling and backup)
+--------
 # Gå till me/report
-git init
-touch README.md
-git add .
-git commit -m "First commit"
+    git init
+    touch README.md
+    git add .
+    git commit -m "First commit"
 
 Om något går fel kan du alltid ta bort katalogen .git/ och starta om.
 
 # me/report
 rm -rf .git
 
-ADD/COMMIT
+git add . 				    Lägg till alla ändringar (eller specifik fil)
+git commit -a -m ".." 	    Commit (-a står för all, -m för message)
+git status				    Show status
+git push				    Send to repo
+git tag -a v1.0 -m ".."     Tag with comment
+git tag v1.0.0              Lightweight tag
+git push --tags             Push with tags
+git checkout???
 
-git add . 				Lägg till alla ändringar (eller specifik fil)
-git commit -a -m ".." 	Commit (-a står för all, -m för message)
-git status				Show status
-git push				Send to repo
-git tag -a v1.0 -m ".." Tag with comment
-git tag v1.0.0          Lightweight tag
 
+NAMESPACE
+---------
+tools/php-cs-fixer/vendor/bin/php-cs-fixer --help To display help in symfony php-standard fixer.
+
+Dry run fixer to identify files needing fixing: 
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v             Show files needing fixing
+Run fixer for php: tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src       Fix files
+
+PHP_CodeSniffer to check for commentign syntax
