@@ -40,5 +40,6 @@ All subs actions listed below.
 20250421 New tag v2.0.5, Routing to other templates for card working.   
 20250421 New tag v2.0.6, All routes for cardgame-func done, UML-created and published.  
 20250422 New tag v2.0.7, Implementing session for selected functionality.
+20250422 New tag v2.1.0, Session implemented. Report embryo added. Initializing final touches.
 
 ![](./public/img/bwtailgun.png)

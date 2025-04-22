@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,7 +56,7 @@ class MyControllerJson
     }
 
     #[Route('/api/deck')]
-    public function deck(): Response
+    public function deck(SessionInterface $session): Response
     {
         $deck = new DeckOfCards('Trad52');
         $data = [
@@ -67,7 +68,7 @@ class MyControllerJson
     }
 
     #[Route('/api/deck/shuffle')]
-    public function shuffle(): Response
+    public function shuffle(SessionInterface $session): Response
     {
         $deck = new DeckOfCards('Trad52');
         $deck->shuffleDeck();
@@ -80,7 +81,7 @@ class MyControllerJson
     }
 
     #[Route('/api/deck/draw')]
-    public function draw1(): Response
+    public function draw1(SessionInterface $session): Response
     {
         $deck = new DeckOfCards('Trad52');
         $card = $deck->dealCard();
@@ -93,9 +94,18 @@ class MyControllerJson
     }
 
     #[Route('/api/deck/draw/{number}')] //has to be frontend if :number not just treated as string.
-    public function draw($number): Response
+    public function draw($number, SessionInterface $session): Response
     {
-        $deck = new DeckOfCards('Trad52');
+        if (!$session->has('deck')) {
+            $deck = new DeckOfCards('Trad52');
+            $session->set('deck', $deck);
+            // echo "No deck in session, rerouting...";
+        } else {
+            $deck = $session->get('deck', new DeckOfCards('Trad52'));
+            // echo "Loaded from session";
+        }
+
+        // $deck = new DeckOfCards('Trad52');
         $hand = new CardHand($deck, $number);
         $remainder = count($deck->getDeck());
         $data = [

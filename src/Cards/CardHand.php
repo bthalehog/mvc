@@ -20,7 +20,7 @@ class CardHand
      * @var integer $handSize       The amount of cards on hand.
      * @var array   $lastSacrifice  The last cards sacrificed.
      */
-    protected array     $currentHand;
+    protected array     $currentHand=[];
     private   array     $lastDraw=[];
     public    ?int      $handSize = null;
     private   array     $lastSacrifice = [];
@@ -32,8 +32,7 @@ class CardHand
     {
         $this->currentHand = [];
         $this->handSize = $handSize;
-        $this->cardToHand($handSize, $currentDeck);
-
+        $this->cardToHand($handSize, $currentDeck); // Argument is an object not a list!
         // return $this;
     }
 
@@ -92,9 +91,17 @@ class CardHand
      *
      * @return void
      */
-    public function cardToHand($amount, $currentDeck): void {
+    public function cardToHand($amount, ?DeckOfCards $currentDeck = null): void {
+        /// draw from Deck three times and
+        $card = null;
+
+        if (!$currentDeck instanceof DeckOfCards) {
+            $currentDeck = new DeckOfCards('Trad52');
+        }
+
+        // Draw method is singular, loop amount of card times.
         for($i=0; $i < $amount; $i++) {
-            $card = $currentDeck->dealCard(); // This needs fixing, myst be able to deal from one deck from inside hand. Trait?
+            $card = $currentDeck->dealCard();
             array_push($this->currentHand, $card);
             // array_push($this->lastDraw, (array_push($this->currentHand, $this->dealCard())));
             $this->lastDraw[] = $card;

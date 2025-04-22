@@ -14,7 +14,7 @@ use App\Cards\Card; // Import specific class
  * CardHand-class
  * Holds Card-objects for playing card game.
  */
-class DeckOfCards
+class DeckOfCards implements \JsonSerializable
 {
     /**
      * @var array $deck             Holding all the (remaining) cards of the deck.
@@ -181,4 +181,10 @@ class DeckOfCards
             echo "No such deck type.";
         }
     }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->getDeck(); // or however you want to expose it
+    }
+    
 }
