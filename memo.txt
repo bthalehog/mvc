@@ -82,3 +82,40 @@ tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v             Show
 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src                          Fix files
 
 PHP_CodeSniffer to check for commentign syntax
+
+
+LINTERS
+-------
+
+PHP MD (Mess Detector)
+ tools/phpmd/vendor/bin/phpmd --version
+  tools/phpmd/vendor/bin/phpmd --help
+
+Execute: 
+
+tools/phpmd/vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode
+
+Interpret errors: https://phpmd.org/rules/index.html
+
+Run via phpmd.xml (exceptions and other tweaks): tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml
+
+PHPStan
+-------
+Find bugs before production.
+
+tools/phpstan/vendor/bin/phpstan --version
+tools/phpstan/vendor/bin/phpstan --help
+tools/phpstan/vendor/bin/phpstan analyse src (note the s not z)
+
+PHPstan validates your code according to levels between 0 and 10 where 0 is the loosest level and 9 is the strictest level of linting.
+Try to validate your code on level 9 and then you can downsize the level to an acceptable one: tools/phpstan/vendor/bin/phpstan analyse -l 9 src
+
+execute via phpstan.neon with: tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon
+
+After added to composer:
+
+composer phpmd  (run phpmd)
+composer phpstan (run phpstan)
+composer lint (run all things that do linting)
+
+Writing custom commands: https://getcomposer.org/doc/articles/scripts.md#writing-custom-commands

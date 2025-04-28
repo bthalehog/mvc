@@ -1,0 +1,324 @@
+
+---------------------------------
+5- REMODEL into PSEUDO
+
+playerClass():
+    init()
+        player.id
+        player.status
+        player.hand
+        player.turn (order in list of other players in game)
+        player.wallet (need additional variable for player: Gör så att spelaren kan satsa pengar. 
+            Man kan satsa en viss summa vid varje spel. 
+            Håll koll på hur mycket pengar som spelaren och banken har.
+
+            Låt banken och spelaren börja med 100 pengar var. 
+                När någon har 0 pengar har den spelaren förlorat
+    
+    getId()
+    setId()
+
+    getName
+    setName
+
+    getHand()
+
+    getWallet()
+    setWallet()
+
+    getStatus()
+    setStatus()
+
+    drawCard()
+
+    sacrificeCard()
+    
+    return playerObject
+
+
+gameClass Tjugoett (kortspel)
+
+    need selectDifficulty() (normal, hell) Låt spelaren välja om den spelar mot den “dumma” eller den “smarta” banken. 
+        Förklara taktiken för den “dumma” och den “smarta” banken på dokumentationssidan. (eller varför den smarta inte existerar men valfunktionen gör det)
+
+    Need an addPlayer():
+        game.players = []
+        CALL PlayerClass()
+
+    Need a cardValue-indexer(): 
+        De viktigaste skillnaderna mellan dessa två spel är dels kortens värde, 
+        dels 
+        Essen är värda valfritt 1 eller 14, 
+            kungarna 13, damerna 12, knektarna 11. 
+            Nummerkorten har samma värden som valören.
+
+    Need a ruleset():
+        Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21.
+        bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
+        
+        bankRotator(): En av deltagarna utses till bankir. (HAS banker = TRUE)
+            Banken behöver inte vara speciellt intelligent i sitt kortspel. 
+            Det räcker att den kan utföra sin uppgift och spela spelet. 
+            En enkel variant är att banken alltid plockar kort tills den har 17 eller mer, sedan stannar den.
+            Man kan satsa en viss summa vid varje spel. 
+            Håll koll på hur mycket pengar som spelaren och banken har.
+
+            Låt banken och spelaren börja med 100 pengar var. 
+                När någon har 0 pengar har den spelaren förlorat.
+
+        CALL cardValue-indexer()
+
+        Need is21(player.hand) return bool: 
+                    IF total hand value is 21
+                    IF värdet av korten är 21 vinner spelaren från banken ett belopp lika stort som insatsen. 
+                    IF summan större än 21 har spelaren ”spruckit” eller ”blivit tjock” och förlorar sin insats till banken. 
+                    IF summan är under 21 kan spelaren antingen förklara sig nöjd eller begära ytterligare kort för att komma närmare 21, 
+                    men då också riskera att spricka.
+            
+        need specialCases():
+            Två, eller tre, ess utan andra kort får räknas som 21,
+            en spelare som fått fem kort utan att spricka anses ha uppnått 21.
+
+    need bankRotator(): 
+        En av deltagarna utses till bankir. 
+        Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.
+        bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
+
+    need initiator startGame(): 
+        Need a setStake(): 
+            Spelet börjar med att bankiren lägger en insats i banken, det vill säga potten som det spelas om,
+             Man kan satsa en viss summa vid varje spel. 
+            Håll koll på hur mycket pengar som spelaren och banken har.
+
+            Låt banken och spelaren börja med 100 pengar var. 
+                När någon har 0 pengar har den spelaren förlorat.
+            
+            och därefter ger varje spelare utom sig själv ett kort.
+
+        need compareHands():
+                        Need a "winning hands" comparison table
+                        or calculateHand()
+
+        Need a turn():(return playerObject); 
+            Spelarna spelar sedan mot bankiren en i taget.
+
+        Need playerMove(player)
+            tittar på sitt kort och satsar ett valfritt belopp, inte större än vad som finns i banken, 
+            får därefter ytterligare ett kort.
+
+            CALL is21(player.hand) return bool: 
+            
+            IF is21 is FALSE: (return winner (obj))
+                (find out who wins if noone meets the condition for 21)
+                CALL compareHands():
+
+            Need playerHappy(player.status) return bool: 
+                IF player happy
+                (Om spelaren förklarat sig nöjd,)
+                ska bankiren straffa spelaren, spela ut egna kort från leken, ett i taget med framsidan uppåt. 
+                Spricker bankiren, vinner spelaren lika mycket som sin insats. 
+
+        (This part might have to frame all the above code)
+        WHILE bank NOT happy
+            (När bankiren förklarat sig nöjd),
+            visar spelaren sina kort. 
+            Den som har högst vinner. 
+            Har båda lika är det bankiren som vinner, likaså om bankiren fått 21.
+
+---------------------------------
+4 - SYNTHESIS
+
+gameClass Tjugoett (kortspel)
+
+    Need an addPlayer()
+
+    Need a cardValue-indexer(): 
+        De viktigaste skillnaderna mellan dessa två spel är dels kortens värde, 
+        dels 
+        Essen är värda valfritt 1 eller 14, 
+            kungarna 13, damerna 12, knektarna 11. 
+            Nummerkorten har samma värden som valören.
+
+    Need a ruleset():
+        Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21.
+        bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
+        
+        bankRotator(): En av deltagarna utses till bankir. (HAS banker = TRUE)
+
+        CALL cardValue-indexer()
+
+        Need is21(player.hand) return bool: 
+                    IF total hand value is 21
+                    IF värdet av korten är 21 vinner spelaren från banken ett belopp lika stort som insatsen. 
+                    IF summan större än 21 har spelaren ”spruckit” eller ”blivit tjock” och förlorar sin insats till banken. 
+                    IF summan är under 21 kan spelaren antingen förklara sig nöjd eller begära ytterligare kort för att komma närmare 21, 
+                    men då också riskera att spricka.
+            
+        need specialCases():
+            Två, eller tre, ess utan andra kort får räknas som 21,
+            en spelare som fått fem kort utan att spricka anses ha uppnått 21.
+
+    need bankRotator(): 
+        En av deltagarna utses till bankir. 
+        Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.
+        bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
+
+    need initiator startGame(): 
+        Need a setStake(): Spelet börjar med att bankiren lägger en insats i banken, det vill säga potten som det spelas om, och därefter ger varje spelare utom sig själv ett kort. 
+    
+        Need a turn():(return playerObject); 
+            Spelarna spelar sedan mot bankiren en i taget. Den spelare som är i tur:
+            
+            Need playerMove(player)
+                tittar på sitt kort och satsar ett valfritt belopp, inte större än vad som finns i banken, 
+                får därefter ytterligare ett kort.
+
+                CALL is21(player.hand) return bool: 
+                
+                IF is21 is FALSE: (return winner (obj))
+                    (find out who wins if noone meets the condition for 21)
+                    need compareHands:
+                        Need a "winning hands" comparison table
+                        or calculateHand()
+
+                Need playerHappy(player.status) return bool: 
+                    IF player happy
+                    (Om spelaren förklarat sig nöjd,)
+                    ska bankiren straffa spelaren, spela ut egna kort från leken, ett i taget med framsidan uppåt. 
+                    Spricker bankiren, vinner spelaren lika mycket som sin insats. 
+
+        (This part might have to frame all the above code)
+        WHILE bank NOT happy
+            (När bankiren förklarat sig nöjd),
+            visar spelaren sina kort. 
+            Den som har högst vinner. 
+            Har båda lika är det bankiren som vinner, likaså om bankiren fått 21.
+
+
+---------------------------------
+3 - Estimated need of functionality.
+
+Need a gameClass (TwentyOne())
+Need a cardValue-indexer
+Need a ruleset
+Need a compare hands
+Need a "winning hands" comparison table or calculateHand()
+Need an addPlayer()
+Need a turn() (maybe with a queue-implementation)
+Need a setStake() to handle current winnings
+Need drawCard()/playerMove()
+Need is21() return bool
+
+---------------------------------
+2 - PSEUDOCODE-pre-model for gameClass created from game description text.
+
+Tjugoett (kortspel)
+
+De viktigaste skillnaderna mellan dessa två spel är dels kortens värde, dels att bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
+
+Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21. 
+
+Essen är värda valfritt 1 eller 14, kungarna 13, damerna 12, knektarna 11. Nummerkorten har samma värden som valören.
+
+En av deltagarna utses till bankir. 
+
+Spelet börjar med att bankiren lägger en insats i banken, det vill säga potten som det spelas om, och därefter ger varje spelare utom sig själv ett kort. 
+
+Spelarna spelar sedan mot bankiren en i taget. 
+    Den spelare som är i tur tittar på sitt kort och satsar ett valfritt belopp, som dock inte får vara större än vad som finns i banken, och får därefter ytterligare ett kort.
+
+    Om summan av korten är 21 vinner spelaren från banken ett belopp lika stort som insatsen. 
+    Är summan större än 21 har spelaren ”spruckit” eller ”blivit tjock” och förlorar sin insats till banken. 
+    Om summan är under 21 kan spelaren antingen förklara sig nöjd eller begära ytterligare kort för att komma närmare 21, 
+        men då också riskera att spricka.
+
+Om spelaren förklarat sig nöjd, 
+    ska bankiren straffa spelaren, 
+        det vill säga spela ut egna kort från leken, ett i taget med framsidan uppåt. 
+        
+Spricker bankiren, vinner spelaren lika mycket som sin insats. 
+
+När bankiren förklarat sig nöjd, visar spelaren sina kort. 
+    Den som har högst vinner. 
+    Har båda lika är det bankiren som vinner, likaså om bankiren fått 21.
+
+Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.
+
+Rules:
+Två, eller tre, ess utan andra kort får räknas som 21,
+en spelare som fått fem kort utan att spricka anses ha uppnått 21. 
+
+(OPTIONAL
+En annan tilläggsregel ger en spelare möjlighet att ”mörka”, vilket är att begära kort från bankiren utan att titta på dem.
+En spelare som har mörkat vinner över bankiren vid lika värden eller om båda spricker.)
+
+---------------------------------
+1 - UPPGIFTSBESKRIVNING
+
+Landningssida och intro
+
+    Skapa en landdningssida för spelet game/ där du samlar information om spelet och kan starta spelet. Placera länken i webbplatsens navbar.
+    I din landningssida, inled med en kort beskrivning av ditt kortspel och reglerna för hur det fungerar.
+    Placera en knapp eller länk som leder till att spelet börjar.
+
+    Problemlösning
+        Gör din problemlösning innan du påbörjar att implementera spelet.
+        Du skall problemlösa det spelet du valt med:
+            flödesschema
+                DIA
+            Pseudokod.   
+                Skapa psuedokod som visar hur du tänker lösa delar av spelet.                                                           OK
+                Du kan spara resultatet som text eller bild                                                                             OK
+                    visa upp det i webbsidan för dokumentationen. 
+                Det behöver inte vara en komplett lösning, en dellösning räcker bra.                                                    OK
+            Fundera igenom vilka klasser du behöver för att implementera spelet.                                                        OK
+                Beskriv klasserna i text med klassens namn och en mening som beskriver vad klassens syfte är.                           OK
+                Håll det kort och enkelt. OK
+
+    Samla all din dokumentation i en webbsida under routen game/doc och länka till dokumentationssidan från din landningssida.
+
+Kortspel
+
+    Bygg ditt kortspel i Symfony med objektorienterade konstruktioner i PHP och försök tänka till så att du får “snygg kod”.
+        All applikationskod placerar du i klasser som din kontroller använder. 
+        Se till att du har så lite kod som möjligt i din kontroller. Om du har mycket kod där så flyttar du den till en egen klass. 
+        Tänk att kontrollern skall vara tunn (lite kod) och modellerna (applikationens klasser) kan vara tjocka (mycket kod).
+        Använd templatefiler för att rendera webbsidorna.
+        Bygg spelet så att det fungerar minst enligt de regler som visas i introduktionen ovan.                                         OK
+        Banken behöver inte vara speciellt intelligent i sitt kortspel.                                                                 OK
+            Det räcker att den kan utföra sin uppgift och spela spelet. 
+                En enkel variant är att banken alltid plockar kort tills den har 17 eller mer, sedan stannar den.
+
+Kortspel valfritt
+
+    need selectDifficulty() (normal, hell) Låt spelaren välja om den spelar mot den “dumma” eller den “smarta” banken. 
+        Förklara taktiken för den “dumma” och den “smarta” banken på dokumentationssidan. (eller varför den smarta inte existerar men valfunktionen gör det)
+        EXTRA:
+            Bygg en smartare bank som spelar på ett “intelligent sätt”. 
+            Låt banken ta hjälp av statistiken.
+
+    need additional variable for player: Gör så att spelaren kan satsa pengar. 
+        Man kan satsa en viss summa vid varje spel. 
+        Håll koll på hur mycket pengar som spelaren och banken har.
+
+        Låt banken och spelaren börja med 100 pengar var. 
+            När någon har 0 pengar har den spelaren förlorat.
+
+    EXCLUDE:
+    //    Korträkning med sannolikhet att få högt/lågt kort. 
+    //    Låt bli att blanda kortleken inför varje ny runda och spela tills kortleken är slut.
+    //    Visa statistik som berättar sannolikheten för att få ett visst kort. 
+    //    Visa statistiken så att spelaren kan ha hjälp av den. Tex om spelaren har 15, visa sannolikheten för att spelaren inte skall bli tjock om nytt kort tas.
+    ENDEXCLUDE:
+
+Kortspel JSON
+
+    I din landningssida för api/ lägger du till routen api/game som visar upp den aktuella ställningen för spelet i en JSON struktur.
+
+Kodvalidering
+
+    Fixa till din kod enligt den kodstil du kör genom att köra composer csfix.
+    Kolla din kod hur den matchar dina linters genom att köra composer lint.
+        Får du fel så kollar du vad det är och rättar de sakerna du anser rimliga. 
+        Försök få en ren och tom rapport, utan valideringsfel.
+

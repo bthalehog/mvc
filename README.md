@@ -43,5 +43,8 @@ All subs actions listed below.
 20250422 New tag v2.1.0, Session implemented. Report embryo added. Initializing final touches.  
 20250422 New tag v2.1.1, Kmom02 done, report finished, uploaded to server.  
 
+### _Kmom03_  
+20250428 New tag v3.0.0, Initial upload Kmom03 - Planning and modeling phase.   
+
 
 ![](./public/img/bwtailgun.png)
