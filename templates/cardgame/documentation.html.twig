@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cardgame documentation{% endblock %}
+
+{% block body %}
+    <div class="documentationView">
+        <article class="documentationArticle">
+            <h2>TjugoEtt</h2>
+                <h3>Spelregler</h4>
+                    <p>Förklara spelets regler.</p>
+            <h2>Funktionalitetsbehov</h3>
+            <p>
+                sessionHandlerClass()
+                <p style="text-indent: 2em;">init session, save, load, destroy session</p><br>
+
+                playerClass(): return playerObject ()
+                   init():
+                        <ul>
+                            <li>player.id</li>
+                            <li>player.status</li> 
+                            <li>player.hand</li> 
+                            <li>player.turn</li> 
+                            <li>player.wallet</li> 
+                        </ul>
+                    <p style="text-indent: 2em;">
+                        getId()
+                        setId()
+                        getName()
+                        setName()
+                        getWallet()
+                        setWallet()
+                        getStatus()
+                        setStatus()
+                        getHand()
+                        drawCard()
+                        sacrificeCard()
+                    </p>
+            </p>
+            <h2>Pseudokod</h3>
+                <code>pseudokod här</code>
+            <h2>Flödesschema</h2>
+                <img class="homePic" src="{{ asset('build/images/kmom03flowchart.svg') }}" alt="Flowchart"></img>
+            <h2>Kontrollerstruktur</h2>
+                <code>
+                    <section style="text-indent: 2em;">
+                        game = new Game();<br>
+                        sessionHandler(game);<br>
+                        game.selectRuleSet();<br>
+                        sessionHandler(game);<br>
+                        game.selectRuleSet();<br>
+                        game.selectDifficulty();<br>
+                        game.addPlayer();<br>
+                        game.bankRotator();<br>
+                        game.startGame();<br>
+                    </section>
+                    <br>
+                    <p style="text-indent: 2em;">
+                        WHILE (game.bank.status !== "happy" && game.player[x].status !== happy AND canDraw IS TRUE)<br>
+                    </p>
+                        <p style="text-indent: 4em;">
+                            game.setStake();<br>
+                            game.turn(); (++);<br>
+                            game.playerMove();<br>
+                            game.bank.hand.is21();<br>
+                            game.player.hand.is21();<br>
+                            <br>
+                            IF !is21() THEN check for specialCase<br>
+                                game.bank.specialCase()<br>
+                                game.player.specialCase();<br>
+                            <br>
+                            IF !specialCase() THEN<br>
+                                game.compareHands(game.bank, game.player);<br>
+                            <br>
+                            game.playerHappy()<br>
+                            game.bankHappy()<br>
+                        </p>
+                    </section>
+                    <br>
+                    <section>
+                        game.payUp();<br>
+                        destroySession();<br>
+                    </section>
+                </code>
+        </article>
+    </div>
+{% endblock %}

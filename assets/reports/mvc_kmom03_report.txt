@@ -1,1 +1,32 @@
-MVC KMOM03
+<article class="hashView">
+
+    <h2>MVC Kmom03</h2>
+        <h3>Generella intryck och egna reflektioner</h3>
+            <p>Kmom03... </p>
+
+            <p></p>
+
+            <p></p>
+
+            <p></p>
+
+        <h3>Uppgiften</h3>
+            <p></p>
+
+            <p></p>
+
+            <p></p>
+
+            <p></p>
+
+            <p></p>
+
+            <i></i>
+                <p></p>
+
+           
+        <h3>TIL</h3>
+            <ul>
+                <li></li>
+            </ul>
+</article>

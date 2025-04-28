@@ -1,6 +1,65 @@
 
 ---------------------------------
+6- CONTROLLER STRUCTURE (trying to keep it slim).
+
+// Create game
+game = new Game();
+
+// Init and write to session
+sessionHandler(game);
+
+// Select ruleset (normal or with specialCases)
+game.selectRuleSet();
+
+// Select difficulty (normal/hell)
+game.selectDifficulty();
+(Resonera kring lösningen av fake AI med procentsänkning av vinstproent vs dummare motst.)
+
+// Add players to game
+game.addPlayer();
+
+// Select bank from players, if none then bank is computer.
+game.bankRotator();
+
+// Start game
+game.startGame();
+
+// Either player being "happy" changes the course of action
+while (game.bank.status !== "happy" && game.player[x].status !== happy)
+    // Bank sets stake
+    game.setStake();
+
+    // Current player selected from queue
+    game.turn(); (++);
+
+    // Current player makes move
+    game.playerMove();
+
+    // Check all players and bank result
+    game.bank.hand.is21();
+    game.player.hand.is21();
+
+    // If game.ruleset special - check for specialCases
+    IF non is 21 THEN
+        game.bank.specialCase()
+        game.player.specialCase();
+        game.compareHAnds();
+
+    IF non is specialCase THEN
+        game.compareHands(game.bank, game.player);
+
+game.payUp();
+
+destroySession();
+
+---------------------------------
 5- REMODEL into PSEUDO
+
+sessionHandlerClass()
+    init session
+    save
+    load
+    destroy session
 
 playerClass():
     init()
@@ -55,16 +114,6 @@ gameClass Tjugoett (kortspel)
     Need a ruleset():
         Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21.
         bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
-        
-        bankRotator(): En av deltagarna utses till bankir. (HAS banker = TRUE)
-            Banken behöver inte vara speciellt intelligent i sitt kortspel. 
-            Det räcker att den kan utföra sin uppgift och spela spelet. 
-            En enkel variant är att banken alltid plockar kort tills den har 17 eller mer, sedan stannar den.
-            Man kan satsa en viss summa vid varje spel. 
-            Håll koll på hur mycket pengar som spelaren och banken har.
-
-            Låt banken och spelaren börja med 100 pengar var. 
-                När någon har 0 pengar har den spelaren förlorat.
 
         CALL cardValue-indexer()
 
@@ -79,10 +128,18 @@ gameClass Tjugoett (kortspel)
             Två, eller tre, ess utan andra kort får räknas som 21,
             en spelare som fått fem kort utan att spricka anses ha uppnått 21.
 
-    need bankRotator(): 
-        En av deltagarna utses till bankir. 
-        Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.
-        bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
+    bankRotator(): En av deltagarna utses till bankir. (HAS banker = TRUE)
+            Banken behöver inte vara speciellt intelligent i sitt kortspel. 
+            Det räcker att den kan utföra sin uppgift och spela spelet. 
+            En enkel variant är att banken alltid plockar kort tills den har 17 eller mer, sedan stannar den.
+            Man kan satsa en viss summa vid varje spel. 
+            Håll koll på hur mycket pengar som spelaren och banken har.
+
+            Låt banken och spelaren börja med 100 pengar var. 
+                När någon har 0 pengar har den spelaren förlorat.
+            En av deltagarna utses till bankir. 
+            Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.
+            bankiren i tjugoett spelar mot en spelare i taget och inte som i Black Jack mot alla på en gång.
 
     need initiator startGame(): 
         Need a setStake(): 
@@ -208,9 +265,10 @@ Need a turn() (maybe with a queue-implementation)
 Need a setStake() to handle current winnings
 Need drawCard()/playerMove()
 Need is21() return bool
+Need sessionHandler
 
 ---------------------------------
-2 - PSEUDOCODE-pre-model for gameClass created from game description text.
+2 - PSEUDOCODE-pre-model for game created from game description text.
 
 Tjugoett (kortspel)
 
@@ -253,7 +311,10 @@ En annan tilläggsregel ger en spelare möjlighet att ”mörka”, vilket är a
 En spelare som har mörkat vinner över bankiren vid lika värden eller om båda spricker.)
 
 ---------------------------------
-1 - UPPGIFTSBESKRIVNING
+1 - INSAMLING UNDERLAG
+Beskrivning från wiki samt uppgiftsbeskrivning indenterad till förstadie till pseudokod och nedbrytning av stort problem till mindre delar.
+Tillämpning av YAGNI på de delar av optionella uppgifter som inte avses genomföras.
+Fungerar som checklist och referens i kommande steg.
 
 Landningssida och intro
 
@@ -262,18 +323,18 @@ Landningssida och intro
     Placera en knapp eller länk som leder till att spelet börjar.
 
     Problemlösning
-        Gör din problemlösning innan du påbörjar att implementera spelet.
-        Du skall problemlösa det spelet du valt med:
-            flödesschema
-                DIA
-            Pseudokod.   
-                Skapa psuedokod som visar hur du tänker lösa delar av spelet.                                                           OK
+        Gör din problemlösning innan du påbörjar att implementera spelet.                                                               OK
+        Du skall problemlösa det spelet du valt med:                                                                        
+            flödesschema                                                                                                                OK
+                draw.io                                                                                                                 OK
+            Pseudokod.                                                                                                                  OK
+                Skapa pseudokod som visar hur du tänker lösa delar av spelet.                                                           OK
                 Du kan spara resultatet som text eller bild                                                                             OK
-                    visa upp det i webbsidan för dokumentationen. 
+                    visa upp det i webbsidan för dokumentationen.                                                                       OK
                 Det behöver inte vara en komplett lösning, en dellösning räcker bra.                                                    OK
             Fundera igenom vilka klasser du behöver för att implementera spelet.                                                        OK
                 Beskriv klasserna i text med klassens namn och en mening som beskriver vad klassens syfte är.                           OK
-                Håll det kort och enkelt. OK
+                Håll det kort och enkelt.                                                                                               OK            
 
     Samla all din dokumentation i en webbsida under routen game/doc och länka till dokumentationssidan från din landningssida.
 

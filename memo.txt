@@ -1,28 +1,34 @@
+#========================#
+# MODEL VIEW CONTROLLER  #
+#========================#
+
 Ramverk: Symfony (installeras med composer)
 Script: PHP
 
-serverkommando:	php -S localhost:8888 -t public
-symfony server:start		(runs on own http://127.0.0.1:8000)
+serverkommando:	    php -S localhost:8888 -t public
+                    symfony server:start		(runs on own http://127.0.0.1:8000)
 
+=================================================================================================================
 
+------------
 COMPOSER
----------
-composer show		show all packages
-composer --version	show version
-
-You should run composer dump-autoload when:
-
-    You’ve added new classes
-
-    You changed your composer.json "autoload" section
-
-    You renamed namespaces or folders
-
-    Things just “aren’t being found” that should be
+------------
+composer show		                        show all packages
+composer --version	                        show version
+omposer dump-autoload                       dump-autoload (You should run composer dump-autoload when:
+                                                            You’ve added new classes
+                                                            You changed your composer.json "autoload" section
+                                                            You renamed namespaces or folders
+                                                            Things just “aren’t being found” that should be.)
 
 
-SYMFONY (handle routers)
--------
+=================================================================================================================
+
+-----------
+SYMFONY
+-----------
+(handle routers)
+
 bin/console					                show commands
 bin/console debug:router			        Show routes
 bin/console router:match /lucky/number		Match specific route
@@ -35,87 +41,113 @@ symfony server:stop                         Stop server
 symfony server:status                       Server status
 
 
-TWIG (handles active resources, php template engine)
-----
-https://github.com/dbwebb-se/mvc/tree/main/example/symfony	Grundexempel
+=================================================================================================================
+
+-------
+TWIG
+-------
+(handles active resources, php template engine)
+
+Grundexempel    https://github.com/dbwebb-se/mvc/tree/main/example/symfony
 
 
+=================================================================================================================
 
-ENCORE (handles static resources)
-------------
+---------
+ENCORE
+---------
+(handles static resources)  
 
 Set .setPublicPath('/build') to .setPublicPath('build') to allow to build assets using 'npm run build'
-
 npm run build krävs efter ändringar i .css (assets/style) för att se implementering vid omstart av servern
-
 KOM IHÅG ATT run build och starta om server OFTA!!!
 
-GIT (version handling and backup)
+
+=================================================================================================================
+
 --------
-# Gå till me/report
-    git init
-    touch README.md
-    git add .
-    git commit -m "First commit"
+GIT
+--------
+(version handling and backup)
 
-Om något går fel kan du alltid ta bort katalogen .git/ och starta om.
-
+git add . 				            Lägg till alla ändringar (eller specifik fil)
+git commit -a -m ".." 	            Commit (-a står för all, -m för message)
+git status				            Show status
+git push				            Send to repo
+git tag -a v1.0 -m ".."             Tag with comment
+git tag v1.0.0                      Lightweight tag
+git push --tags                     Push with tags
+git checkout???
+                =================================================================================
+                _________________________________________________________________________________
+                #                                                                               #
+                #    Initial setup: # Gå till me/report                                         #
+                #        git init                                                               #
+                #        touch README.md                                                        #
+                #        git add .                                                              #
+                #        git commit -m "First commit"                                           #
+                #                                                                               #
+                #    Om något går fel kan du alltid ta bort katalogen .git/ och starta om.      #
+                #                                                                               #
+                =================================================================================
 # me/report
 rm -rf .git
-
-git add . 				    Lägg till alla ändringar (eller specifik fil)
-git commit -a -m ".." 	    Commit (-a står för all, -m för message)
-git status				    Show status
-git push				    Send to repo
-git tag -a v1.0 -m ".."     Tag with comment
-git tag v1.0.0              Lightweight tag
-git push --tags             Push with tags
-git checkout???
+______________________________________________________________________
 
 
+=================================================================================================================
+
+---------
 NAMESPACE
 ---------
-tools/php-cs-fixer/vendor/bin/php-cs-fixer --help To display help in symfony php-standard fixer.
 
-Dry run fixer to identify files needing fixing: 
-tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v             Show files needing fixing
+tools/php-cs-fixer/vendor/bin/php-cs-fixer --help                           To display help in symfony php-standard fixer.
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v             Dry run fixer to identify files needing fixing. 
 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src                          Fix files
 
-PHP_CodeSniffer to check for commentign syntax
 
+=================================================================================================================
 
+-------
 LINTERS
 -------
+PHP_CodeSniffer to check for commenting syntax (for NAMESPACE)
 
 PHP MD (Mess Detector)
- tools/phpmd/vendor/bin/phpmd --version
-  tools/phpmd/vendor/bin/phpmd --help
 
-Execute: 
-
-tools/phpmd/vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode
+tools/phpmd/vendor/bin/phpmd --version                                                              Show version
+tools/phpmd/vendor/bin/phpmd --help                                                                 Show help
+tools/phpmd/vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode     Execute 
+tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml                                           Run via phpmd.xml (exceptions and other tweaks): 
 
 Interpret errors: https://phpmd.org/rules/index.html
 
-Run via phpmd.xml (exceptions and other tweaks): tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml
 
+=================================================================================================================
+
+-------
 PHPStan
 -------
 Find bugs before production.
 
-tools/phpstan/vendor/bin/phpstan --version
-tools/phpstan/vendor/bin/phpstan --help
-tools/phpstan/vendor/bin/phpstan analyse src (note the s not z)
+tools/phpstan/vendor/bin/phpstan --version                                      Show version.
+tools/phpstan/vendor/bin/phpstan --help                                         Show help.
+tools/phpstan/vendor/bin/phpstan analyse src                                    Execute (note the s not z.              
+tools/phpstan/vendor/bin/phpstan analyse -l 9 src                               Validate on level 9*
+tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon          Execute via phpstan.neon
 
-PHPstan validates your code according to levels between 0 and 10 where 0 is the loosest level and 9 is the strictest level of linting.
-Try to validate your code on level 9 and then you can downsize the level to an acceptable one: tools/phpstan/vendor/bin/phpstan analyse -l 9 src
+*   PHPstan validates your code according to levels between 0 and 10
+    where 0 is the loosest level and 9 is the strictest level of linting.
+    Try to validate your code on level 9 and then you can downsize the level to an acceptable one: tools/phpstan/vendor/bin/phpstan analyse -l 9 src
 
-execute via phpstan.neon with: tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon
+    execute via phpstan.neon with: tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon
 
 After added to composer:
-
-composer phpmd  (run phpmd)
-composer phpstan (run phpstan)
-composer lint (run all things that do linting)
+    composer phpmd  (run phpmd)
+    composer phpstan (run phpstan)
+    composer lint (run all things that do linting)
 
 Writing custom commands: https://getcomposer.org/doc/articles/scripts.md#writing-custom-commands
+
+
+=================================================================================================================
