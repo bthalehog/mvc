@@ -310,3 +310,84 @@ h3 {
     padding: 0.5rem;
     line-height: 3rem;
 }
+
+/* TWENTYONE CARDGAME */
+
+.twentyOneViewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.rules {
+    justify-content: center;
+    align-items: left;
+    padding: 1rem;
+    background-color: white;
+    border: 1rem solid black;
+    height: auto;
+    width: 100%;
+}
+
+.cardGameFormContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    padding: 1rem;
+    background-color: white;
+    border: 1rem solid black;
+    height: auto;
+    width: 100%;
+}
+
+.cardgameMenuForm {
+    justify-self: left;
+    order: 2;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    gap: 1rem;
+    flex-direction: column;
+    height: auto;
+    width: 50%;
+    grid-row: 0 / 1;
+    padding: 1rem;
+}
+
+select {
+    height: 45%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+input {
+    height: 45%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.cardGameButton {
+    display: flex;
+    justify-self: right;
+    justify-content: center;
+    align-items: center;
+    grid-row: 1 / 2;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    height: 15rem;
+    width: 50%;
+}
+
+.cardGameButton:hover {
+    background-color: white;
+    color: green;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 1rem;
+}

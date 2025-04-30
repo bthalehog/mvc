@@ -3,7 +3,14 @@
 {% block title %}TwentyOne{% endblock %}
 
 {% block body %}
-    <div class="cardGameView">
-        {{ rules }}
+    <div class="twentyOneViewer">
+        {{ rules|raw }}
+        <div id="cardGameFormContainer" class="cardGameFormContainer">
+            <form id="cardGameMenuForm" class="cardGameMenuForm">
+                {{ difficulty|raw }}
+                {{ players|raw }}
+            </form>
+            {{ button|raw }}
+        </div>
     </div>
 {% endblock %}
