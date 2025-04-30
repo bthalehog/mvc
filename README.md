@@ -53,5 +53,5 @@ All subs actions listed below.
 20250430 New tag v3.0.2, Migrated classes from Geany, all functionality tested and working. Next: implement flowchart in Controller.   
 
 ### _Kmom04_ 
-...
+
 ![](./public/img/bwtailgun.png)
