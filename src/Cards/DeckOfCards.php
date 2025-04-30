@@ -2,17 +2,14 @@
 
 namespace App\Cards;
 
-// require_once(__DIR__ . '/Card.php');
-
 use App\Cards\Card; // Import specific class
 
-// Keep all complezity in deckofcards, let card be simple, cardhand simple.
+// Keep all complexity in deckofcards, let card be simple, cardhand simple.
 // Added decks() for selecting between jokers or no jokers, prepped to be extended.
-//
 
 /**
- * CardHand-class
- * Holds Card-objects for playing card game.
+ * DeckOfCards-object
+ * Creates DeckOfCards-object for use in card games.
  */
 class DeckOfCards implements \JsonSerializable
 {
@@ -22,6 +19,7 @@ class DeckOfCards implements \JsonSerializable
      * @var string $deckType        Defining the type of deck used.
      * @var array $lastDraw         Holding the last cards drawn (also writes draws to histogram).
      * @var array $lastDeal         Holding the last cards dealt (also writes draws to histogram).
+     * @var array $deckMap          Indexer for conversion.
      */
     protected array $deck = [];
     protected ?int $deckSize = null;

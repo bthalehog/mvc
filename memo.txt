@@ -132,7 +132,7 @@ Find bugs before production.
 
 tools/phpstan/vendor/bin/phpstan --version                                      Show version.
 tools/phpstan/vendor/bin/phpstan --help                                         Show help.
-tools/phpstan/vendor/bin/phpstan analyse src                                    Execute (note the s not z.              
+tools/phpstan/vendor/bin/phpstan analyse src                                    Execute (note the s not z).              
 tools/phpstan/vendor/bin/phpstan analyse -l 9 src                               Validate on level 9*
 tools/phpstan/vendor/bin/phpstan analyse -c tools/phpstan/phpstan.neon          Execute via phpstan.neon
 

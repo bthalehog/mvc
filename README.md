@@ -42,9 +42,10 @@ All subs actions listed below.
 20250422 New tag v2.0.7, Implementing session for selected functionality.  
 20250422 New tag v2.1.0, Session implemented. Report embryo added. Initializing final touches.  
 20250422 New tag v2.1.1, Kmom02 done, report finished, uploaded to server.  
-
+  
 ### _Kmom03_  
-20250428 New tag v3.0.0, Initial upload Kmom03 - Planning and modeling phase.   
-
+20250428 New tag v3.0.0, Initial upload Kmom03 - Planning and modeling phase.  
+20250428 New tag v3.0.1, Added basic routes - Phase 1 OK.  
+20250430 New tag v3.0.2, Migrated classes from Geany, all functionality tested and working. Next: implement flowchart in Controller.  
 
 ![](./public/img/bwtailgun.png)

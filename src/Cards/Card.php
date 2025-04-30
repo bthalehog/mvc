@@ -20,6 +20,7 @@ class Card
      * @var string  $status         Reserved for optionals (["show", "hide", "sacrifice", "hold"]).
      * @var string  $relations      Reserved for optionals (["parent", ["myDeck", "diamonds"], "child", ["bare", "royal"], "sibling", [$value+1, $value-1]]]).
      * @var string  $graphics       Holds graphical representation in utf-8.
+     * @var string  $order          Shows order in deck if sorted in suites.
      */
     protected ?string $value = "";
     protected string $status = "";

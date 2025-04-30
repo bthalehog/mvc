@@ -15,9 +15,6 @@ class CardGameController extends AbstractController
     #[Route("/game/cards", name: "cards_start")]
     public function cardsHome(SessionInterface $session): Response
     {
-        // Replace deck with session-deck
-        // $deck = new DeckOfCards('Trad52');
-        // $deck = $session->get('deck', new DeckOfCards('Trad52'));
         if (!$session->has('deck')) {
             $deck = new DeckOfCards('Trad52');
             $session->set('deck', $deck);

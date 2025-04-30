@@ -19,11 +19,13 @@ class CardHand
      * @var integer $lastDraw       The value of the last draw.
      * @var integer $handSize       The amount of cards on hand.
      * @var array   $lastSacrifice  The last cards sacrificed.
+     * @var int     $score          The score the cardHand constitutes.
      */
     protected array     $currentHand = [];
     private array     $lastDraw = [];
     public ?int      $handSize = null;
     private array     $lastSacrifice = [];
+    protected int	$score = 0;
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -70,6 +72,17 @@ class CardHand
     public function getHand(): array
     {
         return (array) $this->currentHand;
+    }
+    
+    public function setScore($score)
+    {
+		$this->score += $score;
+        // echo "Score added";
+    }
+    
+    public function getScore(): int
+    {
+		return $this->score;
     }
 
     /**
