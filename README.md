@@ -46,6 +46,6 @@ All subs actions listed below.
 ### _Kmom03_  
 20250428 New tag v3.0.0, Initial upload Kmom03 - Planning and modeling phase.  
 20250428 New tag v3.0.1, Added basic routes - Phase 1 OK.  
-20250430 New tag v3.0.2, Migrated classes from Geany, all functionality tested and working. Next: implement flowchart in Controller.  
-
+20250430 New tag v3.0.2, Migrated classes from Geany, all functionality tested and working. Next: implement flowchart in Controller.   
+  
 ![](./public/img/bwtailgun.png)
