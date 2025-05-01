@@ -6,11 +6,14 @@
     <div class="twentyOneViewer">
         {{ rules|raw }}
         <div id="cardGameFormContainer" class="cardGameFormContainer">
-            <form id="cardGameMenuForm" class="cardGameMenuForm">
+            <form id="cardGameMenuForm" class="cardGameMenuForm" action="{{ path('twentyone') }}" method="POST">
                 {{ difficulty|raw }}
                 {{ players|raw }}
+                <a href="{{ path('play') }}">
+                    {{ button|raw }}
+                </a>
+            </a>
             </form>
-            {{ button|raw }}
         </div>
     </div>
 {% endblock %}

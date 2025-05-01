@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Cards\Card;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
+use App\Cards\TwentyOne;
 
 class SessionController extends AbstractController
 {
@@ -18,14 +19,27 @@ class SessionController extends AbstractController
     {
         if (!$session) {
             $deck = new DeckOfCards('Trad52');
-            $this->initSession($session, $deck);
+            $game = null;
+            $this->initSession($session, $deck, $game);
             echo "Session created";
         }
 
         if ($session == null) {
             $deck = new DeckOfCards('Trad52');
-            $this->initSession($session, $deck);
+            $game = null;
+            $this->initSession($session, $deck, $game);
             echo "Session created";
+        }
+
+        if (!$session->has('game')) {
+            $game = null;
+            $session->set('game', $game);
+            echo "Empty session created";
+        }
+
+        if ($session->has('game')) {
+            $game = $session->get('game');
+            echo "Game loaded from session";
         }
 
         if ($session->has('deck')) {

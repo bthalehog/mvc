@@ -20,12 +20,14 @@ class CardHand
      * @var integer $handSize       The amount of cards on hand.
      * @var array   $lastSacrifice  The last cards sacrificed.
      * @var int     $score          The score the cardHand constitutes.
+     * @var string  $status         The status held by cardHand.
      */
     protected array     $currentHand = [];
-    private array     $lastDraw = [];
-    public ?int      $handSize = null;
-    private array     $lastSacrifice = [];
-    protected int	$score = 0;
+    private array       $lastDraw = [];
+    public ?int         $handSize = null;
+    private array       $lastSacrifice = [];
+    protected int	    $score = 0;
+    protected string    $status= "";
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -35,6 +37,7 @@ class CardHand
         $this->currentHand = [];
         $this->handSize = $handSize;
         $this->cardToHand($handSize, $currentDeck); // Argument is an object not a list!
+        $this->status = "not_done";
         // return $this;
     }
 
@@ -83,6 +86,11 @@ class CardHand
     public function getScore(): int
     {
 		return $this->score;
+    }
+
+    public function getStatus(): string
+    {
+		return $this->status;
     }
 
     /**

@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
-
 /*
 
 FLOWCHART to implement
 
 game = new Game(); 	// Create game
 sessionHandler(game); 	// Init and write to session
-game.selectRuleSet(); 	// Select ruleset (normal or with specialCases)
 game.selectDifficulty(); 	// Select difficulty (normal/hell)
 game.addPlayer(); 	// Add players to game
+
+
 game.bankRotator(); 	// Select bank from players, if none then bank is computer.
 
 WHILE (game.bank.status !== "happy" && game.player[x].status !== happy)
@@ -44,7 +44,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
+use App\Cards;
 use App\Cards\Card;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
@@ -67,59 +69,99 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/twentyone", name: "twentyone")]
-    public function twentyOne()
-    {   
-        $rules = '<article class="rules">
-            <h2>Tjugo-ett</h2>
-                <ul>
-                    <p>Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21.</p>
-                    <li>Essen är värda valfritt 1 eller 14, kungarna 13, damerna 12, knektarna 11.</li>
-                    <li>Nummerkorten har samma värden som valören.</li>
-                    <li>En av deltagarna utses till bankir.</li>
-                    <li>Bankiren i tjugoett spelar mot en spelare i taget.</li>
-                    <li>Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.</li>
-                </ul>
-            <h4>Specialfall</h4>
-                <ul>
-                    <p><i>Tillämpas tillsammans med smartare AI vid "nightmare"-difficulty.</i></p>
-                    <li>Två, eller tre, ess utan andra kort får räknas som 21</li>
-                    <li>En spelare som fått fem kort utan att spricka anses ha uppnått 21</li>
-                </ul>
-        </article>';
-        
-        $difficulty = '<label for="difficulty">Select difficulty</label><select id="difficulty"><option value="normal">Normal</option><option value="nightmare">Nightmare</option></select>';
-        $players = '<label for="numberOfPlayers">Number of players</label><input id="numberOfPlayers" type="number"></input>';
-        $button = '<button type="submit" class="cardGameButton">Start game!</button>';
-        $deck = null;
-        $game = null;
+    public function twentyOne(Request $request, SessionInterface $session)
+    {      
+        if ($session === null) {
+            return redirectToRoute('session_start');
+        }
+        if ($session->get('game') === null) {
+            $rules = '<article class="rules">
+                <h2>Tjugo-ett</h2>
+                    <ul>
+                        <p>Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21.</p>
+                        <li>Essen är värda valfritt 1 eller 14, kungarna 13, damerna 12, knektarna 11.</li>
+                        <li>Nummerkorten har samma värden som valören.</li>
+                        <li>En av deltagarna utses till bankir.</li>
+                        <li>Bankiren i tjugoett spelar mot en spelare i taget.</li>
+                        <li>Eftersom oddsen väger över till bankens fördel, är det brukligt att deltagarna turas om med att vara bankir.</li>
+                    </ul>
+                <h4>Specialfall</h4>
+                    <ul>
+                        <p><i>Tillämpas tillsammans med smartare AI vid "nightmare"-difficulty.</i></p>
+                        <li>Två, eller tre, ess utan andra kort får räknas som 21</li>
+                        <li>En spelare som fått fem kort utan att spricka anses ha uppnått 21</li>
+                    </ul>
+            </article>';
+            
+            $deck = null;
+            $game = null;
 
-        $deck = new DeckOfCards('Trad52');
-        $card = $deck->dealCard();
-        $game = new TwentyOne($deck, 2, 'nightmare');
+            // Get form-data
+            $numberOfPlayersInput = $request->request->get('numberOfPlayers');
+            $difficultyInput = $request->request->get('difficulty');
 
-        $data = [
-            "rules" => $rules,
-            "difficulty" => $difficulty,
-            "players" => $players,
-            "button" => $button,
-            "game" => $game
-        ];
+            echo $numberOfPlayersInput;
+            echo $difficultyInput;
+            echo "Nothing shown?";
 
-        return $this->render('cardgame/cardgame.html.twig', $data);
+            if ($request->isMethod('POST') && $numberOfPlayersInput !== null && $difficultyInput !== null) {
+                // Create game from input
+                $deck = new DeckOfCards('Trad52');
+                $game = new TwentyOne($deck, $numberOfPlayersInput, $difficultyInput);
+
+                $session->set('game', $game);
+                
+                return $this->redirectToRoute('play');
+            }
+
+            // Set html
+            $difficulty = '<label for="difficulty">Select difficulty</label><br><select id="difficulty" name="difficulty" value=""><option value="normal">Normal</option><option value="nightmare">Nightmare</option></select><br>';
+            $players = '<label for="numberOfPlayers">Number of players</label><br><input id="numberOfPlayers" name="numberOfPlayers" type="number" value="" /><br>';
+            $button = '<button type="submit" class="cardGameButton">Start game!</button>';
+            
+            // Store and send to render startpage
+            $data = [
+                "rules" => $rules,
+                "difficulty" => $difficulty,
+                "players" => $players,
+                "button" => $button
+            ];
+
+            return $this->render('cardgame/cardgame.html.twig', $data);
+        }
+        return $this->redirectToRoute('play');
     }
 
-    #[Route("/game/twentyone/start", name: "start")]
-    public function start()
-    {  
-        if (!$session->has('game')) {
-            // These values should come from buttons on startpage amountOfPlayers and difficulty.
-            $game = $this;
-            $session->set('game', $game);
-            echo "No game in session, rerouting...";
-            return $this->redirectToRoute('session_start');
-        } else {
-            $deck = $session->get('game');
-            echo "Loaded from session";
-        }
+    #[Route("/game/twentyone/play", name: "play")]
+    public function start(SessionInterface $session)
+    {   
+        $game = $session->get('game');
+
+        $button1 = '<button type="submit" id="playerButtonDraw" class="playerButton">Draw card</button>';
+        $button2 = '<button type="submit" id="playerButtonStay" class="playerButton">Stay</button>';
+
+        // $currentPlayer = $game->getCurrentPlayer();
+        $game->setBank();
+
+        // while ($game->getBank()->getStatus() !== "happy" || $game->currentPlayer()->getStatus() !== "happy") {
+        //    if ($currentPlayer !== null && $currentPlayer->getStatus === "done") {
+        //        $game->turn();
+        //    }
+        //
+        //       $game->currentPlayer->asCards();
+
+        //    $game->currentPlayer->cardToHand(1, $game->getDeck()->dealCard());
+
+        //    echo "Here now";
+        // }
+
+        $data = [
+            "button1" => $button1,
+            "button2" => $button2,
+        ];
+
+        echo "Start";
+
+        return $this->render('cardgame/play.html.twig', $data);
     }
 }

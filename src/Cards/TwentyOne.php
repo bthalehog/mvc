@@ -108,6 +108,11 @@ class TwentyOne implements \JsonSerializable
     {
         return (string) $this->difficulty;
     }
+
+	public function getBank(): object
+    {
+        return (object) $this->bank;
+    }
     
     public function getDeck(): object
     {
@@ -310,4 +315,13 @@ class TwentyOne implements \JsonSerializable
 			}
 		}
 	}
+
+	/**
+     * Happy no happy?
+	 * Returns boolean indicating if calling entity is content with cards.
+     */
+    public function getStatus(): string
+    {	
+		return $this->status;
+    }
 }

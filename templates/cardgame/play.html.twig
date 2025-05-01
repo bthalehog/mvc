@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}TwentyOne{% endblock %}
+
+{% block body %}
+    <div class="twentyOneViewer">
+        <div id="gameContainer" class="gameContainer">
+            <div id="bankView" class="gameView">
+                <p>Bank here!</p>
+            </div>
+            
+            <div id="playerView" class="gameView">
+                <p>Player here here!</p>
+            </div>
+
+            <div id="infoView" class="gameView">
+                <p>Game info here!</p>
+                <a href="{{ path('play') }}">{{ button1|raw }}</a>
+                <a href="{{ path('play') }}">{{ button2|raw }}</a>
+            </div>
+        </div>
+{% endblock %}

@@ -53,7 +53,8 @@ All subs actions listed below.
 20250430 New tag v3.0.2, Migrated classes from Geany, all functionality tested and working. Next: implement flowchart in Controller.  
 20250430 New tag v3.0.3, Corrective push.   
 20250430 New tag v3.0.4, Cardgame startpage, rules, form and button to start game added. Controller initiated, functionality tested - OK.  
-
-### _Kmom04_ 
+20250501 New tag v.3.0.5, Cardgame session, start menu, basic routing OK.    
+  
+### _Kmom04_  
   
 ![](./public/img/bwtailgun.png)
