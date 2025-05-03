@@ -2,7 +2,7 @@
 
 namespace App\Cards;
 
-use App\Cards\Card; // Import specific class
+use App\Cards\Card;
 use App\Cards\CardHand;
 use App\Cards\DeckOfCards;
 
@@ -35,6 +35,7 @@ class TwentyOne implements \JsonSerializable
     protected array $cardIndex;
     protected ?object $currentPlayer = null;
     protected ?object $bank = null;
+	protected ?object $winner = null;
 
     /**
      * Constructor to create a game
@@ -52,7 +53,35 @@ class TwentyOne implements \JsonSerializable
         ];
     }
 
-    public function setDifficulty($difficulty_level) {
+    public function addDeck($deck = new DeckOfCards('Trad52')) {
+        $this->deck = $deck;
+        echo "Deck added";
+    }
+    
+    public function addPlayer($number_of_players=null)
+    {
+		if ($number_of_players === 100) {
+			$bank = new CardHand($this->getDeck(), 0); //ändrat till getDeck()
+			$this->setBank($bank);
+			echo ("Bank set by command 100");
+			return;
+		}
+		if ($number_of_players !== null) {
+			$counter = 0;
+			
+			while ($counter < $number_of_players) {
+				$newPlayer = new CardHand($this->deck, 3);
+				$newPlayer->setPlayer($counter);
+				array_push($this->players, $newPlayer);
+				$counter++;
+			};
+			echo "Players added";
+		} else {
+			echo "No amount of players given";
+		}
+    }
+
+	public function setDifficulty($difficulty_level) {
         if ($difficulty_level === "nightmare") {
             $this->difficulty = "nightmare";
             echo "Difficulty set to 'nightmare'";
@@ -63,39 +92,6 @@ class TwentyOne implements \JsonSerializable
             echo "Not a valid option, choose from: normal/nightmare";
         }
     }
-
-    public function addDeck($deck = new DeckOfCards('Trad52')) {
-        $this->deck = $deck;
-        echo "Deck added";
-    }
-    
-    public function addPlayer($number_of_players=null)
-    {
-		if ($number_of_players === 100) {
-			$bank = new CardHand($this->deck, 0);
-			$this->bank = $bank;
-		}
-		if ($number_of_players !== null) {
-			$counter = 0;
-			
-			while ($counter < $number_of_players) {
-				$newPlayer = new CardHand($this->deck, 3);
-				array_push($this->players, $newPlayer);
-				$counter++;
-			};
-			echo "Players added";
-		} else {
-			echo "No amount of players given";
-		}
-    }
-    
-    public function rotatePlayer($player)
-    {
-		if ($player !== null) {
-			array_push($this->players, $player);
-			echo "Added player to end of queue";
-		}
-	}
     
     public function setStake(int $amount)
     {
@@ -124,16 +120,31 @@ class TwentyOne implements \JsonSerializable
         return (string) $this->deck->asString();
     }
     
-    public function getPlayer($which_player=1): object
+    public function getPlayer($which_player=1): ?object
     {
-		if (array_key_exists($which_player, $this->players))
-		{
+		if (count($this->players) === 0) {
+			return null;
+		} 
+		if (array_key_exists($which_player, $this->players)) {
 			return $this->players[$which_player] ?? null;
 		}
 		
 		throw new \OutOfBoundsException("Player index {$which_player} not found.");
     }
+
+	public function getAllPlayers(): array
+    {
+		return $this->players ?? null;
+    }
     
+	public function rotatePlayer($player)
+    {
+		if ($player !== null) {
+			array_push($this->players, $player);
+			echo "Added player to end of queue";
+		}
+	}
+
     public function popPlayer() {
 		array_shift($this->players);
 		echo "Removed first in queue";
@@ -144,29 +155,44 @@ class TwentyOne implements \JsonSerializable
         return (int) $this->stake;
     }
     
-    public function getCurrentPlayer(): object
-    {
+    public function getCurrentPlayer(): ?object
+    {	
         return $this->currentPlayer;
     }
     
     public function turn() {
-		
-		// This should pop and append like a queue
+		// This should pop and append like a queue but track final.
 		if ($this->currentPlayer === null) 
 		{
-			$this->currentPlayer = $this->players[0];
+			$this->currentPlayer = $this->getPlayer(0);
 		}
 		else 
 		{
-			$this->popPlayer();
-			$this->currentPlayer = $this->players[0];
-			$this->rotatePlayer($this->getCurrentPlayer());
+			$moveToBack = $this->popPlayer();
+			$this->currentPlayer = $this->getPlayer(0);
+			$this->rotatePlayer($moveToBack);
 			echo "Next player in turn";
 		}
 	}
 
-	public function compareHands(): object
+	public function compareHands(): ?object
     {
+		$winnerOfAll = null;
+		$highestScore = 0;
+
+		foreach ($this->players as $player) {
+			$handValue = $player->getHandValue();
+			$player->setScore($handValue);
+
+			if ($handValue > $highestScore && $handValue <= 21) {
+				$highestScore = $handValue;
+				$winnerOfAll = $player;
+			}
+		}
+
+		return $winnerOfAll;
+
+		/*
 		$contenders = [];
 		
 		foreach($this->players as $player) {
@@ -188,6 +214,7 @@ class TwentyOne implements \JsonSerializable
 		// echo $winnerString;
 		
 		return (object) $winner;
+		*/
     }
 
     public function playerMove() {
@@ -211,7 +238,7 @@ class TwentyOne implements \JsonSerializable
 		
 		// Count number of aces
 		foreach($cards as $card) {
-			if ($card === 21) {
+			if ($card === 14) {
 				$aces += 1;
 			}
 		}
@@ -250,12 +277,12 @@ class TwentyOne implements \JsonSerializable
 		}
 	}
 	
-	public function setBank($player=null)
+	public function setBank($player=null): object
     {
 		$withoutBank = [];
 		
-		if ($player !== null) {
-			$this->bank = $this->addPlayer(100);
+		if ($player === null) {
+			$this->bank = new CardHand($this->getDeck(), 0);
 			echo "Bank set";
 		} else {
 			$withoutBank = array_filter($this->players, fn($item) => $item !== $player);
@@ -263,17 +290,17 @@ class TwentyOne implements \JsonSerializable
 			$this->bank = $player;
 			echo "Player selected as bank";
 		}
+
+		return $this->bank;
     }
     
 	// Also in DeckOfCards
     public function dealCard(int $amount = 1)
     {
         for ($i = 0; $i < $amount; $i++) {
-            $randInd = array_rand($this->deck);
-            $dealtCard = $this->deck[$randInd];
-            array_push($this->lastDeal, $dealtCard);
-            unset($this->deck[$randInd]);
-            $this->deckSize = count($this->deck);
+            $randInd = array_rand($this->getDeck());
+            $dealtCard = $this->getDeck()[$randInd];
+            unset($this->getDeck()[$randInd]);
         }
 
         return $dealtCard;
@@ -324,4 +351,13 @@ class TwentyOne implements \JsonSerializable
     {	
 		return $this->status;
     }
+
+	public function getWinner(): ?object {
+		foreach($this->getAllPlayers() as $player) {
+			if ($player->getStatus() === "winner") {
+				return $player;
+			}
+		}
+		return null;
+	}
 }

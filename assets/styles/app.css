@@ -312,13 +312,12 @@ h3 {
 }
 
 /* TWENTYONE CARDGAME */
-
 .twentyOneViewer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: auto;
+    height: 100vh;
+    width: 100%;
     flex-direction: column;
 }
 
@@ -390,42 +389,92 @@ input {
 }
 
 .gameContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     padding: 0.5rem;
     background-color: white;
     border: 1rem solid black;
-    height: 100vh;
-    width: 100%;
+    height: auto;
+    width: auto;
 }
 
-.bankView {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    background-color: white;
-    border: 1rem solid black;
-    height: 100vh;
-    width: 100%;
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
 }
 
-.playerView {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+.cardSize {
+    font-size: 8rem;
+}
+
+.bankView .cardSize {
+    order: 1;
     background-color: white;
     border: 1rem solid black;
-    height: 100vh;
+    height: 15vh;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerView .cardSize {
+    order: 2;
+    background-color: white;
+    border: 1rem solid black;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .infoView {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: row;
     background-color: black;
     border: 1rem solid black;
-    height: 100vh;
+    height: auto;
     width: 100%;
     color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
 }
 
+.selectForm {   
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    border: 1rem ridge black;
+    padding: 1rem;
+    border-radius: 10px;
+}
 
+.playerButton {
+    display: flex;
+    justify-self: right;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    height: 5rem;
+    width: 10rem;
+}
+
+.playerButton:hover {
+    background-color: white;
+    color: green;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 1rem;
+}

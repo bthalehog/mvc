@@ -27,7 +27,8 @@ class CardHand
     public ?int         $handSize = null;
     private array       $lastSacrifice = [];
     protected int	    $score = 0;
-    protected string    $status= "";
+    protected string    $status = "";
+    public int          $player = 0;
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -38,6 +39,7 @@ class CardHand
         $this->handSize = $handSize;
         $this->cardToHand($handSize, $currentDeck); // Argument is an object not a list!
         $this->status = "not_done";
+        $this->player = 0;
         // return $this;
     }
 
@@ -91,6 +93,36 @@ class CardHand
     public function getStatus(): string
     {
 		return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function getPlayer(): int
+    {
+		return $this->player;
+    }
+
+    public function setPlayer($order)
+    {
+        $this->player = $order;
+        // Status updated.
+    }
+
+    public function getHandValue(): int
+    {
+        $score = 0;
+        
+        foreach($this->getHand() as $card) {
+            $value = $card->getValue();
+            preg_match('/\d+/', $value, $match);
+            $value = (int) $match[0];
+            $score += $value;
+        }
+
+        return $score;
     }
 
     /**
@@ -150,5 +182,10 @@ class CardHand
     public function getLastDraw(): array
     {
         return $this->lastDraw;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->getHand();
     }
 }

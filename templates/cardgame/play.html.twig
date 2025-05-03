@@ -5,18 +5,24 @@
 {% block body %}
     <div class="twentyOneViewer">
         <div id="gameContainer" class="gameContainer">
-            <div id="bankView" class="gameView">
-                <p>Bank here!</p>
-            </div>
-            
-            <div id="playerView" class="gameView">
-                <p>Player here here!</p>
-            </div>
+            <div id="game" class="game">
+                <div id="bankView" class="gameView">
+                    <p class="cardSize">{{ bank }}</p>
+                </div>
+                
+                <div id="playerView" class="gameView">
+                    <p class="cardSize">{{ player }}</p>
+                </div>
 
-            <div id="infoView" class="gameView">
-                <p>Game info here!</p>
-                <a href="{{ path('play') }}">{{ button1|raw }}</a>
-                <a href="{{ path('play') }}">{{ button2|raw }}</a>
+                <div id="infoView" class="infoView">
+                    <form method="POST" action="{{ path("play") }}" class="selectForm">
+                        {{ button1|raw }}
+                        {{ button2|raw }}
+                    </form>
+
+                    <p style="color: white;">{{ gameInfo|raw }}</p>
+                    <p> {{ winner }} </p>
+                </div>
             </div>
         </div>
 {% endblock %}

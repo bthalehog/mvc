@@ -47,13 +47,9 @@ class DeckOfCards implements \JsonSerializable
         // Card should be given value from DoC->cardInd, therefore randSelect inside this loop.
 
         while (count($this->deckMap) > 0) {
-            // for ($i = 0; $i <= ($this->deckSize + 1); $i++) {
             // Selection from cardIndex
             $randSelector = array_rand($this->deckMap);
             //$this->value = $this->cardIndex[$randSelector]["value"]; // "value" instead? "value"=>"s1" or better to pop?
-            // $this->cardIndex[$randSelector]["status"] = "out";
-            // FIX THIS - $this->lastDraw = $this->value;
-            // OPTION $this->addToHistogram($this->lastDraw);
             array_push($this->deck, new Card($this->deckMap[$randSelector]["value"] ?? null, $this->deckMap[$randSelector]["status"] ?? null, $this->deckMap[$randSelector]["order"] ?? null));
             unset($this->deckMap[$randSelector]);
         }
@@ -92,11 +88,14 @@ class DeckOfCards implements \JsonSerializable
     // Decide whether it deals one card and is called repeatedly or if it takes argument and repeats call inside.
     public function dealCard(int $amount = 1)
     {
+        if ($amount === 0) {
+            return;
+        }
         for ($i = 0; $i < $amount; $i++) {
             $randInd = array_rand($this->deck);
             $dealtCard = $this->deck[$randInd];
             array_push($this->lastDeal, $dealtCard);
-            unset($this->deck[$randInd]);
+            unset($this->deck[$randInd]);   
             $this->deckSize = count($this->deck);
         }
 
@@ -191,6 +190,6 @@ class DeckOfCards implements \JsonSerializable
 
     public function jsonSerialize(): mixed
     {
-        return $this->getDeck(); // or however you want to expose it
+        return $this->getDeck();
     }
 }

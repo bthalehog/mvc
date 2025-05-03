@@ -26,8 +26,9 @@ class SessionController extends AbstractController
 
         if ($session == null) {
             $deck = new DeckOfCards('Trad52');
-            $game = null;
-            $this->initSession($session, $deck, $game);
+            $cardHand = new CardHand();
+            $players = 0;
+            $this->initSession($session, $deck, $cardHand, $players);
             echo "Session created";
         }
 
