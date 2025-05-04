@@ -29,6 +29,8 @@ class CardHand
     protected int	    $score = 0;
     protected string    $status = "";
     public int          $player = 0;
+    protected           $wallet = 0;
+    protected           $isHead = false;
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -40,6 +42,7 @@ class CardHand
         $this->cardToHand($handSize, $currentDeck); // Argument is an object not a list!
         $this->status = "not_done";
         $this->player = 0;
+        $this->wallet = 0;
         // return $this;
     }
 
@@ -74,9 +77,33 @@ class CardHand
         return (string) $stringer;
     }
 
+    public function isHead(): bool {
+        return $this->isHead;
+    }
+
+    public function setHead($newHead) {
+        $this->isHead = $newHead;
+    }
+
     public function getHand(): array
     {
         return (array) $this->currentHand;
+    }
+
+    public function discardHand()
+    {
+        $this->currentHand = [];
+    }
+
+    public function getWallet(): int
+    {
+        return $this->wallet;
+    }
+
+    public function setWallet($cash)
+    {
+        $this->wallet += $cash;
+        echo "Cash added to wallet.";
     }
     
     public function setScore($score)

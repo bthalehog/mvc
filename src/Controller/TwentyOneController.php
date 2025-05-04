@@ -3,16 +3,13 @@
 namespace App\Controller;
 
 /*
-
 FLOWCHART to implement
 
 game = new Game(); 	// Create game
 sessionHandler(game); 	// Init and write to session
 game.selectDifficulty(); 	// Select difficulty (normal/hell)
 game.addPlayer(); 	// Add players to game
-
-
-game.bankRotator(); 	// Select bank from players, if none then bank is computer.
+(game.bankRotator(); 	// Select bank from players, if none then bank is computer.)
 
 WHILE (game.bank.status !== "happy" && game.player[x].status !== happy)
 game.setStake(); 	// Bank sets stake
@@ -138,6 +135,7 @@ class TwentyOneController extends AbstractController
     #[Route("/game/twentyone/play", name: "play")]
     public function start(SessionInterface $session, Request $request)
     {   
+        echo "Start";
         $deck = $session->get('deck');
         $cardHand = $session->get('cardHand');
         $card = $session->get('card');
@@ -146,22 +144,36 @@ class TwentyOneController extends AbstractController
 
         $button1 = '<button type="submit" id="playerButtonDraw" name="action" class="playerButton" value="draw">Draw card</button>';
         $button2 = '<button type="submit" id="playerButtonStay" name="action" class="playerButton" value="stay">Stay</button>';
+        $button3 = '<button type="submit" id="newGameBtn" name="action" class="playerButton" value="new">New game</button>';
+        $button4 = '<button type="submit" id="nextPlayerBtn" name="action" class="playerButton" value="next">Next player</button>';
+
         $gameInfo = "";
         $winner = "";
+        $result = "";
+        $action = 
+
+        // Get player input
+        $action = $request->request->get('action');
+        $new = $request->request->get('new');
+
+        if ($new === "new") {
+            return redirectToRoute('session_delete');
+        }
 
         ob_start();
+
+        // Add a condition to check if queue has been rotated fully.
 
         if ($game->getCurrentPlayer() === null) {
             $game->turn();
         }
         
-        // $game->turn();
         $currentPlayer = $game->getCurrentPlayer();
         $game->setBank();
         $game->setStake(50);
         $bank = $game->getBank();
         
-        dump($game);
+        // dump($game);
 
         // echo get_class($game);
         // echo get_class($game->getPlayer(0));
@@ -169,168 +181,112 @@ class TwentyOneController extends AbstractController
         // echo get_class($currentPlayer);
 
         // STD-CLASS -- CardHand
-        echo get_class($bank);
+        // echo get_class($bank);
 
-        if (!$bank instanceof CardHand) {
-            throw new \RuntimeException("Bank object not found or invalid.");
-        }
-
-        // Get player input
-        $action = $request->request->get('action');
+        // if (!$bank instanceof CardHand) {
+        //    throw new \RuntimeException("Bank object not found or invalid.");
+        // }
 
         if ($action === "draw") {
             $game->getCurrentPlayer()->cardToHand(1, $game->getDeck());
-            
+
             if ($game->getCurrentPlayer()->getHandValue() > 21) {
                 $game->getCurrentPlayer()->setStatus("fat");
                 $game->getBank()->setStatus("winner");
-
+                $gameInfo .= "Player" . (string)$game->getCurrentPlayer()->getPlayer() . " burst!<br>";
             } else if ($game->getCurrentPlayer()->getHandValue() === 21) {
                 $game->getCurrentPlayer()->setStatus("happy");
+                $gameInfo .= "Player" . $game->getCurrentPlayer()->getPlayer() . " hits 21!<br>";
             }
         }
 
-        if ($action === "stay") {
-            $game->getCurrentPlayer()->setStatus("happy");
-
+        // TO BE IMPLEMENTED WHEN PLAYER LOGIC IS COMPLETE
+        // BANK LOGIC (need new function,  getPlayerHandValueTotal (use compareHands), getWallet, setWallet, getStake)
+        if ($action === "stay" or $game->getCurrentPlayer()->getStatus() === "fat" or $game->getCurrentPlayer()->getStatus() === "happy") {
+            // SHIFTING THIS LOGIC $game->getCurrentPlayer()->setStatus("happy");
+            echo "Bank takes turn, draws 2...<br>";
+            // sleep(1);
             // Initiate bank turn
             while ($game->getBank()->getHandValue() <= 17) {
-                echo "Bank below 17, has to draw!";
+                echo "Bank below 17, has to draw!<br>";
                 $game->getBank()->cardToHand(1, $game->getDeck());
+                // sleep(1);
             }
 
-            while ($game->getBank()->getHandValue() < 21 && $game->getBank()->getStatus() !== "happy" && $game->getBank()->getStatus() !== "winner") {
+            while ($game->getBank()->getHandValue() < 21 or $game->getBank()->getStatus() !== "happy" && $game->getBank()->getStatus() !== "winner") {
                 // This is used to set difficulty level or intelligence, mathematically always intelligent to stay above 17.
-                if ($game->getBank()->getHandValue() > 17) {
+                if ($game->getBank()->getHandValue() > 17 || $game->getBank()->getHandValue() <= 21) {
+                    echo "Bank stays!<br>";
                     $game->getBank()->setStatus("happy");
-                    echo "Bank stays!";
-                }
-
-                if ($game->getBank()->getHandValue() > 21) {
+                } else if ($game->getBank()->getHandValue() > 21) {
                     // Check for 21-combinations.
-                    if ($game->getBank()->is21()) {
+                    if ($game->is21($game->getBank())) {
+                        echo "Bank hits 21!<br>";
                         $game->getBank()->setStatus("winner");
-                        echo "Bank hits 21!";
-                        // $game->getBank()->setScore(21);
                     }
-
+                    echo "Bank burst!<br>";
                     $game->getBank()->setStatus("fat");
                     $game->getCurrentPlayer()->setStatus("winner");
-
-                    echo "Bank is fat!";
-                }
-
-                if ($game->getBank()->getHandValue() === 21) {
+                } else if ($game->getBank()->getHandValue() === 21) {
                     $game->getBank()->setStatus("winner");
-                    echo "Bank hits 21!";
+                    echo "Bank hits 21!<br>";
+                } else {
+                    $game->getBank()->cardToHand(1, $game->getDeck());
+                    // sleep(1);
                 }
-
-                $game->getBank()->cardToHand(1, $game->getDeck());
             }
         }
-
+        
         if ($game->getBank()->getStatus() === "winner") {
-            $winner = $game->getBank()->getPlayer();
+            $winner = $game->getBank()->getPlayer(); //Should return an int
         }
 
-        /*
-        // while ($game->getBank()->getStatus() !== "happy" || $game->getCurrentPlayer()->getStatus() !== "happy") {
-            // Draw card
-            $game->getCurrentPlayer()->cardToHand(1, $game->getDeck());
-
-            // Check for lard
-            if($game->getCurrentPlayer()->getHandValue() > 21) {
-                $game->getCurrentPlayer()->setStatus("fat");
-                $game->getBank()->setStatus("winner");
-                break;
-            }
-
-            // Check for 21
-            if($game->getCurrentPlayer()->getHandValue() === 21) {
-                $game->getCurrentPlayer()->setStatus("happy");
-            }
-
-            // If not lardy and not 21 - OPTION connected to button
-            // HERE HERE HERE
-        }
-            */
-
-        /* TO BE IMPLEMENTED WHEN PLAYER LOGIC IS COMPLETE
-        // BANK LOGIC (need new function, return playerHandValueTotal (use compareHands) in twentyOne)
-        while ($game->getBank()->getStatus() !== "happy" && $game->getBank()->getStatus() !== "fat" && $game->getCurrentPlayer()->getStatus() !== "fat") {
-            while ($game->getBank()->getHandValue() <= 17) {
-                $game->getBank()->cardToHand($game->getDeck());
-            }
-
-            while ($game->getBank()->getHandValue() > 17 && $game->getBank()->getHandValue() < 21) {
-                $game->getBank()->cardToHand($game->getDeck());
-
-                if ($game->getBank()->getHandValue() >= 18) {
-                    $game->getBank()->setStatus("happy");
-                }
-
-                if ($game->getBank()->getHandValue() > 21) {
-                    $game->getBank()->setStatus("fat");
-                }
-            }
-
-            if ($game->getBank()->getHandValue() === 21) {
-                $game->getBank()->setStatus("winner");
-            }
-        }
-
-        if ($game->getBank()->getStatus() !== "fat" && $game->getCurrentPlayer()->getStatus() !== "fat") {
-            // $game->compareHands();
-            $winner = $game->getWinner();
-        }
-
-        // If more players to go, call turn.
-        if (count($game->players) !== 0) {
-            $game->turn();
-        } else {
-            break;
-        }
-        */
         if ($game->getBank()->getStatus() === "winner" && $game->getCurrentPlayer()->getStatus() === "fat") {
-            echo "Bank win!";
-        }
-
-        if ($game->getCurrentPlayer()->getStatus() === "winner" && $game->getBank()->getStatus() === "fat") {
-            echo $game->getCurrentPlayer()->getPlayerString() . " win!";
-        }
-
-        // $winner = $game->getWinner();
-        // echo $winner->getPlayerString() . "wins!";
-
-        // If more players to go, call turn.
-        if (count($game->getAllPlayers()) > 0) {
-            $game->turn();
+            echo "Bank win!<br>";
+        } else if ($game->getCurrentPlayer()->getStatus() === "winner" && $game->getBank()->getStatus() === "fat") {
+            echo $game->getCurrentPlayer()->getPlayerString() . " wins!<br>";
         } else {
-            echo "Comparing hands. ";
+            echo "Comparing hands.<br>";
             $winner = $game->compareHands();
 
-            if ($winner === null) {
-                $winner = "All are fat, no winner!";
+            if ($winner === "player") {
+                $result = "Bank wins!<br>";
+                echo $result;
+                $game->getBank()->setWallet($game->getStake());
+            } else if (ctype_digit($winner)) {
+                $result = "Player" . (string)$winner->getPlayer() . " wins!<br>";
+                echo $result;
+
+                $game->getPlayer($winner)->setWallet($game->getStake());
+                echo "Total earnings: " . (string)$winner->getWallet() . "<br>";
+            } else {
+                echo "No winner! Bank takes all.<br>";
+                $game->getBank()->setWallet($game->getStake());
             }
         }
 
-        echo $winner;
-        
-        echo "Game ended, restart by session/delete";
+        // NEXT BUTTON
+        $next = $request->request->get('next');
+
+        if ($next === "next") {
+            echo "Next players turn..";
+            turn();
+        }
 
         $output = ob_get_clean();
         
         $data = [
             "button1" => $button1,
             "button2" => $button2,
+            "button3" => $button3,
+            "button4" => $button4,
             "gameInfo" => $output,
-            "player" => $game->getCurrentPlayer()->asCards(),
+            "player" =>  $game->getCurrentPlayer()->asCards(),
             "bank" => $game->getBank()->asCards(),
-            "winner" => $winner,
+            "winner" => $result,
         ];
-
-        echo "Start";
 
         return $this->render('cardgame/play.html.twig', $data);
     }
 }
+

@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}TwentyOne{% endblock %}
+{% block title %}TwentyOne{% endblock %}    
 
 {% block body %}
     <div class="twentyOneViewer">
@@ -18,6 +18,8 @@
                     <form method="POST" action="{{ path("play") }}" class="selectForm">
                         {{ button1|raw }}
                         {{ button2|raw }}
+                        {{ button3|raw }}
+                        {{ button4|raw }}
                     </form>
 
                     <p style="color: white;">{{ gameInfo|raw }}</p>
@@ -26,3 +28,4 @@
             </div>
         </div>
 {% endblock %}
+
