@@ -54,8 +54,9 @@ All subs actions listed below.
 20250430 New tag v3.0.3, Corrective push.   
 20250430 New tag v3.0.4, Cardgame startpage, rules, form and button to start game added. Controller initiated, functionality tested - OK.  
 20250501 New tag v.3.0.5, Cardgame session, start menu, basic routing OK.  
-20250503 New tag v.3.0.6, Cardgame game logic, in process.  
-20250504 New tag v.3.0.7, Cardgame game logic refinement, adding delay, next player, bet, and setScore in process.  
+20250503 New tag v3.0.6, Cardgame game logic, in process.  
+20250504 New tag v3.0.7, Cardgame game logic refinement, adding delay, next player, bet, and setScore in process.  
+20250506 New tag v3.0.8, Cardgame restructure, encapsulation and methodization of game logic, fixing unresponsive layout changes and queue-logic.    
   
 ### _Kmom04_  
   

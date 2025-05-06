@@ -7,10 +7,12 @@
         <div id="gameContainer" class="gameContainer">
             <div id="game" class="game">
                 <div id="bankView" class="gameView">
+                    <p> Bank </p>
                     <p class="cardSize">{{ bank }}</p>
                 </div>
                 
                 <div id="playerView" class="gameView">
+                    <p> Player </p>
                     <p class="cardSize">{{ player }}</p>
                 </div>
 
@@ -22,10 +24,14 @@
                         {{ button4|raw }}
                     </form>
 
-                    <p style="color: white;">{{ gameInfo|raw }}</p>
-                    <p> {{ winner }} </p>
+                    {% for message in app.flashes('notice') %}
+                        <p style="color: white;">{{ message }}</p>
+                    {% endfor %}
+                    <p style="color: white;"> {{ gameInfo }} </p>
+                    <p style="color: white;"> {{ winner }} </p>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}
 

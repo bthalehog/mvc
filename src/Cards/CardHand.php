@@ -109,7 +109,7 @@ class CardHand
     public function setScore($score)
     {
 		$this->score += $score;
-        // echo "Score added";
+        echo "Score added";
     }
     
     public function getScore(): int
@@ -125,6 +125,7 @@ class CardHand
     public function setStatus($status)
     {
         $this->status = $status;
+        echo "Score added";
     }
 
     public function getPlayer(): int
@@ -135,7 +136,7 @@ class CardHand
     public function setPlayer($order)
     {
         $this->player = $order;
-        // Status updated.
+        echo "Player set to: Player" . (string)$order . ".";
     }
 
     public function getHandValue(): int
