@@ -55,7 +55,6 @@ class TwentyOneController extends AbstractController
                 
                 // Create game from input
                 $game = new TwentyOne($deck, $numberOfPlayersInput, $difficultyInput);
-                $game->setCurrentPlayerIndex(0); 
 
                 // This removes bank from player array and sets stake to $50.
                 $bank = $game->setBank($game->getPlayer(0));
@@ -63,13 +62,17 @@ class TwentyOneController extends AbstractController
 
                 // Allowing for index pos 0 to be used again to initiate queue
                 $player = $game->setCurrentPlayer($game->getPlayer(0));
+
+                // Set player index for queue-handler.
+                $game->setCurrentPlayerIndex(0);
            
-                // Write to session
+                // Write to session              
                 $session->set('deck', $deck);
                 $session->set('game', $game);
-                $session->set('bank', $bank);
-                $session->set('player', $player);
+                $session->set('bank', $game->getBank());
+                $session->set('player', $game->getCurrentPlayer());
                 $session->set('stake', 50);
+                $session->set('playerIndex', $game->getCurrentPlayerIndex());
                 
                 return $this->redirectToRoute('play');
             }
@@ -97,15 +100,17 @@ class TwentyOneController extends AbstractController
     {   
         $this->addFlash('notice', 'Game started!');
 
-        // Session variables
+        // Session variables for deserialization
         $deckMock = new DeckOfCards('Trad52');
         $cardMock = $deckMock->dealCard();
         $cardHandMock = new CardHand($deckMock);
 
+        // Session game variables
         $deck = $session->get('deck');
         $game = $session->get('game');
         $bank = $session->get('bank');
         $player = $session->get('player');
+        $playerIndex = $session->get('playerIndex'); // Added for queue handle
 
         // Template variables
         $gameInfo = "";
@@ -131,19 +136,37 @@ class TwentyOneController extends AbstractController
         // ob_start();
 
         // New game by reroute to session delete
-        if ($new === "new") {
+        if ($action === "new") {
            return $this->redirectToRoute('session_delete');
-        } elseif ($next === "next") {
+        } elseif ($action === "next") {
             if ($game->lastPlayer() === true) {
-                $gameInfo .= string($winner) . "wins!";
+                // Announce winner
+                $gameInfo .= (string)$winner . "wins!";
+
+                // Clear views
+                $game->getBank()->discardHand();
+                $game->getCurrentPlayer()->discardHand();
+
+                // Save to session
                 $session->set('game', $game);
                 $session->set('player', $game->getCurrentPlayer());
                 $session->set('bank', $game->getBank());
+
                 sleep(2);
                 $gameInfo .= "Hit new game-button to reset session and start a new game.";
                 sleep(5);
-                return redirectToRoute('session_delete');
+                return $this->redirectToRoute('session_delete');
             } else {
+                // Clear views
+                $game->getCurrentPlayer()->discardHand();
+                $game->getBank()->discardHand();
+
+                // Save to session
+                $session->set('game', $game);
+                $session->set('player', $game->getCurrentPlayer());
+                $session->set('bank', $game->getBank());
+
+                // Bring out next player (also increments currentPlayerIndex and assigns new currentPlayer)
                 $game->nextPlayer();
                 $this->addFlash('notice', "Player" . (string)$game->getCurrentPlayer()->getPlayer() . "takes turn..");
 
@@ -151,6 +174,7 @@ class TwentyOneController extends AbstractController
                 $session->set('game', $game);
                 $session->set('player', $game->getCurrentPlayer());
                 $session->set('bank', $game->getBank());
+                $session->set('playerIndex', $game->getCurrentPlayerIndex());
             }
         }  elseif ($action === "draw") {
             $game->getCurrentPlayer()->cardToHand(1, $game->getDeck());

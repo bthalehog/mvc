@@ -57,6 +57,7 @@ All subs actions listed below.
 20250503 New tag v3.0.6, Cardgame game logic, in process.  
 20250504 New tag v3.0.7, Cardgame game logic refinement, adding delay, next player, bet, and setScore in process.  
 20250506 New tag v3.0.8, Cardgame restructure, encapsulation and methodization of game logic, fixing unresponsive layout changes and queue-logic.    
+20250506 New tag v3.0.9, Restructure tested, unresponsive layout fixed (session-issue), playerIndex added to game-Class for queue-handling, reroute OK. Finalizing specialCases algoritm.  
   
 ### _Kmom04_  
   
