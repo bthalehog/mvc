@@ -54,18 +54,32 @@ class TwentyOne implements \JsonSerializable
         ];
     }
 
+	/**
+	 * Sets the variable $game->currentPlayerIndex
+	 * to track currentPlayer in turn handler.
+     */
 	public function setCurrentPlayerIndex($index) {
 		$this->currentPlayerIndex = $index;
 	}
 
+	/**
+	 * Get index of currentPlayer
+	 * Returns int index
+     */
 	public function getCurrentPlayerIndex(): int {
 		return $this->currentPlayerIndex;
 	}
 
+	/**
+	 * Assign deck to game
+     */
     public function addDeck($deck = new DeckOfCards('Trad52')) {
         $this->deck = $deck;
     }
     
+	/**
+	 * Add player to playerlist.
+     */
     public function addPlayer($number_of_players=null)
     {
 		if ($number_of_players === 100) {
@@ -87,6 +101,10 @@ class TwentyOne implements \JsonSerializable
 		}
     }
 
+	/**
+	 * Set difficulty-level of game.
+	 * Currently takes "normal" and "nightmare"
+     */
 	public function setDifficulty($difficulty_level) {
         if ($difficulty_level === "nightmare") {
             $this->difficulty = "nightmare";
@@ -97,31 +115,53 @@ class TwentyOne implements \JsonSerializable
         }
     }
     
+	/**
+	 * Set game stake to $amount (bank-move)
+     */
     public function setStake(int $amount)
     {
         $this->stake = $amount;
     }
     
+	/**
+	 * Get difficulty-level of game.
+     */
     public function getDifficulty(): string
     {
         return (string) $this->difficulty;
     }
 
+	/**
+	 * Get bank
+	 * Returns cardHand-object bank.
+     */
 	public function getBank(): object
     {
         return (object) $this->bank;
     }
     
+	/**
+	 * Get deck
+	 * Returns deckOfCards-object
+     */
     public function getDeck(): object
     {
         return $this->deck;
     }
     
+	/**
+	 * Get deck as string
+	 * Returns string holding deckvalues.
+     */
     public function getDeckString(): string
     {
         return (string) $this->deck->asString();
     }
-    
+
+	/**
+	 * Get player from playerlist based on index.
+	 * Returns cardHand-object or null.
+     */    
     public function getPlayer($which_player=1): ?object
     {
 		if (count($this->players) === 0) {
@@ -135,22 +175,34 @@ class TwentyOne implements \JsonSerializable
 		throw new \OutOfBoundsException("Player index {$which_player} not found.");
     }
 
+	/**
+	 * Get all players in playerlist
+     * Returns array of cardHand-objects (player)
+     */
 	public function getAllPlayers(): array
     {
 		return $this->players ?? null;
     }
     
+	/** DECOMMISSIONED
+	 * PART OF QUEUE-HANDLER LOGIC
+     * Rotate player from player-list to end of list
+     */
 	public function rotatePlayer($player)
     {
 		if ($player !== null) {
 			array_push($this->players, $player);
-			$this->addFlash('notice', "Added player to end of queue");
+			echo "Added player to end of queue";
 		} if ($player->getPlayer() === 1 && $player->isHead() === false) {
 			$this->setHead("true");
 		}
 		
 	}
 
+	/** DECOMMISSIONED
+	 * PART OF QUEUE-HANDLER LOGIC
+     * Pop player from player-list
+     */
     public function popPlayer() {
 		array_shift($this->players);
 		$this->addFlash('notice', "Removed first in queue");
@@ -171,6 +223,12 @@ class TwentyOne implements \JsonSerializable
         $this->currentPlayer = $newCurrent;
     }
     
+	/**
+     * Handles the first turn in a game
+	 * Assigning currentPlayer
+	 * Selecting bank
+	 * Adjusting playerlist.
+     */
 	public function firstTurn() {
 		// This should pop and append like a queue but track final.
 		if ($this->currentPlayer === null) 
@@ -188,6 +246,9 @@ class TwentyOne implements \JsonSerializable
 		}
 	}
 
+	/** DECOMMISSIONED (replaced by nextPlayer in new game flow structure)
+     * Handles turn in player queue
+     */
     public function turn() {
 		// This should pop and append like a queue but track final.
 		if ($this->currentPlayer === null) 
@@ -203,6 +264,11 @@ class TwentyOne implements \JsonSerializable
 		}
 	}
 
+	/**
+     * Compare the sum of cardvalues of bank and player hand-objects.
+	 * HandOne should be bank for the win on draw to work!
+	 * Returns hand-object-winner.
+     */
 	public function compareHands($handOne, $handTwo): object
     {
 		$highestScore = [];
@@ -214,26 +280,30 @@ class TwentyOne implements \JsonSerializable
 			array_push($comparison, $handTwo);
 
 			foreach ($comparison as $player) {
-				if($player !== null) {
-					if ($player->getScore() !== 21 && $player->getStatus() !== "fat") {
-						$handValue = $player->getHandValue();
-						$player->setScore($handValue);
-					}
+				if ($player->getScore() !== 21 && $player->getStatus() !== "fat") {
+					$handValue = $player->getHandValue();
+					$player->setScore($handValue);
 				}
 			}
 
+			// Bank takes precedence on draw, bank has to be argument 1
 			if ($comparison[0]->getScore() === $comparison[1]->getScore()) {
 				$winner = $comparison[0];
+				echo "Bank win";
 			} else if ($comparison[0]->getScore() > $comparison[1]->getScore()) {
 				$winner = $comparison[0];
+				echo "Bank win";
 			} else {
 				$winner = $comparison[1];
+				echo "Player win";
 			}
 		} else {
-			if ($handOne->getStatus !== "fat") {
+			if ($handOne->getStatus() !== "fat" && $handTwo->getStatus() === "fat") {
 				$winner = $handOne;
+				echo "Bank win";
 			} elseif ($handTwo->getStatus !== "fat") {
 				$winner = $handTwo;
+				echo "Bank win";
 			}
 		}
 
@@ -257,11 +327,19 @@ class TwentyOne implements \JsonSerializable
 
 		return $winnerOfAll;
     } */
-	
+   
+	/**
+     * Return number of players in playerlist.
+     */
 	public function playerCount(): int {
 		return (int) count($this->players);
 	}
 	
+	/**
+     * Find out if the cards on hand constitutes a specialcase for 21.
+	 * Returns boolean.
+	 * Does NOT alter player status.
+     */
 	public function is21($hand) {
 		$cards = [];
 		$aces = 0;
@@ -269,43 +347,44 @@ class TwentyOne implements \JsonSerializable
 		
 		// Write cardvalues to list
 		foreach($hand as $card) {
+			// Separate int value from cardvalue combo (ex s12).
+			$card = preg_replace('/\D/', '', $card->getValue());
 			array_push($cards, $card);
-		}
-		
-		// Count number of aces
-		foreach($cards as $card) {
-			if ($card === 14) {
-				$aces += 1;
-			}
 		}
 		
 		// Count number of aces, suites or suite = 2 + value10
 		foreach($cards as $card) {
+			// Check for Ace
+			// If card > len 2 then check card[0] and card[1]
 			if ($card === 14) {
+				$aces += 1;
+			}
+			// Check for King, Queen and Jack
+			if ($card === 13 or $card === 12 or $card === 11) {
 				$suite += 1;
 			}
-			if ($card === 13 && $card === 12 && $card === 11) {
-				$suite += 1;
-			}
-			if ($suite === 2 && $card === 10) {
+			// Check for combination of two covered and one ace
+			if ($suite === 2 && $aces === 1) {
 				$suite += 1;
 			}
 		}	
 		
-		// Find if any condition true
-		if ($aces <= 2) {
-			echo "Ace";
+		// Find if any special case condition is true
+		if ($aces >= 2) {
+			echo "Two or more aces = 21!";
 			return true;
-		} else if (sum($cards) === 21) {
-			echo "Sum";
+		} else if (array_sum($cards) === 21) {
+			echo "Sum of cards on hand = 21!";
 			return true;
 		} else if ($suite === 3) {
-			echo "Suite";
+			echo "Suite (three covered or two covered and one ace) = 21!";
 			return true;
 		}
+		// This can also be used to alter difficulty on mode-setting.
+		// Shift rules into elseif below for separation.
 		else if ($this->getDifficulty() === "nightmare") {
-			if ($hand->handSize() >= 5) {
-				echo "HandSize - specialCase";
+			if (count($hand) >= 5) {
+				echo "Hand size >= 5 is 21! (specialCase - nightmare-mode)";
 				return true;
 			}
 		} else {
@@ -313,6 +392,12 @@ class TwentyOne implements \JsonSerializable
 		}
 	}
 	
+	/**
+     * Set bank
+	 * If single-player then new CardHand as bank.
+	 * If multi-player then filters out selected from playerlist
+	 * and selects as bank. Bank has order nr 99999.
+     */
 	public function setBank($player=null): object
     {
 		$withoutBank = [];
@@ -330,6 +415,10 @@ class TwentyOne implements \JsonSerializable
     }
     
 	// Also in DeckOfCards
+	/**
+     * Deal $amount cards.
+	 * Return Card-object.
+     */
     public function dealCard(int $amount = 1)
     {
         for ($i = 0; $i < $amount; $i++) {
@@ -342,6 +431,9 @@ class TwentyOne implements \JsonSerializable
     }
 	
 	// Also in DeckOfCards
+	/**
+     * Shuffle deck.
+     */
     public function shuffleDeck(): object
     {
         $carrier = $this->deck;
@@ -352,9 +444,12 @@ class TwentyOne implements \JsonSerializable
     }
 	
 	// Also in DeckOfCards
+	/**
+     * JsonSerializer for $deck
+     */
     public function jsonSerialize(): mixed
     {
-        return $this->deck->getDeck(); // or however you want to expose it
+        return $this->deck->getDeck();
     }
     
     /**
@@ -431,6 +526,11 @@ class TwentyOne implements \JsonSerializable
 		return $rules;
     }
 
+	/**
+     * Turn handler
+	 * Shifts to next player in $game->players
+	 * Increases $this->currentPlayerIndex
+     */
 	public function nextPlayer(): void {
 		if ($this->currentPlayerIndex + 1 < count($this->players)) {
 			$this->currentPlayerIndex++;
@@ -438,12 +538,16 @@ class TwentyOne implements \JsonSerializable
 		}
 	}
 
+	/**
+     * Check if last player
+	 * Returns bool
+     */
 	public function lastPlayer(): bool {
 		return $this->currentPlayerIndex >= count($this->players) - 1;
 	}
 
 	/**
-     * Logic for player
+     * Logic for player move (unused)
      */
 	public function playerMove() {
 		return $this->deck->dealCard(1);
@@ -524,6 +628,78 @@ class TwentyOne implements \JsonSerializable
 	}
 
 	/**
+     * Banklogic ACTIVE
+	 * Auto-pull until 17.
+     */
+    public function autoPull()  {
+		while ($this->getBank()->getHandValue() < 17) {
+			echo "Bank below 17, has to draw!";
+
+			$this->getBank()->cardToHand(1, $this->getDeck());
+
+			if ($this->getBank()->getHandValue() >= 17) {
+				if ($this->getBank()->getHandValue() === 21) {
+					echo "Bank hits 21!";
+					$this->getBank()->setStatus("winner");
+					$this->getCurrentPlayer()->setStatus("fat");
+				} elseif ($this->is21($this->getBank()->getHand()) === true) {
+					echo "Bank hits 21!";
+					$this->getBank()->setStatus("winner");
+					$this->getCurrentPlayer()->setStatus("fat");
+				}
+			}
+		}
+	}
+	
+	/**
+     * Determine winner in a game between bank and player
+	 * Return void (sets status = "winner")
+     */
+    public function determineWinner()
+	{
+		if ($this->getBank()->getStatus() === "winner") {
+			$winner = $this->getBank()->getPlayer(); 
+			$result = "Bank wins!";
+			echo $result;
+			$this->getBank()->setWallet($this->getStake());
+		} elseif ($this->getCurrentPlayer()->getStatus() === "winner") {
+				$winner = $this->getCurrentPlayer()->getPlayer(); //Should return an int
+				$result = "Player wins!";
+				echo $result;
+				$this->getCurrentPlayer()->setWallet($this->getStake());
+		} elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "fat") {
+			$result = $this->getCurrentPlayer()->getPlayerString() . " wins!<br>";
+			echo $result;
+			$this->getCurrentPlayer()->setWallet($this->getStake());
+		} elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "happy") {
+			echo "Comparing hands...";
+			sleep(1);
+			$winner =$this->compareHands($this->getBank(), $this->getCurrentPlayer());
+			echo "Player" . (string)$winner->getPlayer();
+
+			if ($winner === $this->getBank()) {
+				$result = "Bank wins!";
+				echo $result;
+				$this->getBank()->setWallet($this->getStake());
+			} elseif ($winner === $this->getCurrentPlayer()) {
+				$result = "Player" . (string)$winner->getPlayer() . " wins!";
+				echo $result;
+				
+				$this->getCurrentPlayer()->setWallet($this->getStake());
+				// $game->getPlayer($winner)->setWallet($game->getStake());
+				$this->addFlash('notice', "Total earnings: " . (string)$winner->getWallet());
+			} else {
+				$result = "No winner! Bank takes all.";
+				echo $result;
+				$this->getBank()->setWallet($this->getStake());
+			}
+		}
+	}
+
+	/* 	STATIC FUNCTIONS (UNUSED or METHODIZED ABOVE) 	*/
+	/* 		Takes $game and returns $game				*/
+
+	/**
      * Banklogic
 	 * Auto-pull until 17.
      */
@@ -548,31 +724,7 @@ class TwentyOne implements \JsonSerializable
 	}
 
 	/**
-     * Banklogic ACTIVE
-	 * Auto-pull until 17.
-     */
-    public function autoPull()  {
-		while ($this->getBank()->getHandValue() < 17) {
-			echo "Bank below 17, has to draw!";
-
-			$this->getBank()->cardToHand(1, $this->getDeck());
-
-			if ($this->getBank()->getHandValue() >= 17) {
-				if ($this->getBank()->getHandValue() === 21) {
-					echo "Bank hits 21!";
-					$this->getBank()->setStatus("winner");
-					$this->getCurrentPlayer()->setStatus("fat");
-				} elseif ($this->is21($this->getBank()->getHand()) === true) {
-					echo "Bank hits 21!";
-					$this->getBank()->setStatus("winner");
-					$this->getCurrentPlayer()->setStatus("fat");
-				}
-			}
-		}
-	}
-
-	/**
-     * Banklogic for single player game
+     * Determines winner in $game
 	 * Lets bank act on algorithmic instruction.
      */
     public static function determineWinnerArg($game): object
@@ -615,52 +767,6 @@ class TwentyOne implements \JsonSerializable
 			}
 		}
 		return $game;
-	}
-
-	
-	/**
-     * Banklogic for single player game
-	 * Lets bank act on algorithmic instruction.
-     */
-    public function determineWinner()
-	{
-		if ($this->getBank()->getStatus() === "winner") {
-			$winner = $this->getBank()->getPlayer(); 
-			$result = "Bank wins!";
-			echo $result;
-			$this->getBank()->setWallet($this->getStake());
-		} elseif ($this->getCurrentPlayer()->getStatus() === "winner") {
-				$winner = $this->getCurrentPlayer()->getPlayer(); //Should return an int
-				$result = "Player wins!";
-				echo $result;
-				$this->getCurrentPlayer()->setWallet($this->getStake());
-		} elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "fat") {
-			$result = $this->getCurrentPlayer()->getPlayerString() . " wins!<br>";
-			echo $result;
-			$this->getCurrentPlayer()->setWallet($this->getStake());
-		} elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "happy") {
-			echo "Comparing hands...";
-			sleep(1);
-			$winner =$this->compareHands($this->getBank(), $this->getCurrentPlayer());
-			echo "Player" . (string)$winner->getPlayer();
-
-			if ($winner === $this->getBank()) {
-				$result = "Bank wins!";
-				echo $result;
-				$this->getBank()->setWallet($this->getStake());
-			} elseif ($winner === $this->getCurrentPlayer()) {
-				$result = "Player" . (string)$winner->getPlayer() . " wins!";
-				echo $result;
-				
-				$this->getCurrentPlayer()->setWallet($this->getStake());
-				// $game->getPlayer($winner)->setWallet($game->getStake());
-				$this->addFlash('notice', "Total earnings: " . (string)$winner->getWallet());
-			} else {
-				$result = "No winner! Bank takes all.";
-				echo $result;
-				$this->getBank()->setWallet($this->getStake());
-			}
-		}
 	}
 }
 

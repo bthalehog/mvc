@@ -5,64 +5,136 @@
 {% block body %}
     <div class="documentationView">
         <article class="documentationArticle">
-            <h2>TjugoEtt</h2>
-                <h3>Spelregler</h4>
-                    TWIG
-                <h3>Funktionalitetsbehov</h3>
-                    TWIG
-                <h3>Pseudokod</h3>
-                    <code>pseudokod här</code>
-                <p style="text-indent: 2em;">init session, save, load, destroy session</p><br>
+            <span><h2 class="docuHeader">TjugoEtt</h2><span>
+                <h3 class="docuHeader">Spelregler</h4>
+                    <div class="gameLink">
+                        <a href="{{ path('twentyone') }}">Spelregler och spelstart</a>
+                    </div>
+                <h3 class="docuHeader">Funktionalitetsbehov</h3>
+                <div class="docuCode">
+                    <pre class="altered">
+    sessionHandlerClass()
+        init session
+        save
+        load
+        destroy session
+    
+    PlayerClass = (CardHand?)
+    	init
+    	var Player.status
+    	var Player.id
+    	var Player.wallet
+    	var Player.game
+    	var Player.difficulty
+    	var Player.hand
+    	Player.getHand()
+    	Player.getWallet()
+    	Player.setWallet()
+    	Player.setDifficulty()
+    	Player.getDifficulty()
+    	Player.setStatus()
+    	Player.getStatus()
+    	Player.getId()
+    	Player.setId()
+    	Player.draw()
 
-                <h3>Flödesschema</h3>
-                    <span><img class="homePic" src="{{ asset('build/images/kmom03flowchart.svg') }}" alt="Flowchart"></img><span>
+    GameClass: TwentyOne()
+    	init
+    	var GameClass.difficulty = “string”
+    	var GameClass.players = [array]
+    	var GameClass.bank = obj
+    	var GameClass.bankHand = [array]
+    	var GameClass.playerHand = [array]
+    	var GameClass.extra = ?
+    	gameClass.cardValue-indexer
+    	gameClass.addPlayer()
+    	gameClass.ruleset
+    	gameClass.compare hands
+    	gameClass.turn() (maybe with a queue-implementation)
+    	gameClass .setStake() to handle current winnings
+    	gameClass.drawCard()/playerMove()
+    	gameClass .is21() return bool
+    	gameClass.sessionHandler()
+                    </pre>
+                </div>
+                
+                <div class="pseudoCode">
+                <h3 class="docuHeader alterhead">Pseudokod</h3>
+                    <pre>
+    Tjugoett (kortspel)
+    Spelet börjar 
+        bankiren lägger en insats i banken, 
+        ger varje spelare utom sig själv ett kort. 
+
+    Spelarna spelar sedan mot bankiren en i taget. 
+        Den spelare som är i tur tittar på sitt kort,
+        satsar ett valfritt belopp, som dock inte får vara större än vad som finns i banken,
+        får därefter ytterligare ett kort.
+
+    Om summan av korten är 21 
+        vinner spelaren från banken ett belopp lika stort som insatsen. 
+    Är summan större än 21
+        har spelaren ”spruckit” eller ”blivit tjock” och förlorar sin insats till banken. 
+    Om summan är under 21
+        kan spelaren antingen förklara sig nöjd eller begära ytterligare kort för att
+        komma närmare 21, men då också riskera att spricka.
+    Om spelaren förklarat sig nöjd, 
+        ska bankiren straffa spelaren (spela ut egna kort från leken, ett i taget
+        med framsidan uppåt). 
+    Spricker bankiren, vinner spelaren lika mycket som sin insats. 
+
+    När bankiren förklarat sig nöjd, visar spelaren sina kort. 
+        Den som har högst vinner. 
+
+        Har båda lika är det bankiren som vinner, likaså om bankiren fått 21.
+    Nästa spelare.
+                    </pre>
+                </div>
+
+                <h3 class="docuHeader">Flödesschema</h3>
+                    <a href="{{ asset('images/kmom03flowchart.svg') }}" target="_blank">
+                        <div class="flowChart">
+                            <img src="{{ asset('images/kmom03flowchart.svg') }}" class="flowChartThumb" alt="Flowchart" />
+                        </div>
+                    </a>
                 
                 <div id=code class="docuCode">
-                <h3>Kodstruktur</h3>
+                <h3 class="docuHeader">Logikförslag</h3>
                     <code>
-                        <section>
-                            game = new Game();<br>
-                            sessionHandler(game);<br>
-                            game.selectRuleSet();<br>
-                            sessionHandler(game);<br>
-                            game.selectRuleSet();<br>
-                            game.selectDifficulty();<br>
-                            game.addPlayer();<br>
-                            game.bankRotator();<br>
-                            game.startGame();<br>
-                        </section>
-                        <br>
-                        <section>
-                            WHILE (game.bank.status !== "happy" && game.player[x].status !== happy AND canDraw IS TRUE)<br>
-                            <p style="text-indent: 2em;">game.setStake();</p>
-                            <p style="text-indent: 2em;">game.turn(); (++);</p>
-                            <p style="text-indent: 2em;">game.playerMove();</p>
-                            <p style="text-indent: 2em;">game.bank.hand.is21();</p>
-                            <p style="text-indent: 2em;">game.player.hand.is21();</p>
-                            <br>
-                            <p style="text-indent: 2em;">IF !is21() THEN check for specialCase</p>
-                                <p style="text-indent: 3em;">game.bank.specialCase()</p>
-                                <p style="text-indent: 3em;">game.player.specialCase();</p>
-                            <br>
-                            <p style="text-indent: 2em;">IF no specialCase THEN check for happy</p>
-                                <p style="text-indent: 3em;">game.playerHappy()()</p>
-                                <p style="text-indent: 3em;">game.bankHappy()</p>
-                            <br>
-                            <p style="text-indent: 2em;">IF player happy</p>
-                                <p style="text-indent: 3em;">game.bank.bankDraw()</p>
-                                <p style="text-indent: 3em;">game.compareHands(game.bank, game.player)</p>
-                            <p style="text-indent: 2em;">IF bank happy</p>
-                                <p style="text-indent: 3em;">game.compareHands(game.bank, game.player)</p>
-                            
-                            <p>game.compareHands(game.bank, game.player);</p>
-                        </section>
-                        <br>
-                        <section>
-                            game.payUp();<br>
-                            destroySession();<br>
-                        </section>
-                    </code>
-                    <div>
+                        <pre class="altered">
+        game = new Game(); 	// Create game
+        sessionHandler(game); 	// Init and write to session
+        game.selectRuleSet(); 	// Select ruleset (normal or with specialCases)
+        game.selectDifficulty(); 	// Select difficulty (normal/hell)
+        game.addPlayer(); 	// Add players to game
+        game.bankRotator(); 	// Select bank from players, if none then bank is computer.
+
+        WHILE (game.bank.status !== "happy" && game.player[x].status !== happy)
+            game.setStake(); 	// Bank sets stake
+            game.turn(); (++); 		// Current player selected from queue
+            game.playerMove(); 		// Current player makes move
+            game.bank.hand.is21(); 	// Check all players and bank result
+            game.player.hand.is21(); 	// Check all players and bank result
+            game.bank.specialCase(); 	// Check forspecialCase
+            game.player.specialCase(); 	// Check for specialCase
+            bank.isHappy(); 		// Check if bank happy
+            IF bank.isHappy() THEN
+            game.compareHands(game.bank, game.player);
+            IF player.isHappy() THEN
+            game.bankDraw()
+
+        IF (no one is happy and) deck empty THEN
+            game.compareHands(game.bank, game.player);	
+        IF game.bank > game.player THEN
+            game.bank.status = winner
+        ELSE
+            game.player.status = winner
+                
+        game.payUp();		// Pay out stake to winner
+        destroySession();		// Destroy session
+                        <pre>
+                    <code>
+                <div>
         </article>
     </div>
 {% endblock %}

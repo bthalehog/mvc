@@ -152,8 +152,8 @@ class TwentyOneController extends AbstractController
                 $session->set('player', $game->getCurrentPlayer());
                 $session->set('bank', $game->getBank());
 
-                sleep(2);
                 $gameInfo .= "Hit new game-button to reset session and start a new game.";
+
                 sleep(5);
                 return $this->redirectToRoute('session_delete');
             } else {
@@ -200,7 +200,7 @@ class TwentyOneController extends AbstractController
             // Banks turn, decide for engine.
             // SINGLE PLAYER ENGINE - BANK LOGIC AI
             if ($game->playerCount() === 1) {
-                $this->addFlash('notice', "Bank takes turn, draws 2...");
+                $gameInfo .= "Bank takes turn, draws 2...";
 
                 // Auto pull to 17 for both engine types.
                 $game->autoPull();
@@ -210,8 +210,12 @@ class TwentyOneController extends AbstractController
                 $session->set('bank', $bank);
                 $session->set('player', $player);
 
+                sleep(1);
+
                 // Automatic bank move
                 $game->bankMoveAI();
+
+                sleep(1);
 
                 // Save to session
                 $session->set('game', $game);
@@ -229,12 +233,16 @@ class TwentyOneController extends AbstractController
                 $session->set('bank', $game->getBank());
                 $session->set('player', $game->getCurrentPlayer());
 
+                sleep(1);
+
                 // If not already fat or content, continue user instructed draw.
                 while ($game->getBank()->getHandValue() < 21 && $game->getBank()->getStatus() !== "happy" && $game->getBank()->getStatus() !== "winner") {
                     if ($action === "draw") {
                         // Check if combination is 21
                         $game->getBank()->cardToHand(1, $game->getDeck());
                         $gameInfo .= "Bank draws!";
+                        
+                        sleep(1);
         
                         if ($game->is21($game->getBank()->getHand()) === true){
                             $gameInfo .= "Bank hits 21!";
@@ -267,10 +275,15 @@ class TwentyOneController extends AbstractController
                 $session->set('game', $game);
                 $session->set('bank', $game->getBank());
                 $session->set('player', $game->getCurrentPlayer());
+
+                $game->compareHands($game->getBank(), $game->getCurrentPlayer());
             }
+
+            $gameInfo .= "Finding winner...";
+            sleep(2);
             
             // Determine winner by sorting on status, player can never be winner at this stage only happy. (has function in game)
-            $game->determineWinner();
+            $winner = $game->determineWinner();
 
             $session->set('game', $game);
             $session->set('bank', $game->getBank());
