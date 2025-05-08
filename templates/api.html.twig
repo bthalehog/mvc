@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{% block title %}My API:s{% endblock %}
+
+{% block body %}
+    <div id="apiViewer" class="apiLanding">
+        <div id="apiHome" class="apiHome">
+            <h2>API Inventory</h2>
+
+            <p>Below you can test the functionality built:</p>
+                <ul>
+                    <li>
+                        <a href="{{ path('cards_start')}}#deck">Create a deck!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cards_start')}}#card">Draw a card!</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{ path('cards_start')}}#hand">Deal a hand!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cards_start')}}#sacrifice">Sacrifice cards!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cards_start')}}#shuffle">Shuffle deck!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cards_start')}}#sort">Sort deck!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('draw_amount', { 'number': 5 }) }}">Draw amount of cards by adding /(int)!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('shuffle_deck') }}">Shuffle deck by adding: /deck/shuffle to URL!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('sort_deck') }}">Sort deck in template!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('session_start') }}">Start a session!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('session_delete') }}">Destroy your session!</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('twentyone') }}">TwentyOne</a>
+                    </li> 
+                    <li>
+                        <a href="{{ path('debug_session') }}">Debug view!</a>
+                    </li> 
+                </ul>
+           
+            <div id="card" class="cardView">
+                {{ card }}
+            </div>
+            <div id="deck" class="cardView">
+                {{ deck }}
+            </div>
+            <div id="hand" class="cardView">
+                {{ hand }}
+            </div>
+            <div id="sacrifice" class="cardView">
+                <p>Sacrifice</p>
+            </div>
+            <div id="draw" class="cardView">
+                <p>Draw</p>
+            </div>
+            <div id="sort" class="cardView">
+                {{ sorted }}
+            </div>
+            <div id="shuffle" class="cardView">
+                {{ shuffled }}
+            </div>
+            <div id="sorted" class="cardView">
+                {{ sorted }}
+            </div>
+
+            <p>You can see the code at my github-repo <a href="https://github.com/bthalehog/mvc">MVC</a>.</p>
+        </div>
+    </div>
+{% endblock %}

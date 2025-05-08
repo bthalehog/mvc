@@ -6,6 +6,13 @@
     <div class="twentyOneViewer">
         <div id="gameContainer" class="gameContainer">
             <div id="game" class="game">
+                <div id="infoView" class="infoView">
+                    {% for message in app.flashes('notice') %}
+                        <p style="color: white;">{{ message }}</p>
+                    {% endfor %}
+                    <p style="color: white;"> {{ output }} </p>
+                    <p style="color: white;"> {{ gameInfo }} </p>
+                </div>
                 <div id="bankView" class="gameView">
                     <p> Bank </p>
                     <p class="cardSize">{{ bank }}</p>
@@ -16,19 +23,13 @@
                     <p class="cardSize">{{ player }}</p>
                 </div>
 
-                <div id="infoView" class="infoView">
+                <div id="buttonView" class="infoView">
                     <form method="POST" action="{{ path("play") }}" class="selectForm">
                         {{ button1|raw }}
                         {{ button2|raw }}
                         {{ button3|raw }}
                         {{ button4|raw }}
                     </form>
-
-                    {% for message in app.flashes('notice') %}
-                        <p style="color: white;">{{ message }}</p>
-                    {% endfor %}
-                    <p style="color: white;"> {{ gameInfo }} </p>
-                    <p style="color: white;"> {{ winner }} </p>
                 </div>
             </div>
         </div>

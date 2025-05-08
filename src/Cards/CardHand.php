@@ -29,8 +29,8 @@ class CardHand
     protected int	    $score = 0;
     protected string    $status = "";
     public int          $player = 0;
-    protected           $wallet = 0;
-    protected           $isHead = false;
+    protected $wallet = 0;
+    protected $isHead = false;
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -77,11 +77,13 @@ class CardHand
         return (string) $stringer;
     }
 
-    public function isHead(): bool {
+    public function isHead(): bool
+    {
         return $this->isHead;
     }
 
-    public function setHead($newHead) {
+    public function setHead($newHead)
+    {
         $this->isHead = $newHead;
     }
 
@@ -105,21 +107,21 @@ class CardHand
         $this->wallet += $cash;
         echo "Cash added to wallet.";
     }
-    
+
     public function setScore($score)
     {
-		$this->score += $score;
+        $this->score += $score;
         echo "Score added";
     }
-    
+
     public function getScore(): int
     {
-		return $this->score;
+        return $this->score;
     }
 
     public function getStatus(): string
     {
-		return $this->status;
+        return $this->status;
     }
 
     public function setStatus($status)
@@ -130,7 +132,7 @@ class CardHand
 
     public function getPlayer(): int
     {
-		return $this->player;
+        return $this->player;
     }
 
     public function setPlayer($order)
@@ -142,8 +144,8 @@ class CardHand
     public function getHandValue(): int
     {
         $score = 0;
-        
-        foreach($this->getHand() as $card) {
+
+        foreach ($this->getHand() as $card) {
             $value = $card->getValue();
             preg_match('/\d+/', $value, $match);
             $value = (int) $match[0];

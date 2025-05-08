@@ -12,7 +12,7 @@ use App\Cards\DeckOfCards;
 
 class MyControllerJson
 {
-    #[Route("/api")]
+    #[Route("/api", name:"api")]
     public function jsonNumber(): Response
     {
         // $number = random_int(0, 100);
@@ -32,7 +32,7 @@ class MyControllerJson
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
-        return $response;
+        return new JsonResponse($data);
     }
 
     #[Route('/api/quote')]
@@ -61,11 +61,9 @@ class MyControllerJson
             $deck = new DeckOfCards('Trad52');
             $session->set('deck', $deck);
             // echo "No deck in session, rerouting...";
-        } else {
-            $deck = $session->get('deck', new DeckOfCards('Trad52'));
-            // echo "Loaded from session";
         }
-        // $deck = new DeckOfCards('Trad52');
+        $deck = $session->get('deck', new DeckOfCards('Trad52'));
+                
         $data = [
             'deck' => $deck->asCards(),
             'timestamp' => date('c'),
@@ -81,11 +79,9 @@ class MyControllerJson
             $deck = new DeckOfCards('Trad52');
             $session->set('deck', $deck);
             // echo "No deck in session, rerouting...";
-        } else {
-            $deck = $session->get('deck', new DeckOfCards('Trad52'));
-            // echo "Loaded from session";
         }
-        // $deck = new DeckOfCards('Trad52');
+        $deck = $session->get('deck', new DeckOfCards('Trad52'));
+        
         $deck->shuffleDeck();
         $data = [
             'deck' => $deck->asCards(),
@@ -102,11 +98,9 @@ class MyControllerJson
             $deck = new DeckOfCards('Trad52');
             $session->set('deck', $deck);
             // echo "No deck in session, rerouting...";
-        } else {
-            $deck = $session->get('deck', new DeckOfCards('Trad52'));
-            // echo "Loaded from session";
         }
-        // $deck = new DeckOfCards('Trad52');
+        $deck = $session->get('deck', new DeckOfCards('Trad52'));
+        
         $card = $deck->dealCard();
         $data = [
             'card' => $card->getGraphics(),
@@ -123,12 +117,10 @@ class MyControllerJson
             $deck = new DeckOfCards('Trad52');
             $session->set('deck', $deck);
             // echo "No deck in session, rerouting...";
-        } else {
-            $deck = $session->get('deck', new DeckOfCards('Trad52'));
-            // echo "Loaded from session";
-        }
+        } 
+          
+        $deck = $session->get('deck', new DeckOfCards('Trad52'));
 
-        // $deck = new DeckOfCards('Trad52');
         $hand = new CardHand($deck, $number);
         $remainder = count($deck->getDeck());
         $data = [

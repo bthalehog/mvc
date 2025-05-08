@@ -59,7 +59,7 @@ All subs actions listed below.
 20250506 New tag v3.0.8, Cardgame restructure, encapsulation and methodization of game logic, fixing unresponsive layout changes and queue-logic.    
 20250506 New tag v3.0.9, Restructure tested, unresponsive layout fixed (session-issue), playerIndex added to game-Class for queue-handling, reroute OK. Finalizing specialCases algoritm.  
 20250507 New tag v3.1.0, SpecialCases finished, documentation done, report done, finish touches on layout, verifying compareHands-method.  
-
+20250508 New tag v3.1.1, LINTing, more encapsulation, less static functions, clean old and decommissioned methods, some gameInfo-cleanup, layoutfix.   
   
 ### _Kmom04_  
   

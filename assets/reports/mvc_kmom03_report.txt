@@ -50,14 +50,19 @@
             <p>Under ett tag hade jag även en form av queue som jag jobbade med men insåg att det var meningslöst i ett fullgame-turordningsbaserat spel. Jag testa en foreach loop istället men det
             tyckte inte input-delarna om. Det var då jag insåg att min undermåliga inkapsling var boven och valde att migrera att spellogik in till TwentyOne-klassen.</p>
 
-            <p>Jag är, bortsett från missen av deadline, nöjd med slutprodukten givet den tid jag haft och mina förkunskaper. Jag upplever att spelflödet är bra.</p>
+            <p>Jag är, bortsett från missen av deadline, nöjd med slutprodukten givet den tid jag haft och mina förkunskaper.</p>
 
             <p>Smart att man kan samla alla sina echo med ob_start/ob_get_clean() och använda de som återkoppling till spelaren i realtid. PHP-communityt verkar dock tycka att det är dålig praxis
             och att den "fria koden" kan störa annan exekvering. Jag hade stor användning av det under testfasen iaf och upplever inte att den stör mitt spelflöde nu efter att sessionen fungerar som den ska.</p>
 
             <p>Det finns sannolikt gott om utrymme för felhantering och säkring av exekveringsflödet, men det verkar som att vi ska behandla det under nästa kursmoment.
             Jag vet inte om det vore bättre praxis att i vissa fall för spellogiken ha statiska funktioner och anropa dessa med argumentet ($game), de skulle då kunna vara en egen klass GameLogic motsvarande.
-            Det skulle kapsla in även själva "spelmotorn" och Controllern skulle kunna bli ännu smalare.</p>
+            Det skulle kapsla in även själva "spelmotorn" och Controllern skulle kunna bli ännu smalare. Jag skulle nog försöka göra alla dragen i en egen klass, det blir ganska stora metoder och min phpsniffer klagar.
+            </p>
+
+            <p> Jag skulle även vilja strukturera upp återkopplingen från spelarinputen. Jag började med att använda ob_start för att samla <i>echo</i> i funktioner och tänkte använda de som feedback till spelare ist för flash.
+            Efter att ha kapslat in viss controllerlogik i TwentyOne-klassen har jag nu en hybrid av <i>echo</i>, $gameInfo (string) och <i>flash</i>. Det blir varken bra eller snyggt när det parsas och överlappar lite knasigt.
+            Jag skulle också gärna vilja att man ser mer av vad som sker i dragen som banken gör. Min metod med att bygga autodrag till 17 och villkorsstyrda långa funktioner gör att hela förfarandet redan utspelats innan det presenteras, upplevs oresponsivt.</p>
 
             <p>Jag gillar lösningen med UTF som kortgrafik, intressant hur mycket liknande grafikmöjligheter som finns i dess bibliotek. Jag tycker också att jag fått till ett bra flöde för att arbeta i GIT,
             något jag tyckte var icke-intuitivt i början.</p>
@@ -70,14 +75,14 @@
             <li> Om spelet spelas av en spelare spelar datorn automatiskt bankens drag enligt algoritm ("smart") som enkelt kan 
             alterneras för att skapa upplevd intelligens i form av minskad sannolikhet för spelares vinst.</li>
             <li>Vid spelets början sätter banken en insats (hårdkodad till 50), vinnaren erhåller potten. Tanken är att man i slutet av 
-            ett multiplayerspel jämför spelarnas potter och korar en vinnare, vid skilje kan vinnare med 21 utses till vinnare.  Detta medför 
+            ett multiplayerspel jämför spelarnas potter och korar en vinnare (i dagsläget är det högsta poäng på hand om ingen har 21 eller blivit tjock), vid skilje kan vinnare med 21 utses till vinnare.  Detta medför 
             att man slipper sålla på status för att hitta potentiella vinnare bland spelarna.</li>
             <li>Om spelet spelas av flera spelare utses en av dessa till bank, banken drag spelas sedan av spelaren men med de regler som gäller för banken. Detta möjliggör framtida rotering av bankutövare. Efter att ha insett att det var överkurs la jag projektet på is,
             möjligheten till utveckling kvarstår.</li>
         </ul>
         
         <h3>Symfony</h3>
-        Jag har under hela utbildningen tyckt att just ramverkan är den stora utmaningen, de är samtidigt en halvmesyr av språkt de augmenterar, samtidigt en förenklare och assistent.
+        Jag har under hela utbildningen tyckt att just ramverkan är den stora utmaningen, de är samtidigt en halvmesyr av språket de augmenterar, samtidigt en förenklare och möjliggörare.
         Jag tycker om Symfony som ramverk och känner mig mer bekväm i det än i de andra, även så MVC-modellen. Det är dock svårt för mig att bedöma huruvida det handlar om ramverkets förträfflighet
         eller jag själv som bara inte är lite ovan vid uppläggen längre. Det är fortfarande svårt att hålla rätt på vilka språk som har vilka former av path/base_url/osv.. och när saker ska
         anropas via inbyggda hanterare för att bli tillgängliga vid uppladdning på server. Min förståelse för varför kompetens inom specifika ramverk är eftersökt på marknaden har dock ökat till ett hundra procent.
@@ -87,6 +92,6 @@
                 <li>Vikten av att läsa in sig på specifika ramverks sätt att hantera uppgifter som språkte de augmenterar redan hanterar fast på ett annat sätt</li>
                 <li>Vikten av att lära sig flera olika sätt för felsökning/debugging när man arbetar på serversidan</li>
                 <li>Hur mycket av grundarbetet i programmering man kan göra utan ingående kunskaper i ett specifikt språks möjligheter bara genom att ha grundförståelse för logiken</p>
-
+                <li>Man behöver verkligen inte "else".</li>
             </ul>
 </article>

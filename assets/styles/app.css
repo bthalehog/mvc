@@ -411,6 +411,13 @@ input {
     font-size: 8rem;
 }
 
+.gameView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+
 .bankView .cardSize {
     order: 1;
     background-color: white;
@@ -571,4 +578,33 @@ svg {
     height: 100vh;      /* Full viewport height */
     object-fit: cover;  /* Ensures the SVG covers the area */
     overflow: hidden;   /* Crops any content outside of the SVG container */
+}
+
+/* API PAGE */
+.apiLanding {
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    background-color: white;
+    border: 2rem solid black;
+    padding: 1rem;
+}
+
+.cardHome {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    background-color: white;
+    border: 2rem solid black;
+    padding: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
 }

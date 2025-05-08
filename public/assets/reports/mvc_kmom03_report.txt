@@ -1,58 +1,73 @@
 <article class="hashView">
+
     <h2>MVC Kmom03</h2>
         <h3>Generella intryck och egna reflektioner</h3>
-            <p> Jag utgick från att göra modelleringsarbetet enligt instruktion. Tack vare att jag nu har arbetat med liknande uppgift tidigare gick de 
-            första stegen ganska smidigt (målbild tydlig). Jag upplever att modelleringsarbetet är till mycket större hjälp nu när jag har ökad förståelse 
-            för vad det är jag skapar. Jag kommer sannolikt inte att göra fler uppgifter av den här omfattningen utan att göra detta förarbetet, jag upplever att 
+            <p> Jag utgick från att göra modelleringsarbetet enligt instruktion. Tack vare att jag nu har arbetat med liknande uppgift tidigare gick de
+            första stegen ganska smidigt (målbild tydlig). Jag upplever att modelleringsarbetet är till mycket större hjälp nu när jag har ökad förståelse
+            för vad det är jag skapar. Jag kommer sannolikt inte att göra fler uppgifter av den här omfattningen utan att göra detta förarbetet, jag upplever att
             det sparat mig massor av tid under grundarbetet.</p>
 
-            <p>Även vad gäller klasskonstruktioner börjar jag känna mig mer hemma, uppenbart även i, för mig, mer främmande språk som php. Det är verkligen till
-            stor hjälp att ha en "logisk grundplatta" att stå på samt att vara hyfsat bekant med yttre gränsvärden för vad koden kan göra och inte.
-            Det går nu fort för mig att hitta syntax för lösningar i php tack vare att jag vet mer exakt vilken funktionalitet jag söker då jag i större utsträckning 
-            vet vad som finns i verktygslådan. Jag försökte även vara uppgiften trogen avseende "smal kontroll" och "fet klass"-principen. Initialt (vid migrering av klasser från Geany efter funktionstester)
-            var min kontrollerkod lång och illa avgränsad vilket genererade oönskad kompilering vid uppdatering av sidan. Detta problem kändes dock igen från tidigare kurser
-            och efter att klasserna indelats och route-struktur med session fungerade kunde jag påbörja indelning i grundkomponenter (uppstart, första draget, spelares tur, 
-            banks tur, vinnare, nästa, slut).</p>
+            <p>Även vad gäller klasskonstruktioner börjar jag känna mig mer hemma, uppenbart även i, för mig, mer främmande språk som php. Det är verkligen till stor hjälp
+            att ha en "logisk grundplatta" att stå på samt att vara hyfsat bekant med yttre gränsvärden för vad koden kan göra och inte. Det går väldigt fort för mig att hitta
+            syntaktiska lösningar i php tack vare att jag vet mer exakt vilken funktionalitet jag söker, eftersom att jag i större utsträckning vet vad som finns i verktygslådan.</p>
 
-            <p>Jag hade stora problem med att få den visuella delen att uppdater på min hemsida, något som jag härledde till att mycket av arbete skedde på serversidan varför 
-            jag under en dag utforskade möjlighetern med AJAX-request och dynamisk uppdatering av sidan via JS (via Encore). Det gav nyttig övning i att manövrera filträd och 
-            repetera grundförfarandet för js-användning i Symfony, dock landade jag till slut i att det var lite väl orimligt att förvänta sig den lösningen utan att vi snuddat 
-            den i materialet varför jag övergick till studium as sessioner i php. Det hjälpte dock föga eftersom att jag borde studerat sessioner i Symfony (såklart), vilket blev 
-            en uppenbarelse för en smått frustrerad student. Efter att ha fått bukt med sessionshantering (och sett till att inte spara samma objektinstans som flera funktioner 
-            i session) fick dynamiken sig en automatisk uppfräschning.</p>
+            <p>Jag försökte vara uppgiften trogen avseende "smal kontroll" och "fet klass"-principen. Initialt (vid migrering av klasser från Geany efter funktionstester) var min kontrollerkod
+            lång och illa avgränsad vilket genererade oönskad kompilering vid uppdatering av sidan. Detta problem kändes dock igen från tidigare kurser och efter att klasserna var indelade
+            och route-struktur med session fungerade kunde jag påbörja indelning i grundkomponenter (uppstart, första draget, spelares tur, banks tur, vinnare, nästa, slut).</p>
 
-            <p>Inledningsvis tänkte jag även att jag skulle behöva en "player-klass" och jag arbetade med den övertygelsen ett tag, under min utveckling i Geany, tills jag insåg 
-            att en enkel utökning av CardHand skulle ge samma funktion och spara massa tid.</p>
+            <p>Jag hade dock stora problem med att få den visuella delen att uppdater på min hemsida, något som jag härledde till att mycket av arbete skedde på serversidan varför jag under en dag
+            utforskade möjlighetern med AJAX-request och dynamisk uppdatering av sidan via JS (via Encore). Det gav nyttig övning i att manövrera filträd och repetera grundförfarandet för js-användning
+            i Symfony, dock landade jag till slut i att det var lite väl orimligt att förvänta sig den lösningen utan att vi snuddat den i materialet varför jag övergick till studium as sessioner i php.
+            Det hjälpte föga eftersom att jag borde studerat sessioner i Symfony (såklart), vilket blev en uppenbarelse för en smått frustrerad student.
+            Efter att ha fått bukt med sessionshantering (och sett till att inte spara samma objektinstans som flera funktioner i session) fick dynamiken sig en automatisk uppfräschning.</p>
+
+            <p>Inledningsvis tänkte jag även att jag skulle behöva en "player-klass" och jag arbetade med den övertygelsen ett tag, under min utveckling i Geany, tills jag insåg att en enkel utökning av CardHand skulle
+            samma funktion och spara massa tid.</p>
 
         <h3>Uppgiften</h3>
             <p>Efter att ha gjort den initial planeringen och modellering påbörjade jag konstruktion av de klasser och metoder jag bedömt behövas. 
-            Jag använder Geany vid utveckling av grundfunktionaliteten då jag tycker om gränssnittet och mallarna. Efter att testat klasserna och dess metoder 
-            i Geany migrerade jag till VSC och delade in i separata filer. Nästa steg blev att sätta upp session och jag valde samma metod som använts för den 
-            tidigare kortuppgiften - reroute to session_delete, men med lite adderad fördröjning och autoreroute för spelflödeseffekt.</p>
+            Jag använder Geany vid utveckling av grundfunktionaliteten då jag tycker om gränssnittet och mallarna.</p>
 
-            <p>Jag har låtit TwentOne-klassen vara ett levande dokument som jag matchat mot mina logiska behov i kontrollern under arbetet och fyllt på med metoder 
-            allt eftersom. Jag är nöjd med att ha fått ett tydligt flöde och funktioner som följer det önskvärda "en metod - en uppgift" samt ett ganska lättläst flöde i kontrollern.
+            <p>Efter att testat klasserna och dess metoder i Geany migrerade jag till VSC och delade in i separata filer.</p>
+
+            <p>Nästa steg blev att sätta upp session och jag valde samma metod som använts för den tidigare kortuppgiften - reroute to session_delete, men med lite 
+            adderad fördröjning för spelflödeseffekt.</p>
+
+            <p>Jag har låtit TwentOne-klassen vara ett levande dokument som jag matchat mot mina logiska behov i kontrollern under arbetet och fyllt på med metoder allt eftersom.</p>
+
+            <p>Jag är nöjd med att ha fått ett tydligt flöde och funktioner som följer det önskvärda "en metod - en uppgift" samt ett ganska lättläst flöde i kontrollern.
             Jag har också, till skillnad från tidigare då jag jobbat med objekt i spelmiljö, blivit mycket bättre på att använda metoderna och inte skapa så många variabler i min kod.
             Det gör att det blir ganska långa kommandon ibland men jag börjar kunna se på metodanropen sammantaget som en enda entitet. Jag har även förvånats över hur pass mycket kod
             jag nu "vågar" skriva utan att köra kontroll av variabelinnehåll, i vissa fall hela grundstrukturer av en klass som sedan vid test kräver någon enstaka korrigering.
             Väldigt tillfredsställande för mig, som inte har några studieresultat som talar för min kunskapsinhämtning, att jag faktiskt lär mig saker.</p>
 
             <p>Serialiseringen i php (även i Symfony) upplevs något lynnig, den klarar fint att hantera mina objekt men jag hade ett tag svårt med att rekonstruera dem från sessionen.
-            Efter lite efterforskningar fick jag intrycket av att behöva ha "attrapp"-objekt tillgängliga för att symfony ska förstå vad den ska använda vid återskapandet (och inte 
-            ska stdClass utan önskad funktionalitet). När jag tar bort dessa variabler, som inte fyller någon annan funktion, får jag problem med sessionsdatan igen.</p>
+            Efter lite efterforskningar fick jag intrycket av att behöva ha "attrapp"-objekt tillgängliga för att symfony ska förstå vad den ska använda vid återskapandet (och inte ska stdClass utan önskad funktionalitet).
+            När jag tar bort dessa variabler, som inte fyller någon annan funktion, får jag problem med sessionsdatan igen.</p>
 
-            <p>Jag tycker att min lösning är den bästa jag gjort hitintills. Koden är väl dokumenterad och har tydlig struktur, Controllern är smal och lättförstådd ur 
-            felsökningshänseende. Inkapsling och enkelhet har eftersträvats i designen. Alla anrop för tillskrivning/ändring av spelrelaterade variabler sker in absurdum via metoder, 
-            inga variabler publika. Under ett tag hade jag även en form av queue som jag jobbade med men insåg att det var meningslöst i ett fullgame-turordningsbaserat spel. Jag testa en foreach loop istället men det
-            tyckte inte input-delarna om. Det var då jag insåg att min undermåliga inkapsling var boven och valde att migrera att spellogik in till TwentyOne-klassen. Jag är, bortsett från missen av deadline, nöjd med 
-            slutprodukten givet den tid jag haft och mina förkunskaper och jag upplever att spelflödet är bra.</p>
+            <p>Jag tycker att min lösning är den bästa jag gjort hitintills. Koden är väl dokumenterad och har tydlig struktur, Controllern är smal och lättförstådd ur felsökningshänseende.
+            Inkapsling och enkelhet har eftersträvats i designen. Alla anrop för tillskrivning/ändring av spelrelaterade variabler sker in absurdum via metoder, inga variabler publika.</p>
+            <p>Under ett tag hade jag även en form av queue som jag jobbade med men insåg att det var meningslöst i ett fullgame-turordningsbaserat spel. Jag testa en foreach loop istället men det
+            tyckte inte input-delarna om. Det var då jag insåg att min undermåliga inkapsling var boven och valde att migrera att spellogik in till TwentyOne-klassen.</p>
+
+            <p>Jag är, bortsett från missen av deadline, nöjd med slutprodukten givet den tid jag haft och mina förkunskaper.</p>
+
+            <p>Smart att man kan samla alla sina echo med ob_start/ob_get_clean() och använda de som återkoppling till spelaren i realtid. PHP-communityt verkar dock tycka att det är dålig praxis
+            och att den "fria koden" kan störa annan exekvering. Jag hade stor användning av det under testfasen iaf och upplever inte att den stör mitt spelflöde nu efter att sessionen fungerar som den ska.</p>
 
             <p>Det finns sannolikt gott om utrymme för felhantering och säkring av exekveringsflödet, men det verkar som att vi ska behandla det under nästa kursmoment.
             Jag vet inte om det vore bättre praxis att i vissa fall för spellogiken ha statiska funktioner och anropa dessa med argumentet ($game), de skulle då kunna vara en egen klass GameLogic motsvarande.
-            Det skulle kapsla in även själva "spelmotorn" och Controllern skulle kunna bli ännu smalare. Jag gillar lösningen med UTF som kortgrafik, intressant hur mycket liknande grafikmöjligheter som finns i dess bibliotek. Jag tycker också att jag fått till ett bra flöde för att arbeta i GIT,
-            något jag tyckte var icke-intuitivt i början.</p>
+            Det skulle kapsla in även själva "spelmotorn" och Controllern skulle kunna bli ännu smalare. Det blir ganska många och stora metoder, det gillar inte min phpcodesniffer.
+            </p>
 
-        <i>Extrauppgifter</i>
+            <p> Jag skulle även vilja strukturera upp återkopplingen från spelarinputen. Jag började med att använda ob_start för att samla <i>echo</i> i funktioner och tänkte använda de som feedback till spelare ist för flash.
+            Efter att ha kapslat in viss controllerlogik i TwentyOne-klassen har jag nu en hybrid av <i>echo</i>, $gameInfo (string) och <i>flash</i>. Det blir varken bra eller snyggt när det parsas och överlappar lite knasigt.
+            Jag skulle också gärna vilja att man ser mer av vad som sker i dragen som banken gör. Min metod med att bygga autodrag till 17 och villkorsstyrda långa funktioner gör att hela förfarandet redan utspelats innan det presenteras, upplevs oresponsivt.</p>
+
+            <p>Jag gillar lösningen med UTF som kortgrafik, intressant hur mycket liknande grafikmöjligheter som finns i dess bibliotek. Jag tycker också att jag fått till ett bra flöde för att arbeta i GIT,
+            något jag tyckte var icke-intuitivt i början.</p>
+        
+        <i><b>Extrauppgifter</b></i>
         Efter att ha utgått från den mer fullödiga beskrivningen råkade jag skapa även en del av den funktionalitet som ansetts som optionell:
         <ul>
             <li> Spelet har två svårighetsläge, normal/nightmare, förberedd för utökning (fler specialregler, alternativ kortlek osv). 
@@ -60,29 +75,23 @@
             <li> Om spelet spelas av en spelare spelar datorn automatiskt bankens drag enligt algoritm ("smart") som enkelt kan 
             alterneras för att skapa upplevd intelligens i form av minskad sannolikhet för spelares vinst.</li>
             <li>Vid spelets början sätter banken en insats (hårdkodad till 50), vinnaren erhåller potten. Tanken är att man i slutet av 
-            ett multiplayerspel jämför spelarnas potter och korar en vinnare, vid skilje kan vinnare med 21 utses till vinnare.  Detta medför 
+            ett multiplayerspel jämför spelarnas potter och korar en vinnare (i dagsläget är det högsta poäng på hand om ingen har 21 eller blivit tjock), vid skilje kan vinnare med 21 utses till vinnare.  Detta medför 
             att man slipper sålla på status för att hitta potentiella vinnare bland spelarna.</li>
             <li>Om spelet spelas av flera spelare utses en av dessa till bank, banken drag spelas sedan av spelaren men med de regler som gäller för banken. Detta möjliggör framtida rotering av bankutövare. Efter att ha insett att det var överkurs la jag projektet på is,
             möjligheten till utveckling kvarstår.</li>
         </ul>
         
         <h3>Symfony</h3>
-        Jag har under hela utbildningen tyckt att just ramverken är den största utmaningen, de är samtidigt en halvmesyr av språket de augmenterar, samtidigt en förenklare och assistent.
+        Jag har under hela utbildningen tyckt att just ramverkan är den stora utmaningen, de är samtidigt en halvmesyr av språket de augmenterar, samtidigt en förenklare och möjliggörare.
         Jag tycker om Symfony som ramverk och känner mig mer bekväm i det än i de andra, även så MVC-modellen. Det är dock svårt för mig att bedöma huruvida det handlar om ramverkets förträfflighet
-        eller att jag själv bara inte är lite ovan vid uppläggen längre. Det är fortfarande svårt att hålla rätt på vilka språk som har vilka former av path/base_url/osv.. och när saker ska
+        eller jag själv som bara inte är lite ovan vid uppläggen längre. Det är fortfarande svårt att hålla rätt på vilka språk som har vilka former av path/base_url/osv.. och när saker ska
         anropas via inbyggda hanterare för att bli tillgängliga vid uppladdning på server. Min förståelse för varför kompetens inom specifika ramverk är eftersökt på marknaden har dock ökat till ett hundra procent.
            
         <h3>TIL</h3>
             <ul>
-                <li>Vikten av att läsa in sig på specifika ramverks sätt att hantera uppgifter som språket de augmenterar redan hanterar fast på ett annat sätt.</li>
-                <li>Vikten av att lära sig flera olika sätt för felsökning/debugging när man arbetar på serversidan.</li>
-                <li>Hur mycket av grundarbetet i programmering man kan göra utan ingående kunskaper i ett specifikt språks möjligheter bara genom att ha grundförståelse för logiken.</p>
-                <li>Php har både "or" och || samt "and" och &&, olika strikthetsgrad.</li>
-                <li>Php har smidiga inbyggda kommandon för arrayer.</p>
-                <li>Inkapsling kan ha positiv inverkan på spelflödet.</p>
-                <li>Det går att samla alla echo med <i>ob_start/ob_get_clean()</i> och använda dessa som återkoppling till spelaren i realtid. 
-                PHP-communityt verkar dock tycka att det är dålig praxis och att den "fria koden" kan störa annan exekvering.
-                Jag hade stor användning av det under testfasen iaf och upplever inte att den stör mitt spelflöde nu efter att sessionen fungerar som den ska.</li>
-                <li>Jag har spelat 21 fel hela livet.</p>
+                <li>Vikten av att läsa in sig på specifika ramverks sätt att hantera uppgifter som språkte de augmenterar redan hanterar fast på ett annat sätt</li>
+                <li>Vikten av att lära sig flera olika sätt för felsökning/debugging när man arbetar på serversidan</li>
+                <li>Hur mycket av grundarbetet i programmering man kan göra utan ingående kunskaper i ett specifikt språks möjligheter bara genom att ha grundförståelse för logiken</p>
+                <li>Man behöver verkligen inte "else".</li>
             </ul>
 </article>

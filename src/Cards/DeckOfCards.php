@@ -95,7 +95,7 @@ class DeckOfCards implements \JsonSerializable
             $randInd = array_rand($this->deck);
             $dealtCard = $this->deck[$randInd];
             array_push($this->lastDeal, $dealtCard);
-            unset($this->deck[$randInd]);   
+            unset($this->deck[$randInd]);
             $this->deckSize = count($this->deck);
         }
 
@@ -183,9 +183,8 @@ class DeckOfCards implements \JsonSerializable
         if (array_key_exists($type, $decks)) {
             // echo "You selected: $type \n";
             return (array) $decks[$type];
-        } else {
-            echo "No such deck type.";
-        }
+        } 
+        echo "No such deck type.";
     }
 
     public function jsonSerialize(): mixed

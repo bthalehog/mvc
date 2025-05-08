@@ -62,4 +62,20 @@ class MyControllerTwig extends AbstractController
 
         return $this->render('lucky_number.html.twig', $data);
     }
+
+    #[Route("/api_landing", name: "api_landing")]
+    public function apiLanding(): Response
+    {
+        $data = [
+            'welcome' => "Welcome to my API-inventory page. Here you can test functionality that I have built.",
+            'headline' => "API-Inventory",
+            'card' => "card here",
+            'deck' => "deck here",
+            'hand' => "cardHand here",
+            'sorted' => "sorted here",
+            'shuffled' => "shuffled here"
+        ];
+
+        return $this->render('api.html.twig', $data);
+    }
 }

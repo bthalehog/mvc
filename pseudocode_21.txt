@@ -340,34 +340,35 @@ Landningssida och intro
 
 Kortspel
 
-    Bygg ditt kortspel i Symfony med objektorienterade konstruktioner i PHP och försök tänka till så att du får “snygg kod”.
-        All applikationskod placerar du i klasser som din kontroller använder. 
-        Se till att du har så lite kod som möjligt i din kontroller. Om du har mycket kod där så flyttar du den till en egen klass. 
-        Tänk att kontrollern skall vara tunn (lite kod) och modellerna (applikationens klasser) kan vara tjocka (mycket kod).
-        Använd templatefiler för att rendera webbsidorna.
+    Bygg ditt kortspel i Symfony med objektorienterade konstruktioner i PHP och försök tänka till så att du får “snygg kod”.            OK
+        All applikationskod placerar du i klasser som din kontroller använder.                                                          OK
+        Se till att du har så lite kod som möjligt i din kontroller. Om du har mycket kod där så flyttar du den till en egen klass.     OK
+        Tänk att kontrollern skall vara tunn (lite kod) och modellerna (applikationens klasser) kan vara tjocka (mycket kod).           OK
+        Använd templatefiler för att rendera webbsidorna.                                                                               OK
         Bygg spelet så att det fungerar minst enligt de regler som visas i introduktionen ovan.                                         OK
         Banken behöver inte vara speciellt intelligent i sitt kortspel.                                                                 OK
-            Det räcker att den kan utföra sin uppgift och spela spelet. 
-                En enkel variant är att banken alltid plockar kort tills den har 17 eller mer, sedan stannar den.
+            Det räcker att den kan utföra sin uppgift och spela spelet.                                                                 OK
+                En enkel variant är att banken alltid plockar kort tills den har 17 eller mer, sedan stannar den.                       OK
 
 Kortspel valfritt
 
-    need selectDifficulty() (normal, hell) Låt spelaren välja om den spelar mot den “dumma” eller den “smarta” banken. 
+    need selectDifficulty() (normal, hell) Låt spelaren välja om den spelar mot den “dumma” eller den “smarta” banken.                  OK
         Förklara taktiken för den “dumma” och den “smarta” banken på dokumentationssidan. (eller varför den smarta inte existerar men valfunktionen gör det)
         EXTRA:
-            Bygg en smartare bank som spelar på ett “intelligent sätt”. 
-            Låt banken ta hjälp av statistiken.
+            Bygg en smartare bank som spelar på ett “intelligent sätt”.                                                                 OK
+            Låt banken ta hjälp av statistiken.                                                                                         -
 
     need additional variable for player: Gör så att spelaren kan satsa pengar. 
-        Man kan satsa en viss summa vid varje spel. 
-        Håll koll på hur mycket pengar som spelaren och banken har.
+        Man kan satsa en viss summa vid varje spel.                                                                                     OK
+        Håll koll på hur mycket pengar som spelaren och banken har.                                                                     OK
 
-        Låt banken och spelaren börja med 100 pengar var. 
-            När någon har 0 pengar har den spelaren förlorat.
+        Låt banken och spelaren börja med 100 pengar var.                                                                               -
+            När någon har 0 pengar har den spelaren förlorat.                                                                           -
+
+            Låt bli att blanda kortleken inför varje ny runda och spela tills kortleken är slut.                                        OK
 
     EXCLUDE:
     //    Korträkning med sannolikhet att få högt/lågt kort. 
-    //    Låt bli att blanda kortleken inför varje ny runda och spela tills kortleken är slut.
     //    Visa statistik som berättar sannolikheten för att få ett visst kort. 
     //    Visa statistiken så att spelaren kan ha hjälp av den. Tex om spelaren har 15, visa sannolikheten för att spelaren inte skall bli tjock om nytt kort tas.
     ENDEXCLUDE:
