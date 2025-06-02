@@ -89,7 +89,7 @@
            
         <h3>TIL</h3>
             <ul>
-                <li>Vikten av att läsa in sig på specifika ramverks sätt att hantera uppgifter som språkte de augmenterar redan hanterar fast på ett annat sätt</li>
+                <li>Vikten av att läsa in sig på specifika ramverks sätt att hantera uppgifter som språket de augmenterar redan hanterar fast på ett annat sätt</li>
                 <li>Vikten av att lära sig flera olika sätt för felsökning/debugging när man arbetar på serversidan</li>
                 <li>Hur mycket av grundarbetet i programmering man kan göra utan ingående kunskaper i ett specifikt språks möjligheter bara genom att ha grundförståelse för logiken</p>
                 <li>Man behöver verkligen inte "else".</li>

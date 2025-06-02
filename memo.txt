@@ -77,9 +77,9 @@ git push				            Send to repo
 git tag -a v1.0 -m ".."             Tag with comment
 git tag v1.0.0                      Lightweight tag
 git push --tags                     Push with tags
-git checkout???
+git checkout -b kmom03              SKapa branch kmom03
+
                 =================================================================================
-                _________________________________________________________________________________
                 #                                                                               #
                 #    Initial setup: # Gå till me/report                                         #
                 #        git init                                                               #

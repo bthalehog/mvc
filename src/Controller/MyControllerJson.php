@@ -12,7 +12,7 @@ use App\Cards\DeckOfCards;
 
 class MyControllerJson
 {
-    #[Route("/api", name:"api")]
+    #[Route("/api_json", name:"api")]
     public function jsonNumber(): Response
     {
         // $number = random_int(0, 100);
@@ -35,7 +35,7 @@ class MyControllerJson
         return new JsonResponse($data);
     }
 
-    #[Route('/api/quote')]
+    #[Route('/api_json/quote')]
     public function quote(): Response
     {
         $quote = random_int(0, 4);
@@ -54,7 +54,7 @@ class MyControllerJson
         return new JsonResponse($data);
     }
 
-    #[Route('/api/deck')]
+    #[Route('/api_json/deck')]
     public function deck(SessionInterface $session): Response
     {
         if (!$session->has('deck')) {
@@ -72,7 +72,7 @@ class MyControllerJson
         return new JsonResponse($data);
     }
 
-    #[Route('/api/deck/shuffle')]
+    #[Route('/api_json/deck/shuffle')]
     public function shuffle(SessionInterface $session): Response
     {
         if (!$session->has('deck')) {
@@ -91,7 +91,7 @@ class MyControllerJson
         return new JsonResponse($data);
     }
 
-    #[Route('/api/deck/draw')]
+    #[Route('/api_json/deck/draw')]
     public function draw1(SessionInterface $session): Response
     {
         if (!$session->has('deck')) {
@@ -110,7 +110,7 @@ class MyControllerJson
         return new JsonResponse($data);
     }
 
-    #[Route('/api/deck/draw/{number}')] //has to be frontend if :number not just treated as string.
+    #[Route('/api_json/deck/draw/{number}')] //has to be frontend if :number not just treated as string.
     public function draw($number, SessionInterface $session): Response
     {
         if (!$session->has('deck')) {

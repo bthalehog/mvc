@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class MyControllerTwig extends AbstractController
 {
@@ -63,7 +64,26 @@ class MyControllerTwig extends AbstractController
         return $this->render('lucky_number.html.twig', $data);
     }
 
-    #[Route("/api_landing", name: "api_landing")]
+    #[Route("/api/game", name: "game")]
+    public function currentScore(SessionInterface $session): Response
+    {
+        $game = $session->get('game');
+        $playerWallet = 0;
+        $bankWallet = 0;
+
+        // Get bank and current player wallet
+        $bankWallet = $game->getBank()->getWallet();
+        $playerWallet = $game->getCurrentPlayer()->getWallet();
+
+        $data = [
+            'bank' => $bankWallet,
+            'player' => $playerWallet
+        ];
+
+        return $this->render('game.html.twig', $data);
+    }
+
+    #[Route("/api", name: "api")]
     public function apiLanding(): Response
     {
         $data = [

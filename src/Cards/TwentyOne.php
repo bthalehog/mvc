@@ -264,11 +264,13 @@ class TwentyOne implements \JsonSerializable
         if ($handOne->getStatus() !== "fat" && $handTwo->getStatus() === "fat") {
             $winner = $handOne;
             echo "Bank win";
-        } elseif ($handTwo->getStatus !== "fat") {
+        } elseif ($handTwo->getStatus() !== "fat") {
             $winner = $handTwo;
             echo "Bank win";
         }
 
+        $winner->setWallet(50);
+        
         return $winner;
     }
 
@@ -529,6 +531,7 @@ class TwentyOne implements \JsonSerializable
 				if ($this->is21($this->getBank()->getHand()) === true) {
 					echo "Bank hits 21! ";
 					$this->getBank()->setStatus("winner");
+                    $this->getBank()->setWallet(50);
 					$this->getCurrentPlayer()->setStatus("fat");
 				};
 	
@@ -537,13 +540,16 @@ class TwentyOne implements \JsonSerializable
 					if ($this->is21($this->getBank()->getHand()) === true) {
 						echo "Bank hits 21! ";
 						$this->getBank()->setStatus("winner");
+                        $this->getBank()->setWallet(50);
 					}
 					echo "Bank burst! ";
 					$this->getBank()->setStatus("fat");
 					$this->getCurrentPlayer()->setStatus("winner");
+                    $this->getCurrentPlayer()->setWallet(50);
 				} elseif ($this->getBank()->getHandValue() === 21) {
 					echo "Bank hits 21! ";
 					$this->getBank()->setStatus("winner");
+                    $this->getBank()->setWallet(50);
 				}
 			}
 	
@@ -573,12 +579,15 @@ class TwentyOne implements \JsonSerializable
                 if ($this->is21($this->getBank()->getHand())) {
                     echo "Bank hits 21! ";
                     $this->getBank()->setStatus("winner");
+                    $this->getBank()->setWallet(50);
                 } 
                 echo "Bank burst! ";
                 $this->getBank()->setStatus("fat");
                 $this->getCurrentPlayer()->setStatus("winner");
+                $this->getCurrentPlayer()->setWallet(50);
             } elseif ($this->getBank()->getHandValue() === 21) {
                 $this->getBank()->setStatus("winner");
+                $this->getBank()->setWallet(50);
                 echo "Bank hits 21! ";
             }
         }
@@ -600,10 +609,12 @@ class TwentyOne implements \JsonSerializable
                 if ($this->getBank()->getHandValue() === 21) {
                     echo "Bank hits 21! ";
                     $this->getBank()->setStatus("winner");
+                    $this->getBank()->setWallet(50);
                     $this->getCurrentPlayer()->setStatus("fat");
                 } elseif ($this->is21($this->getBank()->getHand()) === true) {
                     echo "Bank hits 21! ";
                     $this->getBank()->setStatus("winner");
+                    $this->getBank()->setWallet(50);
                     $this->getCurrentPlayer()->setStatus("fat");
                 }
             }
