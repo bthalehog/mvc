@@ -102,6 +102,9 @@ class TwentyOneController extends AbstractController
         $game = $session->get('game');
         $bank = $session->get('bank');
         $player = $session->get('player');
+        $difficulty = $session->get('difficulty');
+        $game->setDifficulty($difficulty);
+
         // $playerIndex = $session->get('playerIndex'); // Added for turn handle
 
         // Template variables
@@ -130,7 +133,7 @@ class TwentyOneController extends AbstractController
         } elseif ($action === "next") {
             if ($game->lastPlayer() === true) {
                 // Announce winner
-                $gameInfo .= (string)$winner . "wins!";
+                // $gameInfo .= (string)$winner . "wins!";
                 // Clear views
                 $game->getBank()->discardHand();
                 $game->getCurrentPlayer()->discardHand();
@@ -138,8 +141,11 @@ class TwentyOneController extends AbstractController
                 $session->set('game', $game);
                 $session->set('player', $game->getCurrentPlayer());
                 $session->set('bank', $game->getBank());
+                
+                echo "Hit new game-button to reset session and start a new game.";
                 $gameInfo .= "Hit new game-button to reset session and start a new game.";
                 sleep(5);
+
                 return $this->redirectToRoute('session_delete');
             }
             // Clear views
@@ -176,11 +182,10 @@ class TwentyOneController extends AbstractController
             $session->set('game', $game);
             $session->set('bank', $game->getBank());
             $session->set('player', $game->getCurrentPlayer());
-        } if ($action === "stay" or $game->getCurrentPlayer()->getStatus() === "fat" or $game->getCurrentPlayer()->getStatus() === "happy") {
+        } if ($action === "stay" || $game->getCurrentPlayer()->getStatus() === "fat" || $game->getCurrentPlayer()->getStatus() === "happy") {
             // Banks turn, decide for engine.
             // SINGLE PLAYER ENGINE - BANK LOGIC AI
-            if ($game->playerCount() <= 2) {
-                $gameInfo .= "Bank AI takes turn, draws 2...";
+            if ($game->playerCount() <= 99) {
                 // Auto pull to 17 for both engine types.
                 $game->autoPull();
                 // Save to session
@@ -195,10 +200,9 @@ class TwentyOneController extends AbstractController
                 $session->set('game', $game);
                 $session->set('player', $game->getCurrentPlayer());
                 $session->set('bank', $game->getBank());
-            }
-            // MULTIPLAYER ENGINE - USER INPUT BANK LOGIC
-            elseif ($game->playerCount() > 2) {
-                $this->addFlash('notice', "Bank takes turn, draws 2...");
+            } // MULTIPLAYER ENGINE - USER INPUT BANK LOGIC - DISCONTINUED AND SET TO 99+
+            elseif ($game->playerCount() > 99) {
+                $this->addFlash('notice', "Bank takes turn. ");
                 $game->autoPull();
                 // Save to session
                 $session->set('game', $game);
@@ -216,11 +220,14 @@ class TwentyOneController extends AbstractController
                 $session->set('player', $game->getCurrentPlayer());
                 $game->compareHands($game->getBank(), $game->getCurrentPlayer());
             }
-            echo "Finding winner...";
+            // echo "Finding winner...";
             sleep(1);
+            
             // Determine winner by sorting on status, player can never be winner at this stage only happy. (has function in game)
             $winner = $game->determineWinner();
             $gameInfo .= "Winner: " . $winner;
+            // echo $gameInfo;
+            
             $session->set('game', $game);
             $session->set('bank', $game->getBank());
             $session->set('player', $game->getCurrentPlayer());

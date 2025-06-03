@@ -151,3 +151,59 @@ Writing custom commands: https://getcomposer.org/doc/articles/scripts.md#writing
 
 
 =================================================================================================================
+
+=================================================================================================================
+
+-------
+PHP Documentor
+-------
+(autogen documentation)
+tools/phpdoc/phpdoc --version                       Show version
+tools/phpdoc/phpdoc --help                          Show help
+tools/phpdoc/phpdoc run -d ./src -t ./docs/api      generate code from /src
+composer phpdoc                                     for use when documentor is added to composers scripts
+
+
+
+=================================================================================================================
+
+-------
+PHP UNIT TESTING
+-------
+
+php -S localhost:8889                                       Localhost start
+php src/Dice/main.php                                       Run in terminal
+XDEBUG_MODE=coverage vendor/bin/phpunit                     phpunit directly 
+composer phpunit                                            Composer script
+./vendor/bin/phpunit                                        When installed globally use this to reach
+
+REport generated to: build/coverage/index.html
+
+composer phpunit -- --filter testCreateObjectNoArguments    test singular
+
+Note the first -- that says to composer to add the remaining part as arguments to the command.
+The --filter is a way to ask phpunit to only run the tests matching that string.
+
+Another way to use --filter is to only execute the tests from a specific class, for example --filter GuessTest.
+Try it like this: composer phpunit -- --filter GuessTest 
+
+
+------------------------------------------------------------------------------------
+Files related to the tests
+
+Let's look at the files related to phpunit and the test suite.
+Item 	Description
+build/coverage 	The report with the code coverage from the test suite.
+phpunit.xml 	Configuration read by phpunit on startup.
+tests/<srcdir> 	The test suite with all test cases that phpunit will execute.
+tests/config.php 	Bootstrap file to setup PHP essentials for phpunit and the surroundings, including the autoloader and defining constanst or including mocks.
+
+--------------
+Noted
+
+Multiple testMethods can have the same name if in different test-classes and will then be executed by the same command simultaneously.
+"If it have no assert, it aint no test."
+"If the tests can not run independently, then they are not unit tests."
+Try to cover as many source lines of code as possible with your test suite. The test cases you write should cover the whole code, each class, each method, and each line, at least once.
+Divide your test suite into classes having reasonable sizes. 
+There is an assertion for $this->assertNull() 
