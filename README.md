@@ -60,8 +60,9 @@ All subs actions listed below.
 20250506 New tag v3.0.9, Restructure tested, unresponsive layout fixed (session-issue), playerIndex added to game-Class for queue-handling, reroute OK. Finalizing specialCases algoritm.  
 20250507 New tag v3.1.0, SpecialCases finished, documentation done, report done, finish touches on layout, verifying compareHands-method.  
 20250602 New tag v3.1.1, LINTing, more encapsulation, less static functions, clean old and decommissioned methods, layoutfix, api-landing fixed.  
-
+20250603 New tag v3.1.2, Minor game-info-clean up, started with testing, player-controlled-bank decommissioned.  
   
 ### _Kmom04_  
+20250603 New tag v4.0.0, Unit-testing initiated, card-class finished.  
   
 ![](./public/img/bwtailgun.png)
