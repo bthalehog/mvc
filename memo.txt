@@ -207,3 +207,5 @@ Multiple testMethods can have the same name if in different test-classes and wil
 Try to cover as many source lines of code as possible with your test suite. The test cases you write should cover the whole code, each class, each method, and each line, at least once.
 Divide your test suite into classes having reasonable sizes. 
 There is an assertion for $this->assertNull() 
+Hard to compare Equals for object, need to use som asString to compare results.
+Easy to reuse unit-tests if written simple and for testing just one thing, recurring methods, only problem is testing constructor.
