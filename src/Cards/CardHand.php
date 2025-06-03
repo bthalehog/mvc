@@ -77,11 +77,13 @@ class CardHand
         return (string) $stringer;
     }
 
+    // DECOMISSIONED
     public function isHead(): bool
     {
         return $this->isHead;
     }
 
+    // DECOMISSIONED
     public function setHead($newHead)
     {
         $this->isHead = $newHead;

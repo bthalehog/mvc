@@ -64,5 +64,6 @@ All subs actions listed below.
   
 ### _Kmom04_  
 20250603 New tag v4.0.0, Unit-testing initiated, card-class finished.  
+20250603 New tag v4.0.1, Unit-testing continues, cardHand-class finished.   
   
 ![](./public/img/bwtailgun.png)
