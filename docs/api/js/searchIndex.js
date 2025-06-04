@@ -448,12 +448,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AgetStatus\u0028\u0029",
             "name": "getStatus",
-            "summary": "Happy\u0020no\u0020happy\u003F\nReturns\u0020boolean\u0020indicating\u0020if\u0020calling\u0020entity\u0020is\u0020content\u0020with\u0020cards.",
+            "summary": "Method\u0020to\u0020get\u0020status\u0020as\u0020string",
             "url": "classes/App-Cards-TwentyOne.html#method_getStatus"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AgetWinner\u0028\u0029",
             "name": "getWinner",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020winner\u0020of\u0020all\u0020players\u0020\u0028based\u0020on\u0020status\u0029\nReturns\u0020player\u0020\u0028cardHand\u002Dobject\u0029",
             "url": "classes/App-Cards-TwentyOne.html#method_getWinner"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AgetRules\u0028\u0029",
@@ -493,7 +493,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AdetermineWinner\u0028\u0029",
             "name": "determineWinner",
-            "summary": "Determine\u0020winner\u0020in\u0020a\u0020game\u0020between\u0020bank\u0020and\u0020player\nReturn\u0020void\u0020\u0028sets\u0020status\u0020\u003D\u0020\u0022winner\u0022\u0029",
+            "summary": "NB\u0020NB\u0020NB\u0021\u0021\nDetermine\u0020winner\u0020in\u0020a\u0020game\u0020between\u0020bank\u0020and\u0020player\nReturn\u0020\u0024result\u0020containing\u0020winning\u0020gameInfo\u0020phrase.",
             "url": "classes/App-Cards-TwentyOne.html#method_determineWinner"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003A\u0024difficulty",
@@ -540,6 +540,11 @@ Search.appendIndex(
             "name": "currentPlayerIndex",
             "summary": "",
             "url": "classes/App-Cards-TwentyOne.html#property_currentPlayerIndex"
+        },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003A\u0024stake",
+            "name": "stake",
+            "summary": "",
+            "url": "classes/App-Cards-TwentyOne.html#property_stake"
         },                {
             "fqsen": "\\App\\Controller\\CardGameController",
             "name": "CardGameController",

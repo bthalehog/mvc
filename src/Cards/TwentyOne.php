@@ -31,6 +31,7 @@ class TwentyOne implements \JsonSerializable
     protected ?object 	$bank = null;
     protected ?object 	$winner = null;
     protected int 		$currentPlayerIndex = 0;
+    protected int 		$stake = 0;
 
     /**
      * Constructor to create a game
@@ -40,6 +41,7 @@ class TwentyOne implements \JsonSerializable
         $this->setDifficulty($difficulty);
         $this->addDeck($deck);
         $this->addPlayer($numberOfPlayers);
+        $this->stake = 0;
         $this->cardIndex = [
             "A" => [1, 14],
             "K" => 13,
@@ -206,7 +208,7 @@ class TwentyOne implements \JsonSerializable
         $this->currentPlayer = $newCurrent;
     }
 
-    /**
+    /** MODIFIED AND WORKING
      * Handles the first turn in a game
      * Assigning currentPlayer
      * Selecting bank
@@ -217,15 +219,18 @@ class TwentyOne implements \JsonSerializable
         // This should pop and append like a queue but track final.
         if ($this->currentPlayer === null) {
             // This will shift from players -> bank and leave the players diminished.
-            $this->setBank($this->getPlayer(0));
+            $this->addPlayer(100);
 
             // The new index zero will be first currentPlayer()
-            $this->currentPlayer = $this->getPlayer();
+            $this->currentPlayer = $this->getPlayer(0);
 
             $moveToBack = $this->getPlayer(0);
-            $this->popPlayer();
+            unset($this->getAllPlayers()[0]);
+            array_values($this->getAllPlayers());
+            $allPlayersAfterUnset = $this->getAllPlayers();
+            array_push($allPlayersAfterUnset, $moveToBack);
+            $this->players = $allPlayersAfterUnset;
             $this->setCurrentPlayer = $this->getPlayer(0);
-            $this->rotatePlayer($moveToBack);
         }
     }
 
@@ -433,15 +438,18 @@ class TwentyOne implements \JsonSerializable
     }
 
     /**
-     * Happy no happy?
-     * Returns boolean indicating if calling entity is content with cards.
+     * Method to get status as string
      */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function getWinner(): null
+    /**
+     * Method to get winner of all players (based on status)
+     * Returns player (cardHand-object)
+     */
+    public function getWinner(): ? object
     {
         foreach ($this->getAllPlayers() as $player) {
             if ($player->getStatus() === "winner") {
@@ -505,7 +513,7 @@ class TwentyOne implements \JsonSerializable
      */
     public function lastPlayer(): bool
     {
-        if ($this->currentPlayerIndex > count($this->players)) {
+        if ($this->currentPlayerIndex === count($this->players) - 1) {
             return true;
         }
         return false;
@@ -626,9 +634,10 @@ class TwentyOne implements \JsonSerializable
         }
     }
 
-    /**
+    /** NB NB NB!!
      * Determine winner in a game between bank and player
-     * Return void (sets status = "winner")
+     * Return $result containing winning gameInfo phrase.
+     * Should this return the $winner instead of the $result that is already being echoed??
      */
     public function determineWinner()
     {
@@ -649,7 +658,7 @@ class TwentyOne implements \JsonSerializable
             // $this->getCurrentPlayer()->setStatus(null);
         } elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "fat") {
             $winner = $this->getCurrentPlayer();//->getPlayer();
-            $result = $this->getCurrentPlayer()->getPlayerString() . " wins! ";
+            $result = $this->getCurrentPlayer()->getPlayer() . " wins! ";
             echo $result;
             $this->getCurrentPlayer()->setWallet($this->getStake());
             // $this->getCurrentPlayer()->setStatus(null);
@@ -676,6 +685,6 @@ class TwentyOne implements \JsonSerializable
             $this->getBank()->setWallet($this->getStake());
             $this->getBank()->setStatus("");
         }
-		return $result;
+		return $winner;
     }
 }

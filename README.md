@@ -66,5 +66,6 @@ All subs actions listed below.
 20250603 New tag v4.0.0, Unit-testing initiated, card-class finished.  
 20250603 New tag v4.0.1, Unit-testing continues, cardHand-class finished.  
 20250603 New tag v4.0.2, Unit-testing continues, deckOfCards-class finished.  
+20250604 New tag v4.0.3, Unit-testing continues, 
   
 ![](./public/img/bwtailgun.png)
