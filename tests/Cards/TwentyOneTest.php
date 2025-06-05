@@ -291,6 +291,51 @@ class TwentyOneTest extends TestCase
     }
 
     /**
+     * Verify setBank method without args.
+     */
+    public function testSetBankWithoutArgs()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "normal");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        // $expPre = null;
+        $resPre = $game->getBank();
+
+        // Test
+        $game->setBank();
+        $resPost = $game->getBank();
+
+        $this->assertInstanceOf("\stdClass", $resPre);
+        $this->assertInstanceOf("\App\Cards\CardHand", $resPost);
+    }
+
+    /**
+     * Verify setBank method with arg cardhand-object.
+     */
+    public function testSetBankWitArgs()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "normal");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $resPre = $game->getBank();
+
+        // Test
+        $game->setBank($game->getPlayer(0));
+        $resPost = $game->getBank();
+
+        $this->assertInstanceOf("\stdClass", $resPre);
+        $this->assertInstanceOf("\App\Cards\CardHand", $resPost);
+    }
+
+    /**
      * Verify dealCard method.
      * Always using the one in deck. Not testable like this, can remove?
      */
@@ -312,6 +357,7 @@ class TwentyOneTest extends TestCase
         $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
         $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
         $this->assertInstanceOf("\App\Cards\Card", $card);
+
         // Set expectations
         $exp = 2;
 
@@ -435,6 +481,141 @@ class TwentyOneTest extends TestCase
     }
 
     /**
+     * Verify playerMove method.
+     */
+    public function testPlayerMove()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "normal");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $expPre = [];
+        $resPre = $game->getCurrentPlayer()->getHand();
+
+        // Test
+        $res = $game->playerMove();
+
+        $this->assertInstanceOf("\App\Cards\Card", $res);
+    }
+
+    /**
+     * Verify jsonSerialize method.
+     */
+    public function testJsonSerializeTwentyOne()
+    {
+        // Instantiate and assertInstance
+        $deck = new DeckOfCards("Trad52");
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+
+        // Set expectations
+        $expLen = count($deck->jsonSerialize());
+
+        // Test method
+        $res = $deck->jsonSerialize();
+
+        // Not assertJson since the method calls getHand that returns an array
+        $this->assertIsArray($res);
+        $this->assertEquals($expLen, count($res));
+    }
+
+    /**
+     * Verify bank's autoPull method.
+     */
+    public function testAutoPull()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "normal");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $expPre = [];
+        $resPre = $game->getBank()->getHand();
+
+        // Test
+        $game->autoPull();
+        $resPost = $game->getBank()->getHand();
+        $resValue = $game->getBank()->getHandValue();
+
+        $this->assertEquals($expPre, $resPre);
+        $this->assertNotNull($resPost);
+        $this->assertIsInt($resValue);
+    }
+
+    /**
+     * Verify bankMoveAI method when status is not "happy" and not "winner".
+     */
+    public function testBankMoveAINotHappyNotWinner()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "normal");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $expPre = [];
+        $resPre = $game->getBank()->getHand();
+
+        // Set expectations
+        $expMessage = ["Bank stays! ", "Bank hits 21! ", "Bank burst! "];
+        
+        // Test
+        ob_start();
+        $game->bankMoveAI();
+        $resMessage = ob_get_clean();
+        $resPost = $game->getBank()->getHand();
+        $resValue = $game->getBank()->getHandValue();
+
+        $this->assertEquals($expPre, $resPre);
+        $this->assertNotNull($resPost);
+        $this->assertIsInt($resValue);
+        $this->assertContains($resMessage, $expMessage, "Not found");
+    }
+
+    /**
+     * Verify bankMoveAI method when status "happy".
+     */
+    public function testBankMoveAIHappy()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "normal");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $expPre = [];
+        $resPre = $game->getBank()->getHand();
+
+        // Set expectations
+        $expPost = '';
+
+        // Test
+        $game->getBank()->setStatus("happy");
+
+        ob_start();
+        $game->bankMoveAI();
+        $resMessage = ob_get_clean();
+
+        $resPost = $game->getBank()->getHand();
+        $resValue = $game->getBank()->getHandValue();
+
+        $this->assertEquals($expPre, $resPre);
+        $this->assertNotNull($resPost);
+        $this->assertIsInt($resValue);
+        $this->assertEquals($expPost, $resMessage);
+    }
+
+    /**
      * Verify getWinner method
      */
     public function testGetWinner()
@@ -551,6 +732,7 @@ class TwentyOneTest extends TestCase
      * Verify determineWinner method in a game where bank is "happy" and player "happy"
      * and bank has the higher value (below 21) on hand.
      */
+    /*
     public function testDetermineWinnerBankHappyPlayerHappy()
     {
         $deck = new DeckOfCards("Trad52");
@@ -578,8 +760,102 @@ class TwentyOneTest extends TestCase
         $this->assertEquals($expPlayer, $resPlayer);
         $this->assertEquals($expStatus, $resStatus);
     }
-    
+    */
+
     /**
+     * Verify is21 method with cardhand-object not having 21.
+     */
+    public function testIs21Not21()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "nightmare");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $player = $game->getCurrentPlayer();
+        $this->assertInstanceOf("\App\Cards\CardHand", $player);
+
+        $card1 = new Card("s2");
+        $card2 = new Card("h3");
+        $card3 = new Card("d5");
+
+        $this->assertInstanceOf("\App\Cards\Card", $card1);
+        $this->assertInstanceOf("\App\Cards\Card", $card2);
+        $this->assertInstanceOf("\App\Cards\Card", $card3);
+
+        $player->setHand($card1);
+        $player->setHand($card2);
+        $player->setHand($card3);
+
+        // Set expectation
+        $exp = false;
+
+        // Test
+        $hand = $player->getHand();
+        $res = $game->is21($hand);
+
+        $this->assertEquals($exp, $res);
+    }
+
+    /** FUNCTIONAL - needed full hand-object.
+     * Verify is21 method with cardhand-object having 21 in triple aces.
+     */
+    public function testIs21WithTripleAce()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "nightmare");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $player = $game->getCurrentPlayer();
+        $this->assertInstanceOf("\App\Cards\CardHand", $player);
+
+        $card1 = new Card("s1");
+        $card2 = new Card("h1");
+        $card3 = new Card("d1");
+        $this->assertInstanceOf("\App\Cards\Card", $card1);
+        $this->assertInstanceOf("\App\Cards\Card", $card2);
+        $this->assertInstanceOf("\App\Cards\Card", $card3);
+
+        echo $card1->asString();
+        echo $card2->asString();
+        echo $card3->asString();
+
+        $player->setHand($card1);
+        $player->setHand($card2);
+        $player->setHand($card3);
+
+        echo $player->asString();
+
+        // Set expectation
+        $exp = true;
+
+        // Test
+        $hand = $player->getHand();
+        $res = $game->is21($hand);
+
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
+     * Verify is21 method with cardhand-object having 21 with suite (3 covered).
+     */
+
+    /**
+     * Verify is21 method with cardhand-object having 21 with suite (2 covered 1 ace).
+     */
+
+     /**
+     * Verify is21 method with cardhand-object having 21 with five cards non fat.
+     */
+
+    /** NON FUNCTIONAL
      * Verify determineWinner method in a game where bank is "happy" and player "happy"
      * and bank has the higher value (below 21) on hand.
      */
@@ -592,13 +868,21 @@ class TwentyOneTest extends TestCase
         $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
 
         // Set expectations
-        $expPlayer = 99999; // If bank has higher value hand
+        $expPlayer = 99999; // Bc Bank win on tie.
         $expStatus = ""; // Since bank get cleared after winner status used.
 
         // Test
         $game->firstTurn();
-        $game->getBank(); // Need to set same value hand
-        $game->getCurrentPlayer(); // Need to set same value hand
+        echo $game->getBank()->getPlayer();
+
+        $game->getBank()->setHand(new Card("s3"));
+        $game->getBank()->setHand(new Card("h4"));
+        $game->getBank()->setHand(new Card("d7"));
+
+        $game->getCurrentPlayer()->setHand(new Card("h3"));
+        $game->getCurrentPlayer()->setHand(new Card("d4"));
+        $game->getCurrentPlayer()->setHand(new Card("s7"));
+
         $game->getBank()->setStatus("happy");
         $game->getCurrentPlayer()->setStatus("happy");
 
@@ -610,5 +894,4 @@ class TwentyOneTest extends TestCase
         $this->assertEquals($expPlayer, $resPlayer);
         $this->assertEquals($expStatus, $resStatus);
     }
-
 }

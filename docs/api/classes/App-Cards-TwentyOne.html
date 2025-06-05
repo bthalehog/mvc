@@ -266,14 +266,6 @@ Banklogic
 Auto-pull until 17.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-Cards-TwentyOne.html#method_bankMove">bankMove()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>Banklogic for multiplayer game
-Lets selected player act as bank.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-TwentyOne.html#method_bankMoveAI">bankMoveAI()</a>
     <span>
                                 &nbsp;: mixed    </span>
@@ -297,27 +289,21 @@ Lets bank act on algorithmic instruction.</dd>
 <dd>Compare the sum of cardvalues of bank and player hand-objects.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-Cards-TwentyOne.html#method_dealCard">dealCard()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>Deal $amount cards.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-TwentyOne.html#method_determineWinner">determineWinner()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd>NB NB NB!!
+<dd>MODIFIED DURING UNIT TEST
 Determine winner in a game between bank and player
-Return $result containing winning gameInfo phrase.</dd>
+Return $winner (cardHand-object) and write gameInfo to $result.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-TwentyOne.html#method_firstTurn">firstTurn()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd>Handles the first turn in a game
+<dd>MODIFIED AND WORKING
+Handles the first turn in a game
 Assigning currentPlayer
 Selecting bank
 Adjusting playerlist.</dd>
@@ -494,13 +480,6 @@ to track currentPlayer in turn handler.</dd>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>Set game stake to $amount (bank-move)</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-Cards-TwentyOne.html#method_shuffleDeck">shuffleDeck()</a>
-    <span>
-                                &nbsp;: object    </span>
-</dt>
-<dd>Shuffle deck.</dd>
 
     </dl>
 
@@ -1003,7 +982,7 @@ to track currentPlayer in turn handler.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -1048,7 +1027,7 @@ to track currentPlayer in turn handler.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">611</span>
+    <span class="phpdocumentor-element-found-in__line">626</span>
 
     </aside>
 
@@ -1077,52 +1056,6 @@ Auto-pull until 17.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_bankMove">
-        bankMove()
-        <a href="classes/App-Cards-TwentyOne.html#method_bankMove" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">531</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Banklogic for multiplayer game
-Lets selected player act as bank.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">bankMove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$action</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_bankMoveAI">
         bankMoveAI()
         <a href="classes/App-Cards-TwentyOne.html#method_bankMoveAI" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1131,7 +1064,7 @@ Lets selected player act as bank.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">578</span>
+    <span class="phpdocumentor-element-found-in__line">593</span>
 
     </aside>
 
@@ -1146,7 +1079,9 @@ Lets bank act on algorithmic instruction.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Returns void.</p>
+</section>
+
     
     
 
@@ -1168,7 +1103,7 @@ Lets bank act on algorithmic instruction.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">423</span>
+    <span class="phpdocumentor-element-found-in__line">435</span>
 
     </aside>
 
@@ -1217,7 +1152,7 @@ Lets bank act on algorithmic instruction.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">243</span>
 
     </aside>
 
@@ -1268,53 +1203,6 @@ Returns hand-object-winner based on highest hand total score if both non fat.</p
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_dealCard">
-        dealCard()
-        <a href="classes/App-Cards-TwentyOne.html#method_dealCard" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">387</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Deal $amount cards.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">dealCard</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">1</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <section class="phpdocumentor-description"><p>Return Card-object.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$amount</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">1</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_determineWinner">
         determineWinner()
         <a href="classes/App-Cards-TwentyOne.html#method_determineWinner" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1323,13 +1211,13 @@ Returns hand-object-winner based on highest hand total score if both non fat.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">639</span>
+    <span class="phpdocumentor-element-found-in__line">653</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">NB NB NB!!
+        <p class="phpdocumentor-summary">MODIFIED DURING UNIT TEST
 Determine winner in a game between bank and player
-Return $result containing winning gameInfo phrase.</p>
+Return $winner (cardHand-object) and write gameInfo to $result.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1338,9 +1226,7 @@ Return $result containing winning gameInfo phrase.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Should this return the $winner instead of the $result that is already being echoed??</p>
-</section>
-
+    
     
     
 
@@ -1362,11 +1248,12 @@ Return $result containing winning gameInfo phrase.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">217</span>
+    <span class="phpdocumentor-element-found-in__line">218</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Handles the first turn in a game
+        <p class="phpdocumentor-summary">MODIFIED AND WORKING
+Handles the first turn in a game
 Assigning currentPlayer
 Selecting bank
 Adjusting playerlist.</p>
@@ -1400,7 +1287,7 @@ Adjusting playerlist.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">183</span>
 
     </aside>
 
@@ -1440,7 +1327,7 @@ Returns array of cardHand-objects (player)</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -1480,7 +1367,7 @@ Returns cardHand-object bank.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">198</span>
+    <span class="phpdocumentor-element-found-in__line">199</span>
 
     </aside>
 
@@ -1559,7 +1446,7 @@ Returns int index</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">147</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
@@ -1599,7 +1486,7 @@ Returns deckOfCards-object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">157</span>
 
     </aside>
 
@@ -1639,7 +1526,7 @@ Returns string holding deckvalues.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -1678,7 +1565,7 @@ Returns string holding deckvalues.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">165</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
@@ -1729,7 +1616,7 @@ Returns string holding deckvalues.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">464</span>
+    <span class="phpdocumentor-element-found-in__line">476</span>
 
     </aside>
 
@@ -1769,7 +1656,7 @@ Returns instructions for game</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">190</span>
+    <span class="phpdocumentor-element-found-in__line">191</span>
 
     </aside>
 
@@ -1808,7 +1695,7 @@ Returns instructions for game</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">440</span>
+    <span class="phpdocumentor-element-found-in__line">452</span>
 
     </aside>
 
@@ -1847,7 +1734,7 @@ Returns instructions for game</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">449</span>
+    <span class="phpdocumentor-element-found-in__line">461</span>
 
     </aside>
 
@@ -1887,7 +1774,7 @@ Returns player (cardHand-object)</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">294</span>
+    <span class="phpdocumentor-element-found-in__line">300</span>
 
     </aside>
 
@@ -1900,7 +1787,8 @@ Returns player (cardHand-object)</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Returns boolean.
+        <section class="phpdocumentor-description"><p>Takes array as cards on hand.
+Returns boolean.
 Does NOT alter player status.</p>
 </section>
 
@@ -1935,7 +1823,7 @@ Does NOT alter player status.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">415</span>
+    <span class="phpdocumentor-element-found-in__line">427</span>
 
     </aside>
 
@@ -1970,7 +1858,7 @@ Does NOT alter player status.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">511</span>
+    <span class="phpdocumentor-element-found-in__line">523</span>
 
     </aside>
 
@@ -2010,7 +1898,7 @@ Returns bool</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">499</span>
+    <span class="phpdocumentor-element-found-in__line">511</span>
 
     </aside>
 
@@ -2047,7 +1935,7 @@ Increases $this-&gt;currentPlayerIndex</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">284</span>
+    <span class="phpdocumentor-element-found-in__line">288</span>
 
     </aside>
 
@@ -2086,7 +1974,7 @@ Increases $this-&gt;currentPlayerIndex</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">522</span>
+    <span class="phpdocumentor-element-found-in__line">534</span>
 
     </aside>
 
@@ -2121,7 +2009,7 @@ Increases $this-&gt;currentPlayerIndex</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">367</span>
+    <span class="phpdocumentor-element-found-in__line">375</span>
 
     </aside>
 
@@ -2174,7 +2062,7 @@ and selects as bank. Bank has order nr 99999.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">206</span>
+    <span class="phpdocumentor-element-found-in__line">207</span>
 
     </aside>
 
@@ -2265,7 +2153,7 @@ to track currentPlayer in turn handler.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -2312,7 +2200,7 @@ to track currentPlayer in turn handler.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 
     </aside>
 
@@ -2342,45 +2230,6 @@ to track currentPlayer in turn handler.</p>
     
 
     
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_shuffleDeck">
-        shuffleDeck()
-        <a href="classes/App-Cards-TwentyOne.html#method_shuffleDeck" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">402</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Shuffle deck.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">shuffleDeck</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">object</span>
-            </section>
-
 </article>
             </section>
 
@@ -2515,11 +2364,9 @@ to track currentPlayer in turn handler.</p>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_addDeck">addDeck()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_addPlayer">addPlayer()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_autoPull">autoPull()</a></li>
-                                            <li class=""><a href="classes/App-Cards-TwentyOne.html#method_bankMove">bankMove()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_bankMoveAI">bankMoveAI()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_cardValueIndexer">cardValueIndexer()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_compareHands">compareHands()</a></li>
-                                            <li class=""><a href="classes/App-Cards-TwentyOne.html#method_dealCard">dealCard()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_determineWinner">determineWinner()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_firstTurn">firstTurn()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_getAllPlayers">getAllPlayers()</a></li>
@@ -2545,7 +2392,6 @@ to track currentPlayer in turn handler.</p>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_setCurrentPlayerIndex">setCurrentPlayerIndex()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_setDifficulty">setDifficulty()</a></li>
                                             <li class=""><a href="classes/App-Cards-TwentyOne.html#method_setStake">setStake()</a></li>
-                                            <li class=""><a href="classes/App-Cards-TwentyOne.html#method_shuffleDeck">shuffleDeck()</a></li>
                                     </ul>
             </li>
                     </ul>

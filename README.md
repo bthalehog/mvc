@@ -66,6 +66,7 @@ All subs actions listed below.
 20250603 New tag v4.0.0, Unit-testing initiated, card-class finished.  
 20250603 New tag v4.0.1, Unit-testing continues, cardHand-class finished.  
 20250603 New tag v4.0.2, Unit-testing continues, deckOfCards-class finished.  
-20250604 New tag v4.0.3, Unit-testing continues, 
+20250604 New tag v4.0.3, Unit testing continues, Halfway through TwentyOne-class; restructured and patched flawed methods determineWinner(), firstTurn(), lastPlayer(), getWinner().  
+20250604 New tag v4.0.4, Unit testing continues, 70% line coverage achieved, all classes tested, fixing error in is21()-method.  
   
 ![](./public/img/bwtailgun.png)

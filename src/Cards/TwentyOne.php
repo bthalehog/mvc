@@ -76,6 +76,7 @@ class TwentyOne implements \JsonSerializable
         $this->deck = $deck;
     }
 
+    // Modified cardHand called with 0 cards arg instead of 1.
     /**
      * Add player to playerlist.
      */
@@ -90,7 +91,7 @@ class TwentyOne implements \JsonSerializable
             $counter = 0;
 
             while ($counter < $numberOfPlayers) {
-                $newPlayer = new CardHand($this->deck, 1);
+                $newPlayer = new CardHand($this->deck, 0);
                 $newPlayer->setPlayer($counter);
                 array_push($this->players, $newPlayer);
                 $counter++;
@@ -289,8 +290,10 @@ class TwentyOne implements \JsonSerializable
         return (int) count($this->players);
     }
 
+    // Modified, changed ace-value check from 14 to 1.
     /**
      * Find out if the cards on hand constitutes a specialcase for 21.
+     * Takes array as cards on hand.
      * Returns boolean.
      * Does NOT alter player status.
      */
@@ -311,16 +314,15 @@ class TwentyOne implements \JsonSerializable
         // Count number of aces, suites or suite = 2 + value10
         foreach ($cards as $card) {
             // Check for Ace
-            // If card > len 2 then check card[0] and card[1]
-            if ($card === 14) {
+            if ($card === 1) {
                 $aces += 1;
             }
             // Check for King, Queen and Jack
-            if ($card === 13 || $card === 12 || $card === 11) {
+            elseif ($card === 13 || $card === 12 || $card === 11) {
                 $suite += 1;
             }
             // Check for combination of two covered and one ace
-            if ($suite === 2 && $aces >= 1) {
+            elseif ($suite === 2 && $aces >= 1) {
                 $suite += 1;
             }
         }
@@ -332,10 +334,12 @@ class TwentyOne implements \JsonSerializable
                     $score += ($card + 10);
                 }
 
-                if ($score === 21) {
-                    echo "Sum of cards on hand = 21!";
-                    return true;
-                }
+                $score += $card;
+            }
+
+            if ($score === 21) {
+                echo "Sum of cards on hand = 21!";
+                return true;
             }
         }
 
@@ -353,7 +357,7 @@ class TwentyOne implements \JsonSerializable
         // This can also be used to alter difficulty on mode-setting.
         // Shift rules into elseif below for separation.
         elseif ($this->getDifficulty() === "nightmare") {
-            if (count($hand) >= 5) {
+            if (count($hand) >= 5 && $hand->getStatus() !== "fat") {
                 echo "Hand size >= 5 is 21! (specialCase - nightmare-mode)";
                 return true;
             }
@@ -361,6 +365,7 @@ class TwentyOne implements \JsonSerializable
         return false;
     }
 
+    //  MODIFIED added else-condition.
     /**
      * Set bank
      * If single-player then new CardHand as bank.
@@ -373,20 +378,22 @@ class TwentyOne implements \JsonSerializable
 
         if ($player === null) {
             $this->bank = new CardHand($this->getDeck(), 0);
-        } 
-        $withoutBank = array_filter($this->players, fn ($item) => $item !== $player);
-        $this->players = array_values($withoutBank);
-        $this->bank = $player;
-        $this->getBank()->setPlayer(99999);
+        } else {
+            $withoutBank = array_filter($this->players, fn ($item) => $item !== $player);
+            $this->players = array_values($withoutBank);
+            $this->bank = $player;
+            $this->getBank()->setPlayer(99999);
+        }
 
         return $this->bank;
     }
 
-    // Also in DeckOfCards
+    // Also in DeckOfCards NOT USED IN TwentyOne-class
     /**
      * Deal $amount cards.
      * Return Card-object.
      */
+    /*
     public function dealCard(int $amount = 1)
     {
         for ($i = 0; $i < $amount; $i++) {
@@ -398,10 +405,11 @@ class TwentyOne implements \JsonSerializable
         return $dealtCard;
     }
 
-    // Also in DeckOfCards
+    // Also in DeckOfCards NOT USED IN TwentyOne-class
     /**
      * Shuffle deck.
      */
+    /*
     public function shuffleDeck(): object
     {
         $carrier = $this->deck;
@@ -410,6 +418,7 @@ class TwentyOne implements \JsonSerializable
 
         return $this;
     }
+    */
 
     // Also in DeckOfCards
     /**
@@ -527,10 +536,11 @@ class TwentyOne implements \JsonSerializable
         return $this->deck->dealCard(1);
     }
 
-    /**
+    /** DISCONTINUED
      * Banklogic for multiplayer game
      * Lets selected player act as bank.
      */
+    /*
     public function bankMove($action)
     {
 		while ($this->getBank()->getHandValue() < 21 && $this->getBank()->getStatus() !== "happy" && $this->getBank()->getStatus() !== "winner") {
@@ -571,12 +581,14 @@ class TwentyOne implements \JsonSerializable
 				$this->getBank()->setStatus("happy");
 			}
 		}
-	}	
+    }
+    */
 
     /**
      * ACTIVE
      * Banklogic for single player game
      * Lets bank act on algorithmic instruction.
+     * Returns void.
      */
     public function bankMoveAI()
     {
@@ -634,10 +646,9 @@ class TwentyOne implements \JsonSerializable
         }
     }
 
-    /** NB NB NB!!
+    /** MODIFIED DURING UNIT TEST
      * Determine winner in a game between bank and player
-     * Return $result containing winning gameInfo phrase.
-     * Should this return the $winner instead of the $result that is already being echoed??
+     * Return $winner (cardHand-object) and write gameInfo to $result.
      */
     public function determineWinner()
     {
@@ -646,20 +657,17 @@ class TwentyOne implements \JsonSerializable
         if ($this->getBank()->getStatus() === "winner") {
             $winner = $this->getBank(); //->getPlayer();
             $result = "Bank wins! ";
-            echo $result;
             $this->getBank()->setWallet($this->getStake());
             // Clear bank status
             $this->getBank()->setStatus("");
         } elseif ($this->getCurrentPlayer()->getStatus() === "winner") {
             $winner = $this->getCurrentPlayer();//->getPlayer(); //Should return an int
             $result = "Player wins! ";
-            echo $result;
             $this->getCurrentPlayer()->setWallet($this->getStake());
             // $this->getCurrentPlayer()->setStatus(null);
         } elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "fat") {
             $winner = $this->getCurrentPlayer();//->getPlayer();
             $result = $this->getCurrentPlayer()->getPlayer() . " wins! ";
-            echo $result;
             $this->getCurrentPlayer()->setWallet($this->getStake());
             // $this->getCurrentPlayer()->setStatus(null);
         } elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "happy") {
@@ -669,22 +677,19 @@ class TwentyOne implements \JsonSerializable
 
             if ($winner === $this->getBank()) {
                 $result = "Bank wins! ";
-                echo $result;
                 $this->getBank()->setWallet($this->getStake());
                 $this->getBank()->setStatus("");
             } elseif ($winner === $this->getCurrentPlayer()/*->getPlayer()*/) {
                 $result = "Player" . (string)$winner->getPlayer() . " wins! ";
-                echo $result;
-
                 $this->getCurrentPlayer()->setWallet($this->getStake());
                 // $game->getPlayer($winner)->setWallet($game->getStake());
                 echo "Total earnings: " . (string)$winner->getWallet();
             }
             $result = "Tie! Bank takes all.";
-            echo $result;
             $this->getBank()->setWallet($this->getStake());
             $this->getBank()->setStatus("");
         }
+        echo $result;
 		return $winner;
     }
 }

@@ -48,7 +48,6 @@ class CardHand
 
     /**
      * Return cards on hand as string.
-     *
      * @return string as representation of cards on hand.
      */
     public function asString(): string
@@ -64,6 +63,10 @@ class CardHand
         return (string) $stringer;
     }
 
+    /**
+     * Method to get cards on hand as UTF-graphic string.
+     * @return string
+     */
     public function asCards(): string
     {
         $stringer = "";
@@ -89,58 +92,106 @@ class CardHand
         $this->isHead = $newHead;
     }
 
+    /**
+     * Method to get hand.
+     * Return array
+     */
     public function getHand(): array
     {
         return (array) $this->currentHand;
     }
 
+    /**
+     * Method to set hand with given card.
+     * Return void
+     */
+    public function setHand($card): void
+    {   
+        array_push($this->currentHand, $card);
+    }
+
+    /**
+     * Method to discard hand.
+     */
     public function discardHand()
     {
         $this->currentHand = [];
     }
 
+    /**
+     * Method to get wallet holding cardHand won stakes.
+     */
     public function getWallet(): int
     {
         return $this->wallet;
     }
 
+    /**
+     * Method to set wallet with game stake.
+     */
     public function setWallet($cash)
     {
         $this->wallet += $cash;
         echo "Cash added to wallet.";
     }
 
+    /**
+     * Method to set score.
+     */
     public function setScore($score)
     {
         $this->score += $score;
     }
 
+    /**
+     * Method to get score.
+     * @return string
+     */
     public function getScore(): int
     {
         return $this->score;
     }
 
+    /**
+     * Method to get status.
+     * @return string
+     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
+    /**
+     * Method to set status.
+     */
     public function setStatus($status)
     {
         $this->status = $status;
     }
 
+    /**
+     * Method to get player number (eg player1 = 1).
+     * @return int
+     */
     public function getPlayer(): int
     {
         return $this->player;
     }
 
+    /**
+     * Method to set player.
+     * Takes $order (int) as argument.
+     */
     public function setPlayer($order)
     {
         $this->player = $order;
         echo "Player set to: Player" . (string)$order . ".";
     }
 
+    /**
+     * Method to get hand value.
+     * @return int
+     */
     public function getHandValue(): int
     {
         $score = 0;
@@ -214,6 +265,10 @@ class CardHand
         return $this->lastDraw;
     }
 
+    /**
+     * JSON-serialize hand.
+     * @return mixed (array)
+     */
     public function jsonSerialize(): mixed
     {
         return $this->getHand();

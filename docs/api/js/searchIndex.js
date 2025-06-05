@@ -83,7 +83,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AasCards\u0028\u0029",
             "name": "asCards",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020cards\u0020on\u0020hand\u0020as\u0020UTF\u002Dgraphic\u0020string.",
             "url": "classes/App-Cards-CardHand.html#method_asCards"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003A\u0024isHead",
@@ -98,57 +98,62 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020hand.",
             "url": "classes/App-Cards-CardHand.html#method_getHand"
+        },                {
+            "fqsen": "\\App\\Cards\\CardHand\u003A\u003AsetHand\u0028\u0029",
+            "name": "setHand",
+            "summary": "Method\u0020to\u0020set\u0020hand\u0020with\u0020given\u0020card.",
+            "url": "classes/App-Cards-CardHand.html#method_setHand"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AdiscardHand\u0028\u0029",
             "name": "discardHand",
-            "summary": "",
+            "summary": "Method\u0020to\u0020discard\u0020hand.",
             "url": "classes/App-Cards-CardHand.html#method_discardHand"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AgetWallet\u0028\u0029",
             "name": "getWallet",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020wallet\u0020holding\u0020cardHand\u0020won\u0020stakes.",
             "url": "classes/App-Cards-CardHand.html#method_getWallet"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AsetWallet\u0028\u0029",
             "name": "setWallet",
-            "summary": "",
+            "summary": "Method\u0020to\u0020set\u0020wallet\u0020with\u0020game\u0020stake.",
             "url": "classes/App-Cards-CardHand.html#method_setWallet"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AsetScore\u0028\u0029",
             "name": "setScore",
-            "summary": "",
+            "summary": "Method\u0020to\u0020set\u0020score.",
             "url": "classes/App-Cards-CardHand.html#method_setScore"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AgetScore\u0028\u0029",
             "name": "getScore",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020score.",
             "url": "classes/App-Cards-CardHand.html#method_getScore"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AgetStatus\u0028\u0029",
             "name": "getStatus",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020status.",
             "url": "classes/App-Cards-CardHand.html#method_getStatus"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AsetStatus\u0028\u0029",
             "name": "setStatus",
-            "summary": "",
+            "summary": "Method\u0020to\u0020set\u0020status.",
             "url": "classes/App-Cards-CardHand.html#method_setStatus"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AgetPlayer\u0028\u0029",
             "name": "getPlayer",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020player\u0020number\u0020\u0028eg\u0020player1\u0020\u003D\u00201\u0029.",
             "url": "classes/App-Cards-CardHand.html#method_getPlayer"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AsetPlayer\u0028\u0029",
             "name": "setPlayer",
-            "summary": "",
+            "summary": "Method\u0020to\u0020set\u0020player.",
             "url": "classes/App-Cards-CardHand.html#method_setPlayer"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AgetHandValue\u0028\u0029",
             "name": "getHandValue",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020hand\u0020value.",
             "url": "classes/App-Cards-CardHand.html#method_getHandValue"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003Asacrifice\u0028\u0029",
@@ -173,7 +178,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003AjsonSerialize\u0028\u0029",
             "name": "jsonSerialize",
-            "summary": "",
+            "summary": "JSON\u002Dserialize\u0020hand.",
             "url": "classes/App-Cards-CardHand.html#method_jsonSerialize"
         },                {
             "fqsen": "\\App\\Cards\\CardHand\u003A\u003A\u0024currentHand",
@@ -403,7 +408,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AfirstTurn\u0028\u0029",
             "name": "firstTurn",
-            "summary": "Handles\u0020the\u0020first\u0020turn\u0020in\u0020a\u0020game\nAssigning\u0020currentPlayer\nSelecting\u0020bank\nAdjusting\u0020playerlist.",
+            "summary": "MODIFIED\u0020AND\u0020WORKING\nHandles\u0020the\u0020first\u0020turn\u0020in\u0020a\u0020game\nAssigning\u0020currentPlayer\nSelecting\u0020bank\nAdjusting\u0020playerlist.",
             "url": "classes/App-Cards-TwentyOne.html#method_firstTurn"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AcompareHands\u0028\u0029",
@@ -425,16 +430,6 @@ Search.appendIndex(
             "name": "setBank",
             "summary": "Set\u0020bank\nIf\u0020single\u002Dplayer\u0020then\u0020new\u0020CardHand\u0020as\u0020bank.",
             "url": "classes/App-Cards-TwentyOne.html#method_setBank"
-        },                {
-            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AdealCard\u0028\u0029",
-            "name": "dealCard",
-            "summary": "Deal\u0020\u0024amount\u0020cards.",
-            "url": "classes/App-Cards-TwentyOne.html#method_dealCard"
-        },                {
-            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AshuffleDeck\u0028\u0029",
-            "name": "shuffleDeck",
-            "summary": "Shuffle\u0020deck.",
-            "url": "classes/App-Cards-TwentyOne.html#method_shuffleDeck"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AjsonSerialize\u0028\u0029",
             "name": "jsonSerialize",
@@ -476,11 +471,6 @@ Search.appendIndex(
             "summary": "Logic\u0020for\u0020player\u0020move\u0020\u0028unused\u0029",
             "url": "classes/App-Cards-TwentyOne.html#method_playerMove"
         },                {
-            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AbankMove\u0028\u0029",
-            "name": "bankMove",
-            "summary": "Banklogic\u0020for\u0020multiplayer\u0020game\nLets\u0020selected\u0020player\u0020act\u0020as\u0020bank.",
-            "url": "classes/App-Cards-TwentyOne.html#method_bankMove"
-        },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AbankMoveAI\u0028\u0029",
             "name": "bankMoveAI",
             "summary": "ACTIVE\nBanklogic\u0020for\u0020single\u0020player\u0020game\nLets\u0020bank\u0020act\u0020on\u0020algorithmic\u0020instruction.",
@@ -493,7 +483,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AdetermineWinner\u0028\u0029",
             "name": "determineWinner",
-            "summary": "NB\u0020NB\u0020NB\u0021\u0021\nDetermine\u0020winner\u0020in\u0020a\u0020game\u0020between\u0020bank\u0020and\u0020player\nReturn\u0020\u0024result\u0020containing\u0020winning\u0020gameInfo\u0020phrase.",
+            "summary": "MODIFIED\u0020DURING\u0020UNIT\u0020TEST\nDetermine\u0020winner\u0020in\u0020a\u0020game\u0020between\u0020bank\u0020and\u0020player\nReturn\u0020\u0024winner\u0020\u0028cardHand\u002Dobject\u0029\u0020and\u0020write\u0020gameInfo\u0020to\u0020\u0024result.",
             "url": "classes/App-Cards-TwentyOne.html#method_determineWinner"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003A\u0024difficulty",

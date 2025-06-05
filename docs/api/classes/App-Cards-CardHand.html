@@ -231,6 +231,7 @@ Holds Card-object for playing a card game.</p>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>Method to get cards on hand as UTF-graphic string.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_asString">asString()</a>
@@ -251,18 +252,21 @@ Holds Card-object for playing a card game.</p>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Method to discard hand.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_getHand">getHand()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
+<dd>Method to get hand.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_getHandValue">getHandValue()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>Method to get hand value.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_getLastDraw">getLastDraw()</a>
@@ -283,24 +287,28 @@ Holds Card-object for playing a card game.</p>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>Method to get player number (eg player1 = 1).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_getScore">getScore()</a>
     <span>
-                                &nbsp;: int    </span>
+                                &nbsp;: string    </span>
 </dt>
+<dd>Method to get score.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_getStatus">getStatus()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>Method to get status.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_getWallet">getWallet()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>Method to get wallet holding cardHand won stakes.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_isHead">isHead()</a>
@@ -313,6 +321,7 @@ Holds Card-object for playing a card game.</p>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>JSON-serialize hand.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_sacrifice">sacrifice()</a>
@@ -320,6 +329,13 @@ Holds Card-object for playing a card game.</p>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Sacrifices cards (array).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Cards-CardHand.html#method_setHand">setHand()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Method to set hand with given card.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_setHead">setHead()</a>
@@ -332,24 +348,28 @@ Holds Card-object for playing a card game.</p>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Method to set player.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_setScore">setScore()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Method to set score.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_setStatus">setStatus()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Method to set status.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-CardHand.html#method_setWallet">setWallet()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Method to set wallet with game stake.</dd>
 
     </dl>
 
@@ -764,11 +784,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get cards on hand as UTF-graphic string.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">asCards</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
@@ -802,7 +823,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -845,7 +866,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">179</span>
+    <span class="phpdocumentor-element-found-in__line">230</span>
 
     </aside>
 
@@ -897,11 +918,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to discard hand.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">discardHand</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -931,11 +953,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get hand.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getHand</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
@@ -943,7 +966,9 @@ Holds Card-object for playing a card game.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Return array</p>
+</section>
+
     
     
 
@@ -969,11 +994,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get hand value.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getHandValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -1007,7 +1033,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">212</span>
+    <span class="phpdocumentor-element-found-in__line">263</span>
 
     </aside>
 
@@ -1050,7 +1076,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">253</span>
 
     </aside>
 
@@ -1093,11 +1119,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">176</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get player number (eg player1 = 1).</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPlayer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -1131,14 +1158,15 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get score.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getScore</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+                    <span class="phpdocumentor-signature__name">getScore</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1151,7 +1179,7 @@ Holds Card-object for playing a card game.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
+        <span class="phpdocumentor-signature__response_type">string</span>
             </section>
 
 </article>
@@ -1169,11 +1197,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get status.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
@@ -1207,11 +1236,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to get wallet holding cardHand won stakes.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getWallet</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -1245,7 +1275,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -1283,11 +1313,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">217</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">JSON-serialize hand.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">jsonSerialize</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -1301,7 +1332,15 @@ Holds Card-object for playing a card game.</p>
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>(array)</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1317,7 +1356,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">214</span>
 
     </aside>
 
@@ -1354,6 +1393,53 @@ Holds Card-object for playing a card game.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setHand">
+        setHand()
+        <a href="classes/App-Cards-CardHand.html#method_setHand" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">108</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method to set hand with given card.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setHand</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$card</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Return void</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$card</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setHead">
         setHead()
         <a href="classes/App-Cards-CardHand.html#method_setHead" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1362,7 +1448,7 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -1406,11 +1492,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to set player.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setPlayer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$order</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -1418,7 +1505,9 @@ Holds Card-object for playing a card game.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Takes $order (int) as argument.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1450,11 +1539,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">113</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to set score.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setScore</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$score</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -1494,11 +1584,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">128</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to set status.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -1538,11 +1629,12 @@ Holds Card-object for playing a card game.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/CardHand.php"><a href="files/src-cards-cardhand.html"><abbr title="src/Cards/CardHand.php">CardHand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method to set wallet with game stake.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setWallet</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cash</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -1712,6 +1804,7 @@ Holds Card-object for playing a card game.</p>
                                             <li class=""><a href="classes/App-Cards-CardHand.html#method_isHead">isHead()</a></li>
                                             <li class=""><a href="classes/App-Cards-CardHand.html#method_jsonSerialize">jsonSerialize()</a></li>
                                             <li class=""><a href="classes/App-Cards-CardHand.html#method_sacrifice">sacrifice()</a></li>
+                                            <li class=""><a href="classes/App-Cards-CardHand.html#method_setHand">setHand()</a></li>
                                             <li class=""><a href="classes/App-Cards-CardHand.html#method_setHead">setHead()</a></li>
                                             <li class=""><a href="classes/App-Cards-CardHand.html#method_setPlayer">setPlayer()</a></li>
                                             <li class=""><a href="classes/App-Cards-CardHand.html#method_setScore">setScore()</a></li>
