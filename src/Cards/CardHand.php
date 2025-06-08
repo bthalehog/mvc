@@ -135,12 +135,13 @@ class CardHand
         echo "Cash added to wallet.";
     }
 
+    // Modified to set instead of adding.
     /**
      * Method to set score.
      */
     public function setScore($score)
     {
-        $this->score += $score;
+        $this->score = $score;
     }
 
     /**

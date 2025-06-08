@@ -406,25 +406,10 @@ Search.appendIndex(
             "summary": "Set\u0020current\u0020player",
             "url": "classes/App-Cards-TwentyOne.html#method_setCurrentPlayer"
         },                {
-            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AfirstTurn\u0028\u0029",
-            "name": "firstTurn",
-            "summary": "MODIFIED\u0020AND\u0020WORKING\nHandles\u0020the\u0020first\u0020turn\u0020in\u0020a\u0020game\nAssigning\u0020currentPlayer\nSelecting\u0020bank\nAdjusting\u0020playerlist.",
-            "url": "classes/App-Cards-TwentyOne.html#method_firstTurn"
-        },                {
-            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AcompareHands\u0028\u0029",
-            "name": "compareHands",
-            "summary": "Compare\u0020the\u0020sum\u0020of\u0020cardvalues\u0020of\u0020bank\u0020and\u0020player\u0020hand\u002Dobjects.",
-            "url": "classes/App-Cards-TwentyOne.html#method_compareHands"
-        },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AplayerCount\u0028\u0029",
             "name": "playerCount",
             "summary": "Return\u0020number\u0020of\u0020players\u0020in\u0020playerlist.",
             "url": "classes/App-Cards-TwentyOne.html#method_playerCount"
-        },                {
-            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003Ais21\u0028\u0029",
-            "name": "is21",
-            "summary": "Find\u0020out\u0020if\u0020the\u0020cards\u0020on\u0020hand\u0020constitutes\u0020a\u0020specialcase\u0020for\u002021.",
-            "url": "classes/App-Cards-TwentyOne.html#method_is21"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AsetBank\u0028\u0029",
             "name": "setBank",
@@ -456,6 +441,11 @@ Search.appendIndex(
             "summary": "Instructions\u0020for\u0020game\nReturns\u0020instructions\u0020for\u0020game",
             "url": "classes/App-Cards-TwentyOne.html#method_getRules"
         },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AfirstTurn\u0028\u0029",
+            "name": "firstTurn",
+            "summary": "MODIFIED\u0020AND\u0020WORKING\nHandles\u0020the\u0020first\u0020turn\u0020in\u0020a\u0020game\nAssigning\u0020currentPlayer\nSelecting\u0020bank\nAdjusting\u0020playerlist.",
+            "url": "classes/App-Cards-TwentyOne.html#method_firstTurn"
+        },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AnextPlayer\u0028\u0029",
             "name": "nextPlayer",
             "summary": "Turn\u0020handler\nShifts\u0020to\u0020next\u0020player\u0020in\u0020\u0024game\u002D\u003Eplayers\nIncreases\u0020\u0024this\u002D\u003EcurrentPlayerIndex",
@@ -480,6 +470,16 @@ Search.appendIndex(
             "name": "autoPull",
             "summary": "ACTIVE\nBanklogic\nAuto\u002Dpull\u0020until\u002017.",
             "url": "classes/App-Cards-TwentyOne.html#method_autoPull"
+        },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003Ais21\u0028\u0029",
+            "name": "is21",
+            "summary": "Find\u0020out\u0020if\u0020the\u0020cards\u0020on\u0020hand\u0020constitutes\u0020a\u0020specialcase\u0020for\u002021.",
+            "url": "classes/App-Cards-TwentyOne.html#method_is21"
+        },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AcompareHands\u0028\u0029",
+            "name": "compareHands",
+            "summary": "Compare\u0020the\u0020sum\u0020of\u0020cardvalues\u0020of\u0020bank\u0020and\u0020player\u0020hand\u002Dobjects.",
+            "url": "classes/App-Cards-TwentyOne.html#method_compareHands"
         },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AdetermineWinner\u0028\u0029",
             "name": "determineWinner",

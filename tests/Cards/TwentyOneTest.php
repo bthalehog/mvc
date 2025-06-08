@@ -800,6 +800,7 @@ class TwentyOneTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
+    // Identified bug in class,
     /** FUNCTIONAL - needed full hand-object.
      * Verify is21 method with cardhand-object having 21 in triple aces.
      */
@@ -823,15 +824,15 @@ class TwentyOneTest extends TestCase
         $this->assertInstanceOf("\App\Cards\Card", $card2);
         $this->assertInstanceOf("\App\Cards\Card", $card3);
 
-        echo $card1->asString();
-        echo $card2->asString();
-        echo $card3->asString();
+        // echo $card1->asString();
+        // echo $card2->asString();
+        // echo $card3->asString();
 
         $player->setHand($card1);
         $player->setHand($card2);
         $player->setHand($card3);
 
-        echo $player->asString();
+        // echo $player->asString();
 
         // Set expectation
         $exp = true;
@@ -846,16 +847,123 @@ class TwentyOneTest extends TestCase
     /**
      * Verify is21 method with cardhand-object having 21 with suite (3 covered).
      */
+    public function testIs21WithSuite()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "nightmare");
+
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $player = $game->getCurrentPlayer();
+        $this->assertInstanceOf("\App\Cards\CardHand", $player);
+
+        $card1 = new Card("s11");
+        $card2 = new Card("h12");
+        $card3 = new Card("d13");
+        $this->assertInstanceOf("\App\Cards\Card", $card1);
+        $this->assertInstanceOf("\App\Cards\Card", $card2);
+        $this->assertInstanceOf("\App\Cards\Card", $card3);
+
+        $player->setHand($card1);
+        $player->setHand($card2);
+        $player->setHand($card3);
+
+        // Set expectation
+        $exp = true;
+
+        // Test
+        $hand = $player->getHand();
+        $res = $game->is21($hand);
+
+        $this->assertEquals($exp, $res);
+    }
 
     /**
      * Verify is21 method with cardhand-object having 21 with suite (2 covered 1 ace).
      */
+    public function testIs21WithSuiteOfCoveredAndAce()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "nightmare");
 
-     /**
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $player = $game->getCurrentPlayer();
+        $this->assertInstanceOf("\App\Cards\CardHand", $player);
+
+        $card1 = new Card("s11");
+        $card2 = new Card("h12");
+        $card3 = new Card("d1");
+
+        $this->assertInstanceOf("\App\Cards\Card", $card1);
+        $this->assertInstanceOf("\App\Cards\Card", $card2);
+        $this->assertInstanceOf("\App\Cards\Card", $card3);
+
+        $player->setHand($card1);
+        $player->setHand($card2);
+        $player->setHand($card3);
+
+        // Set expectation
+        $exp = true;
+
+        // Test
+        $hand = $player->getHand();
+        $res = $game->is21($hand);
+
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
      * Verify is21 method with cardhand-object having 21 with five cards non fat.
      */
+    public function testIs21WithNonFatFivePlus()
+    {
+        $deck = new DeckOfCards("Trad52");
+        $game = new TwentyOne($deck, 2, "nightmare");
 
-    /** NON FUNCTIONAL
+        $this->assertInstanceOf("\App\Cards\DeckOfCards", $deck);
+        $this->assertInstanceOf("\App\Cards\TwentyOne", $game);
+
+        // Setup
+        $game->firstTurn();
+        $player = $game->getCurrentPlayer();
+        $this->assertInstanceOf("\App\Cards\CardHand", $player);
+
+        $card1 = new Card("s2");
+        $card2 = new Card("h4");
+        $card3 = new Card("d3");
+        $card4 = new Card("s3");
+        $card5 = new Card("d2");
+
+        $this->assertInstanceOf("\App\Cards\Card", $card1);
+        $this->assertInstanceOf("\App\Cards\Card", $card2);
+        $this->assertInstanceOf("\App\Cards\Card", $card3);
+        $this->assertInstanceOf("\App\Cards\Card", $card4);
+        $this->assertInstanceOf("\App\Cards\Card", $card5);
+        
+        $player->setHand($card1);
+        $player->setHand($card2);
+        $player->setHand($card3);
+        $player->setHand($card4);
+        $player->setHand($card5);
+
+        // Set expectation
+        $exp = true;
+
+        // Test
+        $hand = $player->getHand();
+        $res = $game->is21($hand);
+
+        $this->assertEquals($exp, $res);
+    }
+
+    /** Original class modified, now working.
      * Verify determineWinner method in a game where bank is "happy" and player "happy"
      * and bank has the higher value (below 21) on hand.
      */

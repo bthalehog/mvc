@@ -225,8 +225,12 @@ class TwentyOneController extends AbstractController
             
             // Determine winner by sorting on status, player can never be winner at this stage only happy. (has function in game)
             $winner = $game->determineWinner();
-            $gameInfo .= "Winner: " . $winner;
-            // echo $gameInfo;
+
+            if ($winner->getPlayer() === 99999) {
+                $gameInfo .= "Winner: Bank";
+            } else {
+                $gameInfo .= "Winner: Player" . $winner->getPlayer();
+            }
             
             $session->set('game', $game);
             $session->set('bank', $game->getBank());

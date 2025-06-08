@@ -209,160 +209,12 @@ class TwentyOne implements \JsonSerializable
         $this->currentPlayer = $newCurrent;
     }
 
-    /** MODIFIED AND WORKING
-     * Handles the first turn in a game
-     * Assigning currentPlayer
-     * Selecting bank
-     * Adjusting playerlist.
-     */
-    public function firstTurn()
-    {
-        // This should pop and append like a queue but track final.
-        if ($this->currentPlayer === null) {
-            // This will shift from players -> bank and leave the players diminished.
-            $this->addPlayer(100);
-
-            // The new index zero will be first currentPlayer()
-            $this->currentPlayer = $this->getPlayer(0);
-
-            $moveToBack = $this->getPlayer(0);
-            unset($this->getAllPlayers()[0]);
-            array_values($this->getAllPlayers());
-            $allPlayersAfterUnset = $this->getAllPlayers();
-            array_push($allPlayersAfterUnset, $moveToBack);
-            $this->players = $allPlayersAfterUnset;
-            $this->setCurrentPlayer = $this->getPlayer(0);
-        }
-    }
-
-    /**
-     * Compare the sum of cardvalues of bank and player hand-objects.
-     * HandOne should be bank for the win on draw to work!
-     * Returns hand-object-winner based on highest hand total score if both non fat.
-     */
-    public function compareHands($handOne, $handTwo): object
-    {
-        $comparison = [];
-        $winner = [];
-
-        if ($handOne->getStatus() !== "fat" && $handTwo->getStatus() !== "fat") {
-            array_push($comparison, $handOne);
-            array_push($comparison, $handTwo);
-
-            foreach ($comparison as $player) {
-                if ($player->getScore() !== 21 && $player->getStatus() !== "fat") {
-                    $handValue = $player->getHandValue();
-                    $player->setScore($handValue);
-                }
-            }
-
-            // Bank takes precedence on draw, bank has to be argument 1
-            if ($comparison[0]->getScore() === $comparison[1]->getScore()) {
-                $winner = $comparison[0];
-                echo "Bank win";
-            } elseif ($comparison[0]->getScore() > $comparison[1]->getScore()) {
-                $winner = $comparison[0];
-                echo "Bank win";
-            } else {
-                $winner = $comparison[1];
-                echo "Player win";
-            }
-            
-        } 
-        if ($handOne->getStatus() !== "fat" && $handTwo->getStatus() === "fat") {
-            $winner = $handOne;
-            echo "Bank win";
-        } elseif ($handTwo->getStatus() !== "fat") {
-            $winner = $handTwo;
-            echo "Bank win";
-        }
-
-        // $winner->setWallet(50);
-        
-        return $winner;
-    }
-
     /**
      * Return number of players in playerlist.
      */
     public function playerCount(): int
     {
         return (int) count($this->players);
-    }
-
-    // Modified, changed ace-value check from 14 to 1.
-    /**
-     * Find out if the cards on hand constitutes a specialcase for 21.
-     * Takes array as cards on hand.
-     * Returns boolean.
-     * Does NOT alter player status.
-     */
-    public function is21($hand)
-    {
-        $cards = [];
-        $aces = 0;
-        $suite = 0;
-        $score = 0;
-
-        // Write cardvalues to list
-        foreach ($hand as $card) {
-            // Separate int value from cardvalue combo (ex s12).
-            $card = preg_replace('/\D/', '', $card->getValue());
-            array_push($cards, $card);
-        }
-
-        // Count number of aces, suites or suite = 2 + value10
-        foreach ($cards as $card) {
-            // Check for Ace
-            if ($card === 1) {
-                $aces += 1;
-            }
-            // Check for King, Queen and Jack
-            elseif ($card === 13 || $card === 12 || $card === 11) {
-                $suite += 1;
-            }
-            // Check for combination of two covered and one ace
-            elseif ($suite === 2 && $aces >= 1) {
-                $suite += 1;
-            }
-        }
-
-        // Find handvalue with ace as 11 instead of 1 in case of hand burst.
-        if (array_sum($cards) > 21) {
-            foreach ($cards as $card) {
-                if ($card === 1) {
-                    $score += ($card + 10);
-                }
-
-                $score += $card;
-            }
-
-            if ($score === 21) {
-                echo "Sum of cards on hand = 21!";
-                return true;
-            }
-        }
-
-        // Find if any special case condition is true
-        if ($aces >= 2) {
-            echo "Two or more aces = 21!";
-            return true;
-        } elseif (array_sum($cards) === 21) {
-            echo "Sum of cards on hand = 21!";
-            return true;
-        } elseif ($suite === 3) {
-            echo "Suite (three covered or two covered and one ace) = 21!";
-            return true;
-        }
-        // This can also be used to alter difficulty on mode-setting.
-        // Shift rules into elseif below for separation.
-        elseif ($this->getDifficulty() === "nightmare") {
-            if (count($hand) >= 5 && $hand->getStatus() !== "fat") {
-                echo "Hand size >= 5 is 21! (specialCase - nightmare-mode)";
-                return true;
-            }
-        }
-        return false;
     }
 
     //  MODIFIED added else-condition.
@@ -501,6 +353,32 @@ class TwentyOne implements \JsonSerializable
             </article>';
 
         return $rules;
+    }
+
+    /** MODIFIED AND WORKING
+     * Handles the first turn in a game
+     * Assigning currentPlayer
+     * Selecting bank
+     * Adjusting playerlist.
+     */
+    public function firstTurn()
+    {
+        // This should pop and append like a queue but track final.
+        if ($this->currentPlayer === null) {
+            // This will shift from players -> bank and leave the players diminished.
+            $this->addPlayer(100);
+
+            // The new index zero will be first currentPlayer()
+            $this->currentPlayer = $this->getPlayer(0);
+
+            $moveToBack = $this->getPlayer(0);
+            unset($this->getAllPlayers()[0]);
+            array_values($this->getAllPlayers());
+            $allPlayersAfterUnset = $this->getAllPlayers();
+            array_push($allPlayersAfterUnset, $moveToBack);
+            $this->players = $allPlayersAfterUnset;
+            $this->setCurrentPlayer = $this->getPlayer(0);
+        }
     }
 
     /**
@@ -646,13 +524,140 @@ class TwentyOne implements \JsonSerializable
         }
     }
 
-    /** MODIFIED DURING UNIT TEST
+    // Modified, changed ace-value check from 14 to 1.
+    // Changed preg_replace to extract int instead of string "1".
+    /**
+     * Find out if the cards on hand constitutes a specialcase for 21.
+     * Takes array as cards on hand.
+     * Returns boolean.
+     * Does NOT alter player status.
+     * 
+     */
+    public function is21($hand)
+    {
+        $cards = [];
+        $aces = 0;
+        $suite = 0;
+        $score = 0;
+
+        // Write cardvalues to list
+        foreach ($hand as $card) {
+            // Separate int value from cardvalue combo (ex s12).
+            $card = (int) preg_replace('/\D/', '', $card->getValue());
+            array_push($cards, $card);
+
+            // Check for Ace
+            if ($card === 1) {
+                $aces += 1;
+            } 
+            // Check for King, Queen and Jack
+            elseif ($card === 13 || $card === 12 || $card === 11) {
+                $suite += 1;
+            }
+        }
+
+        // Find handvalue with ace as 11 instead of 1 in case of hand burst.
+        // This is wrong since base value for card is 1!!
+        // Best to change in deck? from 1 to 14?
+        if (array_sum($cards) > 21) {
+            foreach ($cards as $card) {
+                if ($card === 1) {
+                    $score += (14); // But to check for change on "fat" the higher value should be base and the lower the alter, change in deck? 
+                }
+
+                $score += $card;
+            }
+
+            if ($score === 21) {
+                echo "Sum of cards on hand is 21!";
+                return true;
+            }
+        }
+
+        // Find if any special case condition is true
+        if ($aces >= 2) {
+            echo "Two or more aces = 21!";
+            return true;
+        } elseif ($suite === 3 && count($cards) === 3) {
+            echo "Suite (three covered or two covered and one ace) = 21!";
+            return true;
+        } elseif ($suite === 2 && $aces === 1 && count($cards) === 3) {
+            echo "Suite (two covered and one ace) = 21!";
+            return true;
+        }
+
+        // NIGHTMARE MODE SPECIAL CASES
+        // This can also be used to alter difficulty on mode-setting.
+        // Shift rules into if below for separation.
+        if ($this->getDifficulty() === "nightmare") {
+            if (count($hand) >= 5 && $score < 21) {
+                echo "Hand size >= 5 is 21! (specialCase - nightmare-mode)";
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // MODIFIED changed to elseif for second block.
+    /**
+     * Compare the sum of cardvalues of bank and player hand-objects.
+     * HandOne should be bank for the win on draw to work!
+     * Returns hand-object-winner based on highest hand total score if both non fat.
+     */
+    public function compareHands($handOne, $handTwo): object
+    {
+        $comparison = [];
+        $winner = [];
+
+        if ($handOne->getStatus() !== "fat" && $handTwo->getStatus() !== "fat") {
+            array_push($comparison, $handOne);
+            array_push($comparison, $handTwo);
+
+            foreach ($comparison as $player) {
+                if ($player->getScore() !== 21 && $player->getStatus() !== "fat") {
+                    $handValue = $player->getHandValue();
+                    $player->setScore($handValue);
+                }
+            }
+
+            // Bank takes precedence on tie, bank has to be argument 1
+            if ($comparison[0]->getScore() === $comparison[1]->getScore()) {
+                $winner = $comparison[0];
+                echo "Bank win";
+            } elseif ($comparison[0]->getScore() > $comparison[1]->getScore()) {
+                $winner = $comparison[0];
+                echo "Bank win";
+            } else {
+                $winner = $comparison[1];
+                echo "Player win";
+            }
+        } 
+        elseif ($handOne->getStatus() !== "fat" && $handTwo->getStatus() === "fat") {
+            $winner = $handOne;
+            echo "Bank win";
+        } elseif ($handOne->getStatus() === "fat" && $handTwo->getStatus() !== "fat") {
+            $winner = $handTwo;
+            echo "Bank win";
+        } elseif ($handOne->getStatus() === "fat" && $handTwo->getStatus() === "fat") {
+            $winner = $handOne;
+            echo "Bank win";
+        }
+
+        // $winner->setWallet(50);
+        
+        return $winner;
+    }
+
+    /** MODIFIED DURING UNIT TEST, added null for $winner and !isset if not set.
      * Determine winner in a game between bank and player
      * Return $winner (cardHand-object) and write gameInfo to $result.
+     * Added else-condition for tie.
      */
     public function determineWinner()
     {
 		$result = "";
+        $winner = null;
 
         if ($this->getBank()->getStatus() === "winner") {
             $winner = $this->getBank(); //->getPlayer();
@@ -664,12 +669,10 @@ class TwentyOne implements \JsonSerializable
             $winner = $this->getCurrentPlayer();//->getPlayer(); //Should return an int
             $result = "Player wins! ";
             $this->getCurrentPlayer()->setWallet($this->getStake());
-            // $this->getCurrentPlayer()->setStatus(null);
         } elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "fat") {
             $winner = $this->getCurrentPlayer();//->getPlayer();
             $result = $this->getCurrentPlayer()->getPlayer() . " wins! ";
             $this->getCurrentPlayer()->setWallet($this->getStake());
-            // $this->getCurrentPlayer()->setStatus(null);
         } elseif ($this->getCurrentPlayer()->getStatus() === "happy" && $this->getBank()->getStatus() === "happy") {
             echo "Comparing hands...";
             sleep(1);
@@ -684,11 +687,19 @@ class TwentyOne implements \JsonSerializable
                 $this->getCurrentPlayer()->setWallet($this->getStake());
                 // $game->getPlayer($winner)->setWallet($game->getStake());
                 echo "Total earnings: " . (string)$winner->getWallet();
+            } else {
+                $result = "Tie! Bank takes all.";
+                $this->getBank()->setWallet($this->getStake());
+                $this->getBank()->setStatus("");
+                $winner = $this->getBank();
             }
-            $result = "Tie! Bank takes all.";
-            $this->getBank()->setWallet($this->getStake());
-            $this->getBank()->setStatus("");
         }
+
+        if (!isset($winner)) {
+            $winner = $this->getBank();
+            $result = "No winner! Bank takes all.";
+        }
+
         echo $result;
 		return $winner;
     }
