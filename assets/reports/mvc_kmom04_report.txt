@@ -1,1 +1,35 @@
-MVC KMOM04
+<article class="hashView">
+
+    <h2>MVC Kmom04</h2>
+        <h3>Generella intryck och egna reflektioner</h3>
+		Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och hur du upplever phpunit rent allmänt.
+            <p>Jag har tidigare upplevt att testandet varit svårtillgängligt med olika referenser till objekten och $this, i denna kurs (detta moment) trillade dock någon pollett ner.
+		Bra upplägg att först få skriva kod som med största sannolikhet har massa fel för att sedan själv felsöka den i ett helt moment. Bättre upplägg än testmomenten i de tidigare kurserna tycker jag.
+		Nomenklaturen är ganska snarlik de andra språken vi kört tester i och även i php finns gott om färdiga assert-metoder. Man får passa sig så att man inte skriver tester som passar sin (felaktiga) kod istället för att skriva tester som testar koden
+		jag satt länge och undrade varför jag inte kunde får rätt bool på min is21() när det helt enkelt visade sig att jag inte tagit höjd för att mitt strängvärde "s1" inte blev en integer efter att jag <i>preg_replace</i>-at den.
+		Jag hittade också en hel del andra logiska fel och utfall som jag inte tagit höjd för (och som därför gjorde att ingen vinnare skrevs till $winner-variabeln i min determineWinner()-metod. 
+		Mitt spelflyt såväl som min <i>gameInfo</i> blev mycket bättre efter testerna. Jag tror det kan vara ganska effektivt att blanda testprocesser och t.ex. använda sig av testdriven utveckling när det kommer till spellogiken.</p>
+
+        <h3>Uppgiften</h3>
+		<p>Jag lyckades nå 82% radtäckning och 80% funktions/metod-täckning vilket jag är nöjd med. Det var betydligt svårare att testa TwentyOne-klassen (själv spelet) jämfört med spelobjekt-klasserna i vilka man kunde återanvända och modifiera mycket av testkoden.
+		I spelobjektsklasserna lyckades jag nå 100, 86 och 97% täckning men spellogikklassen drog ner snittet en del, det var dock de roligaste testerna att skriva och där jag upptäckte de fel som innebar förbättring av min kod.
+		Min kod hade kunnat bli ännu mer testbar om jag hade styckat upp mina spellogik-funktioner is21(), determineWinner() och compareHands() i mindre komponenter och det var i dessa klasser jag blev tvungen att fixa logiken.
+		Jag tror att jag hade haft färre buggar om jag skrivit mer nedbrutna metoder då det hade gett mer överblick över vilka specifika utfall som täckts in och inte. Jag borde också mycket tidigare ha "städat upp" i min spelInfo-struktur och bestämt mig för hur cardHands status variable skulle användas (i vilken funktion, och uteslutande i en, vinnarvariabel skulle skrivas).
+		Jag tror absolut att testbar kod i mångt och mycket är synonymt med "snygg och ren kod" då jag upplever att testbarheten ökar om riktlinjerna för DRY och nedbrytning följs. 
+		</p>
+
+        <p>Det vore betydligt svårare att testa Controller-klassen i mitt fall då jag fortfarande är dålig på att göra metoder i controller-delarna, då måste jag testa ett helt spelflöde med väldigt många instanser, alternativt att jag skriver ett väldigt långt test med kontrollpunkter på vägen som följer spelets gång, lite som en spegling av själva controllern.</p>
+
+        <h3>TIL</h3>
+            <ul>
+                <li>Man behöver visst else-villkoret ibland, att den är överflödig var en överdrift.</li>
+                <li>Det går inte att jämföra (<i>assertEqual</i>) med objekt, man får skriva runt det och utvinna parametrar som är jämförbara.</li>
+                <li>Det är enkelt att återanvända testkod om metoderna är väldigt specifika/smala.</li>
+                <li>Det är enkelt att återanvända testkod för att testa olika utfall av en och samma metod.</li>
+                <li>Om man använder <i>expectException</i> så bryts testet där undantaget upptäcks, det går då inte att ha kod med exempelvis assertSomething efter detta.</li>
+                <li>Om man använder <i>assertInstanceOf</i> på ett Error måste man se till att det inte hänvisar till namespace och inleds med \.</li>
+		        <li>Om man förväntar en <i>stdClass</i> måste även denna behandlas på samma sätt som nämnts ovan.</li>
+		        <li>Det finns en <i>assertNull-metod</i></li>
+		        <li>Jag tror det är en bättre <i>base-line</i>-policy att i spellogik-klassen alltid skriva metoder som inte tar några argument utan alltid hänvisar till hela spelinstansen ($this), jag hade några fall där jag matade in $hand som argument och tappade då möjligheten att skriva till status-variabel och annat som låg i objekten istället för arrayen.</li>		
+            </ul>
+</article>

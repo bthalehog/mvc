@@ -68,5 +68,7 @@ All subs actions listed below.
 20250603 New tag v4.0.2, Unit-testing continues, deckOfCards-class finished.  
 20250604 New tag v4.0.3, Unit testing continues, Halfway through TwentyOne-class; restructured and patched flawed methods determineWinner(), firstTurn(), lastPlayer(), getWinner().  
 20250604 New tag v4.0.4, Unit testing continues, 70% line coverage achieved, all classes tested, fixing error in is21()-method.  
+20250608 New tag v4.0.5, Unit testing finished, game-logic classes fixed, assignment criteria met.  
+20250611 New tag v5.0.0, Kmom05 Excercise, setup SQLite, db and repository. 
   
 ![](./public/img/bwtailgun.png)

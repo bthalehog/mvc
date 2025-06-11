@@ -77,7 +77,7 @@ git push				            Send to repo
 git tag -a v1.0 -m ".."             Tag with comment
 git tag v1.0.0                      Lightweight tag
 git push --tags                     Push with tags
-git checkout -b kmom03              SKapa branch kmom03
+(git checkout -b kmom03              SKapa branch kmom03, endast i webapp-lager)
 
                 =================================================================================
                 #                                                                               #
@@ -187,7 +187,6 @@ The --filter is a way to ask phpunit to only run the tests matching that string.
 Another way to use --filter is to only execute the tests from a specific class, for example --filter GuessTest.
 Try it like this: composer phpunit -- --filter GuessTest 
 
-
 ------------------------------------------------------------------------------------
 Files related to the tests
 
@@ -204,8 +203,10 @@ Noted
 Multiple testMethods can have the same name if in different test-classes and will then be executed by the same command simultaneously.
 "If it have no assert, it aint no test."
 "If the tests can not run independently, then they are not unit tests."
+
 Try to cover as many source lines of code as possible with your test suite. The test cases you write should cover the whole code, each class, each method, and each line, at least once.
 Divide your test suite into classes having reasonable sizes. 
+
 There is an assertion for $this->assertNull() 
 Hard to compare Equals for object, need to use som asString to compare results.
 Easy to reuse unit-tests if written simple and for testing just one thing, recurring methods, only problem is testing constructor.
@@ -216,3 +217,45 @@ Unittesterna fixade min lastPlayer()-funktion som var out of bounds.
 Unittesterna fixade min getWinner()-funktion som inte var satt att returnera object eller noll (?object) utan enbart null
 
 Man bör nog undvika att skriva metoder som tar delar av spelet (andra objekt) som argument och alltid utgå från spelet självt ($this i klasserna), för att undvika att man inte når viss funktionalitet inne i funktione (ex statusändring)
+
+==================================================================================================================================================
+
+SYMFONY DOCTRINE
+
+(commands for terminal)
+
+php bin/console doctrine:database:create            Create database
+sqlite3 var/data.db                                 Check database schema
+php bin/console make:entity                         Create entity
+    Then set entity class name
+    Set Property name
+    Set field type
+    questions can just be passed by enter
+php bin/console make:migration                      Make migration
+more migrations/Version20250611193422.php           Check migration
+up()                                                Upgrade migration
+down()                                              Downgrade migration
+
+sqlite3 var/data.db                                 Run SQLite on the database
+    .schema                                             show schema
+
+php bin/console make:controller ProductController   Create controller
+php bin/console debug:router                        Debug router (see if working)
+php bin/console debug:router product                Verify specific (name in example is product)
+php bin/console router:match /product               Verify match
+
+    Go to route to run code (add product)
+
+sqlite3 -header -column var/data.db                 Review db content
+    SELECT * FROM Product;                          See all data in Product 
+
+php bin/console dbal:run-sql 'SELECT * FROM product'    To do strict SQL straight from terminal (not need to first start SQL and the type) This uses the dotenv file.
+
+use App\Repository\ProductRepository;               Update namespace in controller
+
+
+NB. Custom commands for Repository MUST go into the repository Class.
+
+
+Remember that methods that update the state and the database should really be POST and not GET. This method was just simpler to implement to show how to work with Doctrine to update the database.
+
