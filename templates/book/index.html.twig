@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %}
+
+    <div class="libraryViewer">
+        <h1 class="libraryHeadline">Library</h1>
+        <p class="libraryExplanation">Welcome to the library app! Here you can browse, view details and add/remove/edit books in the library inventory. Books need a minimum of an ISBN number to be added to the library. ISBN-format follows international standard <i>ISBN XXX-XX-XXXX-XXX-X</i> (max length 22 characters, including dashes and spaces)</p>
+        <article class="libraryMenu">
+            <a class="libraryButton" href= "{{ path('book_show_all') }}">View all books</a>
+            <a class="libraryButton" href= "{{ path('book_show_all') }}">View book details</a>
+            <a class="libraryButton" href= "{{ path('book_show_all') }}">Add book</a>
+            <a class="libraryButton" href= "{{ path('book_show_all') }}">Update book</a>
+            <a class="libraryButton" href= "{{ path('book_show_all') }}">Remove book</a>
+        </article>
+
+        <p class="libraryExplanation">Happy reading!</p>
+    </div>
+
+{% endblock %}

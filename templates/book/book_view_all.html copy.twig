@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library shelves{% endblock %}
+
+{% block body %}
+
+    <div class="libraryViewer">
+        <ul>
+            {% for book in books %}
+                <li>{{ book.getISBN|e }} ({{ book.getTitle|e }}) {{ book.getAuthor|e }} {{ book.getImage|e }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

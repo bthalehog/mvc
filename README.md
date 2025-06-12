@@ -69,6 +69,9 @@ All subs actions listed below.
 20250604 New tag v4.0.3, Unit testing continues, Halfway through TwentyOne-class; restructured and patched flawed methods determineWinner(), firstTurn(), lastPlayer(), getWinner().  
 20250604 New tag v4.0.4, Unit testing continues, 70% line coverage achieved, all classes tested, fixing error in is21()-method.  
 20250608 New tag v4.0.5, Unit testing finished, game-logic classes fixed, assignment criteria met.  
-20250611 New tag v5.0.0, Kmom05 Excercise, setup SQLite, db and repository. 
+
+### _Kmom05_  
+20250611 New tag v5.0.0, Kmom05 Excercise, setup SQLite, db and repository.  
+20250612 New tag v5.0.1, Kmom05, db and repository added for assignment, landing page created, app-layout done.  
   
 ![](./public/img/bwtailgun.png)
