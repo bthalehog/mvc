@@ -5,25 +5,35 @@
 {% block body %}
 
     <div class="libraryViewer">
-        <tbody class="libraryTable">
-            <tr>
-                <td>
-                    {{ book.getISBN }} 
-                </td>
-                <td>
-                    {{ book.getTitle }}
-                <td>
-                <td>
-                    {{ book.getAuthor }} 
-                </td>
-            </tr>
-        </tbody>
+        <table>
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
 
-        <div class="libraryImage">
-            {{ book.getImage }} 
-        </div>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ book.getISBN }} 
+                    </td>
+                    <td>
+                        {{ book.getTitle }}
+                    </td>
+                    <td>
+                        {{ book.getAuthor }} 
+                    </td>
+                    <td>
+                        {{ book.getImage }}  
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <a href="{{ path('view') }}">Return to main</a>
+        <a class="libraryButton" href="{{ path('book_show_all') }}">Return to main</a>
     </div>
 
 {% endblock %}

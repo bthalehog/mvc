@@ -662,3 +662,65 @@ svg {
     justify-content: center;
     text-align: center;
 }
+
+.libraryButton2 {
+    height: 10%;
+    width: auto;
+    background-color: black;
+    padding: 1rem;
+    margin: 0.5rem;
+    border: 0.5rem ridge black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Form */
+.libraryForm {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.libraryFormOrganizer {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Table */
+table {
+    width: 95%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    border: 0.2rem solid black;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    font-weight: bold;
+}
+
+.libraryMiniButton {
+    height: auto;
+    width: auto;
+    background-color: black;
+    border: 0.5rem ridge black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+

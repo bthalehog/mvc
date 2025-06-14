@@ -9,16 +9,17 @@
 
         <p class="libraryExplanation">Are you sure you want to remove this book from the library shelves?</p>
         
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-                <th>Image</th>
-            </tr>
-        </thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
 
-        <tbody class="libraryTable">
+            <tbody class="libraryTable">
                 <tr>
                     <td>
                         <a href="{{ path('view_details', {'id': book.id}) }}">
@@ -35,12 +36,14 @@
                         {{ book.getImage }}
                     </td>
                 </tr>
-        </tbody>
+            </tbody>
+        </table>
 
         <form class="libraryForm" action="{{ path('book_delete_by_id', {'id': book.id}) }}" method="post">
-            <button type="submit" class="libraryButton">Yes</button>
+            <button type="submit" class="libraryButton2">Yes</button>
+            <a href="{{ path('book_show_all') }}" class="libraryButton2">No</a>
         </form>
-        <a href="{{ path('book_show_all') }}" class="libraryButton">No</a>
+        
     </div>
 
 {% endblock %}

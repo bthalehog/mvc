@@ -7,28 +7,27 @@
     <div class="libraryViewer">
         <h1 class="libraryHeadline">Update details</h1>
 
-        <p class="libraryExplanation">Enter additional data about book.</p>
+        <p class="libraryExplanation">Enter additional data about book, ISBN is mandatory. Click update to implement.</p>
         
-        <form class="libraryForm" action="{{ path('book_create') }}" method="post">
-            <div>
+        <form class="libraryForm" action="{{ path('book_update_by_id', {'id': book.id}) }}" method="post">
+            <div class="libraryFormOrganizer">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" value="{{ book.getTitle }}">
             </div>
-            <div>
+            <div class="libraryFormOrganizer">
                 <label for="author">Author</label>
                 <input type="text" id="author" name="author" value="{{ book.getAuthor }}">
             </div>
-            <div>
-                <label for="isbn">ISBN (mind the format)</label>
+            <div class="libraryFormOrganizer">
+                <label for="isbn">ISBN (mind the format ISBN XXX-XX-XXXX-XXX-X)</label>
                 <input type="text" id="isbn" name="isbn" value="{{ book.getISBN }}" required>
             </div>
-            <div>
+            <div class="libraryFormOrganizer">
                 <label for="image">Image (must match image title)</label>
                 <input type="text" id="image" name="image" value="{{ book.getImage }}">
             </div>
-            <div>
-                <button type="submit" class="libraryButton"!>Update</button>
-            </div>
+            
+            <button type="submit" class="libraryButton"!>Update</button>
         </form>
     </div>
 

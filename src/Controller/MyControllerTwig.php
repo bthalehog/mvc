@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+use App\Repository\BookRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Persistence\ManagerRegistry;
+
 class MyControllerTwig extends AbstractController
 {
     #[Route("/", name: "home")]
@@ -64,6 +68,24 @@ class MyControllerTwig extends AbstractController
         return $this->render('lucky_number.html.twig', $data);
     }
 
+    // API ROUTES
+
+    #[Route("/api", name: "api")]
+    public function apiLanding(): Response
+    {
+        $data = [
+            'welcome' => "Welcome to my API-inventory page. Here you can test functionality that I have built.",
+            'headline' => "API-Inventory",
+            'card' => "card here",
+            'deck' => "deck here",
+            'hand' => "cardHand here",
+            'sorted' => "sorted here",
+            'shuffled' => "shuffled here"
+        ];
+
+        return $this->render('api.html.twig', $data);
+    }
+
     #[Route("/api/game", name: "game")]
     public function currentScore(SessionInterface $session): Response
     {
@@ -83,19 +105,29 @@ class MyControllerTwig extends AbstractController
         return $this->render('game.html.twig', $data);
     }
 
-    #[Route("/api", name: "api")]
-    public function apiLanding(): Response
+    #[Route("/api/library/books", name: "books", methods: ['GET'])]
+    public function libraryBooks(BookRepository $bookRepository): JsonResponse
     {
-        $data = [
-            'welcome' => "Welcome to my API-inventory page. Here you can test functionality that I have built.",
-            'headline' => "API-Inventory",
-            'card' => "card here",
-            'deck' => "deck here",
-            'hand' => "cardHand here",
-            'sorted' => "sorted here",
-            'shuffled' => "shuffled here"
-        ];
+        $library = $bookRepository->findAll();
 
-        return $this->render('api.html.twig', $data);
+        return $this->json($library);
+    }
+
+    #[Route("/api/library/books/{isbn}", name: "book_by_isbn", methods: ['GET'])]
+    public function libraryBookByIsbn(BookRepository $bookRepository, ManagerRegistry $doctrine, string $isbn): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+        
+        // $isbn = "ISBN 978-04-5119-115-1";
+
+        if (!$isbn) {
+            throw $this->createNotFoundException(
+                'No ISBN provided'
+            );
+        }
+
+        $selected = $bookRepository->findByIsbn(['isbn' => $isbn]);
+
+        return $this->json($selected);
     }
 }

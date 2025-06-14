@@ -22,8 +22,9 @@ final class BookController extends AbstractController
     }
 
     #[Route('/book/show', name: 'book_show_all', methods: ['GET'])]
-    public function showAllBook(BookRepository $bookRepository): Response {
-        $books = $bookRepository->findAll();
+    public function showAllBook(ManagerRegistry $doctrine, BookRepository $bookRepository): Response {
+        $entityManager = $doctrine->getManager();
+        $books = $entityManager->getRepository(Book::class)->findAll();
 
         return $this->render('book/view.html.twig', ['books' => $books]);
     }
@@ -104,15 +105,17 @@ final class BookController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
+            dump($request->request->all());
+
+            $book->setISBN($request->request->get('isbn'));
             $book->setTitle($request->request->get('title'));
             $book->setAuthor($request->request->get('author'));
-            $book->setISBN($request->request->get('isbn'));
             $book->setImage($request->request->get('image'));
 
-            return $this->render('book_show_all');
-        }
+            $entityManager->flush();
 
-        $entityManager->flush();
+            return $this->redirectToRoute('book_show_all');
+        }
 
         return $this->render('book/update.html.twig', ['book' => $book]);
     }
@@ -121,22 +124,6 @@ final class BookController extends AbstractController
     public function viewBookDetails(BookRepository $bookRepository, int $id): Response {
         $book = $bookRepository->findByID($id);
 
-        return $this->render('book/view.html.twig', ['book' => $book]);
+        return $this->render('book/view_details.html.twig', ['book' => $book]);
     }
-
-    /* NOT NEEDED
-    #[Route('/book/view/{value}', name: 'book_view_minimum_value')]
-    public function viewBookWithMinimumValue(
-        BookRepository $bookRepository,
-        int $value
-    ): Response {
-        $books = $bookRepository->findByMinimumValue($value);
-
-        $data = [
-            'books' => $books
-        ];
-
-        return $this->render('book/view.html.twig', $data);
-    }
-    */
 }

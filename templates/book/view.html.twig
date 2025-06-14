@@ -5,38 +5,44 @@
 {% block body %}
 
     <div class="libraryViewer">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>ISBN</th>
-                <th>Update</th>
-                <th>Remove</th>
-            </tr>
-        </thead>
-        <tbody class="libraryTable">
-            {% for book in books %}
+        <h1 class="libraryHeadline">Library shelves</h1>
+        <p class="libraryExplanation">Welcome to browse the library shelves, click the ISBN to see full details on book</p>
+
+        <table>
+            <thead>
                 <tr>
-                    <td>
-                        <a href="{{ path('view_details', {'id': book.id}) }}">
-                            {{ book.getISBN }}
-                        </a>
-                    </td>
-                    <td>
-                        {{ book.getTitle }}
-                    </td>
-                    <td>
-                        <a href="{{ path('book_update_by_id', {'id': book.id}) }}">
-                            <button type="button" class="libraryMiniButton">Update</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ path('book_delete_by_id', {'id': book.id}) }}" method="post">
-                            <button type="submit">Remove</button>
-                        </a>
-                    </td>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Update</th>
+                    <th>Remove</th>
                 </tr>
-            {% endfor %}
-        </tbody>
+            </thead>
+
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('view_details', {'id': book.id}) }}">
+                                {{ book.getISBN }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ book.getTitle }}
+                        </td>
+                        <td>
+                            <a href="{{ path('book_update_by_id', {'id': book.id}) }}">
+                                <button type="button" class="libraryMiniButton">Update</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('book_delete_by_id', {'id': book.id}) }}" method="post">
+                                <button type="submit" class="libraryMiniButton">Remove</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}
