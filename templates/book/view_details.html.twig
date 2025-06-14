@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book details{% endblock %}
+
+{% block body %}
+
+    <div class="libraryViewer">
+        <tbody class="libraryTable">
+            <tr>
+                <td>
+                    {{ book.getISBN }} 
+                </td>
+                <td>
+                    {{ book.getTitle }}
+                <td>
+                <td>
+                    {{ book.getAuthor }} 
+                </td>
+            </tr>
+        </tbody>
+
+        <div class="libraryImage">
+            {{ book.getImage }} 
+        </div>
+
+        <a href="{{ path('view') }}">Return to main</a>
+    </div>
+
+{% endblock %}

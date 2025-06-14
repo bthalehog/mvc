@@ -73,5 +73,6 @@ All subs actions listed below.
 ### _Kmom05_  
 20250611 New tag v5.0.0, Kmom05 Excercise, setup SQLite, db and repository.  
 20250612 New tag v5.0.1, Kmom05, db and repository added for assignment, landing page created, app-layout done.  
+20250614 New tag v5.0.2, Remodeled for GET/POST-criteria, layout change, forms and table-structure added.  
   
 ![](./public/img/bwtailgun.png)
