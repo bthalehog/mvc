@@ -81,7 +81,7 @@ GIT
 (version handling and backup)
 
 git add . 				            Lägg till alla ändringar (eller specifik fil)
-git commit -a -m ".." 	            Commit (-a står för all, -m för message)
+git commit -m ".." 	                Commit (-a står för all, -m för message)
 git status				            Show status
 git push				            Send to repo
 git tag -a v1.0 -m ".."             Tag with comment
@@ -269,3 +269,24 @@ NB. Custom commands for Repository MUST go into the repository Class.
 
 Remember that methods that update the state and the database should really be POST and not GET. This method was just simpler to implement to show how to work with Doctrine to update the database.
 
+==================================================================================
+PHPMETRICS
+==================================================================================
+
+Quality of code.
+
+Install
+mkdir --parents tools/phpmetrics
+composer require --working-dir=tools/phpmetrics phpmetrics/phpmetrics
+
+Commands:
+                                (if in Symfony dir)
+Show version                    tools/phpmetrics/vendor/bin/phpmetrics --version
+Show help                       tools/phpmetrics/vendor/bin/phpmetrics --help
+Show all metrics available      tools/phpmetrics/vendor/bin/phpmetrics --metrics
+Generate report in terminal     tools/phpmetrics/vendor/bin/phpmetrics src
+Generate report in html         tools/phpmetrics/vendor/bin/phpmetrics --report-html=docs/metrics src
+(report found in docs/metrics)
+Run by configuration file       tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json
+Run with composer               composer phpmetrics
+(Add script to composer.json first)
