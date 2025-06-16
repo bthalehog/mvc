@@ -63,7 +63,7 @@ class MyControllerJson
             // echo "No deck in session, rerouting...";
         }
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-                
+
         $data = [
             'deck' => $deck->asCards(),
             'timestamp' => date('c'),
@@ -81,7 +81,7 @@ class MyControllerJson
             // echo "No deck in session, rerouting...";
         }
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-        
+
         $deck->shuffleDeck();
         $data = [
             'deck' => $deck->asCards(),
@@ -100,7 +100,7 @@ class MyControllerJson
             // echo "No deck in session, rerouting...";
         }
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-        
+
         $card = $deck->dealCard();
         $data = [
             'card' => $card->getGraphics(),
@@ -117,8 +117,8 @@ class MyControllerJson
             $deck = new DeckOfCards('Trad52');
             $session->set('deck', $deck);
             // echo "No deck in session, rerouting...";
-        } 
-          
+        }
+
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
 
         $hand = new CardHand($deck, $number);

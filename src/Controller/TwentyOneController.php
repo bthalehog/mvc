@@ -98,7 +98,7 @@ class TwentyOneController extends AbstractController
     public function start(SessionInterface $session, Request $request): Response
     {
         $this->addFlash('notice', 'Game started!');
-        
+
         $game = $session->get('game');
         $bank = $session->get('bank');
         $player = $session->get('player');
@@ -110,23 +110,23 @@ class TwentyOneController extends AbstractController
         // Template variables
         $gameInfo = "";
         $winner = "";
-        
+
         // $result = "";
         $action = "";
-        
+
         // HTML-buttons
         $button1 = '<button type="submit" id="playerButtonDraw" name="action" class="playerButton" value="draw">Draw card</button>';
         $button2 = '<button type="submit" id="playerButtonStay" name="action" class="playerButton" value="stay">Stay</button>';
         $button3 = '<button type="submit" id="newGameBtn" name="action" class="playerButton" value="new">New game</button>';
         $button4 = '<button type="submit" id="nextPlayerBtn" name="action" class="playerButton" value="next">Next player</button>';
-        
+
         // Get player input for trigger behaviour.
         if ($request->isMethod('POST')) {
             $action = $request->request->get('action');
         }
         // Start collection of echoes for gameinfo
         ob_start();
-        
+
         // New game by reroute to session delete
         if ($action === "new") {
             return $this->redirectToRoute('session_delete');
@@ -141,7 +141,7 @@ class TwentyOneController extends AbstractController
                 $session->set('game', $game);
                 $session->set('player', $game->getCurrentPlayer());
                 $session->set('bank', $game->getBank());
-                
+
                 echo "Hit new game-button to reset session and start a new game.";
                 $gameInfo .= "Hit new game-button to reset session and start a new game.";
                 sleep(5);
@@ -163,7 +163,7 @@ class TwentyOneController extends AbstractController
             $session->set('player', $game->getCurrentPlayer());
             $session->set('bank', $game->getBank());
             $session->set('playerIndex', $game->getCurrentPlayerIndex());
-            
+
         } elseif ($action === "draw") {
             $game->getCurrentPlayer()->cardToHand(1, $game->getDeck());
             if ($game->getCurrentPlayer()->getHandValue() > 21) {
@@ -173,7 +173,7 @@ class TwentyOneController extends AbstractController
                 } elseif ($game->getCurrentPlayer()->getHandValue() === 21) {
                     $game->getCurrentPlayer()->setStatus("happy");
                     $gameInfo .= "Player" . $game->getCurrentPlayer()->getPlayer() . " hits 21!";
-                } 
+                }
                 $game->getCurrentPlayer()->setStatus("fat");
                 $game->getBank()->setStatus("winner");
                 $gameInfo .= "Player" . (string)$game->getCurrentPlayer()->getPlayer() . " burst!";
@@ -222,7 +222,7 @@ class TwentyOneController extends AbstractController
             }
             // echo "Finding winner...";
             sleep(1);
-            
+
             // Determine winner by sorting on status, player can never be winner at this stage only happy. (has function in game)
             $winner = $game->determineWinner();
 
@@ -231,7 +231,7 @@ class TwentyOneController extends AbstractController
             } else {
                 $gameInfo .= "Winner: Player" . $winner->getPlayer();
             }
-            
+
             $session->set('game', $game);
             $session->set('bank', $game->getBank());
             $session->set('player', $game->getCurrentPlayer());

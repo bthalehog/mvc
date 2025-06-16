@@ -8,6 +8,16 @@ Script: PHP
 serverkommando:	    php -S localhost:8888 -t public
                     symfony server:start		(runs on own http://127.0.0.1:8000)
 
+Inlämningsinstux kodstil:
+
+    Fixa till din kod enligt den kodstil du kör genom att köra composer csfix.
+
+    Kolla din kod hur den matchar dina linters genom att köra composer lint.
+
+    Dubbelkolla att dina testfall passerar med composer phpunit.
+
+    Generera dokumentation av din kod med composer phpdoc.
+
 =================================================================================================================
 
 ------------

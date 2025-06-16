@@ -68,6 +68,14 @@
                 <a href="namespaces/app-controller.html" class="">Controller</a>
                 
             </li>
+                    <li>
+                <a href="namespaces/app-entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-repository.html" class="">Repository</a>
+                
+            </li>
             </ul>
 
                         </section>
@@ -293,9 +301,7 @@ Lets bank act on algorithmic instruction.</dd>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd>MODIFIED DURING UNIT TEST
-Determine winner in a game between bank and player
-Return $winner (cardHand-object) and write gameInfo to $result.</dd>
+<dd>MODIFIED DURING UNIT TEST, added null for $winner and !isset if not set.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Cards-TwentyOne.html#method_firstTurn">firstTurn()</a>
@@ -1211,13 +1217,11 @@ Returns hand-object-winner based on highest hand total score if both non fat.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Cards/TwentyOne.php"><a href="files/src-cards-twentyone.html"><abbr title="src/Cards/TwentyOne.php">TwentyOne.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">657</span>
+    <span class="phpdocumentor-element-found-in__line">656</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">MODIFIED DURING UNIT TEST
-Determine winner in a game between bank and player
-Return $winner (cardHand-object) and write gameInfo to $result.</p>
+        <p class="phpdocumentor-summary">MODIFIED DURING UNIT TEST, added null for $winner and !isset if not set.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1226,7 +1230,9 @@ Return $winner (cardHand-object) and write gameInfo to $result.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Added else-condition for tie.</p>
+        <section class="phpdocumentor-description"><p>Determine winner in a game between bank and player
+Return $winner (cardHand-object) and write gameInfo to $result.
+Added else-condition for tie.</p>
 </section>
 
     

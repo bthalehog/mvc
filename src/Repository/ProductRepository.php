@@ -42,11 +42,11 @@ class ProductRepository extends ServiceEntityRepository
     //    }
 
     // The "glue" between the products and the database and the class is
-    // a place where you can add adaptions specific to the products, 
+    // a place where you can add adaptions specific to the products,
     // for example on how to find them.
     /**
      * Find all producs having a value above the specified one.
-     * 
+     *
      * @return Product[] Returns an array of Product objects
      */
     /*
@@ -62,10 +62,10 @@ class ProductRepository extends ServiceEntityRepository
     }
     */
 
-    // Same as above but not using Query-builde and will give a raw resultset in the form of an array of arrays. 
+    // Same as above but not using Query-builde and will give a raw resultset in the form of an array of arrays.
     /**
      * Find all producs having a value above the specified one with SQL.
-     * 
+     *
      * @return [][] Returns an array of arrays (i.e. a raw data set)
      */
     public function findByMinimumValue($value): array

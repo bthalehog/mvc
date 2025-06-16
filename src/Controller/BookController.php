@@ -5,12 +5,10 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
 // For file upload handling
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,7 +25,8 @@ final class BookController extends AbstractController
     }
 
     #[Route('/book/show', name: 'book_show_all', methods: ['GET'])]
-    public function showAllBook(ManagerRegistry $doctrine, BookRepository $bookRepository): Response {
+    public function showAllBook(ManagerRegistry $doctrine, BookRepository $bookRepository): Response
+    {
         $entityManager = $doctrine->getManager();
         $books = $entityManager->getRepository(Book::class)->findAll();
 
@@ -35,7 +34,8 @@ final class BookController extends AbstractController
     }
 
     #[Route('/book/show/{id}', name: 'view_details', methods: ['GET'])]
-    public function showBookById(BookRepository $bookRepository, int $id): Response {
+    public function showBookById(BookRepository $bookRepository, int $id): Response
+    {
         $book = $bookRepository->find($id);
 
         return $this->render('book/view_details.html.twig', ['book' => $book]);
@@ -55,7 +55,8 @@ final class BookController extends AbstractController
     */
 
     #[Route('/book/create', name: 'book_create', methods: ['GET', 'POST'])]
-    public function createBook(Request $request, ManagerRegistry $doctrine): Response {
+    public function createBook(Request $request, ManagerRegistry $doctrine): Response
+    {
         if ($request->isMethod('POST')) {
             $entityManager = $doctrine->getManager();
 
@@ -68,7 +69,7 @@ final class BookController extends AbstractController
 
             // Result has to be written to variable for further handling.
             // $uploadedImage = $book->setImage($request->files->get('image'));
-           
+
             if ($uploadedImage) {
                 $fileConstraint = new File([
                     'maxSize' => '1024k',
@@ -95,7 +96,8 @@ final class BookController extends AbstractController
     }
 
     #[Route('/book/delete/{id}', name: 'book_delete_by_id', methods: ['GET', 'POST'])]
-    public function deleteBookById(Request $request, ManagerRegistry $doctrine, int $id): Response {
+    public function deleteBookById(Request $request, ManagerRegistry $doctrine, int $id): Response
+    {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Book::class)->find($id);
 
@@ -111,12 +113,13 @@ final class BookController extends AbstractController
 
             return $this->redirectToRoute('book_show_all');
         }
-        
+
         return $this->render('book/delete.html.twig', ['book' => $book]);
     }
 
     #[Route('/book/update/{id}', name: 'book_update_by_id', methods: ['GET', 'POST'])]
-    public function updateBookById(Request $request, ManagerRegistry $doctrine, int $id): Response {
+    public function updateBookById(Request $request, ManagerRegistry $doctrine, int $id): Response
+    {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Book::class)->find($id);
 
@@ -143,7 +146,8 @@ final class BookController extends AbstractController
     }
 
     #[Route('/book/view/{id}', name: 'book_view_details', methods: ['GET'])]
-    public function viewBookDetails(BookRepository $bookRepository, int $id): Response {
+    public function viewBookDetails(BookRepository $bookRepository, int $id): Response
+    {
         $book = $bookRepository->findByID($id);
 
         return $this->render('book/view_details.html.twig', ['book' => $book]);

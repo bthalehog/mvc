@@ -183,7 +183,7 @@ class DeckOfCards implements \JsonSerializable
         if (array_key_exists($type, $decks)) {
             // echo "You selected: $type \n";
             return (array) $decks[$type];
-        } 
+        }
         echo "No such deck type.";
     }
 

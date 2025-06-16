@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ProductRepository;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,7 +20,8 @@ final class ProductController extends AbstractController
     }
 
     #[Route('/product/create', name: 'product_create')]
-    public function createProduct(ManagerRegistry $doctrine): Response {
+    public function createProduct(ManagerRegistry $doctrine): Response
+    {
         $entityManager = $doctrine->getManager();
 
         $product = new Product();
@@ -39,7 +39,8 @@ final class ProductController extends AbstractController
     }
 
     #[Route('/product/show', name: 'product_show_all')]
-    public function showAllProduct(ProductRepository $productRepository): Response {
+    public function showAllProduct(ProductRepository $productRepository): Response
+    {
         $products = $productRepository
             ->findAll();
 
@@ -55,7 +56,8 @@ final class ProductController extends AbstractController
     }
 
     #[Route('/product/show/{id}', name: 'product_by_id')]
-    public function showProductById(ProductRepository $productRepository,
+    public function showProductById(
+        ProductRepository $productRepository,
         int $id
     ): Response {
         $product = $productRepository

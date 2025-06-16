@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\ManagerRegistry;
@@ -117,7 +116,7 @@ class MyControllerTwig extends AbstractController
     public function libraryBookByIsbn(BookRepository $bookRepository, ManagerRegistry $doctrine, string $isbn): JsonResponse
     {
         $entityManager = $doctrine->getManager();
-        
+
         // HARDCODE in twig-template (api.html.twig) path instead. $isbn = "ISBN 978-04-5119-115-1";
 
         if (!$isbn) {

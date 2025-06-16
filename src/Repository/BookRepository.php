@@ -43,7 +43,7 @@ class BookRepository extends ServiceEntityRepository
 
     /**
      * Find all books having an index value above the specified one.
-     * 
+     *
      * @return Book[] Returns an array of Book objects
      */
     public function findByMinimumValue($value): array

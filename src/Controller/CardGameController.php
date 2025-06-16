@@ -59,7 +59,7 @@ class CardGameController extends AbstractController
         }
 
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-        
+
         $deck = $deck->sortDeck();
         $data = [
             "deck" => $deck->asCards(),
@@ -79,10 +79,10 @@ class CardGameController extends AbstractController
             $session->set('deck', $deck);
             echo "No deck in session, rerouting...";
             return $this->redirectToRoute('session_start');
-        } 
-        
+        }
+
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-        
+
 
         $number = (int) $number;
         $hand = new CardHand($deck, $number);
@@ -111,7 +111,7 @@ class CardGameController extends AbstractController
             return $this->redirectToRoute('session_start');
         }
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-        
+
         // POKED AROUND HERE
         // $hand = new CardHand($number, $deck);
         $card = $deck->cardToHand($deck, $number); // Also has to pop from deck!!?
@@ -140,7 +140,7 @@ class CardGameController extends AbstractController
             return $this->redirectToRoute('session_start');
         }
         $deck = $session->get('deck', new DeckOfCards('Trad52'));
-        
+
         $data = [
             "deck" => $deck->shuffleDeck(),
             "deckGraph" => $deck->asCards(),

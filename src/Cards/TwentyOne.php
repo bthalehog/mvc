@@ -185,7 +185,7 @@ class TwentyOne implements \JsonSerializable
         return $this->players ?? null;
     }
 
-	/**
+    /**
      * Get game stake.
      */
     public function getStake(): int
@@ -193,7 +193,7 @@ class TwentyOne implements \JsonSerializable
         return (int) $this->stake;
     }
 
-	/**
+    /**
      * Get current player
      */
     public function getCurrentPlayer(): ?object
@@ -201,7 +201,7 @@ class TwentyOne implements \JsonSerializable
         return $this->currentPlayer;
     }
 
-	/**
+    /**
      * Set current player
      */
     public function setCurrentPlayer($newCurrent)
@@ -310,7 +310,7 @@ class TwentyOne implements \JsonSerializable
      * Method to get winner of all players (based on status)
      * Returns player (cardHand-object)
      */
-    public function getWinner(): ? object
+    public function getWinner(): ?object
     {
         foreach ($this->getAllPlayers() as $player) {
             if ($player->getStatus() === "winner") {
@@ -421,44 +421,44 @@ class TwentyOne implements \JsonSerializable
     /*
     public function bankMove($action)
     {
-		while ($this->getBank()->getHandValue() < 21 && $this->getBank()->getStatus() !== "happy" && $this->getBank()->getStatus() !== "winner") {
-			if ($action === "draw") {
-				// Check if combination is 21
-				$this->getBank()->cardToHand(1, $this->getDeck());
-				echo "Bank draws! ";
-	
-				sleep(1);
-	
-				if ($this->is21($this->getBank()->getHand()) === true) {
-					echo "Bank hits 21! ";
-					$this->getBank()->setStatus("winner");
+        while ($this->getBank()->getHandValue() < 21 && $this->getBank()->getStatus() !== "happy" && $this->getBank()->getStatus() !== "winner") {
+            if ($action === "draw") {
+                // Check if combination is 21
+                $this->getBank()->cardToHand(1, $this->getDeck());
+                echo "Bank draws! ";
+
+                sleep(1);
+
+                if ($this->is21($this->getBank()->getHand()) === true) {
+                    echo "Bank hits 21! ";
+                    $this->getBank()->setStatus("winner");
                     $this->getBank()->setWallet(50);
-					$this->getCurrentPlayer()->setStatus("fat");
-				};
-	
-				if ($this->getBank()->getHandValue() > 21) {
-					// Check for 21-combinations.
-					if ($this->is21($this->getBank()->getHand()) === true) {
-						echo "Bank hits 21! ";
-						$this->getBank()->setStatus("winner");
+                    $this->getCurrentPlayer()->setStatus("fat");
+                };
+
+                if ($this->getBank()->getHandValue() > 21) {
+                    // Check for 21-combinations.
+                    if ($this->is21($this->getBank()->getHand()) === true) {
+                        echo "Bank hits 21! ";
+                        $this->getBank()->setStatus("winner");
                         $this->getBank()->setWallet(50);
-					}
-					echo "Bank burst! ";
-					$this->getBank()->setStatus("fat");
-					$this->getCurrentPlayer()->setStatus("winner");
+                    }
+                    echo "Bank burst! ";
+                    $this->getBank()->setStatus("fat");
+                    $this->getCurrentPlayer()->setStatus("winner");
                     $this->getCurrentPlayer()->setWallet(50);
-				} elseif ($this->getBank()->getHandValue() === 21) {
-					echo "Bank hits 21! ";
-					$this->getBank()->setStatus("winner");
+                } elseif ($this->getBank()->getHandValue() === 21) {
+                    echo "Bank hits 21! ";
+                    $this->getBank()->setStatus("winner");
                     $this->getBank()->setWallet(50);
-				}
-			}
-	
-			if ($action === "stay" || $this->getBank()->getHandValue() > 17) {
-				echo "Bank stays with hand value: " . (string)$this->getBank()->getHandValue() . " ";
-				$this->getBank()->setStatus("happy");
-			}
-		}
+                }
+            }
+
+            if ($action === "stay" || $this->getBank()->getHandValue() > 17) {
+                echo "Bank stays with hand value: " . (string)$this->getBank()->getHandValue() . " ";
+                $this->getBank()->setStatus("happy");
+            }
+        }
     }
     */
 
@@ -483,7 +483,7 @@ class TwentyOne implements \JsonSerializable
                     echo "Bank hits 21! ";
                     $this->getBank()->setStatus("winner");
                     $this->getBank()->setWallet(50);
-                } 
+                }
                 echo "Bank burst! ";
                 $this->getBank()->setStatus("fat");
                 $this->getCurrentPlayer()->setStatus("winner");
@@ -531,7 +531,7 @@ class TwentyOne implements \JsonSerializable
      * Takes array as cards on hand.
      * Returns boolean.
      * Does NOT alter player status.
-     * 
+     *
      */
     public function is21($hand)
     {
@@ -549,7 +549,7 @@ class TwentyOne implements \JsonSerializable
             // Check for Ace
             if ($card === 1) {
                 $aces += 1;
-            } 
+            }
             // Check for King, Queen and Jack
             elseif ($card === 13 || $card === 12 || $card === 11) {
                 $suite += 1;
@@ -562,7 +562,7 @@ class TwentyOne implements \JsonSerializable
         if (array_sum($cards) > 21) {
             foreach ($cards as $card) {
                 if ($card === 1) {
-                    $score += (14); // But to check for change on "fat" the higher value should be base and the lower the alter, change in deck? 
+                    $score += (14); // But to check for change on "fat" the higher value should be base and the lower the alter, change in deck?
                 }
 
                 $score += $card;
@@ -632,8 +632,7 @@ class TwentyOne implements \JsonSerializable
                 $winner = $comparison[1];
                 echo "Player win";
             }
-        } 
-        elseif ($handOne->getStatus() !== "fat" && $handTwo->getStatus() === "fat") {
+        } elseif ($handOne->getStatus() !== "fat" && $handTwo->getStatus() === "fat") {
             $winner = $handOne;
             echo "Bank win";
         } elseif ($handOne->getStatus() === "fat" && $handTwo->getStatus() !== "fat") {
@@ -645,7 +644,7 @@ class TwentyOne implements \JsonSerializable
         }
 
         // $winner->setWallet(50);
-        
+
         return $winner;
     }
 
@@ -656,7 +655,7 @@ class TwentyOne implements \JsonSerializable
      */
     public function determineWinner()
     {
-		$result = "";
+        $result = "";
         $winner = null;
 
         if ($this->getBank()->getStatus() === "winner") {
@@ -701,6 +700,6 @@ class TwentyOne implements \JsonSerializable
         }
 
         echo $result;
-		return $winner;
+        return $winner;
     }
 }

@@ -29,8 +29,8 @@ class CardHand
     protected int	    $score = 0;
     protected string    $status = "";
     public int          $player = 0;
-    protected           $wallet = 0;
-    protected           $isHead = false;
+    protected $wallet = 0;
+    protected $isHead = false;
 
     /**
      * Constructor to create instance of CardHand holding Card-objects.
@@ -106,7 +106,7 @@ class CardHand
      * Return void
      */
     public function setHand($card): void
-    {   
+    {
         array_push($this->currentHand, $card);
     }
 

@@ -76,5 +76,6 @@ All subs actions listed below.
 20250614 New tag v5.0.2, Remodeled for GET/POST-criteria, layout change, forms and table-structure added.  
 20250615 New tag v5.0.3, Styled forms and tables, fixed routing errors and path-errors in update form, added API-routes.  
 20250616 New tag v5.0.4, Upload image finally working, finalized styling, report added.  
+20250616 New tag v5.0.5, Example entries updated, linting and doc-commands run, assignment tested. Handing in Kmom05.  
   
 ![](./public/img/bwtailgun.png)
