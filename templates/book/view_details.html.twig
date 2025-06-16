@@ -27,7 +27,7 @@
                         {{ book.getAuthor }} 
                     </td>
                     <td>
-                        {{ book.getImage }}  
+                        <img src="{{ asset('uploads/images/' ~ book.getImage) }}" alt="{{ book.getTitle }}" />
                     </td>
                 </tr>
             </tbody>

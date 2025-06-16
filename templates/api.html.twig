@@ -48,7 +48,13 @@
                     </li>
                     <li>
                         <a href="{{ path('game') }}">Current score</a>
-                    </li> 
+                    </li>
+                    <li>
+                        <a href="{{ path('books') }}">Library</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('book_by_isbn', {'isbn': 'ISBN 978-04-5119-115-1'}) }}">Book by ISBN</a>
+                    </li>
                     <li>
                         <a href="{{ path('debug_session') }}">Debug view!</a>
                     </li>

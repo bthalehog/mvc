@@ -118,7 +118,7 @@ class MyControllerTwig extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         
-        // $isbn = "ISBN 978-04-5119-115-1";
+        // HARDCODE in twig-template (api.html.twig) path instead. $isbn = "ISBN 978-04-5119-115-1";
 
         if (!$isbn) {
             throw $this->createNotFoundException(

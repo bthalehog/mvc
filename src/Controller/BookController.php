@@ -6,6 +6,11 @@ use App\Entity\Book;
 use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+// For file upload handling
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\File;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -58,7 +63,24 @@ final class BookController extends AbstractController
             $book->setTitle($request->request->get('title'));
             $book->setAuthor($request->request->get('author'));
             $book->setISBN($request->request->get('isbn'));
-            $book->setImage($request->request->get('image'));
+            // $book->setImage($request->request->get('image'));
+            $uploadedImage = $request->files->get('image');
+
+            // Result has to be written to variable for further handling.
+            // $uploadedImage = $book->setImage($request->files->get('image'));
+           
+            if ($uploadedImage) {
+                $fileConstraint = new File([
+                    'maxSize' => '1024k',
+                ]);
+
+                // Generate file name
+                $fileName = uniqid().'.'.$uploadedImage->guessExtension();
+
+                // Move to target dir public/uploads/images as set i service.yaml
+                $uploadedImage->move($this->getParameter('images_directory'), $fileName);
+                $book->setImage($fileName);
+            }
 
             // tell Doctrine you want to (eventually) save the Product
             $entityManager->persist($book);

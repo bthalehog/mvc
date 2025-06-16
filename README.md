@@ -75,5 +75,6 @@ All subs actions listed below.
 20250612 New tag v5.0.1, Kmom05, db and repository added for assignment, landing page created, app-layout done.  
 20250614 New tag v5.0.2, Remodeled for GET/POST-criteria, layout change, forms and table-structure added.  
 20250615 New tag v5.0.3, Styled forms and tables, fixed routing errors and path-errors in update form, added API-routes.  
+20250616 New tag v5.0.4, Upload image finally working, finalized styling, report added.  
   
 ![](./public/img/bwtailgun.png)
