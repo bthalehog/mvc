@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Metrics extras{% endblock %}
+
+{% block body %}
+
+    <div class="metricsViewer">
+        <h1 class="metricsHeadline">Metrics intro</h1>
+        <p class="metricsExplanation">Welcome to the metrics extras.</p>
+
+        <h2 class="metricsHeadline">The 6 C:s</h1>
+        <article class="metricsExplanation">
+            Börja med en rubrik “Introduktion” där du förklarar de sex C:na och hur de kan påverka kodens kvalitet. Exemplifiera, där det passar, med några mätvärden som är kopplad till din egen kod och ge en kort förklaring av mätvärdet relaterat till kodkvalitet.
+        </article>
+
+        <h2 class="metricsHeadline">Phpmetrics</h1>
+        <article class="metricsExplanation">
+            Skapa en rubrik “Phpmetrics” och analysera dess rapport för din kod. Använd mätvärdena för att hitta flaskhalsar och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential. Visualisera med någon representativ bild från rapporten.
+        </article>
+
+        <h2 class="metricsHeadline">Scrutinizer</h1>
+        <article class="metricsExplanation">
+            Skapa en rubrik “Scrutinizer” och analysera dess rapport för din kod. Gör på samma sätt som du gjorde med Phpmetrics.
+
+            Inkludera klickbara Scrutinizer badges i din rapport för build, coverage och quality.
+            Placera samma badges i din README.md.
+
+            I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
+        </article>
+
+        <h2 class="metricsHeadline">Förbättringar</h1>
+        <article class="metricsExplanation">
+            Skapa en ny rubrik “Förbättringar” där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
+
+            Exempel på förbättringar kan vara:
+                Fixa issues
+                Öka kodtäckning
+                Fokusera på kvalitetsindex i Scrutinizer
+                Minska komplexiteten i class/metod
+
+            Börja med att skriva om förbättringarna, vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
+            Implementera sedan förbättringarna.
+            Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
+            Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
+        </article>
+
+        <h2 class="metricsHeadline">Diskussion</h1>
+        <article class="metricsExplanation">
+            Avsluta med ett stycke “Diskussion” där du diskuterar kort kring det du nyss gjort.
+
+            Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
+            Finns det fördelar och kanske nackdelar?
+            Ser du andra möjligheter att jobba mot “clean code”?
+        </article>
+
+        <div> 
+            <a href="{{ path('metrics') }}">
+                <button type="button" class="metricsMiniButton">Back to main</button>
+            </a>
+        
+            <a class="metricsMiniButton" href="{{ path('metrics_show') }}">Metrics data</a>
+        
+            <a href="{{ path('metrics_extras') }}">Metrics extras</a>
+        
+            <a href="{{ path('metrics_intro') }}">Metrics intro</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Extra1</th>
+                    <th>Extra2</th>
+                    <th>Extra3</th>
+                    <th>Extra4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Extra1</td>
+                    <td>Extra2</td>
+                    <td>Extra3</td>
+                    <td>Extra4</td>
+                </tr>
+                <tr>
+                    <td>Extra1</td>
+                    <td>Extra2</td>
+                    <td>Extra3</td>
+                    <td>Extra4</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

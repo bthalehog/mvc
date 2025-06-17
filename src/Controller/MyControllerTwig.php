@@ -129,4 +129,60 @@ class MyControllerTwig extends AbstractController
 
         return $this->json($selected);
     }
+
+    #[Route('/metrics', name: 'metrics')]
+    public function index(): Response
+    {
+        return $this->render('metrics/index.html.twig', [
+            'controller_name' => 'MetricsController',
+        ]);
+    }
+
+    #[Route("/metrics/intro", name: "metrics_intro")]
+    public function showIntro(): Response
+    {
+        $intro1 = "Intro";
+        $intro2 = "Intro2";
+        $intro3 = "Intro3";
+
+        $data = [
+            'intro1' => $intro1,
+            'intro2' => $intro2,
+            'intro3' => $intro3
+        ];
+
+        return $this->render('metrics/intro.html.twig', $data);
+    }
+
+    #[Route("/metrics/show", name: "metrics_show")]
+    public function showMetrics(): Response
+    {
+        $badge1 = "Badge";
+        $badge2 = "Badge";
+        $badge3 = "Badge";
+
+        $data = [
+            'badge1' => $badge1,
+            'badge2' => $badge2,
+            'badge3' => $badge3
+        ];
+
+        return $this->render('metrics/show.html.twig', $data);
+    }
+
+    #[Route("/metrics/extras", name: "metrics_extras")]
+    public function showExtras(): Response
+    {
+        $extra1 = "Extra1";
+        $extra2 = "Extra2";
+        $extra3 = "Extra3";
+
+        $data = [
+            'extra1' => $extra1,
+            'extra2' => $extra2,
+            'extra3' => $extra3
+        ];
+
+        return $this->render('metrics/extras.html.twig', $data);
+    }
 }

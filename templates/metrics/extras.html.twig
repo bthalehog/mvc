@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Metrics extras{% endblock %}
+
+{% block body %}
+
+    <div class="metricsViewer">
+        <h1 class="metricsHeadline">Metrics extras</h1>
+        <p class="metricsExplanation">Welcome to the metrics extras.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Extra1</th>
+                    <th>Extra2</th>
+                    <th>Extra3</th>
+                    <th>Extra4</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="{{ path('metrics') }}">
+                            <button type="button" class="metricsMiniButton">Back to main</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="metricsMiniButton" href="{{ path('metrics_show') }}">Metrics data</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('metrics_extras') }}">Metrics extras</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('metrics_extras') }}">Metrics extras</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
