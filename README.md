@@ -79,6 +79,15 @@ All subs actions listed below.
 20250616 New tag v5.0.5, Example entries updated, linting and doc-commands run, assignment tested. Handing in Kmom05.  
 
 ### _Kmom06_
+
 20250617 New tag v6.0.0, Kmom06 Excercises and base page-structure.  
+20250617 New tag v6.0.1, Kmom06 Analysis in process, badges added.  
+
+
+### Badges earned
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/build-status/main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
 
 ![](./public/img/bwtailgun.png)

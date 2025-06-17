@@ -8,37 +8,146 @@
         <h1 class="metricsHeadline">Metrics intro</h1>
         <p class="metricsExplanation">Welcome to the metrics extras.</p>
 
-        <h2 class="metricsHeadline">The 6 C:s</h1>
+        <h2 class="metricsHeadline">The 6 C:s</h2>
         <article class="metricsExplanation">
-            Börja med en rubrik “Introduktion” där du förklarar de sex C:na och hur de kan påverka kodens kvalitet. Exemplifiera, där det passar, med några mätvärden som är kopplad till din egen kod och ge en kort förklaring av mätvärdet relaterat till kodkvalitet.
+            <p>
+                De sex C:na är ett s.k. "software metrics"-koncept som samlar begreppen <i>Codestyle
+                Coverage, Complexity, Cohesion, Coupling och CRAP</i>.
+
+                Samtliga dessa koncept har gemensamt att de är arbetssätt för att analysera,
+                bedöma och ge förslag till förbättring av din kod genom att bedöma hur bra koden är utifrån ett antal förutbestämda kriterier.
+
+                Det är ibland bruklig att även inräkna ett sjunde C i konstellationen; Code smell.
+            </p>
+
+            <i><h3 class="metricsHeadline">Coverage</h3></i>
+                <p>
+                    Coverage (täckning) mäts i procent och beskriver antalet rader kod som har täckts av unittester, önskvärt är värden som överskrider 70%
+                    för att koden ska anses vara ett minimalt acceptabel.
+
+                    I mitt fall är så mycket som 78,95% av koden utan täckning av enhetstesterna då ingen av mina controllers undergått testning.
+                </p>
+
+            <i><h3 class="metricsHeadline">Complexity</h3></i>
+                <p>
+                    <i>Complexity</i> (komplexitet) avser hur invecklad koden eller välstrukturerad koden är,
+                    alltså t.ex hur många val och andra logiska manövrar koden utför och hur djupt in i koden dessa letar sig.
+                    Komplexiteten mäts genom att mäta antal val eller andra logiska operationer som koden exekverar. Ju fler sådana eller ju mer nästlade dessa är (cyklomatisk komplexitet) desto mer ökar komplexiteten.
+                
+                    Min Card-klass har, trots att den inte är ett enradigt fenomen, mycket låg cyklomatisk komplexitet (1) vilket väl förklaras av att de redan begränsade funktionerna är väl nedbrutna till singelansvarsmetoder.
+                    Fler av de mer komplexa klasserna drar dock upp snittet för varje klass till 8.11.
+                    En av de mest komplexa klasserna (cyklomatisk komplexitet = 70, 203 logiska operatorer använda) är TwentyOne (spellogik) där flera metoder (som redan tidigare orsakat problem) har för stora ansvarsområden och sannolikt skulle dra fördel av att brytas ner (findWinner, is21, bankMoveAi).
+                </p>
+
+            <i><h3 class="metricsHeadline">Cohesion</h3></i>
+                <p>
+                    <i>Cohesion</i> (sammanhållenhet) beskriver hur mycket koden (klasserna och metodernas)
+                    hänger samman invärtes. Ju mer koden hänger samman desto bättre. Mätvärdet ökar exempelvis om flera metoder i en klass har mycket gemensamt eller om besläktade metoder grupperats tillsammans i substrukturer.
+            
+                    Det finns vidare flera sorters sammanhållenhet (logisk, temporal, procedurell, kommunikativ, sekventiell och funktionell sammanhållenhet), vilka beskriver olika aspekter av begreppet.
+
+                    Fördelen med att ha så kallad "high" or "strong" cohesion är att koden blir enklare att underhålla, fler delar av koden går att återanvända (tack vare att den är ordentlig nedbruten till singelfunktionsmetoder - funktionell sammanhållenhet).
+                    Sammanhållenhetsvärdet har en direkt koppling till hur stor koden är. Ett skript besående av ett enstaka kommando kommer per automatik får hög sammanhållenhet. Detta bör beaktas när mätverktyget används.
+                </p>
+
+            <i><h3 class="metricsHeadline">Coupling</h3></i>
+                <p>
+                    <i>Coupling</i> (länkning) avser den grad till vilken de olika delarna (klasserna) av ett program är beroende av varandra.
+                    En hög grad av länkning sammanfaller ofta med en hög grad av sammanhållenhet och vice versa.
+
+                    Låg nivå av länkning är önskvärt då det medför enklare underhåll och felsökning.
+
+                    Det finns flera sorters länkning för olika programmeringsmetoder, den procedurella programmeringen har sina (innehålls-, allmän, extern, kontroll- samt stämpel-/datastrukturslänkning) med det gemensamma syftet att beskriva 
+                    medan den objektorienterade har sina (subklass-, temporal-, dynamisk-, semantisk- och logisk länkning).
+
+                    Coupling har indelas i efferent coupling (antal beroenden hos en klass), afferent coupling (antal klasser med beroende av en speficik klass), Instabilitetsindex (mäter efferent coupling i förhållande till antal funktioner)
+                    De syftar dock alla till att på något sätt beskriva graden av sammanhang submoduler emellan.
+                
+                    I mitt fall lider t.ex klassen DeckOfCards av hög grad av länkning få denna utgör delkomponent i flera av de andra klasserna (Card, CardHand, TwentyOne).
+                </p>
+
+            <i><h3 class="metricsHeadline">CRAP</h3></i>
+                <p>
+                    CRAP står för <i>Change Risk Anti-Pattern</i> och är en metod för att försöka kvantifiera och på så sätt förklara vad som är "dålig kod".
+                    Kvantifieringen består i att mäta hur stora konsekvenser det skulle få om man började ändra på koden någonstans för att på så sätt göra en riskbedömning.
+                    Kvantifieringen beräknas med formeln <i>CRAP(m) = Cyklomatisk komplexitet i kvadrat * Antal procent avsaknad kodtäckning från unittest i kubik + Cyklomatisk komplexitet</i>
+                </p>
+
+            <i><h3 class="metricsHeadline">Code smell</h3></i>
+                <p>
+                    <i>Code smell</i> (kodstank) anspelar på kod vars utformning på ett eller annat sätt uppfyller ett kriterium som gör att det osar problem ur någon synvinkel
+                    (underhåll, testning, felsökning mfl.). Ett exempel på ett sådant uppsatt kriterium är "the God-object", ett objekt (en klass eller annan submodul) som
+                     på något sätt är så stort, antingen genom spretiga och omfattande ansvarsområden eller för hög komplexitet mellan olika klasser och andra delar av koden så att det riskerar leda till problem i den sammantagna koden eller indikerar ett problem någon annanstans i koden som tvingat fram en onödigt komplicerad lösning.
+                    
+                    <quote>
+                        "Smells are certain structures in the code that indicate violation of fundamental design principles and negatively impact design quality"
+                        <i> - Morgan Kaufmann </i>
+                    </quote>
+
+                    Min egen kod lider av just detta begrepp där klassen ProductController har en hög brist på sammanhållenhet mellan metoder, har flertale publika metoder samt "vet för mycket" (behandlar för mycket data) genom användningen av externa klasser.
+                    Förvånansvärt nog tangerar inte min TwentyOne-class som annars har flera metoder som inte gör en enda sak och som skulle kunna brytas ner, gränsen för att räknas som 'blob' även om den anses ha för hög komplexitetsgrad. 
+                </p>
         </article>
 
-        <h2 class="metricsHeadline">Phpmetrics</h1>
+        <h2 class="metricsHeadline">Phpmetrics</h2>
         <article class="metricsExplanation">
-            Skapa en rubrik “Phpmetrics” och analysera dess rapport för din kod. Använd mätvärdena för att hitta flaskhalsar och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential. Visualisera med någon representativ bild från rapporten.
+
+            Php-metrics rapporten efter analysen av min rapport indikerar flera problemområden:
+                <ul>
+                    <li>DeckOfCards-klassen är ett beroende till i stort sätt alla delar av TwentyOne-appen.</li>
+                    <li>TwentyOne-klassen är för komplex genom sina många val och flera funktioner som inte följer singelansvarsupplägget (cardHandValue, is21, bankMoveAi, determineWinner)</li>
+                    <li>ProductController kvalificerar sig som en 'blob'/God-object genom att inte följa singelansvarsregeln, ha flera publika metoder, bristande sammanhållenhet samt högt beroende på externa klasser.</li>
+                    <li>TwentyOneController har likt sin kusin TwentyOne-klassen för hög komplexitet av samma anledningar, den redovisar också den högsta risken för att en bugg ska finnas (0.91) och har en maximal cyklomatisk komplexitet om 16! (love me an if.)</li>
+                </ul>
+                           
+            <img src="{{ asset('build/images/blob.png') }}" class="metricsImage" alt="the God-object" />
+
+            Av testerna framgår även att flera av de composer-paket som jag använder bör uppdateras, att en väldigt liten del av min kod (21%) täcks av enhetstesterna, att jag använder stora mängder kommentare i min kod, att mina klasser generellt har för hög relativ systemkomplexitet (167,06).
+            
+            Sammantaget kan sägas att min oförmåga att skapa singelansvarsfunktioner har haft stor inverkan på min apps komplexitet. Detta är dock ingen nyhet utan ett problem som uppdagades redan under kmom04/kmom05.
+            Det denna rapport bidrar med är en inriktning för var kraftsamling bör ske för att åstadkomma störst förbättring vilket torde vara i ovan nämnda klassers mer komplexa metoder.
+
+            Möjligen skulle även antalet kodrader hållas nere genom att städa upp i klasserna där såväl kommentarer som "back-ups" på omarbetade metoder fortfarande lever kvar i flera fall.
+
         </article>
 
-        <h2 class="metricsHeadline">Scrutinizer</h1>
+        <h2 class="metricsHeadline">Scrutinizer</h2>
         <article class="metricsExplanation">
-            Skapa en rubrik “Scrutinizer” och analysera dess rapport för din kod. Gör på samma sätt som du gjorde med Phpmetrics.
+            Scrutinizer-rapporten utgör lite mer uppmuntrande läsning även om även den lyfter fra TwentyOne-klassen som den sämst rankade php-klassen (F) och TwentyOneController (D) som den sämst rankade php-operationen.
+            
+            <img src="{{ asset('build/images/average.png') }}" class="metricsImage" alt="Average score" />
+            
+            I denna rapport blir det även tydligt att de är de tidigare misstänkliggjorda metoderna i TwentyOne-klassen som ligger bakom en stor del av problematiken.
 
-            Inkludera klickbara Scrutinizer badges i din rapport för build, coverage och quality.
-            Placera samma badges i din README.md.
+            <img src="{{ asset('build/images/scrutinizer.png') }}" class="metricsImage" alt="the God-object" />
 
-            I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
+            <div class="metricsOrganizer">
+                Badges erhållna under analysen:
+                <img src="https://scrutinizer-ci.com/g/bthalehog/mvc/badges/quality-score.png?b=main" class="metricsImage" alt="Scrutinizer" />
+                <img src="https://scrutinizer-ci.com/g/bthalehog/mvc/badges/coverage.png?b=main" class="metricsImage" alt="Coverage" />
+                <img src="https://scrutinizer-ci.com/g/bthalehog/mvc/badges/build.png?b=main" class="metricsImage" alt="Build" />
+                <img src="https://scrutinizer-ci.com/g/bthalehog/mvc/badges/code-intelligence.svg?b=main" class="metricsImage" alt="Code intelligence" />
+            </div>
+
+            Resultaten för Coverage skulle med största sannolikhet enkelt kunna förbättras bara genom att öka antalet unit-tester för de klasser som kvarstår som otestade.
+            Flera fall av potentiella buggar uppmärksammas också vilket enhetstesterna även skulle kunna bidra till att hantera.
+            Klassen TwentyOne framhålls som den med mest allvarliga problem kopplat till dess höga komplexitet (98), avståndet till DeckOfCards som är den näst mest problematiska är stort då denna "endast" har en komplexitet om 12 vilket förefaller försumbart i sammanhanget givet att den har god kodtäckning från enhetstesterna (97,37%).
         </article>
 
-        <h2 class="metricsHeadline">Förbättringar</h1>
+        <h2 class="metricsHeadline">Förbättringar</h2>
         <article class="metricsExplanation">
-            Skapa en ny rubrik “Förbättringar” där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
+            Mot bakgrund av ovan analysutfall finns det inte mycket annat att göra än att acceptera behovet av att omarbeta TwentyOne-klassen med fokus på de metoder som angetts tidigare samt städa upp generellt i de klasser som redan existerar.
 
-            Exempel på förbättringar kan vara:
-                Fixa issues
-                Öka kodtäckning
-                Fokusera på kvalitetsindex i Scrutinizer
-                Minska komplexiteten i class/metod
+            Följande förbättringar tros kunna leda till ett övergripande lyft av testresultaten:
+                <ul>
+                    <li>Nedbrytning av metoder i TwentyOne-klassen (minska komplexitet).</li>
+                    <li>Öka kodtäckning.</li>
+                    <li>Städa upp bland kommentarer och förbättra dokumentationen.</li>
+                </ul>
 
-            Börja med att skriva om förbättringarna, vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
+            Efter att dessa implementerats borde komplexiteten hos TwentyOne-klassen nedgå markant, täckningen bör ha blivit så god att även denna badge kan förvärvas med gult eller grönt och lättförståeligheten hos koden bör ha ökat.
+            Sammantaget borde detta också kunna öka det genomsnittliga resultatet något i positiv riktning från de 8.18 som uppmätts i skrivande stund.
+            
             Implementera sedan förbättringarna.
             Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
             Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
