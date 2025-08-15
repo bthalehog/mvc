@@ -240,38 +240,6 @@ class TwentyOne implements \JsonSerializable
         return $this->bank;
     }
 
-    // Also in DeckOfCards NOT USED IN TwentyOne-class
-    /**
-     * Deal $amount cards.
-     * Return Card-object.
-     */
-    /*
-    public function dealCard(int $amount = 1)
-    {
-        for ($i = 0; $i < $amount; $i++) {
-            $randInd = array_rand($this->getDeck());
-            $dealtCard = $this->getDeck()[$randInd];
-            unset($this->getDeck()[$randInd]);
-        }
-
-        return $dealtCard;
-    }
-
-    // Also in DeckOfCards NOT USED IN TwentyOne-class
-    /**
-     * Shuffle deck.
-     */
-    /*
-    public function shuffleDeck(): object
-    {
-        $carrier = $this->deck;
-        shuffle($carrier);
-        $this->deck = $carrier;
-
-        return $this;
-    }
-    */
-
     // Also in DeckOfCards
     /**
      * JsonSerializer for $deck
@@ -414,54 +382,6 @@ class TwentyOne implements \JsonSerializable
         return $this->deck->dealCard(1);
     }
 
-    /** DISCONTINUED
-     * Banklogic for multiplayer game
-     * Lets selected player act as bank.
-     */
-    /*
-    public function bankMove($action)
-    {
-        while ($this->getBank()->getHandValue() < 21 && $this->getBank()->getStatus() !== "happy" && $this->getBank()->getStatus() !== "winner") {
-            if ($action === "draw") {
-                // Check if combination is 21
-                $this->getBank()->cardToHand(1, $this->getDeck());
-                echo "Bank draws! ";
-
-                sleep(1);
-
-                if ($this->is21($this->getBank()->getHand()) === true) {
-                    echo "Bank hits 21! ";
-                    $this->getBank()->setStatus("winner");
-                    $this->getBank()->setWallet(50);
-                    $this->getCurrentPlayer()->setStatus("fat");
-                };
-
-                if ($this->getBank()->getHandValue() > 21) {
-                    // Check for 21-combinations.
-                    if ($this->is21($this->getBank()->getHand()) === true) {
-                        echo "Bank hits 21! ";
-                        $this->getBank()->setStatus("winner");
-                        $this->getBank()->setWallet(50);
-                    }
-                    echo "Bank burst! ";
-                    $this->getBank()->setStatus("fat");
-                    $this->getCurrentPlayer()->setStatus("winner");
-                    $this->getCurrentPlayer()->setWallet(50);
-                } elseif ($this->getBank()->getHandValue() === 21) {
-                    echo "Bank hits 21! ";
-                    $this->getBank()->setStatus("winner");
-                    $this->getBank()->setWallet(50);
-                }
-            }
-
-            if ($action === "stay" || $this->getBank()->getHandValue() > 17) {
-                echo "Bank stays with hand value: " . (string)$this->getBank()->getHandValue() . " ";
-                $this->getBank()->setStatus("happy");
-            }
-        }
-    }
-    */
-
     /**
      * ACTIVE
      * Banklogic for single player game
@@ -524,14 +444,76 @@ class TwentyOne implements \JsonSerializable
         }
     }
 
-    // Modified, changed ace-value check from 14 to 1.
-    // Changed preg_replace to extract int instead of string "1".
+    /**
+     * Find out if the value of cards on hand is 21.
+     * Takes listed_hand (array of cards).
+     * Returns boolean.
+     */
+    public function is21Sum($cards)
+    {
+        if (array_sum($cards) > 21) {
+            $score = 0;
+
+            foreach ($cards as $card) {
+                if ($card === 1) {
+                    $score += (14); // But to check for change on "fat" the higher value should be base and the lower the alter, change in deck?
+                }
+
+                $score += $card;
+            }
+
+            if ($score === 21) {
+                echo "Sum of cards on hand is 21!";
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Find out if the cards on hand constitutes a special condition for 21.
+     * Takes aces (count aces), suite (count royalty cards) and cards (all cards).
+     * Returns boolean.
+     */
+    public function isSpecialCondition($aces, $suite, $cards)
+    {
+        if ($aces >= 2) {
+            echo "Two or more aces = 21!";
+            return true;
+        } elseif ($suite === 3 && count($cards) === 3) {
+            echo "Suite (three covered or two covered and one ace) = 21!";
+            return true;
+        } elseif ($suite === 2 && $aces === 1 && count($cards) === 3) {
+            echo "Suite (two covered and one ace) = 21!";
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Find out if the cards on hand constitutes a specialcase in nightmare mode for 21.
+     * Takes player hand and score.
+     * Returns boolean.
+     *
+     */
+    public function is21Nightmare($hand, $score)
+    {
+        if ($this->getDifficulty() === "nightmare") {
+            if (count($hand) >= 5 && $score < 21) {
+                echo "Hand size >= 5 is 21! (specialCase - nightmare-mode)";
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Find out if the cards on hand constitutes a specialcase for 21.
      * Takes array as cards on hand.
      * Returns boolean.
-     * Does NOT alter player status.
-     *
      */
     public function is21($hand)
     {
@@ -556,10 +538,12 @@ class TwentyOne implements \JsonSerializable
             }
         }
 
-        // Find handvalue with ace as 11 instead of 1 in case of hand burst.
-        // This is wrong since base value for card is 1!!
-        // Best to change in deck? from 1 to 14?
-        if (array_sum($cards) > 21) {
+        if ($this->is21Sum($cards) === true) {
+            return true;
+        }
+
+        // SEPARATE FUNCTION
+        /* if (array_sum($cards) > 21) {
             foreach ($cards as $card) {
                 if ($card === 1) {
                     $score += (14); // But to check for change on "fat" the higher value should be base and the lower the alter, change in deck?
@@ -572,10 +556,15 @@ class TwentyOne implements \JsonSerializable
                 echo "Sum of cards on hand is 21!";
                 return true;
             }
+        }*/
+
+        if ($this->isSpecialCondition($aces, $suite, $cards) === true) {
+            return true;
         }
 
+        // SEPARATE FUNCTION
         // Find if any special case condition is true
-        if ($aces >= 2) {
+        /*if ($aces >= 2) {
             echo "Two or more aces = 21!";
             return true;
         } elseif ($suite === 3 && count($cards) === 3) {
@@ -584,17 +573,20 @@ class TwentyOne implements \JsonSerializable
         } elseif ($suite === 2 && $aces === 1 && count($cards) === 3) {
             echo "Suite (two covered and one ace) = 21!";
             return true;
+        }*/
+
+        if ($this->is21Nightmare($hand, $score) === true) {
+            return true;
         }
 
+        // SEPARATE FUNCTION
         // NIGHTMARE MODE SPECIAL CASES
-        // This can also be used to alter difficulty on mode-setting.
-        // Shift rules into if below for separation.
-        if ($this->getDifficulty() === "nightmare") {
+        /*if ($this->getDifficulty() === "nightmare") {
             if (count($hand) >= 5 && $score < 21) {
                 echo "Hand size >= 5 is 21! (specialCase - nightmare-mode)";
                 return true;
             }
-        }
+        }*/
 
         return false;
     }

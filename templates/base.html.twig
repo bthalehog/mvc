@@ -17,6 +17,18 @@
         <header class="site-header" style="background-image: url({{ asset('img/bwlunarsurface.png') }})">
             <span class="site-title">    </span>
         </header>
+        
+        <script>
+            function openAppPopup() {
+                const width = 300;
+                const height = 450;
+                const left = (screen.width - width) / 2;
+                const top = (screen.height - height) / 2;
+
+                window.open('{{ path('proj') }}', 'popup', `width=${width},height=${height},left=${left},top=${top}`);
+            }
+        </script>
+
         <nav class="nav">
             <ul class="nav">
                 <li><a href="{{ path('home') }}">Home</a></li>
@@ -29,6 +41,7 @@
                 <li><a href="{{ path('twentyone') }}">TwentyOne</a></li>
                 <li><a href="{{ path('app_book') }}">Library</a></li>
                 <li><a href="{{ path('metrics') }}">Metrics</a></li>
+                <li><a href="#" onclick="openAppPopup()">Project</a></li>
             </ul>
         </nav>
         

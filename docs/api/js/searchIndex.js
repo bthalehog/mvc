@@ -471,6 +471,21 @@ Search.appendIndex(
             "summary": "ACTIVE\nBanklogic\nAuto\u002Dpull\u0020until\u002017.",
             "url": "classes/App-Cards-TwentyOne.html#method_autoPull"
         },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003Ais21Sum\u0028\u0029",
+            "name": "is21Sum",
+            "summary": "Find\u0020out\u0020if\u0020the\u0020value\u0020of\u0020cards\u0020on\u0020hand\u0020is\u002021.",
+            "url": "classes/App-Cards-TwentyOne.html#method_is21Sum"
+        },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003AisSpecialCondition\u0028\u0029",
+            "name": "isSpecialCondition",
+            "summary": "Find\u0020out\u0020if\u0020the\u0020cards\u0020on\u0020hand\u0020constitutes\u0020a\u0020special\u0020condition\u0020for\u002021.",
+            "url": "classes/App-Cards-TwentyOne.html#method_isSpecialCondition"
+        },                {
+            "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003Ais21Nightmare\u0028\u0029",
+            "name": "is21Nightmare",
+            "summary": "Find\u0020out\u0020if\u0020the\u0020cards\u0020on\u0020hand\u0020constitutes\u0020a\u0020specialcase\u0020in\u0020nightmare\u0020mode\u0020for\u002021.",
+            "url": "classes/App-Cards-TwentyOne.html#method_is21Nightmare"
+        },                {
             "fqsen": "\\App\\Cards\\TwentyOne\u003A\u003Ais21\u0028\u0029",
             "name": "is21",
             "summary": "Find\u0020out\u0020if\u0020the\u0020cards\u0020on\u0020hand\u0020constitutes\u0020a\u0020specialcase\u0020for\u002021.",
@@ -690,6 +705,26 @@ Search.appendIndex(
             "name": "libraryBookByIsbn",
             "summary": "",
             "url": "classes/App-Controller-MyControllerTwig.html#method_libraryBookByIsbn"
+        },                {
+            "fqsen": "\\App\\Controller\\MyControllerTwig\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Controller-MyControllerTwig.html#method_index"
+        },                {
+            "fqsen": "\\App\\Controller\\MyControllerTwig\u003A\u003AshowIntro\u0028\u0029",
+            "name": "showIntro",
+            "summary": "",
+            "url": "classes/App-Controller-MyControllerTwig.html#method_showIntro"
+        },                {
+            "fqsen": "\\App\\Controller\\MyControllerTwig\u003A\u003AshowMetrics\u0028\u0029",
+            "name": "showMetrics",
+            "summary": "",
+            "url": "classes/App-Controller-MyControllerTwig.html#method_showMetrics"
+        },                {
+            "fqsen": "\\App\\Controller\\MyControllerTwig\u003A\u003AshowExtras\u0028\u0029",
+            "name": "showExtras",
+            "summary": "",
+            "url": "classes/App-Controller-MyControllerTwig.html#method_showExtras"
         },                {
             "fqsen": "\\App\\Controller\\ProductController",
             "name": "ProductController",

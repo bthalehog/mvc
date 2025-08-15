@@ -1,0 +1,55 @@
+{
+  "rooms": [
+    {
+      "id": "Room 1",
+      "info": "You get a hold of your surroundings, rattle the door handle only to find it is locked!",
+      "items": [
+        { "item": "key", "look": "A small key", "investigate": "It's hard to tell what it is for just by looking at it", "interact": "You pick up the key", "use": "forklift", "take": "yes", "graphics": "key.png"},
+        { "item": "wire", "look": "A piece of wire", "investigate": "Aah metal, the fabric of tools", "interact": "Great for MacGyvering", "use": "door", "take": "yes", "graphics": "wire.png"},
+        { "item": "cup", "look": "A paper cup", "investigate": "It doesn't seem to have been used, what sickos throws away unused cups like that, be more aware guys, really...", "interaction": "It has potential", "use": "fountain", "take": "yes", "graphics": "cup.png"}
+      ],
+      "directions": {
+        "north": "Room 2"
+      },
+      "graphics": [
+        { "background": "room1background.png" }
+      ],
+      "clue": "Well, there is a door..."
+    },
+    {
+      "id": "Room 2",
+      "info": "You find yourself standing at a crossroads, what to do!?",
+      "items": [
+        { "item": "fountain", "look": "A water fountain", "investigate": "It has water in it", "interact": "You take a sip, refreshing!", "use": "cup", "take": "no", "graphics": "fountain.png" },
+        { "item": "note", "look": "A piece of paper", "investigate": "The number 4526 is written on the back", "interact": "Seems I pick things up habitually", "use": "none", "take": "yes", "graphics": "note.png" }
+      ],
+      "directions": {
+        "north": "Closed",
+        "east": "Room 3",
+        "south": "Room 1"
+      },
+      "graphics": [
+        { "background": "room2background.png" }
+      ],
+      "clue": "Hunter gatherer you are"
+    },
+    {
+      "id": "Room 3",
+      "info": "Some sort of warehouse, there seem to be an exit at the far end, but don't let that stop you",
+      "items": 
+        [
+          { "item": "forklift", "look": "A fork lift", "investigate": "Real man are certified!", "interact": "I can't hear you over the sound of my FREEEEEEDOM!", "use": "key", "take": "no", "graphics": "forklift.png" },
+          { "item": "radio", "look": "A transistor radio", "investigate": "It seems plugged in and ready to go", "interact": "You turn the radio on, it is playing Fortunate son", "use": "none", "take": "no", "graphics": "radio.png" }
+        ],
+      "directions": {
+        "north": "Room 4",
+        "west": "Room 2",
+        "east": "Deathtrap"
+      },
+      "graphics": [
+        { "background": "room3background.png" }
+      ],
+      "clue": "Probably should get in the right mood for freedom"
+    }
+  ]
+}

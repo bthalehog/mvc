@@ -124,6 +124,7 @@ class TwentyOneController extends AbstractController
         if ($request->isMethod('POST')) {
             $action = $request->request->get('action');
         }
+
         // Start collection of echoes for gameinfo
         ob_start();
 

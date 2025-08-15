@@ -4,9 +4,6 @@ namespace App\Cards;
 
 use App\Cards\Card; // Import specific class
 
-// Keep all complexity in deckofcards, let card be simple, cardhand simple.
-// Added decks() for selecting between jokers or no jokers, prepped to be extended.
-
 /**
  * DeckOfCards-object
  * Creates DeckOfCards-object for use in card games.
@@ -34,17 +31,11 @@ class DeckOfCards implements \JsonSerializable
     public function __construct($deckType)
     {
         $this->deckType = $deckType;
-        // echo $this->deckType . "\n";
 
         $this->deckMap = $this->decks($this->deckType);
 
-        // print_r($this->deckMap);
-
         // Set deck size by count
         $this->deckSize = count($this->deckMap);
-        // echo ((string) $this->deckSize) . "\n";;
-
-        // Card should be given value from DoC->cardInd, therefore randSelect inside this loop.
 
         while (count($this->deckMap) > 0) {
             // Selection from cardIndex
@@ -53,8 +44,6 @@ class DeckOfCards implements \JsonSerializable
             array_push($this->deck, new Card($this->deckMap[$randSelector]["value"] ?? null, $this->deckMap[$randSelector]["status"] ?? null, $this->deckMap[$randSelector]["order"] ?? null));
             unset($this->deckMap[$randSelector]);
         }
-
-        // echo "Created deck \n";
     }
 
     public function asString(): string
@@ -63,7 +52,6 @@ class DeckOfCards implements \JsonSerializable
 
         foreach ($this->deck as $card) {
             $carrier .= ($card->getValue() . ", ");
-            // echo $carrier;
         }
 
         $carrier = rtrim($carrier, ", ");
@@ -77,7 +65,6 @@ class DeckOfCards implements \JsonSerializable
 
         foreach ($this->deck as $card) {
             $carrier .= ($card->getGraphics() . " ");
-            // echo $carrier;
         }
 
         $carrier = rtrim($carrier, ", ");
@@ -126,9 +113,7 @@ class DeckOfCards implements \JsonSerializable
     {
         $carrier = $this->deck;
 
-        // Use ($order) removed / from arg- int $order = 1
         usort($carrier, function ($alfa, $beta) {
-            // return $a['order'] <=> $b['order'];
             return $alfa->getOrder() <=> $beta->getOrder();
         });
 
@@ -178,10 +163,7 @@ class DeckOfCards implements \JsonSerializable
                 ["order" => 53, "value" => "joker1", "status" => "🃟"], ["order" => 54, "value" => "joker2", "status" => "🃏"]]
         ];
 
-        // echo "Available deck types: 'Trad52', 'Trad54' \n";
-
         if (array_key_exists($type, $decks)) {
-            // echo "You selected: $type \n";
             return (array) $decks[$type];
         }
         echo "No such deck type.";

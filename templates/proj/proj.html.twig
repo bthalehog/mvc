@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<div id="sustainabilityMain" class="clickablePicture">
+  <article id="roomOne" class="roomOne">
+    <h2>{{ info }}</h2>
+    
+    <p>{{ rules }}</p>
+  </article>
+</div>
+
+{% block body %}{% endblock %}
+
+<nav class="nav">
+  <button id="northButton" class="directionButton" onclick="move(north)" value="north"></button>
+  <button id="southButton" class="directionButton" onclick="move(south)" value="south"></button>
+  <button id="westButton" class="directionButton" onclick="move(west)" value="west"></button>
+  <button id="eastButton" class="directionButton" onclick="move(east)" value="east"></button>
+</nav>
+
+</html>

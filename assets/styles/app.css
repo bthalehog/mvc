@@ -724,3 +724,15 @@ th {
     text-align: center;
 }
 
+/* Metrics */
+
+.metricsViewer {
+    padding: 1rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
