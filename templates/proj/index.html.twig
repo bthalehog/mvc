@@ -1,8 +1,42 @@
-{% extends "base.html.twig" %}
+<!DOCTYPE html>
 
-<div id="sustainability" class="sustMainView">
-  <p>{{ info }}</p>
-</div>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Adventure Game{% endblock %}</title>
+
+  {% block stylesheets %}
+      {{ encore_entry_link_tags('app') }}
+  {% endblock %}
+
+  {% block javascripts %}
+      {{ encore_entry_script_tags('app') }}
+      {% block importmap %}{{ importmap('app') }}{% endblock %}
+  {% endblock %}
+</head>
+<body>
 
 {% block body %}
+
 {% endblock %}
+
+<nav class="gameNav">
+  <form method="POST" action="{{ path('move') }}">
+    <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'Room 1' }}">
+    
+    <button type="submit" id="northButton" class="directionButton" name="direction" value="north"></button>
+    <label for="northButton">↑</label>
+
+    <button type="submit" id="southButton" class="directionButton" name="direction"  value="south"></button>
+    <label for="southButton">↓</label>
+
+    <button type="submit" id="westButton" class="directionButton" name="direction"  value="west"></button>
+    <label for="westButton">←<</label>
+
+    <button type="submit" id="eastButton" class="directionButton" name="direction"  value="east"></button>
+    <label for="eastButton">→</label>
+  </form>
+</nav>
+
+</body>
+
+</html>

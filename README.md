@@ -81,7 +81,12 @@ All subs actions listed below.
 ### _Kmom06_
 
 20250617 New tag v6.0.0, Kmom06 Excercises and base page-structure.  
-20250617 New tag v6.0.1, Kmom06 Analysis in process, badges added.  
+20250617 New tag v6.0.1, Kmom06 Analysis in process, badges added.
+
+### _Kmom10_ 
+20250815 New tag v10.0.0, Kmom10 started, base structure set, room database JSON, Controller basics, storageHandler.  
+20250816 New tag v10.0.1, Move-route and move()-function added, navigation made into form for value-retrieval.  
+
 
 
 ### Badges earned

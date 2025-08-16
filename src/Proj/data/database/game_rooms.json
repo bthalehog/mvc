@@ -2,6 +2,7 @@
   "rooms": [
     {
       "id": "Room 1",
+      "name": "Janitor's closet",
       "info": "You get a hold of your surroundings, rattle the door handle only to find it is locked!",
       "items": [
         { "item": "key", "look": "A small key", "investigate": "It's hard to tell what it is for just by looking at it", "interact": "You pick up the key", "use": "forklift", "take": "yes", "graphics": "key.png"},
@@ -18,6 +19,7 @@
     },
     {
       "id": "Room 2",
+      "name": "Hallway",
       "info": "You find yourself standing at a crossroads, what to do!?",
       "items": [
         { "item": "fountain", "look": "A water fountain", "investigate": "It has water in it", "interact": "You take a sip, refreshing!", "use": "cup", "take": "no", "graphics": "fountain.png" },
@@ -35,6 +37,7 @@
     },
     {
       "id": "Room 3",
+      "name": "Warehouse",
       "info": "Some sort of warehouse, there seem to be an exit at the far end, but don't let that stop you",
       "items": 
         [
@@ -50,6 +53,21 @@
         { "background": "room3background.png" }
       ],
       "clue": "Probably should get in the right mood for freedom"
+    },
+    {
+      "id": "Room 4",
+      "name": "Freedom",
+      "info": "You made it! Your thirst for freedom and fork-lift certification payed off!",
+      "items": 
+        [
+          { "item": "flag", "look": "Murica!", "investigate": "And home of the braaaaaave!", "use": null, "take": "no", "graphics": "flag.png" }
+        ],
+      "directions": {
+      },
+      "graphics": [
+        { "background": "room4background.png" }
+      ],
+      "clue": "What's that? I can't hear you over the roar of my freedom.."
     }
   ]
 }

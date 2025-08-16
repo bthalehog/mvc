@@ -1,13 +1,11 @@
-{% extends "proj.html.twig" %}
+{% extends "proj/index.html.twig" %}
 
-  {% block body %}
-    <div id="roomTwo" class="roomView">
-      <h2>You entered room 2</h2>
-      <article>
-        Room 2 picture here!
-      </article>
-    </div>
-  {% endblock %}
+{% block body %}
+
+  <div class="roomView">
+    <h3 class="roomName">{{ room.name }}</h3>
+    <h4 class="roomExplanation">{{ room.info }}</h4>
+    <img src="{{ room.graphics[0].background }}" class="roomImage"> alt="{{ room.name }}">
+  </div>
 
 {% endblock %}
-

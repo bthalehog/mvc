@@ -290,3 +290,7 @@ Generate report in html         tools/phpmetrics/vendor/bin/phpmetrics --report-
 Run by configuration file       tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json
 Run with composer               composer phpmetrics
 (Add script to composer.json first)
+
+KMOM10
+
+Accessing associative arrays: =>
