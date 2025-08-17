@@ -1,7 +1,7 @@
 {
   "rooms": [
     {
-      "id": "Room 1",
+      "id": "room_one",
       "name": "Janitor's closet",
       "info": "You get a hold of your surroundings, rattle the door handle only to find it is locked!",
       "items": [
@@ -10,7 +10,7 @@
         { "item": "cup", "look": "A paper cup", "investigate": "It doesn't seem to have been used, what sickos throws away unused cups like that, be more aware guys, really...", "interaction": "It has potential", "use": "fountain", "take": "yes", "graphics": "cup.png"}
       ],
       "directions": {
-        "north": "Room 2"
+        "north": "room_two"
       },
       "graphics": [
         { "background": "room1background.png" }
@@ -18,7 +18,7 @@
       "clue": "Well, there is a door..."
     },
     {
-      "id": "Room 2",
+      "id": "room_two",
       "name": "Hallway",
       "info": "You find yourself standing at a crossroads, what to do!?",
       "items": [
@@ -26,9 +26,9 @@
         { "item": "note", "look": "A piece of paper", "investigate": "The number 4526 is written on the back", "interact": "Seems I pick things up habitually", "use": "none", "take": "yes", "graphics": "note.png" }
       ],
       "directions": {
-        "north": "Closed",
-        "east": "Room 3",
-        "south": "Room 1"
+        "north": "deathtrap",
+        "east": "room_three",
+        "south": "room_one"
       },
       "graphics": [
         { "background": "room2background.png" }
@@ -36,18 +36,17 @@
       "clue": "Hunter gatherer you are"
     },
     {
-      "id": "Room 3",
+      "id": "room_three",
       "name": "Warehouse",
       "info": "Some sort of warehouse, there seem to be an exit at the far end, but don't let that stop you",
-      "items": 
+      "items":
         [
           { "item": "forklift", "look": "A fork lift", "investigate": "Real man are certified!", "interact": "I can't hear you over the sound of my FREEEEEEDOM!", "use": "key", "take": "no", "graphics": "forklift.png" },
           { "item": "radio", "look": "A transistor radio", "investigate": "It seems plugged in and ready to go", "interact": "You turn the radio on, it is playing Fortunate son", "use": "none", "take": "no", "graphics": "radio.png" }
         ],
       "directions": {
-        "north": "Room 4",
-        "west": "Room 2",
-        "east": "Deathtrap"
+        "north": "room_four",
+        "west": "room_two"
       },
       "graphics": [
         { "background": "room3background.png" }
@@ -55,7 +54,7 @@
       "clue": "Probably should get in the right mood for freedom"
     },
     {
-      "id": "Room 4",
+      "id": "room_four",
       "name": "Freedom",
       "info": "You made it! Your thirst for freedom and fork-lift certification payed off!",
       "items": 

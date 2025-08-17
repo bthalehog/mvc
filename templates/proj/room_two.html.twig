@@ -1,11 +1,12 @@
 {% extends "proj/index.html.twig" %}
 
 {% block body %}
+  <h3 class="roomName">{{ room.name }}</h3>
 
   <div class="roomView">
-    <h3 class="roomName">{{ room.name }}</h3>
-    <h4 class="roomExplanation">{{ room.info }}</h4>
-    <img src="{{ room.graphics[0].background }}" class="roomImage"> alt="{{ room.name }}">
+    <img src="{{ asset('img/game_graphics/' ~ room.graphics[0].background) }}" class="roomImage"> alt="{{ room.name }}">
   </div>
+
+  <h4 class="roomExplanation">{{ room.info }}</h4>
 
 {% endblock %}

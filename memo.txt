@@ -294,3 +294,7 @@ Run with composer               composer phpmetrics
 KMOM10
 
 Accessing associative arrays: =>
+Partial template include = _exampletemplate.html.twig
+assets use for graphics
+z-index: 1 (CSS) puts the element behind other elements (use if element cover parent div)
+(2 puts on top)

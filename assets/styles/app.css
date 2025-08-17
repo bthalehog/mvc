@@ -737,22 +737,27 @@ th {
 /* Kmom10 Project */
 
 /* Game start view */
+.projectBody {
+    background-color: darkslategrey;
+    object-fit: cover;
+}
+
 .projectStart {
-    background-color: cyan;
+    background-color: purple;
     height: 50vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     padding: 1rem;
 }
 
 .startView {
-    background-color: goldenrod;
-    color: black;
-    height: 50%;
-    width: 80%;
+    background-color: purple;
+    color: goldenrod;
+    height: 100%;
+    width: 100%;
     padding: 1rem;
+    font-family: 'Pixelify Sans', sans-serif;
 }
 
 .rulesBox {
@@ -761,40 +766,100 @@ th {
     height: 20%;
     width: 80%;
     padding: 1rem;
+    font-family: 'Pixelify Sans', sans-serif;
 }
 
 /* Game navigation */
 .directionButton {
-    height: 30px;
-    width: 30px;
+    justify-content: center;
+    text-align: center;
+    height: 4rem;
+    width: 4rem;
+    font-size: xx-large;
     background-color: purple;
+    font-family: 'Pixelify Sans', sans-serif;
+    color: darkgoldenrod;
 }
 
 .gameNav {
     display: flex;
-    flex-direction: column;
-    height: 200px;
-    width: 200px;
+    flex-direction: row;
+    justify-content: center;
+    height: 5vh;
+    width: 100%;
+    padding: 1rem;
+    background-color: slategray;
 }
 
+/* Start game */
 .startButton {
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    width: 200px;
+    height: 4rem;
+    width: 6rem;
+    background-color: goldenrod;
+    border: 2px dotted darkslategray;
+    color: purple;
+    font-size: large;
+    font-family: 'Pixelify Sans', sans-serif;
 }
 
 /* Rooms */
+.roomName {
+    height: 5vh;
+    width: 100%;
+    font-size: 4rem;
+    background: purple;
+    color: goldenrod;
+    padding: 1rem;
+    font-family: 'Pixelify Sans', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
 .roomView {
     background-color: purple;
-    height: 50vh;
+    height: 70vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     padding: 1rem;
+    position: relative;
 }
 
 .roomImage {
-  background-image: "room1background.png";  
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.roomExplanation {
+    height: 5vh;
+    width: 100%;
+    font-size: x-large;
+    background: purple;
+    color: goldenrod;
+    padding: 1rem;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+.inventory {
+    height: auto;
+    width: 100%;
+    font-size: large;
+    background: purple;
+    color: goldenrod;
+    padding: 1rem;
+    border: 4px solid goldenrod !important;
+}
+
+.gameItem {
+    background-color: slategray;
+    color: black;
+    border: 1px dotted black;
+    height: 4rem;
+    width: 4rem;
+    font-size: xx-large;
 }

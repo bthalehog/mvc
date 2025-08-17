@@ -38,7 +38,7 @@ class RoomHandler
     }
 
     // Get all rooms
-    public static function getAllRooms(): array
+    public static function getAllRooms(): ?array
     {
         $roomsDatabase = __DIR__ . '/data/game_rooms.json';
 
@@ -55,7 +55,7 @@ class RoomHandler
         return $decodedDatabase;
     }
 
-    // Move to next room
+    // Handle user move input
     public static function move($direction, $currentRoomId): array {
         $currentRoomData = self::getRoomData($currentRoomId);
 

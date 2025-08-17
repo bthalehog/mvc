@@ -12,31 +12,42 @@
       {{ encore_entry_script_tags('app') }}
       {% block importmap %}{{ importmap('app') }}{% endblock %}
   {% endblock %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
-<body>
 
-{% block body %}
+<body class="projectBody">
 
-{% endblock %}
+  {% block body %}
 
-<nav class="gameNav">
-  <form method="POST" action="{{ path('move') }}">
-    <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'Room 1' }}">
-    
-    <button type="submit" id="northButton" class="directionButton" name="direction" value="north"></button>
-    <label for="northButton">↑</label>
-
-    <button type="submit" id="southButton" class="directionButton" name="direction"  value="south"></button>
-    <label for="southButton">↓</label>
-
-    <button type="submit" id="westButton" class="directionButton" name="direction"  value="west"></button>
-    <label for="westButton">←<</label>
-
-    <button type="submit" id="eastButton" class="directionButton" name="direction"  value="east"></button>
-    <label for="eastButton">→</label>
-  </form>
-</nav>
+  {% endblock %}
 
 </body>
+
+{% block nav %}
+  <nav class="gameNav">
+    <form method="POST" action="{{ path('move') }}">
+      <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'room_one' }}">
+      
+      <button type="submit" id="northButton" class="directionButton" name="direction" value="north">↑</button>
+      <label for="northButton"></label>
+
+      <button type="submit" id="southButton" class="directionButton" name="direction" value="south">↓</button>
+      <label for="southButton"></label>
+
+      <button type="submit" id="westButton" class="directionButton" name="direction" value="west">←</button>
+      <label for="westButton"></label>
+
+      <button type="submit" id="eastButton" class="directionButton" name="direction"  value="east">→</button>
+      <label for="eastButton"></label>
+    </form>
+  </nav>
+{% endblock %}
+
+{% block inventory %}
+  {% include 'proj/inventory.html.twig' %}
+{% endblock %}
 
 </html>

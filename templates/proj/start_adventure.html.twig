@@ -1,21 +1,15 @@
 {% extends "proj/index.html.twig" %}
 
 {% block body %}
+    <h1 class="roomName">Project Adventure Game</h1>
 
-  <h2>Project Adventure Game</h2>
+      <div class="roomExplanation">
+        {{ info }}
+      </div>
+      
+      <div class="roomExplanation">
+        {{ rules }}
+      </div>
 
-  <div id="start" class="projectStart">
-    <h3 id="banner" class="banner">Adventure Game</h3>
-    
-    <article class="startView">
-      {{ info }}
-    </article>
-
-    <div class="rulesBox">
-      {{ rules }}
-    </div>
-
-    <button id="startButton" class="startButton" onclick="window.location.href='{{ path('room_one') }}'">Let's go!</button>
-  </div>
-
+      <button id="startButton" class="startButton" onclick="window.location.href='{{ path('room_one') }}'">Let's go!</button>
 {% endblock %}
