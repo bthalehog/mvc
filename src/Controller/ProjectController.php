@@ -10,20 +10,31 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Proj\StorageHandler;
 use App\Proj\RoomHandler;
 use App\Proj\data\database\game_rooms;
+use App\Proj\Inventory;
 
 final class ProjectController extends AbstractController
-{
+{   
+    private Inventory $inventory;
+    private StorageHandler $storageHandler;
+
+    // Added for building inventory and storage
+    public function __construct() {
+        $this->inventory = StorageHandler::getInventoryFromStorage();
+        $this->storageHandler = new StorageHandler();
+    }
+
     #[Route("/proj", name: "proj")]
     public function index(): Response
     {
         // Set parameters
-
         $info = "You wake up in a strange room with a very, I mean VERY, strong urge to immediately escape.";
         $rules = "Use the arrow buttons to navigate, click to interact with objects";
         
+        // Added inventory to data
         $data = [
             'info' => $info,
-            'rules' => $rules
+            'rules' => $rules,
+            'inventory' => $this->inventory // Added
         ];
 
         return $this->render('proj/start_adventure.html.twig', $data);
@@ -38,8 +49,13 @@ final class ProjectController extends AbstractController
             throw $this->createNotFoundException('Room not found');
         }
 
+        // Save data (needs an update approach), sort and update in saveGameData-function
+        StorageHandler::saveGameData($roomOne, $this->inventory);
+
+        // Set data for rendering
         $data = [
-            'room' => $roomOne
+            'room' => $roomOne,
+            'inventory' => $this->inventory
         ];
 
         return $this->render('proj/room_one.html.twig', $data);
@@ -111,8 +127,8 @@ final class ProjectController extends AbstractController
         // Move in found direction
         $result = RoomHandler::move($direction, $currentRoomId);
         
-        dump(print_r($direction));
-        error_log("Result: " . print_r($result, true));
+        // dump(print_r($direction));
+        // error_log("Result: " . print_r($result, true));
 
         if ($result['success']) {
             // Redirect on succes
@@ -125,12 +141,32 @@ final class ProjectController extends AbstractController
 
     #[Route('/project/inventory', name: 'inventory')]
     public function inventory(Request $request): Response
-    {
-        // Select or deselect item on click
-        // Also write the pair-value of the item for comparison with object clicked
-        $item = $request->request->get('value');
+    {   
+        if ($request->isMethod('POST')) 
+        {
+             // Get all data POSTed
+            $dataPOSTed = $request->request->all();
+
+            // Find which item selected
+            foreach ($dataPOSTed as $itemName => $itemValue) {
+                if (!empty($itemValue)) {
+                    $this->inventory->select($itemName);
+                    break;
+                }
+            }
+
+            // Return to previous route
+            $ref = $request->headers->get('referer');
+
+            if ($ref) {
+                return $this->redirect($ref);
+            }
+
+            return $this->redirectToRoute('proj');
+        }
         
-        // Might not have to return this (could be used for popup with inv button nut better with open bar- few items)
-        return $this->render('proj/inventory.html.twig');
+        return $this->render('proj/inventory.html.twig', [
+            'inventory' => $this->inventory
+        ]);
     }
 }

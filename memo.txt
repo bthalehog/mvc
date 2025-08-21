@@ -298,3 +298,9 @@ Partial template include = _exampletemplate.html.twig
 assets use for graphics
 z-index: 1 (CSS) puts the element behind other elements (use if element cover parent div)
 (2 puts on top)
+Combining with JavaScript to not get that delayed behind the scenes feeling
+Using objects to be able to operate on the in symfony/twig
+self:: and this-> when calling static methods from inside class
+calling module functions directly from nameSpace App\Proj\functionName();, like a static for module function. Several options
+Array to string conversion on passing data directly to twig template.
+Sensitivity to var_dumping, outputs unwanted data ad confuses twig

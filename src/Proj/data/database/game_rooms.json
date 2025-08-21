@@ -5,9 +5,9 @@
       "name": "Janitor's closet",
       "info": "You get a hold of your surroundings, rattle the door handle only to find it is locked!",
       "items": [
-        { "item": "key", "look": "A small key", "investigate": "It's hard to tell what it is for just by looking at it", "interact": "You pick up the key", "use": "forklift", "take": "yes", "graphics": "key.png"},
+        { "item": "key", "look": "A small key", "investigate": "It's hard to tell what it is for just by looking at it", "interact": "You pick up the key", "use": "forklift", "take": "yes", "graphics": "🔑"},
         { "item": "wire", "look": "A piece of wire", "investigate": "Aah metal, the fabric of tools", "interact": "Great for MacGyvering", "use": "door", "take": "yes", "graphics": "wire.png"},
-        { "item": "cup", "look": "A paper cup", "investigate": "It doesn't seem to have been used, what sickos throws away unused cups like that, be more aware guys, really...", "interaction": "It has potential", "use": "fountain", "take": "yes", "graphics": "cup.png"}
+        { "item": "cup", "look": "A paper cup", "investigate": "It doesn't seem to have been used, what sickos throws away unused cups like that, be more aware guys, really...", "interaction": "It has potential", "use": "fountain", "take": "yes", "graphics": "🧃"}
       ],
       "directions": {
         "north": "room_two"

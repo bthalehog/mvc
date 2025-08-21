@@ -1,9 +1,27 @@
 <div id="inventory" class="inventory">
-    <form id="itemsForm" action="{{ path('inventory') }}">
-        <button type="submit" name="key" value="key" id="itemKey" class="gameItem">🔑</button>
-        <label type="hidden" for="itemKey"></label>
-        
-        <button type="submit" name="cup" value="cup" id="itemCup" class="gameItem">🧃</button>
-        <label typ="hidden" for="itemCup"></label>
-    </form>
+    {% if inventory.getAllItems() |length > 0 %}
+        <form id="itemsForm" method="POST" action="{{ path('inventory') }}">
+            {% for item in inventory.getAllItems() %}
+                <button type="submit"
+                        name="{{ item.name }}"
+                        value="{{ item.name }}"
+                        id="item{{ item.id }}"
+                        class="gameItem">{{ item.graphics }}</button>
+                <label for="item{{ item.id }}"></label>
+            {% endfor %}
+        </form>
+    {% else %}
+        <form id="itemsForm" method="POST" action="{{ path('inventory') }}">
+            <p>Inventory is empty</p>
+        </form>
+    {% endif %}
+
+    {% if inventory.getSelectedItem() %}
+        <div class="selected-item">
+            <p>Selected: {{ inventory.getSelectedItem().name }}</p>
+            {% if inventory.getSelectedItem().use is defined %}
+                <p>Use: {{ inventory.getSelectedItem().use }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>

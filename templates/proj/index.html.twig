@@ -47,7 +47,9 @@
 {% endblock %}
 
 {% block inventory %}
-  {% include 'proj/inventory.html.twig' %}
+  {% if inventory is defined %}
+    {% include 'proj/inventory.html.twig' %}
+  {% endif %}
 {% endblock %}
 
 </html>
