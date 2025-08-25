@@ -4,7 +4,15 @@
   <h3 class="roomName">{{ room.name }}</h3>
 
   <div class="roomView">
-    <img src="{{ asset('img/game_graphics/' ~ room.graphics[0].background) }}" class="roomImage"> alt="{{ room.name }}">
+    <img src="{{ asset('img/game_graphics/' ~ room.graphics[0].background) }}" class="roomImage" alt="{{ room.name }}" usemap="#roomTwoMap">
+    <map name="roomTwoMap">
+      <area 
+        shape="rect"
+        coords="420,437,475,149"
+        onclick="clickedItem('room_two', 'water')"
+        style="cursor: pointer;"
+        title="Water dispenser">
+    </map>
   </div>
 
   <h4 class="roomExplanation">{{ room.info }}</h4>

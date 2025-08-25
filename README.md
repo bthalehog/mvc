@@ -86,6 +86,8 @@ All subs actions listed below.
 ### _Kmom10_ 
 20250815 New tag v10.0.0, Kmom10 started, base structure set, room database JSON, Controller basics, storageHandler.  
 20250816 New tag v10.0.1, Move-route and move()-function added, navigation made into form for value-retrieval.  
+20250818 New tag v10.0.2,  
+20250822 New tag v10.0.3, Storage updated and working, inventory-class added and implemented, constructors modified   
 
 
 

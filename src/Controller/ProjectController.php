@@ -16,11 +16,13 @@ final class ProjectController extends AbstractController
 {   
     private Inventory $inventory;
     private StorageHandler $storageHandler;
+    private RoomHandler $roomHandler;
 
     // Added for building inventory and storage
     public function __construct() {
-        $this->inventory = StorageHandler::getInventoryFromStorage();
         $this->storageHandler = new StorageHandler();
+        $this->room = Roomhandler::getRoomData("proj") ?? [];
+        $this->inventory = StorageHandler::getInventoryFromStorage();
     }
 
     #[Route("/proj", name: "proj")]
@@ -32,10 +34,17 @@ final class ProjectController extends AbstractController
         
         // Added inventory to data
         $data = [
+            'id' => "proj",
             'info' => $info,
             'rules' => $rules,
             'inventory' => $this->inventory // Added
         ];
+
+        // Set room var
+        $this->room = $data;
+
+        // Save
+        $this->storageHandler->saveGameData($this->room, $this->inventory);
 
         return $this->render('proj/start_adventure.html.twig', $data);
     }
@@ -48,6 +57,11 @@ final class ProjectController extends AbstractController
         if (!$roomOne) {
             throw $this->createNotFoundException('Room not found');
         }
+
+        // Get fresh inventory
+        $this->inventory = StorageHandler::getInventoryFromStorage();
+
+        // print_r($this->inventory->getAllItems());
 
         // Save data (needs an update approach), sort and update in saveGameData-function
         StorageHandler::saveGameData($roomOne, $this->inventory);
@@ -66,9 +80,16 @@ final class ProjectController extends AbstractController
     {
         $roomTwo = RoomHandler::getRoomData("room_two");
 
+        // Get fresh inventory
+        $this->inventory = StorageHandler::getInventoryFromStorage();
+
         $data = [
-            'room' => $roomTwo
+            'room' => $roomTwo,
+            'inventory' => $this->inventory
         ];
+
+        // Save data (needs an update approach), sort and update in saveGameData-function
+        StorageHandler::saveGameData($roomTwo, $this->inventory);
 
         return $this->render('proj/room_two.html.twig', $data);
     }
@@ -78,9 +99,16 @@ final class ProjectController extends AbstractController
     {
         $roomThree = RoomHandler::getRoomData("room_three");
 
+        // Get fresh inventory
+        $this->inventory = StorageHandler::getInventoryFromStorage();
+
         $data = [
-            'room' => $roomThree
+            'room' => $roomThree,
+            'inventory' => $this->inventory
         ];
+
+        // Save data (needs an update approach), sort and update in saveGameData-function
+        StorageHandler::saveGameData($roomThree, $this->inventory);
 
         return $this->render('proj/room_three.html.twig', $data);
     }
@@ -90,9 +118,16 @@ final class ProjectController extends AbstractController
     {
         $roomFour = RoomHandler::getRoomData("room_four");
 
+        // Get fresh inventory
+        $this->inventory = StorageHandler::getInventoryFromStorage();
+
         $data = [
-            'room' => $roomFour
+            'room' => $roomFour,
+            'inventory' => $this->inventory
         ];
+
+        // Save data (needs an update approach), sort and update in saveGameData-function
+        StorageHandler::saveGameData($roomFour, $this->inventory);
 
         return $this->render('proj/room_four.html.twig', $data);
     }
@@ -108,8 +143,11 @@ final class ProjectController extends AbstractController
             ]
         ];
 
+        $this->inventory = StorageHandler::getInventoryFromStorage();
+
         $data = [
-            'room' => $deathTrap
+            'room' => $deathTrap,
+            'inventory' => $this->inventory
         ];
 
         return $this->render('proj/room_four.html.twig', $data);
@@ -126,12 +164,9 @@ final class ProjectController extends AbstractController
         
         // Move in found direction
         $result = RoomHandler::move($direction, $currentRoomId);
-        
-        // dump(print_r($direction));
-        // error_log("Result: " . print_r($result, true));
 
         if ($result['success']) {
-            // Redirect on succes
+            // Redirect on success
             return $this->redirectToRoute($result['redirect']);
         }
         else {
@@ -164,9 +199,93 @@ final class ProjectController extends AbstractController
 
             return $this->redirectToRoute('proj');
         }
+
+        // Refresh inventory
+        $this->inventory = StorageHandler::getInventoryFromStorage();
         
+        // print_r($this->inventory->getAllItems());
+
         return $this->render('proj/inventory.html.twig', [
             'inventory' => $this->inventory
         ]);
+    }
+
+    #[Route('/project/inventory/add', name: 'inventory_add')]
+    public function inventoryAdd(Request $request): Response
+    {   
+        // echo "ROUTE WORKING<br>";
+
+        // Get room id for routing
+        $currentRoom = $this->storageHandler->getRoomFromStorage();
+        $this->room = $currentRoom;
+
+        // echo "Got room from storeage<br>";
+
+        if ($request->isMethod('GET')) 
+        {
+            // echo "Its a GET!<br>";
+
+            // Get data (query)
+            $itemName = $request->query->get('itemName');
+            $roomNumber = $request->query->get('roomNumber');
+            
+            // echo $itemName . "<br>";
+            // echo $roomNumber . "<br>";
+
+            // Find item in database
+            if ($itemName && $roomNumber) {
+                // echo "Both exists!<br>";
+                
+                // Get all room data
+                $roomsData = RoomHandler::getAllRooms();
+                // echo "Got rooms!<br>";
+
+                // echo $roomNumber ."<br>";
+                // print_r($roomsData);
+                // echo "<br>";
+
+                // Match room and item
+                if ($roomsData['rooms']) {
+                    // echo "Found matching room!<br>";
+
+                    // Find room by id
+                    $locatedRoom = null;
+
+                    foreach ($roomsData['rooms'] as $room) {
+                        if ($room['id'] === $roomNumber) {
+                            $locatedRoom = $room;
+                            break;
+                        }
+                    }
+
+                    if ($room && isset($room['items'])) {
+                        // echo "Room has items!<br>";
+
+                        foreach ($room['items'] as $item) {
+                            if ($item['item'] === $itemName) {
+                                // echo "Match found!<br>";
+
+                                // Write to inventory
+                                $this->inventory->addItem($item);
+                                // echo "Added to inv!<br>";
+
+                                // Save
+                                StorageHandler::saveGameData($this->room, $this->inventory); // Was still using removed  $this->storageHAndler
+                                // echo "Save!<br>";
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Redirect
+            return $this->redirectToRoute($roomNumber, [
+                'infoDisplay' => $itemName ? "$itemName added to inventory." : null,
+                'success' => true
+            ]);
+        }
+
+        // If no request
+        return $this->redirectToRoute($roomNumber);
     }
 }

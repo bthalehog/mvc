@@ -11,7 +11,7 @@ class RoomHandler
 {
     public function __construct($room)
     {
-        $this->room = $this->getRoom($room);
+        $this->room = $this->getRoomData($room);
     }
 
     // Get room data
@@ -40,7 +40,7 @@ class RoomHandler
     // Get all rooms
     public static function getAllRooms(): ?array
     {
-        $roomsDatabase = __DIR__ . '/data/game_rooms.json';
+        $roomsDatabase = __DIR__ . '/data/database/game_rooms.json';
 
         if (!file_exists($roomsDatabase)) {
             return "No database found";

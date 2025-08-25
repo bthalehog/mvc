@@ -24,8 +24,7 @@ class Inventory {
         // Push to item array
         $this->items[] = $itemData;
         
-        // Should save state here!
-        StorageHandler::saveInventory($this->items);        
+        return "Item added";
     }
 
     public function removeItem($itemName): bool {
@@ -39,7 +38,7 @@ class Inventory {
                 } elseif ($this->selectedItem > $key) {
                     $this->selectedItem--;
                 }
-                
+               
                 return true;
             }
         }
@@ -63,9 +62,6 @@ class Inventory {
                     $this->selectedItem = $key;
                 }
                 
-                // Save state
-                StorageHandler::saveInventory($this->items);
-                
                 return $this->getSelectedItem();
             }
         }
@@ -84,11 +80,5 @@ class Inventory {
     public function clearInventory() {
         $this->items = [];
         $this->selectedItem = null;
-
-        // Save state
-        StorageHandler::saveInventory($this->items);
     }
-
-    // Save handling moved to StorageHandler to keep it clean
-
 }

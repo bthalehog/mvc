@@ -1,13 +1,13 @@
 <div id="inventory" class="inventory">
-    {% if inventory.getAllItems() |length > 0 %}
+    {% if inventory.getAllItems() | length > 0 %}
         <form id="itemsForm" method="POST" action="{{ path('inventory') }}">
             {% for item in inventory.getAllItems() %}
                 <button type="submit"
-                        name="{{ item.name }}"
-                        value="{{ item.name }}"
-                        id="item{{ item.id }}"
+                        name="{{ item.item }}"
+                        value="{{ item.use }}"
+                        id="item{{ item.item }}"
                         class="gameItem">{{ item.graphics }}</button>
-                <label for="item{{ item.id }}"></label>
+                <label for="item{{ item.item }}"></label>
             {% endfor %}
         </form>
     {% else %}

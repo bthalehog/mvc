@@ -304,3 +304,7 @@ self:: and this-> when calling static methods from inside class
 calling module functions directly from nameSpace App\Proj\functionName();, like a static for module function. Several options
 Array to string conversion on passing data directly to twig template.
 Sensitivity to var_dumping, outputs unwanted data ad confuses twig
+Different ways to image-map (using HTML Image maps - easiest)
+The encore steps to make js inventory work. requesting/queryin to/from js to php route
+Accessing database file from src, assets, or public, different depending on encore, php dir
+roomsData['rooms'], unnecessarily nested, too late to change. aCause error in addITem

@@ -26,7 +26,10 @@ class StorageHandler
     {   
         $gameData = [
             'room' => $room,
-            'inventory' => $inventory
+            'inventory' => [
+                'items' => $inventory->getAllItems(),
+                'selectedItem' => $inventory->getSelectedItem()
+            ]
         ];
 
         return file_put_contents(self::$saveFile, json_encode($gameData, JSON_PRETTY_PRINT));
@@ -52,9 +55,43 @@ class StorageHandler
         $gameData = self::getGameData();
 
         // Find inventory part
-        $inventoryData = $gameData['inventory'] ?? [];
+        $inventoryData = $gameData['inventory'] ?? ['items' => [], 'selectedItem' => null];
 
-        return new Inventory($inventoryData);
+        // Recreate inventory
+        $newInventory = new Inventory($inventoryData['items'] ?? []);
+
+        // If selected
+        if (isset($inventoryData['selectedItem']) && $inventoryData['selectedItem'] !== null) {
+            $newInventory->select($inventoryData['selectedItem']['item']);
+        }
+
+        return $newInventory;
+    }
+
+    // Get inventory from storage
+    public static function updateInventoryInStorage($inventory): object
+    {
+        // Get gameData
+        $gameData = self::getGameData();
+
+        // Overwrite current inventory with new
+        $gameData['inventory'] = $inventory;
+
+        // Save data
+        self::saveGameData($gameData['room'], $inventory);
+
+        return new Inventory($inventory);
+    }
+
+    // Get room from storage
+    public static function getRoomFromStorage()
+    {
+        $gameData = self::getGameData();
+
+        // Find inventory part
+        $roomData = $gameData['room'] ?? [];
+
+        return $roomData;
     }
 
     // Set item to local storage
@@ -63,7 +100,10 @@ class StorageHandler
         $game = self::getGameData();
         $game[$key] = $value;
 
-        return self::saveGameData($game) !== false;
+        $room = $game['room'];
+        $inventory = new Inventory($game['inventory']['items'] ?? []);
+
+        return self::saveGameData($room, $inventory) !== false;
     }
 
     // Get item from local storage
@@ -77,17 +117,21 @@ class StorageHandler
     // Remove item from local storage
     public static function removeItem($key): bool
     {
-        $game = self::$getGameData();
+        $game = self::getGameData();
         unset($game[$key]);
 
-        return self::saveGameData($game) !== false;
+        $room = $game['room'];
+        $inventory = new Inventory($game['inventory']['items'] ?? []);
+
+        return self::saveGameData($room, $inventory) !== false;
     }
 
     // Clear local storage
     public function clearStorage(): bool
     {
-        $game = [];
+        $room = [];
+        $inventory = new Inventory([]);
 
-        return self::saveGameData($game);
+        return self::saveGameData($room, $inventory) !== false;
     }
 }
