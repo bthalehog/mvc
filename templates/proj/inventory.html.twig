@@ -2,11 +2,14 @@
     {% if inventory.getAllItems() | length > 0 %}
         <form id="itemsForm" method="POST" action="{{ path('inventory') }}">
             {% for item in inventory.getAllItems() %}
+                <!-- Debug each item -->
+                <p>Item: {{ item.item }} | Selected: {{ inventory.getSelectedItem() ? inventory.getSelectedItem().item : 'none' }} | Match: {{ inventory.getSelectedItem() and inventory.getSelectedItem().item == item.item ? 'YES' : 'NO' }}</p>
+                
                 <button type="submit"
                         name="{{ item.item }}"
-                        value="{{ item.use }}"
+                        value="{{ item.use_with }}"
                         id="item{{ item.item }}"
-                        class="gameItem">{{ item.graphics }}</button>
+                        class="gameItem {% if inventory.getSelectedItem() and inventory.getSelectedItem().item == item.item %}selected{% endif %}">{{ item.graphics }}</button>
                 <label for="item{{ item.item }}"></label>
             {% endfor %}
         </form>
@@ -14,14 +17,5 @@
         <form id="itemsForm" method="POST" action="{{ path('inventory') }}">
             <p>Inventory is empty</p>
         </form>
-    {% endif %}
-
-    {% if inventory.getSelectedItem() %}
-        <div class="selected-item">
-            <p>Selected: {{ inventory.getSelectedItem().name }}</p>
-            {% if inventory.getSelectedItem().use is defined %}
-                <p>Use: {{ inventory.getSelectedItem().use }}</p>
-            {% endif %}
-        </div>
     {% endif %}
 </div>

@@ -8,6 +8,6 @@
     <img src="{{ asset('img/game_graphics/' ~ room.graphics[0].background) }}" class="roomImage"> alt="{{ room.name }}">
   </div>
 
-  <h4 class="roomExplanation">{{ room.info }}</h4>
+  <h4 id="infoDisplay" class="roomExplanation">{{ room.info }}</h4>
 
 {% endblock %}

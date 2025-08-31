@@ -293,6 +293,10 @@ Run with composer               composer phpmetrics
 
 KMOM10
 
+// Debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 Accessing associative arrays: =>
 Partial template include = _exampletemplate.html.twig
 assets use for graphics
@@ -308,3 +312,7 @@ Different ways to image-map (using HTML Image maps - easiest)
 The encore steps to make js inventory work. requesting/queryin to/from js to php route
 Accessing database file from src, assets, or public, different depending on encore, php dir
 roomsData['rooms'], unnecessarily nested, too late to change. aCause error in addITem
+Use $key variable, not literal 'key'
+onclick="selectInventoryItem('{{ item.item }}')"
+break 2;
+TA bort gamla var_dump!!! Stör JSON parsing

@@ -3,18 +3,40 @@
 {% block body %}
   <h3 class="roomName">{{ room.name }}</h3>
 
+  <script>
+    console.log('showMessage function exists:', typeof showMessage);
+  </script>
+
   <div class="roomView">
     <img src="{{ asset('img/game_graphics/' ~ room.graphics[0].background) }}" class="roomImage" alt="{{ room.name }}" usemap="#roomTwoMap">
     <map name="roomTwoMap">
       <area 
         shape="rect"
-        coords="420,437,475,149"
-        onclick="clickedItem('room_two', 'water')"
+        coords="420,149,475,437"
+        onclick="clickedItem('room_two', 'haphazardous_event')"
         style="cursor: pointer;"
-        title="Water dispenser">
+        title="Door to the north, and so forth.">
+      <area 
+        shape="rect"
+        coords="720,149,775,437"
+        onclick="clickedItem('room_two', 'note')"
+        style="cursor: pointer;"
+        title="Crevice">
+      <area 
+        shape="rect"
+        coords="550,149,655,437"
+        onclick="showMessage('This door has no sign, but its leading east.')"
+        style="cursor: pointer;"
+        title="Door to the east.">
+      <area 
+        shape="rect"
+        coords="220,149,275,437"
+        onclick="showMessage('This door has no sign, but it leads west.')"
+        style="cursor: pointer;"
+        title="Door to the west.">
     </map>
   </div>
 
-  <h4 class="roomExplanation">{{ room.info }}</h4>
+  <h4 id="infoDisplay" class="roomExplanation">{{ room.info }}</h4>
 
 {% endblock %}

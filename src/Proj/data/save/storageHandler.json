@@ -1,203 +1,223 @@
 {
+    "database": {
+        "rooms": [
+            {
+                "id": "proj",
+                "name": "Adventure game",
+                "info": "You wake up in a strange room with a very, I mean VERY, strong urge to immediately escape.",
+                "items": [],
+                "directions": [],
+                "graphics": [
+                    {
+                        "background": null
+                    }
+                ],
+                "clue": "Click the button..."
+            },
+            {
+                "id": "room_one",
+                "name": "Janitor's closet",
+                "info": "You get a hold of your surroundings, you seem to be in the janitor's closet, you rattle the door handle only to find it is locked!",
+                "items": [
+                    {
+                        "item": "key",
+                        "look": "A coat",
+                        "investigate": "There is a key in one of the pockets",
+                        "interact": "You pick up the key",
+                        "use_with": "forklift",
+                        "accept": null,
+                        "take": "yes",
+                        "graphics": "\ud83d\udd11"
+                    },
+                    {
+                        "item": "wire",
+                        "look": "There is something in the bin.",
+                        "investigate": "Aah metal, the fabric of tools!",
+                        "interact": "You found a paper-clip!",
+                        "use_with": "door",
+                        "accept": null,
+                        "take": "yes",
+                        "graphics": "\ud83d\udcce"
+                    },
+                    {
+                        "item": "box",
+                        "look": "There is a beverage box on one of the shelves.",
+                        "investigate": "It has potential..",
+                        "interact": "Congratulations, proud owner of empty beverage box.",
+                        "use_with": "fountain",
+                        "accept": null,
+                        "take": "yes",
+                        "graphics": "\ud83e\uddc3"
+                    },
+                    {
+                        "item": "door_one",
+                        "look": "The way out of here.",
+                        "investigate": "It seem locked from the outside.",
+                        "interact": "Way to MacGyver!",
+                        "use_with": null,
+                        "accept": "wire",
+                        "handshake": "Way to go MacGyver!",
+                        "take": "no",
+                        "graphics": null,
+                        "status": 1
+                    }
+                ],
+                "directions": {
+                    "north": "room_two"
+                },
+                "graphics": [
+                    {
+                        "background": "room1background.png"
+                    }
+                ],
+                "clue": "Well, there is a door..."
+            },
+            {
+                "id": "room_two",
+                "name": "Hallway",
+                "info": "You find yourself standing at a crossroads, what to do!?",
+                "items": [
+                    {
+                        "item": "haphazardous_event",
+                        "look": "This door has a sign on it",
+                        "investigate": "It says: 'Security'",
+                        "interact": "GAME OVER - Don't you read signs?!",
+                        "use": null,
+                        "take": "no",
+                        "graphics": null
+                    },
+                    {
+                        "item": "note",
+                        "look": "A piece of paper",
+                        "investigate": "The number 4526 is written on the back",
+                        "interact": "Seems I pick things up habitually now",
+                        "use": "none",
+                        "take": "yes",
+                        "graphics": "\ud83d\udcc3"
+                    }
+                ],
+                "directions": {
+                    "north": "deathtrap",
+                    "east": "room_three",
+                    "south": "room_one"
+                },
+                "graphics": [
+                    {
+                        "background": "room2background.png"
+                    }
+                ],
+                "clue": "Hunter gatherer you are."
+            },
+            {
+                "id": "room_three",
+                "name": "Warehouse",
+                "info": "Some sort of warehouse, there seem to be an exit at the far end, but don't let that stop you",
+                "items": [
+                    {
+                        "item": "forklift",
+                        "look": "A yellow fork lift",
+                        "investigate": "Real men are certified..",
+                        "interact": "I can't hear you over the sound of my FREEEEEEDOM!",
+                        "use": "key",
+                        "take": "no",
+                        "graphics": null
+                    },
+                    {
+                        "item": "radio",
+                        "look": "A transistor radio",
+                        "investigate": "It seems plugged in and ready to go",
+                        "interact": "You turn the radio on, it is playing Fortunate son",
+                        "use": "none",
+                        "take": "no",
+                        "graphics": null,
+                        "audio": "soundtrack.mp3"
+                    }
+                ],
+                "directions": {
+                    "north": "room_four",
+                    "west": "room_two"
+                },
+                "graphics": [
+                    {
+                        "background": "room3background.png"
+                    }
+                ],
+                "clue": "Party like it's the 4th of July, get in the mood for freedom"
+            },
+            {
+                "id": "room_four",
+                "name": "Freedom",
+                "info": "You made it! Your fork-lift certification and lifelong thirst for freedom payed off!",
+                "items": [
+                    {
+                        "item": "flag",
+                        "look": "Murica!",
+                        "investigate": "And home of the braaaaaave!",
+                        "use": null,
+                        "take": "no",
+                        "graphics": null
+                    }
+                ],
+                "directions": [],
+                "graphics": [
+                    {
+                        "background": "room4background.png"
+                    }
+                ],
+                "clue": "What's that? I can't hear you over the sound of my freedom.."
+            }
+        ]
+    },
     "room": {
-        "id": "room_one",
-        "name": "Janitor's closet",
-        "info": "You get a hold of your surroundings, you seem to be in the janitor's closet, you rattle the door handle only to find it is locked!",
+        "id": "room_two",
+        "name": "Hallway",
+        "info": "You find yourself standing at a crossroads, what to do!?",
         "items": [
             {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
+                "item": "haphazardous_event",
+                "look": "This door has a sign on it",
+                "investigate": "It says: 'Security'",
+                "interact": "GAME OVER - Don't you read signs?!",
+                "use": null,
+                "take": "no",
+                "graphics": null
             },
             {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
+                "item": "note",
+                "look": "A piece of paper",
+                "investigate": "The number 4526 is written on the back",
+                "interact": "Seems I pick things up habitually now",
+                "use": "none",
                 "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "box",
-                "look": "There is a beverage box on one of the shelves.",
-                "investigate": "It has potential..",
-                "interaction": "Congratulations, proud owner of empty beverage box.",
-                "use": "fountain",
-                "take": "yes",
-                "graphics": "\ud83e\uddc3"
+                "graphics": "\ud83d\udcc3"
             }
         ],
         "directions": {
-            "north": "room_two"
+            "north": "deathtrap",
+            "east": "room_three",
+            "south": "room_one"
         },
         "graphics": [
             {
-                "background": "room1background.png"
+                "background": "room2background.png"
             }
         ],
-        "clue": "Well, there is a door..."
+        "clue": "Hunter gatherer you are."
     },
     "inventory": {
         "items": [
             {
                 "item": "key",
-                "look": "A small key",
-                "investigate": "It's hard to tell what it is for just by looking at it",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "key",
                 "look": "A coat",
                 "investigate": "There is a key in one of the pockets",
                 "interact": "You pick up the key",
-                "use": "forklift",
+                "use_with": "forklift",
+                "accept": null,
                 "take": "yes",
                 "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "key",
-                "look": "A coat",
-                "investigate": "There is a key in one of the pockets",
-                "interact": "You pick up the key",
-                "use": "forklift",
-                "take": "yes",
-                "graphics": "\ud83d\udd11"
-            },
-            {
-                "item": "wire",
-                "look": "There is something in the bin.",
-                "investigate": "Aah metal, the fabric of tools, great for MacGyvering!",
-                "interact": "You found a paper-clip!",
-                "use": "door",
-                "take": "yes",
-                "graphics": "\ud83d\udcce"
             }
         ],
         "selectedItem": null
-    }
+    },
+    "objectStates": []
 }

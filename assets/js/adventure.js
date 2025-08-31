@@ -22,14 +22,15 @@ function clickedItem(roomNumber, clickedItem) {
         return null;
     }
 
-    // Remake to taking all vars as arg
-    // Need item-specific clickers
-
     // Create unique clicker position in tuple
     const currentClicker = `${roomNumber}-${clickedItem}`;
-    
-    // If not in clickers, add
-    if (!clickers[currentClicker]) {
+
+    // Load clicker from localStorage
+    const clickSave = localStorage.getItem(`${currentClicker}`);
+
+    if (clickSave !== null) {
+        clickers[currentClicker] = parseInt(clickSave);
+    } else {
         clickers[currentClicker] = 0;
     }
 
@@ -39,6 +40,9 @@ function clickedItem(roomNumber, clickedItem) {
         // Save message for later retrieval after reload.
         localStorage.setItem('currentMessage', fullItem.look);
         
+        // Persist clicker
+        localStorage.setItem(`${currentClicker}`, clickers[currentClicker].toString());
+        
         showMessage(fullItem.look);
 
         return fullItem.look;
@@ -47,17 +51,22 @@ function clickedItem(roomNumber, clickedItem) {
 
         // Save message for later retrieval after reload.
         localStorage.setItem('currentMessage', fullItem.investigate);
+
+        // Persist clicker
+        localStorage.setItem(`${currentClicker}`, clickers[currentClicker].toString());
         
         // Show message
         showMessage(fullItem.investigate);
 
         return fullItem.investigate;
     } else if (clickers[currentClicker] === 2) {
-        // Reset
         clickers[currentClicker] += 1;
 
         // Save message for later retrieval after reload.
         localStorage.setItem('currentMessage', fullItem.interact);
+
+        // Persist clicker
+        localStorage.setItem(`${currentClicker}`, clickers[currentClicker].toString());
         
         // Show message
         showMessage(fullItem.interact);
@@ -76,7 +85,12 @@ function clickedItem(roomNumber, clickedItem) {
         return fullItem.interact;
     } 
     else if (clickers[currentClicker] > 2){
+        clickers[currentClicker] += 1;
+
         showMessage("Nothing there");
+        
+        // Persist clicker
+        localStorage.setItem(`${currentClicker}`, clickers[currentClicker].toString());
 
         return null;
     }
@@ -100,17 +114,71 @@ function findItem(roomNumber, itemName) {
     return item;
 }
 
-
 function showMessage(message) {
-    const infoDisplay = document.getElementById('infoDisplay');
+    const infoDisplay = document.querySelector('#infoDisplay');
 
     if (infoDisplay) {
-        console.log('Infodisplaying:', message)
+        console.log('Info-displaying:', message)
         infoDisplay.textContent = message;
-        // infoDisplay.style.display = 'block';
     } else {
         console.error("Element not found in html")
     }
+}
+
+function objectInteraction(roomId, itemName) {
+    // Get full item data
+    let currentItem = findItem(roomId, itemName);
+    
+    // Show message -- This will fail now..
+    if (currentItem) {
+        showMessage(currentItem.look);
+    }
+
+    // GET to route for object interaction
+    fetch(`/project/api/objectInteraction/${roomId}/${encodeURIComponent(itemName)}`)
+    .then(response => {
+        console.log("Response status:", response.status);
+        console.log("Response headers:", response.headers);
+        
+        if (!response.ok) {
+            throw new Error('Error in interaction js')
+        }
+
+        return response.text();
+    })
+    .then(text => {
+        console.log("Raw response:", text);
+
+        try {
+            const data = JSON.parse(text);
+            showMessage(data.infoDisplay || data.message);
+        } catch (error) {
+            console.error("JSON PARSE FAIL", error);
+            showMessage("JSON error in js");
+        }
+    })
+    .catch(error => {
+        console.error("Error: ", error);
+        showMessage("Error in interaction js");
+    })
+}
+
+function selectInventoryItem(itemName) {
+    fetch(`/project/inventory`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `selectedItem=${encodeURIComponent(itemName)}`
+    })
+    .then(response => {
+        if (response.ok) {
+            document.querySelectorAll('.gameItem').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.getElementById(`item${itemName}`).classList.add('selected');
+        }
+    })
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -124,5 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 globalThis.clickedItem = clickedItem;
 globalThis.showMessage = showMessage;
+globalThis.objectInteraction = objectInteraction;
 
-export { clickedItem, showMessage, findItem }
+export { clickedItem, showMessage, findItem, objectInteraction, selectInventoryItem }

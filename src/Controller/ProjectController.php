@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Proj\StorageHandler;
 use App\Proj\RoomHandler;
@@ -22,12 +23,15 @@ final class ProjectController extends AbstractController
     public function __construct() {
         $this->storageHandler = new StorageHandler();
         $this->room = Roomhandler::getRoomData("proj") ?? [];
-        $this->inventory = StorageHandler::getInventoryFromStorage();
+        // This should fix the array issue
+        $this->inventory = StorageHandler::getInventoryFromStorage() ?: new Inventory();
     }
 
     #[Route("/proj", name: "proj")]
     public function index(): Response
     {
+        StorageHandler::clearStorage();
+
         // Set parameters
         $info = "You wake up in a strange room with a very, I mean VERY, strong urge to immediately escape.";
         $rules = "Use the arrow buttons to navigate, click to interact with objects";
@@ -44,7 +48,7 @@ final class ProjectController extends AbstractController
         $this->room = $data;
 
         // Save
-        $this->storageHandler->saveGameData($this->room, $this->inventory);
+        StorageHandler::saveGameData($this->room, $this->inventory);
 
         return $this->render('proj/start_adventure.html.twig', $data);
     }
@@ -61,8 +65,6 @@ final class ProjectController extends AbstractController
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
-        // print_r($this->inventory->getAllItems());
-
         // Save data (needs an update approach), sort and update in saveGameData-function
         StorageHandler::saveGameData($roomOne, $this->inventory);
 
@@ -78,18 +80,20 @@ final class ProjectController extends AbstractController
     #[Route('/project/room_two', name: 'room_two')]
     public function roomTwo(): Response
     {
+        // Get room data
         $roomTwo = RoomHandler::getRoomData("room_two");
 
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
+        // Save
+        StorageHandler::saveGameData($roomTwo, $this->inventory);
+
+        // Structure for rendering
         $data = [
             'room' => $roomTwo,
             'inventory' => $this->inventory
         ];
-
-        // Save data (needs an update approach), sort and update in saveGameData-function
-        StorageHandler::saveGameData($roomTwo, $this->inventory);
 
         return $this->render('proj/room_two.html.twig', $data);
     }
@@ -97,18 +101,20 @@ final class ProjectController extends AbstractController
     #[Route('/project/room_three', name: 'room_three')]
     public function roomThree(): Response
     {
+        // Get room data
         $roomThree = RoomHandler::getRoomData("room_three");
 
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
+        // Save state ?? redundant?
+        StorageHandler::saveGameData($roomThree, $this->inventory);
+
+        // Structure for rendering
         $data = [
             'room' => $roomThree,
             'inventory' => $this->inventory
         ];
-
-        // Save data (needs an update approach), sort and update in saveGameData-function
-        StorageHandler::saveGameData($roomThree, $this->inventory);
 
         return $this->render('proj/room_three.html.twig', $data);
     }
@@ -116,25 +122,28 @@ final class ProjectController extends AbstractController
     #[Route('/project/room_four', name: 'room_four')]
     public function roomFour(): Response
     {
+        // Get room data
         $roomFour = RoomHandler::getRoomData("room_four");
 
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
+        // Save state
+        StorageHandler::saveGameData($roomFour, $this->inventory);
+
+        // Structure for rendering
         $data = [
             'room' => $roomFour,
             'inventory' => $this->inventory
         ];
-
-        // Save data (needs an update approach), sort and update in saveGameData-function
-        StorageHandler::saveGameData($roomFour, $this->inventory);
 
         return $this->render('proj/room_four.html.twig', $data);
     }
 
     #[Route('/project/deathtrap', name: 'deathtrap')]
     public function deathTrap(): Response
-    {
+    {   
+        // Build room data
         $deathTrap = [
             'name' => 'Game Over',
             'info' => 'Read the signs man..',
@@ -143,8 +152,13 @@ final class ProjectController extends AbstractController
             ]
         ];
 
+        // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
+        // Save state
+        StorageHandler::saveGameData($roomFour, $this->inventory);
+
+        // Structure for rendering
         $data = [
             'room' => $deathTrap,
             'inventory' => $this->inventory
@@ -190,6 +204,9 @@ final class ProjectController extends AbstractController
                 }
             }
 
+            // Save state
+            StorageHandler::saveGameData(null, $this->inventory);
+
             // Return to previous route
             $ref = $request->headers->get('referer');
 
@@ -213,41 +230,22 @@ final class ProjectController extends AbstractController
     #[Route('/project/inventory/add', name: 'inventory_add')]
     public function inventoryAdd(Request $request): Response
     {   
-        // echo "ROUTE WORKING<br>";
-
         // Get room id for routing
-        $currentRoom = $this->storageHandler->getRoomFromStorage();
-        $this->room = $currentRoom;
-
-        // echo "Got room from storeage<br>";
-
+        $currentRoom = StorageHandler::getRoomFromStorage();
+        
         if ($request->isMethod('GET')) 
         {
-            // echo "Its a GET!<br>";
-
             // Get data (query)
             $itemName = $request->query->get('itemName');
             $roomNumber = $request->query->get('roomNumber');
-            
-            // echo $itemName . "<br>";
-            // echo $roomNumber . "<br>";
 
             // Find item in database
-            if ($itemName && $roomNumber) {
-                // echo "Both exists!<br>";
-                
+            if ($itemName && $roomNumber) {                
                 // Get all room data
                 $roomsData = RoomHandler::getAllRooms();
-                // echo "Got rooms!<br>";
-
-                // echo $roomNumber ."<br>";
-                // print_r($roomsData);
-                // echo "<br>";
 
                 // Match room and item
                 if ($roomsData['rooms']) {
-                    // echo "Found matching room!<br>";
-
                     // Find room by id
                     $locatedRoom = null;
 
@@ -258,20 +256,19 @@ final class ProjectController extends AbstractController
                         }
                     }
 
-                    if ($room && isset($room['items'])) {
+                    if ($locatedRoom && isset($locatedRoom['items'])) {
                         // echo "Room has items!<br>";
 
-                        foreach ($room['items'] as $item) {
+                        foreach ($locatedRoom['items'] as $item) {
                             if ($item['item'] === $itemName) {
-                                // echo "Match found!<br>";
-
                                 // Write to inventory
                                 $this->inventory->addItem($item);
-                                // echo "Added to inv!<br>";
 
                                 // Save
-                                StorageHandler::saveGameData($this->room, $this->inventory); // Was still using removed  $this->storageHAndler
+                                StorageHandler::saveGameData($currentRoom, $this->inventory); // Was still using removed  $this->storageHAndler
+                                
                                 // echo "Save!<br>";
+                                // die();
                             }
                         }
                     }
@@ -287,5 +284,81 @@ final class ProjectController extends AbstractController
 
         // If no request
         return $this->redirectToRoute($roomNumber);
+    }
+
+    #[Route('/project/api/objectInteraction/{roomId}/{itemName}', name: 'object_interaction', methods: ['GET'])]
+    public function objectInteraction($roomId, $itemName, Request $request): JsonResponse
+    {                 
+        $hasItem = false;
+        $matchingItem = null;
+
+        // Check object status
+        if (StorageHandler::getItemStatus($roomId, $itemName) === 1) {
+            return $this->json([
+                'success' => true,
+                'status' => 1
+            ]);
+        }
+
+        // Get item data
+        $interactionItem = StorageHandler::findItemFromStorage($roomId, $itemName); // New method
+        
+        // Check existance
+        if (!$interactionItem) {
+            return $this->json([
+                'success' => false,
+                'message' => 'No item found'
+            ]);
+        }
+
+        // Get inventory
+        $inventory = StorageHandler::getInventoryFromStorage();
+        $allItems = $inventory->getAllItems();
+
+        // Set hasItem on handshake
+        foreach ($allItems as $ownedItem) {
+            if ($interactionItem['accept'] === $ownedItem['item']) {
+                $hasItem = true;
+                $matchingItem = $ownedItem;
+                break;
+            }
+        }
+
+        if ($hasItem && StorageHandler::isSelected($matchingItem)) {
+            // Get database
+            $database = StorageHandler::getDatabaseFromStorage();
+            $gameData = StorageHandler::getGameData();
+
+            foreach($database['rooms'] as &$room) {
+                if ($room['id'] === $roomId && isset($room['items'])) {
+                    foreach($room['items'] as &$item) {
+                        if ($item['item'] === $itemName) {
+                            $item['status'] = 1;
+                            break 2;
+                        }
+                    }
+                }
+            }
+
+            // Deselect and remove from inventory after use
+            $inventory = StorageHandler::getInventoryFromStorage();
+            $inventory->removeItem($matchingItem['item']);
+
+            // Save state
+            StorageHandler::saveGameData(null, $inventory, null, $database);
+
+            return $this->json([
+                'success' => true,
+                'infoDisplay' => $interactionItem['handshake'],
+                'stateAltered' => true
+            ]);
+        }
+        
+        return $this->json([
+            'success' => false,
+            'message' => 'You need another item'
+        ]);
+
+        // Should I instead load the database to a var I save in the savefile so I can alter it and save it with new state?
     }
 }

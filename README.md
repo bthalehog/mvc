@@ -87,7 +87,9 @@ All subs actions listed below.
 20250815 New tag v10.0.0, Kmom10 started, base structure set, room database JSON, Controller basics, storageHandler.  
 20250816 New tag v10.0.1, Move-route and move()-function added, navigation made into form for value-retrieval.  
 20250818 New tag v10.0.2,  
-20250822 New tag v10.0.3, Storage updated and working, inventory-class added and implemented, constructors modified   
+20250822 New tag v10.0.3, Storage updated and working, inventory-class added and implemented, constructors modified 
+20250825 New tag v10.0.4, Inventory, addItem fixed, clickable areas added, saveGameData fixed, inventory-methods added, restructured and added database items"  
+20250901 New tag v10.0.5, Select item working, objectInteraction working, added saveState-calls in item-methods, moved select to server-side.  
 
 
 

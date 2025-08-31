@@ -18,19 +18,62 @@ class StorageHandler
         }
 
         self::$saveFile = $saveDir . $file; // Need file here not saveFile
+    
+        // Added for save state database (copy from json to storage)
+        $this->initializeDatabase();
+    }
+
+    // Initialize by assigning database from json to savefile
+    private function initializeDatabase(): void {
+        $gameData = self::getGameData();
+
+        // Check for database existance
+        if (!isset($gameData['database'])) {
+            $jsonPath = __DIR__ . '/data/database/game_rooms.json';
+
+            if (file_exists($jsonPath)) {
+                $database = json_decode(file_get_contents($jsonPath), true);                
+                self::saveGameData(null, null, null, $database);
+            }
+        }
     }
 
     // Save all data
-    // Should hold room, inventory and actions taken (doors open etc) playe rnot needed since always one
-    public static function saveGameData($room, $inventory)
+    // Should hold room, inventory, database (added) and actions taken (doors open etc) playe rnot needed since always one
+    public static function saveGameData($room = null, $inventory = null, $objectStates = null, $database = null): bool
     {   
+        $gameData = self::getGameData();
+
+        if ($room !== null) {
+            $gameData['room'] = $room;
+        }
+
+        if ($inventory !== null) {
+            $gameData['inventory'] = [
+                'items' => $inventory->getAllItems(),
+                'selectedItem' => $inventory->getSelectedItem()
+            ];
+        }
+
+        if ($objectStates !== null) {
+            $gameData['objectStates'] = $objectStates;
+        }
+
+        if ($database !== null) {
+            $gameData['database'] = $database;
+        }
+
+        /*
         $gameData = [
             'room' => $room,
             'inventory' => [
                 'items' => $inventory->getAllItems(),
                 'selectedItem' => $inventory->getSelectedItem()
-            ]
+            ],
+            'objectStates' => self::getGameData()['objectStates'] ?? [],
+            'database' => self::getGameData()['database'] ?? []
         ];
+        */
 
         return file_put_contents(self::$saveFile, json_encode($gameData, JSON_PRETTY_PRINT));
     }
@@ -46,7 +89,26 @@ class StorageHandler
         $gameData = file_get_contents(self::$saveFile);
         $decodedData = json_decode($gameData, true);
 
-        return $decodedData;
+        return $decodedData ?? [];
+    }
+
+    // Get database from storage
+    public static function getDatabaseFromStorage(): array {
+        $gameData = self::getGameData();
+
+        return $gameData['database'] ?? [];
+    }
+
+    // Update database in storage
+    public static function updateDatabaseInStorage($database): bool {
+        $gameData = self::getGameData();
+        $gameData['database'] = $database;
+
+        $room = $gameData['room'];
+        $inventoryData = $gameData['inventory'] ?? ['items' => [], 'selectedItem' => null];
+        $inventory = new Inventory($inventoryData['items'] ?? []);
+
+        return self::saveGameData($room, $inventory);
     }
 
     // Get inventory from storage
@@ -68,6 +130,46 @@ class StorageHandler
         return $newInventory;
     }
 
+    // Update room in gameData (storage)
+    public static function updateRoom($room) {
+        return self::saveGameData($room);
+    }
+
+    // Update inventory in gameData (storage)
+    public static function updateInventory($inventory) {
+        return self::saveGameData(null, $inventory);
+    }
+
+    // Might not need this after saving database to state
+    // Update object-states in gameData (storage)
+    public static function updateObjectStates($objectStates) {
+        return self::saveGameData(null, null, $objectStates);
+    }
+
+    // Might not need this after saving database to state
+    // Update object-states in gameData (storage)
+    public static function updateItemStatus($status) {
+        $gameData = self::getGameData();
+        $database = self::getDatabaseFromStorage();
+
+        if (!isset($database['rooms'])) {
+            return false;
+        }
+
+        // Find and update status in database
+        foreach ($database['rooms'] as $room) {
+            if ($room['id'] == $roomId && isset($room['items'])) {
+                foreach ($room['items'] as $item) {
+                    $item['status'] = $status;
+                    $gameData['database'] = $database;
+
+                    return self::saveGameData(null, null, null); // Save database (handled inside saveGameData)
+                }
+            }
+        }
+    }
+
+    /*
     // Get inventory from storage
     public static function updateInventoryInStorage($inventory): object
     {
@@ -75,13 +177,19 @@ class StorageHandler
         $gameData = self::getGameData();
 
         // Overwrite current inventory with new
-        $gameData['inventory'] = $inventory;
+        $gameData['inventory'] = [
+            'items' => $inventory->getAllItems(),
+            'selectedItem' => $inventory->getSelectedItem()
+        ];
+
+        $room = $gameData['room'];
 
         // Save data
         self::saveGameData($gameData['room'], $inventory);
 
         return new Inventory($inventory);
     }
+        */
 
     // Get room from storage
     public static function getRoomFromStorage()
@@ -92,6 +200,17 @@ class StorageHandler
         $roomData = $gameData['room'] ?? [];
 
         return $roomData;
+    }
+
+    // Get room status from storage
+    public static function getRoomStatusFromStorage()
+    {
+        $gameData = self::getGameData();
+
+        // Find inventory part
+        $roomData = $gameData['room'] ?? [];
+
+        return $roomData['status'];
     }
 
     // Set item to local storage
@@ -118,20 +237,117 @@ class StorageHandler
     public static function removeItem($key): bool
     {
         $game = self::getGameData();
-        unset($game[$key]);
+        unset($game['inventory']->getAllItems()[$key]); // Possible?
 
-        $room = $game['room'];
         $inventory = new Inventory($game['inventory']['items'] ?? []);
 
-        return self::saveGameData($room, $inventory) !== false;
+        return self::saveGameData(null, $inventory) !== false;
     }
 
     // Clear local storage
-    public function clearStorage(): bool
+    public static function clearStorage(): bool
     {
         $room = [];
         $inventory = new Inventory([]);
+        $objectStates = [];
+        $database = null;
 
-        return self::saveGameData($room, $inventory) !== false;
+        return self::saveGameData($room, $inventory, $objectStates, $database) !== false;
+    }
+
+    // Remodel to save the inventory to state for use as database
+
+    // Set object state
+    public static function setObjectState($roomId, $itemName, $state) {
+        $game = self::getGameData();
+
+        // Set object states
+        if (!isset($game['objectStates'])) {
+            $game['objectStates']= [];
+        }
+
+        $key = "room_{$roomId}_item_{$itemName}";
+        $game['objectStates'][$key] = $state;
+        
+        return self::saveGameData(null, null, $game['objectStates']); // Now update specific part
+    }
+
+    // Get object state
+    public static function getObjectState($roomId, $itemName) {
+        $game = self::getGameData();
+
+        // Set object states
+        if (!isset($game['objectStates'])) {
+            return null;
+        }
+
+        $key = "room_{$roomId}_item_{$itemName}";
+
+        return $game['objectStates']['key'] ?? null;
+    }
+
+    // Check if item state is matching, need a bool
+    public static function matchItemState($roomId, $itemName, $state) {
+        return self::getObjectState($roomId, $itemName) === $state;
+    }
+
+    // Set item status variable
+    public static function setItemStatus($roomId, $itemName, $status) {
+        // Add a try
+        $currentItem = self::getItem($roomId, $itemName);
+        $currentItem->status = $status;
+
+        return true;
+    }
+
+    // Get item status variable
+    // Alter for internal database
+    public static function getItemStatus($roomId, $itemName) {
+        $database = self::getDatabaseFromStorage();
+
+        if (!isset($database['rooms'])) {
+            return false;
+        }
+
+        foreach ($database['rooms'] as $room) {
+            if ($room['id'] === $roomId && isset($room['items'])) {
+                foreach ($room['items'] as $item) {
+                    if ($item['item'] === $itemName) {
+                        return $item['status'] ?? 0;
+                    }
+                }
+            }
+        }
+    }
+
+    public static function findItemFromStorage($roomId, $itemName) {
+        $database = StorageHandler::getDatabaseFromStorage();
+
+        if(!isset($database['rooms'])) {
+            return null;
+        }
+
+        foreach ($database['rooms'] as $room) {
+            if ($room['id'] === $roomId && isset($room['items'])) {
+                foreach ($room['items'] as $itemData) {
+                    if ($itemData['item'] === $itemName) {
+                        return $itemData;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static function isSelected($item): bool {
+        // Is this syntax working?
+        $inventory = self::getInventoryFromStorage();
+        $selected = $inventory->getSelectedItem();
+        
+        if ($selected && $selected['item'] === $item['item']) {
+            return true;  
+        }
+        
+        return false;
     }
 }

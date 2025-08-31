@@ -46,6 +46,8 @@ class Inventory {
     }
 
     public function select($itemName) {
+        // echo "Selecting" . $itemName . "<br>";
+
         // Deselect if other already selected
         if ($this->selectedItem !== null) {
             $this->items[$this->selectedItem]['isSelected'] = false;
@@ -54,17 +56,23 @@ class Inventory {
         // Select
         foreach($this->items as $key => $item) {
             if ($item['item'] === $itemName) {
+                // echo "Found" . $itemName . "<br>";
+
                 // If same - deselect
                 if ($this->selectedItem === $key) {
                     $this->selectedItem = null;
+                    // echo "Deselected" . $itemName . "<br>";
                 } else {
                     $this->items[$key]['isSelected'] = true;
                     $this->selectedItem = $key;
+                    // echo "Selected" . $itemName . "<br>";
                 }
                 
                 return $this->getSelectedItem();
             }
         }
+
+        // echo "Not found" . $itemName . "<br>";
 
         return null;
     }

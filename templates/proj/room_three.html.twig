@@ -9,25 +9,26 @@
     <map name="roomThreeMap">
       <area 
         shape="rect"
-        coords="420,437,475,149"
+        coords="220,437,320,337"
         onclick="clickedItem('room_three', 'forklift')"
         style="cursor: pointer;"
-        title="A yellow forklift">
+        title="A yellow forklift"
+        background-color="red">
       <area 
         shape="rect"
-        coords="420,437,475,149"
+        coords="470,437,525,293"
+        onclick="showMessage('It's locked')"
+        style="cursor: pointer;"
+        title="An exit">
+      <area 
+        shape="rect"
+        coords="720,587,775,451"
         onclick="clickedItem('room_three', 'radio')"
         style="cursor: pointer;"
         title="Radio">
-      <area 
-        shape="rect"
-        coords="420,437,475,149"
-        onclick="clickedItem('room_three', 'door')"
-        style="cursor: pointer;"
-        title="door">
     </map>
   </div>
 
-  <h4 class="roomExplanation">{{ room.info }}</h4>
+  <h4 id="infoDisplay" class="roomExplanation">{{ room.info }}</h4>
 
 {% endblock %}

@@ -36,6 +36,7 @@ class RoomHandler
             }
         }
     }
+    
 
     // Get all rooms
     public static function getAllRooms(): ?array
