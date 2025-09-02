@@ -322,5 +322,5 @@ Fixed move with limitations/gates (missing indexer)
 TODO:
 
 Add finalMove functionality
-test audio gen for radio
+    verify forklift is status 1 (key interaction), radio is status 1 (three times clicked), then x is ok to exit
 Add part for resetting when finished

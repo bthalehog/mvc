@@ -59,7 +59,7 @@
       "items":
         [
           { "item": "forklift", "look": "A yellow fork lift", "investigate": "Real men are certified..", "interact": "I can't hear you over the sound of my FREEEEEEDOM!", "use_with": "x", "accepts": "key", "take": "no", "graphics": null, "status": 0 },
-          { "item": "radio", "look": "A transistor radio", "investigate": "It seems plugged in and ready to go", "interact": "You turn the radio on, it is playing Fortunate son", "use_with": "none", "take": "no", "graphics": null, "status": 0, "audio": "soundtrack.mp3" },
+          { "item": "radio", "look": "A transistor radio", "investigate": "It seems plugged in and ready to go", "interact": "You turn the radio on, it is playing Fortunate son", "use_with": "none", "take": "no", "graphics": null, "status": 0, "audio": "audiotrack.mp3" },
           { "item": "emergency_exit", "look": "A door.", "investigate": "It's an emergency exit!", "interact": "Something is obstructing it.", "use_with": null, "accept": "forklift", "handshake": "Just an inch between you and the world!", "take": "no", "graphics": null, "status": 0},
           { "item": "x", "look": "An X.", "investigate": "Why would you draw that there?", "interact": "Would it be clickable if it has no use?", "use_with": null, "accept": "forklift", "handshake": "They can take away our certifications, but they can never take away, our freedom!", "take": "no", "graphics": null, "status": 0}
         ],

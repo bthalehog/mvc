@@ -71,6 +71,13 @@ function clickedItem(roomNumber, clickedItem) {
         // Show message
         showMessage(fullItem.interact);
 
+        // Check for audio
+        if(fullItem.audio) {
+            console.log("Audio param found in item, calling jukebox");
+            playAudio(fullItem.audio);
+            return;
+        }
+
         // Better to use websockets or just GET to route??
         // addToInventory(roomNumber, clickedItem.name, clickedItem)
 
@@ -181,6 +188,32 @@ function selectInventoryItem(itemName) {
     })
 }
 
+function playAudio(trackName) {
+    console.log("Jukebox replies, selecting record");
+
+    // Create jukebox
+    const jukebox = document.createElement('audio');
+    console.log(`Element created`);
+    console.log(`Track ${trackName}`)
+
+    jukebox.src = `/assets/audio/${trackName}`;
+    jukebox.preload = 'auto';
+    jukebox.controls = false;
+    jukebox.volume = 0.5;
+
+    // Add to DOM
+    jukebox.style.display = 'none';
+    document.body.appendChild(jukebox);
+
+    jukebox.play().catch(error => {
+        console.log('Could not play audio');
+    })
+
+    jukebox.addEventListener('ended', () => {
+        document.body.removeChild(jukebox);
+    })
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     let currentMessage = localStorage.getItem('currentMessage');
 
@@ -193,5 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
 globalThis.clickedItem = clickedItem;
 globalThis.showMessage = showMessage;
 globalThis.objectInteraction = objectInteraction;
+globalThis.playAudio = playAudio;
 
-export { clickedItem, showMessage, findItem, objectInteraction, selectInventoryItem }
+export { clickedItem, showMessage, findItem, objectInteraction, selectInventoryItem, playAudio }
