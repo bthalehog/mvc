@@ -90,6 +90,7 @@ All subs actions listed below.
 20250822 New tag v10.0.3, Storage updated and working, inventory-class added and implemented, constructors modified 
 20250825 New tag v10.0.4, Inventory, addItem fixed, clickable areas added, saveGameData fixed, inventory-methods added, restructured and added database items"  
 20250901 New tag v10.0.5, Select item working, objectInteraction working, added saveState-calls in item-methods, moved select to server-side.  
+20250902 New tag v10.0.6, added "gates" to database, RoomHandler move function updated with gate-logic, 
 
 
 

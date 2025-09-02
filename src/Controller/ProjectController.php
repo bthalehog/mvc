@@ -155,8 +155,9 @@ final class ProjectController extends AbstractController
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
-        // Save state
-        StorageHandler::saveGameData($roomFour, $this->inventory);
+        // Clear and Save state
+        // StorageHandler::clearStorage();
+        StorageHandler::saveGameData($deathTrap, $this->inventory);
 
         // Structure for rendering
         $data = [

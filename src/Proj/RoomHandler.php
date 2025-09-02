@@ -58,28 +58,37 @@ class RoomHandler
 
     // Handle user move input
     public static function move($direction, $currentRoomId): array {
-        $currentRoomData = self::getRoomData($currentRoomId);
+        $database = StorageHandler::getDatabaseFromStorage();
+        $currentRoomData = null;
 
-        foreach($currentRoomData['directions'] as $loopedDirection => $roomName)
-        {
-            if ($loopedDirection === $direction)
-            {
-                if ($roomName === "Closed")
-                {
-                    return ['success' => false, 'message' => "The door is closed."];
+        // Find room and verify direction
+        foreach ($database['rooms'] as $room) {
+            if ($room['id'] === $currentRoomId) {
+                // Verify direction
+
+                if (!isset($room['directions'][$direction])) {
+                    return ['success' => false, 'message' => "No way!"];
                 }
 
-                elseif ($roomName === "Locked")
-                {
-                    return ['success' => false, 'message' => "The door is locked..."];
+                $roomName = $room['directions'][$direction];
+
+                // Check gate
+                if (isset($room['gates'][$direction])) {
+                    $gateItemName = $room['gates'][$direction];
+
+                    foreach($room['items'] as $item) {
+                        if ($item['item'] === $gateItemName) {
+                            if ($item['status'] === 0) {
+                                return ['success' => false, 'message' => "The door is locked."];
+                            }
+                            break;
+                        }
+                    }
                 }
-                else 
-                {
-                    return ['success' => true, 'redirect' => $roomName];
-                }
+
+                return ['success' => true, 'redirect' => $roomName];
             }
         }
-
-        return ['success' => false, 'message' => "No way!"];
+        return ['success' => false, 'message' => "No such room."];
     }
 }

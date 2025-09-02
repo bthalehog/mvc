@@ -316,3 +316,11 @@ Use $key variable, not literal 'key'
 onclick="selectInventoryItem('{{ item.item }}')"
 break 2;
 TA bort gamla var_dump!!! Stör JSON parsing
+Npm run build hela tiden..
+Fixed move with limitations/gates (missing indexer)
+
+TODO:
+
+Add finalMove functionality
+test audio gen for radio
+Add part for resetting when finished

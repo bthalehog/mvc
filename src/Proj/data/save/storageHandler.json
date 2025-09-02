@@ -65,6 +65,9 @@
                 "directions": {
                     "north": "room_two"
                 },
+                "gates": {
+                    "north": "door_one"
+                },
                 "graphics": [
                     {
                         "background": "room1background.png"
@@ -78,22 +81,24 @@
                 "info": "You find yourself standing at a crossroads, what to do!?",
                 "items": [
                     {
-                        "item": "haphazardous_event",
-                        "look": "This door has a sign on it",
-                        "investigate": "It says: 'Security'",
-                        "interact": "GAME OVER - Don't you read signs?!",
-                        "use": null,
-                        "take": "no",
-                        "graphics": null
-                    },
-                    {
                         "item": "note",
                         "look": "A piece of paper",
                         "investigate": "The number 4526 is written on the back",
                         "interact": "Seems I pick things up habitually now",
-                        "use": "none",
+                        "use_with": null,
+                        "accept": null,
                         "take": "yes",
                         "graphics": "\ud83d\udcc3"
+                    },
+                    {
+                        "item": "haphazardous_event",
+                        "look": "This door has a sign on it",
+                        "investigate": "It says: 'Security'",
+                        "interact": "GAME OVER - Don't you read signs?!",
+                        "use_with": null,
+                        "accept": null,
+                        "take": "no",
+                        "graphics": null
                     }
                 ],
                 "directions": {
@@ -101,6 +106,7 @@
                     "east": "room_three",
                     "south": "room_one"
                 },
+                "gates": [],
                 "graphics": [
                     {
                         "background": "room2background.png"
@@ -118,24 +124,54 @@
                         "look": "A yellow fork lift",
                         "investigate": "Real men are certified..",
                         "interact": "I can't hear you over the sound of my FREEEEEEDOM!",
-                        "use": "key",
+                        "use_with": "x",
+                        "accepts": "key",
                         "take": "no",
-                        "graphics": null
+                        "graphics": null,
+                        "status": 0
                     },
                     {
                         "item": "radio",
                         "look": "A transistor radio",
                         "investigate": "It seems plugged in and ready to go",
                         "interact": "You turn the radio on, it is playing Fortunate son",
-                        "use": "none",
+                        "use_with": "none",
                         "take": "no",
                         "graphics": null,
+                        "status": 0,
                         "audio": "soundtrack.mp3"
+                    },
+                    {
+                        "item": "emergency_exit",
+                        "look": "A door.",
+                        "investigate": "It's an emergency exit!",
+                        "interact": "Something is obstructing it.",
+                        "use_with": null,
+                        "accept": "forklift",
+                        "handshake": "Just an inch between you and the world!",
+                        "take": "no",
+                        "graphics": null,
+                        "status": 0
+                    },
+                    {
+                        "item": "x",
+                        "look": "An X.",
+                        "investigate": "Why would you draw that there?",
+                        "interact": "Would it be clickable if it has no use?",
+                        "use_with": null,
+                        "accept": "forklift",
+                        "handshake": "They can take away our certifications, but they can never take away, our freedom!",
+                        "take": "no",
+                        "graphics": null,
+                        "status": 0
                     }
                 ],
                 "directions": {
                     "north": "room_four",
                     "west": "room_two"
+                },
+                "gates": {
+                    "north": "x"
                 },
                 "graphics": [
                     {
@@ -153,12 +189,14 @@
                         "item": "flag",
                         "look": "Murica!",
                         "investigate": "And home of the braaaaaave!",
-                        "use": null,
+                        "use_with": null,
+                        "accept": null,
                         "take": "no",
                         "graphics": null
                     }
                 ],
                 "directions": [],
+                "gates": [],
                 "graphics": [
                     {
                         "background": "room4background.png"
@@ -174,22 +212,24 @@
         "info": "You find yourself standing at a crossroads, what to do!?",
         "items": [
             {
-                "item": "haphazardous_event",
-                "look": "This door has a sign on it",
-                "investigate": "It says: 'Security'",
-                "interact": "GAME OVER - Don't you read signs?!",
-                "use": null,
-                "take": "no",
-                "graphics": null
-            },
-            {
                 "item": "note",
                 "look": "A piece of paper",
                 "investigate": "The number 4526 is written on the back",
                 "interact": "Seems I pick things up habitually now",
-                "use": "none",
+                "use_with": null,
+                "accept": null,
                 "take": "yes",
                 "graphics": "\ud83d\udcc3"
+            },
+            {
+                "item": "haphazardous_event",
+                "look": "This door has a sign on it",
+                "investigate": "It says: 'Security'",
+                "interact": "GAME OVER - Don't you read signs?!",
+                "use_with": null,
+                "accept": null,
+                "take": "no",
+                "graphics": null
             }
         ],
         "directions": {
@@ -197,6 +237,7 @@
             "east": "room_three",
             "south": "room_one"
         },
+        "gates": [],
         "graphics": [
             {
                 "background": "room2background.png"
@@ -214,10 +255,53 @@
                 "use_with": "forklift",
                 "accept": null,
                 "take": "yes",
-                "graphics": "\ud83d\udd11"
+                "graphics": "\ud83d\udd11",
+                "isSelected": true
+            },
+            {
+                "item": "box",
+                "look": "There is a beverage box on one of the shelves.",
+                "investigate": "It has potential..",
+                "interact": "Congratulations, proud owner of empty beverage box.",
+                "use_with": "fountain",
+                "accept": null,
+                "take": "yes",
+                "graphics": "\ud83e\uddc3"
+            },
+            {
+                "item": "radio",
+                "look": "A transistor radio",
+                "investigate": "It seems plugged in and ready to go",
+                "interact": "You turn the radio on, it is playing Fortunate son",
+                "use_with": "none",
+                "take": "no",
+                "graphics": null,
+                "status": 0,
+                "audio": "soundtrack.mp3"
+            },
+            {
+                "item": "forklift",
+                "look": "A yellow fork lift",
+                "investigate": "Real men are certified..",
+                "interact": "I can't hear you over the sound of my FREEEEEEDOM!",
+                "use_with": "x",
+                "accepts": "key",
+                "take": "no",
+                "graphics": null,
+                "status": 0
             }
         ],
-        "selectedItem": null
+        "selectedItem": {
+            "item": "key",
+            "look": "A coat",
+            "investigate": "There is a key in one of the pockets",
+            "interact": "You pick up the key",
+            "use_with": "forklift",
+            "accept": null,
+            "take": "yes",
+            "graphics": "\ud83d\udd11",
+            "isSelected": true
+        }
     },
     "objectStates": []
 }
