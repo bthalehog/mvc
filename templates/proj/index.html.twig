@@ -26,30 +26,31 @@
 
 </body>
 
-{% block nav %}
-  <nav class="gameNav">
-    <form method="POST" action="{{ path('move') }}">
-      <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'room_one' }}">
-      
-      <button type="submit" id="northButton" class="directionButton" name="direction" value="north">↑</button>
-      <label for="northButton"></label>
+<div id="componentsHolder" class="componentsHolder">
+  {% block nav %}
+    <nav class="gameNav">
+      <form method="POST" action="{{ path('move') }}">
+        <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'room_one' }}">
+        
+        <button type="submit" id="northButton" class="directionButton" name="direction" value="north">↑</button>
+        <label for="northButton"></label>
 
-      <button type="submit" id="southButton" class="directionButton" name="direction" value="south">↓</button>
-      <label for="southButton"></label>
+        <button type="submit" id="southButton" class="directionButton" name="direction" value="south">↓</button>
+        <label for="southButton"></label>
 
-      <button type="submit" id="westButton" class="directionButton" name="direction" value="west">←</button>
-      <label for="westButton"></label>
+        <button type="submit" id="westButton" class="directionButton" name="direction" value="west">←</button>
+        <label for="westButton"></label>
 
-      <button type="submit" id="eastButton" class="directionButton" name="direction" value="east">→</button>
-      <label for="eastButton"></label>
-    </form>
-  </nav>
-{% endblock %}
+        <button type="submit" id="eastButton" class="directionButton" name="direction" value="east">→</button>
+        <label for="eastButton"></label>
+      </form>
+    </nav>
+  {% endblock %}
 
-{% block inventory %}
-  {% if inventory is defined %}
-    {% include 'proj/inventory.html.twig' %}
-  {% endif %}
-{% endblock %}
-
+  {% block inventory %}
+    {% if inventory is defined %}
+      {% include 'proj/inventory.html.twig' %}
+    {% endif %}
+  {% endblock %}
+</div>
 </html>

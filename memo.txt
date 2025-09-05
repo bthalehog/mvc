@@ -318,9 +318,14 @@ break 2;
 TA bort gamla var_dump!!! Stör JSON parsing
 Npm run build hela tiden..
 Fixed move with limitations/gates (missing indexer)
+Fixe no pick up on unpickable items, added final_move route
+Added final-route check in objectInteraction
+Fixed deathtrap by hardcoding pic and creating own template
+Moved playAudio to after itemcheck in clickedItem (never had time to call status-update on radio)
 
 TODO:
 
-Add finalMove functionality
-    verify forklift is status 1 (key interaction), radio is status 1 (three times clicked), then x is ok to exit
 Add part for resetting when finished
+Move playAudio to js in the response for objectInteraction
+Fix deathtrap interaction on door, clearStorage after deathtrap
+Stop deathtrap from adding to inv

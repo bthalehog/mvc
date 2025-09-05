@@ -740,6 +740,13 @@ th {
 .projectBody {
     background-color: darkslategrey;
     object-fit: cover;
+    height: 80vh;
+    width: 100%;
+}
+
+.projectBody * {
+    margin: 0;
+    padding: 0;
 }
 
 .projectStart {
@@ -769,26 +776,9 @@ th {
     font-family: 'Pixelify Sans', sans-serif;
 }
 
-/* Game navigation */
-.directionButton {
-    justify-content: center;
-    text-align: center;
-    height: 4rem;
-    width: 4rem;
-    font-size: xx-large;
-    background-color: purple;
-    font-family: 'Pixelify Sans', sans-serif;
-    color: darkgoldenrod;
-}
-
-.gameNav {
+.componentsHolder {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    height: 5vh;
-    width: 100%;
-    padding: 1rem;
-    background-color: slategray;
 }
 
 /* Start game */
@@ -802,10 +792,35 @@ th {
     font-family: 'Pixelify Sans', sans-serif;
 }
 
+/* Game navigation */
+.gameNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 50%;
+    padding: 1rem;
+    background-color: purple;
+    border: 0px solid goldenrod !important;
+}
+
+.directionButton {
+    justify-content: center;
+    text-align: center;
+    height: 4rem;
+    width: 4rem;
+    font-size: xx-large;
+    background-color: darkslategray;
+    font-family: 'Pixelify Sans', sans-serif;
+    color: goldenrod;
+    border: 2px double goldenrod;
+}
+
 /* Rooms */
 .roomName {
     height: 5vh;
-    width: 100%;
+    width: 97%;;
     font-size: 4rem;
     background: purple;
     color: goldenrod;
@@ -818,7 +833,7 @@ th {
 .roomView {
     background-color: purple;
     height: 70vh;
-    width: 100%;
+    width: 97%;
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -826,18 +841,18 @@ th {
 }
 
 .roomImage {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .roomExplanation {
     height: 5vh;
-    width: 100%;
+    width: 97%;
     font-size: x-large;
     background: purple;
     color: goldenrod;
@@ -846,13 +861,16 @@ th {
 }
 
 .inventory {
-    height: auto;
-    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 50%;
     font-size: large;
     background: purple;
     color: goldenrod;
     padding: 1rem;
-    border: 4px solid goldenrod !important;
+    border: 0px solid goldenrod !important;
 }
 
 .gameItem {
@@ -861,9 +879,80 @@ th {
     height: 4rem;
     width: 4rem;
     font-size: xx-large;
+    margin: 0.2rem;
 }
 
 .gameItem.selected {
     border: 4px solid orange;
 }
 
+.itemsForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ABOUT */
+
+.aboutHead {
+    padding: 1rem;
+    height: 15%;
+    width: 94%;
+    font-size: x-large;
+    background: purple;
+    color: goldenrod;
+    margin: 0;
+}
+
+.aboutInfo {
+    line-height: 1.7rem;
+    padding: 1rem;
+    height: 25%;
+    width: 97%;
+    font-size: large;
+    background: purple;
+    color: goldenrod;
+    margin: 0;
+}
+
+.aboutCheat {
+    line-height: 1.7rem;
+    padding: 1rem;
+    height: 50%;
+    width: 97%;
+    font-size: large;
+    background: purple;
+    color: goldenrod;
+    margin: 0;
+}
+
+.aboutCheat ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    color: goldenrod;
+}
+
+.aboutCheat li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: goldenrod;
+}
+
+.aboutCheat ul ul {
+    padding-left: 2rem;
+    margin-top: 0.3rem;
+}
+
+.aboutCheat ul ul li {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: slategray;;
+}
+
+.aboutCheat strong {
+    color: goldenrod;
+    font-weight: bold;
+}

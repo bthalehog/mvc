@@ -22,7 +22,7 @@ final class ProjectController extends AbstractController
     // Added for building inventory and storage
     public function __construct() {
         $this->storageHandler = new StorageHandler();
-        $this->room = Roomhandler::getRoomData("proj") ?? [];
+        $this->room = RoomHandler::getRoomData("proj") ?? [];
         // This should fix the array issue
         $this->inventory = StorageHandler::getInventoryFromStorage() ?: new Inventory();
     }
@@ -53,10 +53,68 @@ final class ProjectController extends AbstractController
         return $this->render('proj/start_adventure.html.twig', $data);
     }
 
+    #[Route("/proj/about", name: "about")]
+    public function about(): Response
+    {
+        // Set headline
+        $headline = "About this adventure game";
+
+        // Set parameters
+        $info = "
+            This is an adventure game made as examination project in the course MVC given at BTH 2025.
+            The game consists of a number of rooms, items and doors that, if combined correctly, will lead you to the exit.<br>
+            <br>
+            In the rooms are doors that sometimes are locked and can be opened.<br>
+            To have an item interact with another, select the item in your inventory and then click the item you want to interact with.<br>
+            Navigation between rooms is done using the navigation-arrows in the panel.<br>
+            <br>
+            In this scenario you find yourself waking up in a closet with an urge to get out. You have no memory of how you ended up there just a burning sensation that you should get out.
+        ";
+        
+        $cheat = "
+            <ul class='aboutCheat'>
+                <li><strong>Room 1 - Janitor's closet</strong></li>
+                    <ul>
+                        <li>items: key (in coat), cup (in shelf, no use), wire (in bin)</li>
+                        <li>gates: door (accepts wire)</li>
+                    </ul>
+
+                <li><strong>Room 2 - Hallway</strong></li>
+                    <ul>
+                        <li>items: note (eastern wall crevice, no use)</li>
+                        <li>gates: western door (leads nowhere)
+                        northern door (three clicks = GAME OVER)
+                        eastern door (lead to warehouse, unlocked)</li>
+                    </ul>
+                
+                <li><strong>Room 3 - Warehouse</strong></li>
+                    <ul>
+                        <li>items: forklift (takes key), radio (three clicks to start music)</li>
+                        <li>gates: emergency exit (locked, cannot be opened)
+                        x (win game by clicking the X three times after starting the forklift and turning on some music)</li>
+                    </ul>
+
+                <li><strong>Room 4 - Guards' room</strong></li>
+                    <ul>
+                        <li>This is an instant GAME OVER triggered by clicking three times on the nortern door in Hallway.</li>
+                    </ul>
+                <br>
+        ";
+
+        $data = [
+            'headline' => $headline,
+            'info' => $info,
+            'cheat' => $cheat
+        ];
+
+        return $this->render('proj/about.html.twig', $data);
+    }
+
     #[Route('/project/room_one', name: 'room_one')]
     public function roomOne(): Response
     {
-        $roomOne = RoomHandler::getRoomData("room_one");
+        // $roomOne = RoomHandler::getRoomData("room_one");
+        $roomOne = StorageHandler::getRoomFromStorage("room_one");
 
         if (!$roomOne) {
             throw $this->createNotFoundException('Room not found');
@@ -81,7 +139,8 @@ final class ProjectController extends AbstractController
     public function roomTwo(): Response
     {
         // Get room data
-        $roomTwo = RoomHandler::getRoomData("room_two");
+        // $roomTwo = RoomHandler::getRoomData("room_two");
+        $roomTwo = StorageHandler::getRoomFromStorage("room_two");
 
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
@@ -102,7 +161,8 @@ final class ProjectController extends AbstractController
     public function roomThree(): Response
     {
         // Get room data
-        $roomThree = RoomHandler::getRoomData("room_three");
+        // $roomThree = RoomHandler::getRoomData("room_three");
+        $roomThree = StorageHandler::getRoomFromStorage("room_three");
 
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
@@ -119,53 +179,55 @@ final class ProjectController extends AbstractController
         return $this->render('proj/room_three.html.twig', $data);
     }
 
-    #[Route('/project/room_four', name: 'room_four')]
-    public function roomFour(): Response
-    {
-        // Get room data
-        $roomFour = RoomHandler::getRoomData("room_four");
+    #[Route('/project/deathtrap', name: 'deathtrap')]
+    public function deathTrap(): Response
+    {   
+        // $deathTrap = RoomHandler::getRoomData("deathtrap");
+        $deathTrap = StorageHandler::getRoomFromStorage("deathtrap");
 
         // Get fresh inventory
         $this->inventory = StorageHandler::getInventoryFromStorage();
 
-        // Save state
-        StorageHandler::saveGameData($roomFour, $this->inventory);
+        // Clear state and savefile
+        StorageHandler::clearStorage();
+        StorageHandler::clearSaveFile();
 
         // Structure for rendering
         $data = [
-            'room' => $roomFour,
-            'inventory' => $this->inventory
-        ];
-
-        return $this->render('proj/room_four.html.twig', $data);
-    }
-
-    #[Route('/project/deathtrap', name: 'deathtrap')]
-    public function deathTrap(): Response
-    {   
-        // Build room data
-        $deathTrap = [
-            'name' => 'Game Over',
-            'info' => 'Read the signs man..',
+            'room' => $deathTrap,
+            'inventory' => $this->inventory,
             'graphics' => [
                 ['background' => 'deathtrap.png']
             ]
         ];
 
-        // Get fresh inventory
-        $this->inventory = StorageHandler::getInventoryFromStorage();
+        return $this->render('proj/death_trap.html.twig', $data);
+    }
 
-        // Clear and Save state
-        // StorageHandler::clearStorage();
-        StorageHandler::saveGameData($deathTrap, $this->inventory);
+    #[Route('/project/final_move', name: 'final_move')]
+    public function finalMove(): Response
+    {
+        // Get room data
+        // $finalMove = RoomHandler::getRoomData("final_move");
+
+        $finalMove = StorageHandler::getRoomFromStorage("final_move");
+
+        // Save state
+        StorageHandler::saveGameData($finalMove, $this->inventory);
 
         // Structure for rendering
         $data = [
-            'room' => $deathTrap,
+            'room' => $finalMove,
             'inventory' => $this->inventory
         ];
 
-        return $this->render('proj/room_four.html.twig', $data);
+        // Clear and Save state
+        StorageHandler::clearStorage();
+        StorageHandler::clearSaveFile();
+
+        // StorageHandler::saveGameData($finalMove, $this->inventory);
+
+        return $this->render('proj/final_move.html.twig', $data);
     }
 
     #[Route('/project/move', name: 'move')]
@@ -232,7 +294,7 @@ final class ProjectController extends AbstractController
     public function inventoryAdd(Request $request): Response
     {   
         // Get room id for routing
-        $currentRoom = StorageHandler::getRoomFromStorage();
+        $currentRoom = StorageHandler::getRoomData();
         
         if ($request->isMethod('GET')) 
         {
@@ -240,10 +302,17 @@ final class ProjectController extends AbstractController
             $itemName = $request->query->get('itemName');
             $roomNumber = $request->query->get('roomNumber');
 
+            // Check if take: "no" or jus list non-takeables
+            // Can also if in array
+            if ($itemName === "emergency_exit" || $itemName === "forklift" || $itemName === "x" || $itemName === "deathtrap") {
+                
+                return $this->redirectToRoute('room_three');
+            }
+
             // Find item in database
             if ($itemName && $roomNumber) {                
                 // Get all room data
-                $roomsData = RoomHandler::getAllRooms();
+                $roomsData = StorageHandler::getDatabaseFromStorage();
 
                 // Match room and item
                 if ($roomsData['rooms']) {
@@ -289,7 +358,138 @@ final class ProjectController extends AbstractController
 
     #[Route('/project/api/objectInteraction/{roomId}/{itemName}', name: 'object_interaction', methods: ['GET'])]
     public function objectInteraction($roomId, $itemName, Request $request): JsonResponse
-    {                 
+    {   
+        // Handle status on radio
+        if ($roomId === 'room_three' && $itemName === "radio") {
+            // Update status
+            $database = StorageHandler::getDatabaseFromStorage();
+
+            foreach($database['rooms'] as &$room) {
+                if($room['id'] === $roomId && isset($room['items'])) {
+                    foreach($room['items'] as &$item) {
+                        if ($item['item'] === "radio") {
+                            $item['status'] = 1;
+                            break 2;
+                        }
+                    }
+                }
+            }
+
+            // Get fresh inventory
+            $inventory = StorageHandler::getInventoryFromStorage();
+
+            // Save state
+            StorageHandler::saveGameData(null, $inventory, null, $database);
+
+            return $this->json([
+                'success' => true,
+                'infoDisplay' => "Radio is playing, about to get this breakout party started!",
+                'stateAltered' => true
+            ]);
+        }
+
+        // Handle status on forklift
+        if ($roomId === 'room_three' && $itemName === "forklift") {
+            // Check if key selected
+            $inventory = StorageHandler::getInventoryFromStorage();
+            $allItems = $inventory->getAllItems();
+            $isSelected = false;
+
+            foreach ($allItems as $ownedItem) {
+                if ($ownedItem['item'] === "key" && StorageHandler::isSelected($ownedItem)) {
+                    $isSelected = true;
+                    break;
+                }
+            }
+
+            if ($isSelected) {
+                // Update forklift status
+                $database = StorageHandler::getDatabaseFromStorage();
+
+                foreach($database['rooms'] as &$room) {
+                    if($room['id'] === $roomId && isset($room['items'])) {
+                        foreach($room['items'] as &$item) {
+                            if ($item['item'] === "forklift") {
+                                $item['status'] = 1;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+
+                // Remove item after use
+                $inventory->removeItem("key");
+
+                // Save state
+                StorageHandler::saveGameData(null, $inventory, null, $database);
+                
+                // Return json
+                return $this->json([
+                    'success' => true,
+                    'infoDisplay' => "The forklift is roaring, you are the captain now!",
+                    'stateAltered' => true
+                ]);
+            } else {
+                // Return json
+                return $this->json([
+                    'success' => false,
+                    'infoDisplay' => "The forklift requires a key to start."
+                ]);
+            }
+        }
+        
+        // Check for finalMove
+        // Catch if room four (win scene) given and the item clicked is {itemName}
+        if ($roomId === 'room_three' && $itemName === "x") {
+            // Get database from storage
+            $database = StorageHandler::getDatabaseFromStorage();
+
+            // Get roomData from database
+            $roomData = null;
+
+            foreach ($database['rooms'] as $room) {
+                if ($room['id'] === $roomId) {
+                    $roomData = $room;
+                    break;
+                }
+            }
+
+            if (!$roomData) {
+                return $this->json([
+                    'success' => false,
+                    'message' => "Room error in finalMovecheck in objectInteraction route"
+                ]);
+            }
+
+            // Key items status check
+            $radioStatus = 0;
+            $forkliftStatus = 0;
+
+            foreach($roomData['items'] as $item) {
+                if ($item['item'] === "radio") {
+                    $radioStatus = $item['status'] ?? 0;
+                }
+                if ($item['item'] === "forklift") {
+                    $forkliftStatus = $item['status'] ?? 0;
+                }
+            }
+
+            if ($radioStatus === 1 && $forkliftStatus === 1) {
+                // Win!
+                return $this->json([
+                    'success' => true,
+                    'finalMove' => true,
+                    'redirectTo' => 'final_move'
+                ]);
+            } else {
+                return $this->json([
+                    'success' => true,
+                    'message' => true
+                ]);
+            }
+        }
+
+        // Run normal objectInteraction        
         $hasItem = false;
         $matchingItem = null;
 
@@ -302,7 +502,7 @@ final class ProjectController extends AbstractController
         }
 
         // Get item data
-        $interactionItem = StorageHandler::findItemFromStorage($roomId, $itemName); // New method
+        $interactionItem = StorageHandler::findItemFromStorage($roomId, $itemName);
         
         // Check existance
         if (!$interactionItem) {
@@ -359,7 +559,5 @@ final class ProjectController extends AbstractController
             'success' => false,
             'message' => 'You need another item'
         ]);
-
-        // Should I instead load the database to a var I save in the savefile so I can alter it and save it with new state?
     }
 }

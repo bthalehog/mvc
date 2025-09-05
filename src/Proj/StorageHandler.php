@@ -169,34 +169,32 @@ class StorageHandler
         }
     }
 
-    /*
-    // Get inventory from storage
-    public static function updateInventoryInStorage($inventory): object
-    {
-        // Get gameData
-        $gameData = self::getGameData();
-
-        // Overwrite current inventory with new
-        $gameData['inventory'] = [
-            'items' => $inventory->getAllItems(),
-            'selectedItem' => $inventory->getSelectedItem()
-        ];
-
-        $room = $gameData['room'];
-
-        // Save data
-        self::saveGameData($gameData['room'], $inventory);
-
-        return new Inventory($inventory);
-    }
-        */
-
     // Get room from storage
-    public static function getRoomFromStorage()
+    public static function getRoomFromStorage($roomId)
     {
+        // Get database
+        $database = self::getDatabaseFromStorage();
+
+        // Verify
+        if (!isset($database['rooms'])) {
+            return null;
+        }
+
+        // Find room
+        foreach($database['rooms'] as $room) {
+            if ($room['id'] === $roomId) {
+                return $room;
+            }
+        }
+
+        return null;
+    }
+
+    // Get room data
+    public static function getRoomData() {
         $gameData = self::getGameData();
 
-        // Find inventory part
+        // Find room
         $roomData = $gameData['room'] ?? [];
 
         return $roomData;
@@ -242,6 +240,14 @@ class StorageHandler
         $inventory = new Inventory($game['inventory']['items'] ?? []);
 
         return self::saveGameData(null, $inventory) !== false;
+    }
+
+    // Clear savegilr
+    public static function clearSaveFile(): void
+    {   
+        $storageFile = __DIR__ . '/../Proj/data/save/storageHandler.json';
+        
+        file_put_contents($storageFile, '{}');
     }
 
     // Clear local storage

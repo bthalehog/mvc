@@ -38,7 +38,7 @@
       "info": "You find yourself standing at a crossroads, what to do!?",
       "items": [
         { "item": "note", "look": "A piece of paper", "investigate": "The number 4526 is written on the back", "interact": "Seems I pick things up habitually now", "use_with": null, "accept": null, "take": "yes", "graphics": "📃" },
-        { "item": "haphazardous_event", "look": "This door has a sign on it", "investigate": "It says: 'Security'", "interact": "GAME OVER - Don't you read signs?!", "use_with": null, "accept": null, "take": "no", "graphics": null }
+        { "item": "haphazardous_event", "look": "This door has a sign on it", "investigate": "It says: 'Security'", "interact": "GAME OVER - Don't you read signs?!", "use_with": null, "accept": null, "take": "no", "graphics": "deathtrap.png" }
       ],
       "directions": {
         "north": "deathtrap",
@@ -58,8 +58,8 @@
       "info": "Some sort of warehouse, there seem to be an exit at the far end, but don't let that stop you",
       "items":
         [
-          { "item": "forklift", "look": "A yellow fork lift", "investigate": "Real men are certified..", "interact": "I can't hear you over the sound of my FREEEEEEDOM!", "use_with": "x", "accepts": "key", "take": "no", "graphics": null, "status": 0 },
-          { "item": "radio", "look": "A transistor radio", "investigate": "It seems plugged in and ready to go", "interact": "You turn the radio on, it is playing Fortunate son", "use_with": "none", "take": "no", "graphics": null, "status": 0, "audio": "audiotrack.mp3" },
+          { "item": "forklift", "look": "A yellow fork lift", "investigate": "Real men are certified..", "interact": "I can't hear you over the sound of my FREEEEEEDOM!", "use_with": "x", "accept": "key", "take": "no", "graphics": null, "status": 0 },
+          { "item": "radio", "look": "A transistor radio", "investigate": "It seems plugged in and ready to go", "interact": "You turn the radio on, it really sets the mood for freedom.", "use_with": "none", "take": "no", "graphics": null, "status": 0, "audio": "audiotrack.mp3" },
           { "item": "emergency_exit", "look": "A door.", "investigate": "It's an emergency exit!", "interact": "Something is obstructing it.", "use_with": null, "accept": "forklift", "handshake": "Just an inch between you and the world!", "take": "no", "graphics": null, "status": 0},
           { "item": "x", "look": "An X.", "investigate": "Why would you draw that there?", "interact": "Would it be clickable if it has no use?", "use_with": null, "accept": "forklift", "handshake": "They can take away our certifications, but they can never take away, our freedom!", "take": "no", "graphics": null, "status": 0}
         ],
@@ -76,9 +76,25 @@
       "clue": "Party like it's the 4th of July, get in the mood for freedom"
     },
     {
-      "id": "room_four",
+      "id": "deathtrap",
+      "name": "Guards' quarters",
+      "info": "Curiosity killed the cat.",
+      "items": 
+        [
+        ],
+      "directions": {
+      },
+      "gates": {
+      },
+      "graphics": [
+        { "background": "deathtrap.png" }
+      ],
+      "clue": "What's that? I can't hear you over the sound of my freedom.."
+    },
+    {
+      "id": "final_move",
       "name": "Freedom",
-      "info": "You made it! Your fork-lift certification and lifelong thirst for freedom payed off!",
+      "info": "You made it! Your fork-lift certification payed off!",
       "items": 
         [
           { "item": "flag", "look": "Murica!", "investigate": "And home of the braaaaaave!", "use_with": null, "accept": null, "take": "no", "graphics": null }
@@ -88,7 +104,7 @@
       "gates": {
       },
       "graphics": [
-        { "background": "room4background.png" }
+        { "background": "freedom.jpg" }
       ],
       "clue": "What's that? I can't hear you over the sound of my freedom.."
     }

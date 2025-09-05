@@ -14,7 +14,6 @@ function clickedItem(roomNumber, clickedItem) {
 
     // Need to get the full item data here to access interaction and investigate
     // Made separate database in assets
-
     let fullItem = findItem(roomNumber, clickedItem);
 
     if (!fullItem) {
@@ -71,30 +70,45 @@ function clickedItem(roomNumber, clickedItem) {
         // Show message
         showMessage(fullItem.interact);
 
+        // Check for radio and forklift to call objectInteraction
+        if (fullItem.item === "radio") {
+            console.log("Radio call objectInteraction")
+            objectInteraction(roomNumber, fullItem.item)
+            return fullItem.interact
+        } else if (fullItem.item === "forklift") {
+            console.log("Forklift call objectInteraction")
+            objectInteraction(roomNumber, fullItem.item)
+            return fullItem.interact
+        } else if (fullItem.item === "x") {
+            console.log("X call objectInteraction")
+            objectInteraction(roomNumber, fullItem.item)
+            return fullItem.interact
+        } 
+        
         // Check for audio
         if(fullItem.audio) {
-            console.log("Audio param found in item, calling jukebox");
+            console.log("Audio param found in item, this is a mood setter.");
             playAudio(fullItem.audio);
             return;
         }
-
-        // Better to use websockets or just GET to route??
-        // addToInventory(roomNumber, clickedItem.name, clickedItem)
+        
+        // Show message
+        localStorage.setItem('currentMessage', fullItem.interact);
+        showMessage(fullItem.interact);
 
         // GET request
         const url = `/project/inventory/add?itemName=${encodeURIComponent(fullItem.item)}&roomNumber=${roomNumber}`;
         console.log('Redirect to: ', url);
         console.log('Item sent: ', fullItem.item);
         console.log('Room ', roomNumber)
-        
         window.location.href = url;
-
-        return fullItem.interact;
-    } 
-    else if (clickers[currentClicker] > 2){
+        
+        return fullItem.interact
+    } else if (clickers[currentClicker] > 2) {
         clickers[currentClicker] += 1;
 
-        showMessage("Nothing there");
+        // THis for all others when clicked three times already
+        showMessage("fullItem.interact");
         
         // Persist clicker
         localStorage.setItem(`${currentClicker}`, clickers[currentClicker].toString());
@@ -158,7 +172,13 @@ function objectInteraction(roomId, itemName) {
 
         try {
             const data = JSON.parse(text);
+
             showMessage(data.infoDisplay || data.message);
+
+            if (data.redirectTo) {
+                window.location.href = `/project/${data.redirectTo}`;
+                return;
+            }
         } catch (error) {
             console.error("JSON PARSE FAIL", error);
             showMessage("JSON error in js");

@@ -1,9 +1,9 @@
 <div id="inventory" class="inventory">
     {% if inventory.getAllItems() | length > 0 %}
-        <form id="itemsForm" method="POST" action="{{ path('inventory') }}">
+        <form id="itemsForm" class="itemsForm" method="POST" action="{{ path('inventory') }}">
             {% for item in inventory.getAllItems() %}
                 <!-- Debug each item -->
-                <p>Item: {{ item.item }} | Selected: {{ inventory.getSelectedItem() ? inventory.getSelectedItem().item : 'none' }} | Match: {{ inventory.getSelectedItem() and inventory.getSelectedItem().item == item.item ? 'YES' : 'NO' }}</p>
+                <!-- <p>Item: {{ item.item }} | Selected: {{ inventory.getSelectedItem() ? inventory.getSelectedItem().item : 'none' }} | Match: {{ inventory.getSelectedItem() and inventory.getSelectedItem().item == item.item ? 'YES' : 'NO' }}</p> -->
                 
                 <button type="submit"
                         name="{{ item.item }}"

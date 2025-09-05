@@ -92,6 +92,7 @@ All subs actions listed below.
 20250901 New tag v10.0.5, Select item working, objectInteraction working, added saveState-calls in item-methods, moved select to server-side.  
 20250902 New tag v10.0.6, Added "gates" to database, RoomHandler move function updated with gate-logic, reduced nesting.  
 20250903 New tag v10.0.7, All room routing working, radio enabled to play audio on interaction.  
+20250904 New tag v10.0.8, Added checks for forklift and radio in js clickedItem, updated objectInteraction, added finalMove-check, 
 
 
 
