@@ -33,6 +33,11 @@ function clickedItem(roomNumber, clickedItem) {
         clickers[currentClicker] = 0;
     }
 
+    if (fullItem.item === "forklift") {
+        objectInteraction(roomNumber, fullItem.item);
+        return fullItem.interact;
+    }
+
     if (clickers[currentClicker] === 0) {
         clickers[currentClicker] += 1;
         
@@ -74,7 +79,13 @@ function clickedItem(roomNumber, clickedItem) {
         if (fullItem.item === "radio") {
             console.log("Radio call objectInteraction")
             objectInteraction(roomNumber, fullItem.item)
-            return fullItem.interact
+            
+            // Check for audio
+            if(fullItem.audio) {
+                console.log("Audio param found in item, this is a mood setter.");
+                playAudio(fullItem.audio);
+                return;
+            }
         } else if (fullItem.item === "forklift") {
             console.log("Forklift call objectInteraction")
             objectInteraction(roomNumber, fullItem.item)
@@ -83,13 +94,6 @@ function clickedItem(roomNumber, clickedItem) {
             console.log("X call objectInteraction")
             objectInteraction(roomNumber, fullItem.item)
             return fullItem.interact
-        } 
-        
-        // Check for audio
-        if(fullItem.audio) {
-            console.log("Audio param found in item, this is a mood setter.");
-            playAudio(fullItem.audio);
-            return;
         }
         
         // Show message
@@ -107,8 +111,8 @@ function clickedItem(roomNumber, clickedItem) {
     } else if (clickers[currentClicker] > 2) {
         clickers[currentClicker] += 1;
 
-        // THis for all others when clicked three times already
-        showMessage("fullItem.interact");
+        // This for all others when clicked three times already
+        showMessage(fullItem.interact);
         
         // Persist clicker
         localStorage.setItem(`${currentClicker}`, clickers[currentClicker].toString());
@@ -234,6 +238,25 @@ function playAudio(trackName) {
     })
 }
 
+function clearClickers() {
+    console.log("Clearing clickers..")
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+        let key = localStorage.key(i);
+
+        if (key && key.includes('-') && !key.includes('.')) {
+            console.log("Removing", key);
+            localStorage.removeItem(key);
+        }
+    }
+
+    localStorage.removeItem('currentMessage');
+
+    // Reset clickers object
+    clickers = {};
+
+    console.log("Clickers cleared on reset");
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     let currentMessage = localStorage.getItem('currentMessage');
 
@@ -247,5 +270,6 @@ globalThis.clickedItem = clickedItem;
 globalThis.showMessage = showMessage;
 globalThis.objectInteraction = objectInteraction;
 globalThis.playAudio = playAudio;
+globalThis.clearClickers = clearClickers;
 
-export { clickedItem, showMessage, findItem, objectInteraction, selectInventoryItem, playAudio }
+export { clickedItem, showMessage, findItem, objectInteraction, selectInventoryItem, playAudio, clearClickers }

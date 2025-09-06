@@ -41,7 +41,8 @@ final class ProjectController extends AbstractController
             'id' => "proj",
             'info' => $info,
             'rules' => $rules,
-            'inventory' => $this->inventory // Added
+            'inventory' => $this->inventory, // Added
+            'clearClickers' => false
         ];
 
         // Set room var
@@ -129,7 +130,8 @@ final class ProjectController extends AbstractController
         // Set data for rendering
         $data = [
             'room' => $roomOne,
-            'inventory' => $this->inventory
+            'inventory' => $this->inventory,
+            'clearClickers' => false
         ];
 
         return $this->render('proj/room_one.html.twig', $data);
@@ -151,7 +153,8 @@ final class ProjectController extends AbstractController
         // Structure for rendering
         $data = [
             'room' => $roomTwo,
-            'inventory' => $this->inventory
+            'inventory' => $this->inventory,
+            'clearClickers' => false
         ];
 
         return $this->render('proj/room_two.html.twig', $data);
@@ -173,7 +176,8 @@ final class ProjectController extends AbstractController
         // Structure for rendering
         $data = [
             'room' => $roomThree,
-            'inventory' => $this->inventory
+            'inventory' => $this->inventory,
+            'clearClickers' => false
         ];
 
         return $this->render('proj/room_three.html.twig', $data);
@@ -191,6 +195,7 @@ final class ProjectController extends AbstractController
         // Clear state and savefile
         StorageHandler::clearStorage();
         StorageHandler::clearSaveFile();
+        StorageHandler::clearCache();
 
         // Structure for rendering
         $data = [
@@ -198,10 +203,11 @@ final class ProjectController extends AbstractController
             'inventory' => $this->inventory,
             'graphics' => [
                 ['background' => 'deathtrap.png']
-            ]
+            ],
+            'clearClickers' => true
         ];
 
-        return $this->render('proj/death_trap.html.twig', $data);
+        return $this->render('proj/deathtrap.html.twig', $data);
     }
 
     #[Route('/project/final_move', name: 'final_move')]
@@ -218,12 +224,14 @@ final class ProjectController extends AbstractController
         // Structure for rendering
         $data = [
             'room' => $finalMove,
-            'inventory' => $this->inventory
+            'inventory' => $this->inventory,
+            'clearClickers' => true
         ];
 
         // Clear and Save state
         StorageHandler::clearStorage();
         StorageHandler::clearSaveFile();
+        StorageHandler::clearCache();
 
         // StorageHandler::saveGameData($finalMove, $this->inventory);
 
@@ -304,8 +312,10 @@ final class ProjectController extends AbstractController
 
             // Check if take: "no" or jus list non-takeables
             // Can also if in array
-            if ($itemName === "emergency_exit" || $itemName === "forklift" || $itemName === "x" || $itemName === "deathtrap") {
-                
+            if ($itemName === "emergency_exit" || $itemName === "forklift" || $itemName === "x" || $itemName === "haphazardous_event") {
+                if ($itemName === "haphazardous_event") {
+                    return $this->redirectToRoute('deathtrap');
+                }
                 return $this->redirectToRoute('room_three');
             }
 

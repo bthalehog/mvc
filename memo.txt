@@ -322,10 +322,18 @@ Fixe no pick up on unpickable items, added final_move route
 Added final-route check in objectInteraction
 Fixed deathtrap by hardcoding pic and creating own template
 Moved playAudio to after itemcheck in clickedItem (never had time to call status-update on radio)
+Added part for resetting when finished
+Added clearStorage after deathtrap
+Moved playAudio inside the check in js objectInteraction
+index-template updated to handle clickers on reset
+Added clearing clickers on reset
+Fixed clearClickers-error by moving script to index-template instead of call from adventure.js
+Fixed deathtrap interaction on door
+Fixed flaw; key interaction on truck for status change on uneven clicks
 
 TODO:
 
-Add part for resetting when finished
-Move playAudio to js in the response for objectInteraction
-Fix deathtrap interaction on door, clearStorage after deathtrap
-Stop deathtrap from adding to inv
+Test code
+run scrutinizer
+add badges to README
+write report

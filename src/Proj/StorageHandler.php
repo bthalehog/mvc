@@ -2,6 +2,8 @@
 
 namespace App\Proj;
 
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+
 /**
  * Handles game state presistency
  */
@@ -259,6 +261,12 @@ class StorageHandler
         $database = null;
 
         return self::saveGameData($room, $inventory, $objectStates, $database) !== false;
+    }
+
+    // Clear cache
+    public static function clearCache(): void {
+        $cache = new FilesystemAdapter();
+        $cache->clear();
     }
 
     // Remodel to save the inventory to state for use as database

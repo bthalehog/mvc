@@ -1,25 +1,27 @@
 # My repo README
 
-Welcome to the README-file for my github-repo for the course Mvc givet at BTH.  
+Welcome to the README-file for my github-repo for the course Mvc givet at BTH.
+
 https://github.com/bthalehog/mvc  
 
-All information regarding version-handling for the webpage will be kept here.  
+## About this repository
+This repository exists as part of the course MVC given at BTH 2025.
+The repo holds information on repo activity and tagging for all stages of the course.
 
-## Tags:
+- About this repository
+- Clone and start
+- Action log
+- Badges
 
-### v1.0.0
-Tag for uploading report on kmom01.  
-All subs actions listed below.  
+## Clone and start
 
-### v2.0.0
-Tag for uploading report on kmom02.  
-All subs actions listed below.  
+To clone this repository:  
+- Install symfony, encore, etc...  
+- Save the .... into your ... folder  
+- Open terminal - sype symfony:start server  
+- Browse to 127.0.0.1:8000  
 
-### v3.0.0
-Tag for uploading report on kmom03.  
-All subs actions listed below. 
-
-## Actions log:
+## Action log
 
 ### _Kmom01_
 20250402 Added base structure for webpage (Symfony).   
@@ -92,14 +94,19 @@ All subs actions listed below.
 20250901 New tag v10.0.5, Select item working, objectInteraction working, added saveState-calls in item-methods, moved select to server-side.  
 20250902 New tag v10.0.6, Added "gates" to database, RoomHandler move function updated with gate-logic, reduced nesting.  
 20250903 New tag v10.0.7, All room routing working, radio enabled to play audio on interaction.  
-20250904 New tag v10.0.8, Added checks for forklift and radio in js clickedItem, updated objectInteraction, added finalMove-check, 
-
-
+20250904 New tag v10.0.8, Added checks for forklift and radio in js clickedItem, updated objectInteraction, added finalMove-check, added about-route, reset on deathtrap and final_move.
+20250906 New tag v10.0.9, Updated README, key-selected click interaction with forklift fixed, all resets working.   
 
 ### Badges earned
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)
 [![Code Coverage](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/build-status/main)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
+
+### Badges earned for kmom10
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/build-status/main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence) // update these
 
 ![](./public/img/bwtailgun.png)

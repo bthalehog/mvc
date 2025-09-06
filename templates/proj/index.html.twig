@@ -24,6 +24,27 @@
 
   {% endblock %}
 
+  {% if clearClickers %}
+    <script>
+      console.log("Clearing clickers..");
+
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+          let key = localStorage.key(i);
+
+          if (key && key.includes('-') && !key.includes('.')) {
+              console.log("Removing", key);
+              localStorage.removeItem(key);
+          }
+      }
+
+      localStorage.removeItem('currentMessage');
+
+      // Reset clickers object
+      clickers = {};
+
+      console.log("Clickers cleared on reset");
+    </script>
+  {% endif %}
 </body>
 
 <div id="componentsHolder" class="componentsHolder">
