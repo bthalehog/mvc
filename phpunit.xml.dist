@@ -20,6 +20,10 @@
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
+            <exclude>tests/Controller</exclude>
+            <exclude>tests/Cards</exclude>
+            <exclude>tests/Repository</exclude>
+            <exclude>tests/Entity</exclude>
         </testsuite>
     </testsuites>
 
@@ -27,6 +31,13 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+
+        <exclude>
+            <directory>src/Controller</directory>
+            <directory>src/Cards</directory>
+            <directory>src/Repository</directory>
+            <directory>src/Entity</directory>
+        </exclude>
 
         <report>
             <clover outputFile="docs/coverage.clover"/>

@@ -5,7 +5,7 @@ namespace App\Proj;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
- * Handles game state presistency
+ * Handles game state persistency
  */
 class StorageHandler
 {
@@ -25,7 +25,10 @@ class StorageHandler
         $this->initializeDatabase();
     }
 
-    // Initialize by assigning database from json to savefile
+    /**
+     * Initialize database by assigning from json to savefile.
+     * @return void
+     */
     private function initializeDatabase(): void {
         $gameData = self::getGameData();
 
@@ -40,8 +43,10 @@ class StorageHandler
         }
     }
 
-    // Save all data
-    // Should hold room, inventory, database (added) and actions taken (doors open etc) playe rnot needed since always one
+    /**
+     * Save game data.
+     * @return bool from file_put_contents
+     */
     public static function saveGameData($room = null, $inventory = null, $objectStates = null, $database = null): bool
     {   
         $gameData = self::getGameData();
@@ -65,22 +70,14 @@ class StorageHandler
             $gameData['database'] = $database;
         }
 
-        /*
-        $gameData = [
-            'room' => $room,
-            'inventory' => [
-                'items' => $inventory->getAllItems(),
-                'selectedItem' => $inventory->getSelectedItem()
-            ],
-            'objectStates' => self::getGameData()['objectStates'] ?? [],
-            'database' => self::getGameData()['database'] ?? []
-        ];
-        */
-
         return file_put_contents(self::$saveFile, json_encode($gameData, JSON_PRETTY_PRINT));
     }
 
-    // Get all data
+    // Might not need this after saving database to file
+    /**
+     * Get all game data.
+     * @return array of decoded database-data
+     */
     public static function getGameData(): array
     {
         if (!file_exists(self::$saveFile))
@@ -94,14 +91,20 @@ class StorageHandler
         return $decodedData ?? [];
     }
 
-    // Get database from storage
+    /**
+     * Get database from storage
+     * @return array of decoded database-data
+     */
     public static function getDatabaseFromStorage(): array {
         $gameData = self::getGameData();
 
         return $gameData['database'] ?? [];
     }
 
-    // Update database in storage
+    /**
+     * Update database in storage
+     * @return bool from saveGameData()
+     */
     public static function updateDatabaseInStorage($database): bool {
         $gameData = self::getGameData();
         $gameData['database'] = $database;
@@ -113,7 +116,10 @@ class StorageHandler
         return self::saveGameData($room, $inventory);
     }
 
-    // Get inventory from storage
+    /**
+     * Get inventory from storage.
+     * @return object Inventory
+     */
     public static function getInventoryFromStorage(): object
     {
         $gameData = self::getGameData();
@@ -132,47 +138,11 @@ class StorageHandler
         return $newInventory;
     }
 
-    // Update room in gameData (storage)
-    public static function updateRoom($room) {
-        return self::saveGameData($room);
-    }
-
-    // Update inventory in gameData (storage)
-    public static function updateInventory($inventory) {
-        return self::saveGameData(null, $inventory);
-    }
-
-    // Might not need this after saving database to state
-    // Update object-states in gameData (storage)
-    public static function updateObjectStates($objectStates) {
-        return self::saveGameData(null, null, $objectStates);
-    }
-
-    // Might not need this after saving database to state
-    // Update object-states in gameData (storage)
-    public static function updateItemStatus($status) {
-        $gameData = self::getGameData();
-        $database = self::getDatabaseFromStorage();
-
-        if (!isset($database['rooms'])) {
-            return false;
-        }
-
-        // Find and update status in database
-        foreach ($database['rooms'] as $room) {
-            if ($room['id'] == $roomId && isset($room['items'])) {
-                foreach ($room['items'] as $item) {
-                    $item['status'] = $status;
-                    $gameData['database'] = $database;
-
-                    return self::saveGameData(null, null, null); // Save database (handled inside saveGameData)
-                }
-            }
-        }
-    }
-
-    // Get room from storage
-    public static function getRoomFromStorage($roomId)
+    /**
+     * Get room from storage
+     * @return mixed room or null;
+     */
+    public static function getRoomFromStorage($roomId): mixed
     {
         // Get database
         $database = self::getDatabaseFromStorage();
@@ -192,8 +162,11 @@ class StorageHandler
         return null;
     }
 
-    // Get room data
-    public static function getRoomData() {
+    /**
+     * Get room data (not storage file)
+     * @return array of roomData;
+     */
+    public static function getRoomData(): array {
         $gameData = self::getGameData();
 
         // Find room
@@ -202,49 +175,10 @@ class StorageHandler
         return $roomData;
     }
 
-    // Get room status from storage
-    public static function getRoomStatusFromStorage()
-    {
-        $gameData = self::getGameData();
-
-        // Find inventory part
-        $roomData = $gameData['room'] ?? [];
-
-        return $roomData['status'];
-    }
-
-    // Set item to local storage
-    public static function setItem($key, $value): bool
-    {
-        $game = self::getGameData();
-        $game[$key] = $value;
-
-        $room = $game['room'];
-        $inventory = new Inventory($game['inventory']['items'] ?? []);
-
-        return self::saveGameData($room, $inventory) !== false;
-    }
-
-    // Get item from local storage
-    public function getItem($key)
-    {
-        $game = self::getGameData();
-
-        return $game[$key];
-    }
-
-    // Remove item from local storage
-    public static function removeItem($key): bool
-    {
-        $game = self::getGameData();
-        unset($game['inventory']->getAllItems()[$key]); // Possible?
-
-        $inventory = new Inventory($game['inventory']['items'] ?? []);
-
-        return self::saveGameData(null, $inventory) !== false;
-    }
-
-    // Clear savegilr
+    /**
+     * Clear savefile (storage)
+     * @return void
+     */
     public static function clearSaveFile(): void
     {   
         $storageFile = __DIR__ . '/../Proj/data/save/storageHandler.json';
@@ -252,7 +186,10 @@ class StorageHandler
         file_put_contents($storageFile, '{}');
     }
 
-    // Clear local storage
+    /**
+     * Clear storage
+     * @return bool from saveGameData();
+     */
     public static function clearStorage(): bool
     {
         $room = [];
@@ -263,7 +200,10 @@ class StorageHandler
         return self::saveGameData($room, $inventory, $objectStates, $database) !== false;
     }
 
-    // Clear cache
+    /**
+     * Clear cache
+     * @return void
+     */
     public static function clearCache(): void {
         $cache = new FilesystemAdapter();
         $cache->clear();
@@ -271,7 +211,10 @@ class StorageHandler
 
     // Remodel to save the inventory to state for use as database
 
-    // Set object state
+    /**
+     * setObjectState
+     * @return bool from saveGameData();
+     */
     public static function setObjectState($roomId, $itemName, $state) {
         $game = self::getGameData();
 
@@ -286,8 +229,11 @@ class StorageHandler
         return self::saveGameData(null, null, $game['objectStates']); // Now update specific part
     }
 
-    // Get object state
-    public static function getObjectState($roomId, $itemName) {
+    /**
+     * Get object state
+     * @return mixed array or null
+     */
+    public static function getObjectState($roomId, $itemName): mixed {
         $game = self::getGameData();
 
         // Set object states
@@ -300,13 +246,11 @@ class StorageHandler
         return $game['objectStates']['key'] ?? null;
     }
 
-    // Check if item state is matching, need a bool
-    public static function matchItemState($roomId, $itemName, $state) {
-        return self::getObjectState($roomId, $itemName) === $state;
-    }
-
-    // Set item status variable
-    public static function setItemStatus($roomId, $itemName, $status) {
+    /**
+     * Set item status
+     * @return bool
+     */
+    public static function setItemStatus($roomId, $itemName, $status): bool {
         // Add a try
         $currentItem = self::getItem($roomId, $itemName);
         $currentItem->status = $status;
@@ -314,9 +258,11 @@ class StorageHandler
         return true;
     }
 
-    // Get item status variable
-    // Alter for internal database
-    public static function getItemStatus($roomId, $itemName) {
+    /**
+     * Get item status
+     * @return mixed as string or null
+     */
+    public static function getItemStatus($roomId, $itemName): mixed {
         $database = self::getDatabaseFromStorage();
 
         if (!isset($database['rooms'])) {
@@ -334,7 +280,11 @@ class StorageHandler
         }
     }
 
-    public static function findItemFromStorage($roomId, $itemName) {
+    /**
+     * Find item from storage
+     * @return mixed as array of itemData or null
+     */
+    public static function findItemFromStorage($roomId, $itemName): mixed {
         $database = StorageHandler::getDatabaseFromStorage();
 
         if(!isset($database['rooms'])) {
@@ -350,9 +300,14 @@ class StorageHandler
                 }
             }
         }
+
         return null;
     }
 
+    /**
+     * Check if item is selected
+     * @return bool
+     */
     public static function isSelected($item): bool {
         // Is this syntax working?
         $inventory = self::getInventoryFromStorage();

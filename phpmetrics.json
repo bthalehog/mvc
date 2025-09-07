@@ -1,0 +1,21 @@
+{
+    "includes": [
+        "../../src/Proj",
+        "../../src/Controller/ProjectController.php"
+    ],
+    "exclude": [
+      "../../test[s]?",
+      "../../src/Proj/data"
+    ],
+    "report": {
+        "html": "../../docs/metrics"
+    },
+    "plugins": {
+        "git": {
+            "binary": "git"
+        },
+        "junit": {
+            "file": "docs/junit.xml"
+        }
+    }
+}

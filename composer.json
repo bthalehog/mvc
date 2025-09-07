@@ -99,7 +99,11 @@
         ],
         "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
         "csfix:dry": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v",
-        "phpmetrics": "tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json"
+        "phpmetrics": "tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json",
+        "phphtmlrep": "tools/phpmetrics/vendor/bin/phpmetrics --report-html=docs/metrics src",
+        "phpprojecthtml": "tools/phpmetrics/vendor/bin/phpmetrics --report-html=docs/metrics/project src/Proj",
+        "phpproject": "tools/phpmetrics/vendor/bin/phpmetrics src/Proj",
+        "phpunit-coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --exclude-group=integration,slow"
     },
     "conflict": {
         "symfony/symfony": "*"

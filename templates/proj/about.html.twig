@@ -3,14 +3,20 @@
 {% block body %}
     <h1 class="roomName">{{ headline }}</h1>
 
-      <div class="aboutInfo">
+    <div class="aboutInfo">
         {{ info|raw }}
+    </div>
+
+    <div class="aboutOrganizer">
+      <div class="about aboutInstall">
+        {{ install|raw }}
       </div>
       
-      <div class="aboutCheat">
+      <div class="about aboutCheat">
         {{ cheat|raw }}
-
-        <button id="startButton" class="startButton" onclick="window.location.href='{{ path('room_one') }}'">Let's go!</button>
       </div>
+    </div>
+
+    <button id="startButton" class="startButton" onclick="window.location.href='{{ path('room_one') }}'">Let's go!</button>
 
 {% endblock %}

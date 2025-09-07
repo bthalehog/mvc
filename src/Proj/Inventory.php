@@ -4,22 +4,34 @@ namespace App\Proj;
 
 use App\Proj\StorageHandler;
 
+/**
+ * Handles items in game inventory
+ */
 class Inventory {
     private $items = [];
     private $selectedItem = null;
 
-    // Get current inventory, need failsafe!!!
+    /**
+     * Get current inventory,.
+     * @return void
+     */
     public function __construct(array $items = []) {
         // $inventory = StorageHandler::getInventoryFromStorage();
         $this->items = $items;
     }
 
+    /**
+     * Get all items
+     * @return array as representation of items in inventory.
+     */
     public function getAllItems(): array {
         return $this->items;
     }
 
-    // Adds item based on the itemData from the room database
-    // Define and form it
+    /**
+     * Add item to inventory
+     * @return string as confirmation "Item added".
+     */
     public function addItem($itemData) {
         // Push to item array
         $this->items[] = $itemData;
@@ -27,6 +39,10 @@ class Inventory {
         return "Item added";
     }
 
+    /**
+     * Remove item from
+     * @return bool
+     */
     public function removeItem($itemName): bool {
         foreach($this->items as $key => $item) {
             if ($item['item'] == $itemName) {
@@ -45,6 +61,10 @@ class Inventory {
         return false;
     }
 
+    /**
+     * Select item in inventory
+     * @return array objectData.
+     */
     public function select($itemName) {
         // echo "Selecting" . $itemName . "<br>";
 
@@ -77,6 +97,10 @@ class Inventory {
         return null;
     }
 
+    /**
+     * Get selected item
+     * @return array of itemData.
+     */
     public function getSelectedItem() {
         if ($this->selectedItem !== null && isset($this->items[$this->selectedItem])) {
             return $this->items[$this->selectedItem];
@@ -85,6 +109,10 @@ class Inventory {
         return null;
     }
 
+    /**
+     * Clear inventory
+     * @return void
+     */
     public function clearInventory() {
         $this->items = [];
         $this->selectedItem = null;

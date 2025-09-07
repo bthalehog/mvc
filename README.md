@@ -95,7 +95,9 @@ To clone this repository:
 20250902 New tag v10.0.6, Added "gates" to database, RoomHandler move function updated with gate-logic, reduced nesting.  
 20250903 New tag v10.0.7, All room routing working, radio enabled to play audio on interaction.  
 20250904 New tag v10.0.8, Added checks for forklift and radio in js clickedItem, updated objectInteraction, added finalMove-check, added about-route, reset on deathtrap and final_move.
-20250906 New tag v10.0.9, Updated README, key-selected click interaction with forklift fixed, all resets working.   
+20250906 New tag v10.0.9, Updated README, key-selected click interaction with forklift fixed, all resets working.  
+20250907 New tag v10.1.0, Cleared unused functions, added unittest for Inventory and RoomHandler  
+
 
 ### Badges earned
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)

@@ -16,8 +16,6 @@ use App\Proj\Inventory;
 final class ProjectController extends AbstractController
 {   
     private Inventory $inventory;
-    private StorageHandler $storageHandler;
-    private RoomHandler $roomHandler;
 
     // Added for building inventory and storage
     public function __construct() {
@@ -64,16 +62,16 @@ final class ProjectController extends AbstractController
         $info = "
             This is an adventure game made as examination project in the course MVC given at BTH 2025.
             The game consists of a number of rooms, items and doors that, if combined correctly, will lead you to the exit.<br>
-            <br>
+            
             In the rooms are doors that sometimes are locked and can be opened.<br>
             To have an item interact with another, select the item in your inventory and then click the item you want to interact with.<br>
             Navigation between rooms is done using the navigation-arrows in the panel.<br>
-            <br>
+            
             In this scenario you find yourself waking up in a closet with an urge to get out. You have no memory of how you ended up there just a burning sensation that you should get out.
         ";
         
         $cheat = "
-            <ul class='aboutCheat'>
+            <ul class='about'>
                 <li><strong>Room 1 - Janitor's closet</strong></li>
                     <ul>
                         <li>items: key (in coat), cup (in shelf, no use), wire (in bin)</li>
@@ -102,10 +100,42 @@ final class ProjectController extends AbstractController
                 <br>
         ";
 
+        $install = "<ul class='about'>
+                <li><strong>Install the following:</li>
+                    <ul>
+                        <li>PHP 8.1 or higher</li>
+                        <li>Composer</li>
+                        <li>Git</li>
+                        <li>Node.js</li>
+                        <li>Encore</li>
+                    </ul>
+
+                <li>Clone the repository</li>
+                    <ul>
+                        <li>git clone 'repository-directory'</li>
+                        <li>cd 'project-directory'</li>
+                    </ul>
+                
+                <li>Install dependencies</li>
+                    <ul>
+                        <li>composer install</li>
+                        <li>npm install</li>
+                    </ul>
+                
+                <li>Run build and launch</li>
+                    <ul>
+                        <li>npm run build</li>
+                        <li>symfony server:start</li>
+                        <li>Open in <a href='http://127.0.0.1:8000'>browser</a></li>
+                    </ul>
+        ";
+
         $data = [
             'headline' => $headline,
             'info' => $info,
-            'cheat' => $cheat
+            'cheat' => $cheat,
+            'install' => $install,
+            'clearClickers' => false
         ];
 
         return $this->render('proj/about.html.twig', $data);

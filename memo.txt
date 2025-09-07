@@ -330,6 +330,8 @@ Added clearing clickers on reset
 Fixed clearClickers-error by moving script to index-template instead of call from adventure.js
 Fixed deathtrap interaction on door
 Fixed flaw; key interaction on truck for status change on uneven clicks
+Cleared unused functions remaining from before separate database init implemented.
+Added unittest for inventory and RoomHandler
 
 TODO:
 
@@ -337,3 +339,4 @@ Test code
 run scrutinizer
 add badges to README
 write report
+unit test StroageHanlder, build mock files for comparison

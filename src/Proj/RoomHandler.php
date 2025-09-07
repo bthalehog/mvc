@@ -5,17 +5,20 @@ namespace App\Proj;
 use App\Proj\data\database\game_rooms;
 
 /**
- * Handles room loading
+ * Handles room loading.
  */
 class RoomHandler
 {
-    public function __construct($room)
+    public function __construct()
     {
-        $this->room = $this->getRoomData($room);
+        $this->storageHandler = new StorageHandler();
+        $this->room = null;
     }
 
-    // Get room data
-    public static function getRoomData($roomId): ?array
+    /**
+     * Get room data.
+     */
+    public static function getRoomData($roomId)
     {
         $roomsDatabase = __DIR__ . '/data/database/game_rooms.json';
 
@@ -36,27 +39,11 @@ class RoomHandler
             }
         }
     }
-    
 
-    // Get all rooms
-    public static function getAllRooms(): ?array
-    {
-        $roomsDatabase = __DIR__ . '/data/database/game_rooms.json';
-
-        if (!file_exists($roomsDatabase)) {
-            return "No database found";
-        }
-
-        $decodedDatabase = json_decode(file_get_contents($roomsDatabase), true);
-
-        if (!$decodedDatabase) {
-            return "No decoded database found";
-        }
-
-        return $decodedDatabase;
-    }
-
-    // Handle user move input
+    /**
+     * Handle user move.
+     * @return array holding bool and route.
+     */
     public static function move($direction, $currentRoomId): array {
         $database = StorageHandler::getDatabaseFromStorage();
         $currentRoomData = null;
