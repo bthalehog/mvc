@@ -26,10 +26,4 @@ build:
                 coverage:
                     file: "docs/coverage.clover"
                     format: "php-clover"
-
-branches:
-    only:
-        - main
-        - v*
-        - tags/*
         
