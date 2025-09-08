@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.021195">
-    <testsuite name="Project Test Suite" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.021195">
-      <testsuite name="App\Proj\InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.005535">
-        <testcase name="testConstruct" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="18" assertions="1" time="0.005535"/>
+  <testsuite name="" tests="28" assertions="62" errors="0" warnings="0" failures="0" skipped="0" time="0.039970">
+    <testsuite name="Project Test Suite" tests="28" assertions="62" errors="0" warnings="0" failures="0" skipped="0" time="0.039970">
+      <testsuite name="App\Proj\InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" tests="11" assertions="31" errors="0" warnings="0" failures="0" skipped="0" time="0.015208">
+        <testcase name="testConstruct" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="30" assertions="2" time="0.008387"/>
+        <testcase name="testConstructorEmptyArray" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="42" assertions="2" time="0.000871"/>
+        <testcase name="testConstructorWithItemsArray" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="54" assertions="2" time="0.000813"/>
+        <testcase name="testAddItem" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="72" assertions="4" time="0.000716"/>
+        <testcase name="testRemoveItem" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="90" assertions="3" time="0.000695"/>
+        <testcase name="testRemoveItemNotInInventory" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="114" assertions="2" time="0.000615"/>
+        <testcase name="testSelectItem" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="127" assertions="3" time="0.000388"/>
+        <testcase name="testSelectItemNotInInventory" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="145" assertions="2" time="0.000655"/>
+        <testcase name="testDeselectItem" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="158" assertions="6" time="0.001301"/>
+        <testcase name="testGetSelected" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="186" assertions="3" time="0.000380"/>
+        <testcase name="testGetSelectedWithNone" class="App\Proj\InventoryTest" classname="App.Proj.InventoryTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/InventoryTest.php" line="207" assertions="2" time="0.000387"/>
       </testsuite>
-      <testsuite name="App\Proj\RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.015343">
-        <testcase name="testConstruct" class="App\Proj\RoomHandlerTest" classname="App.Proj.RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" line="19" assertions="1" time="0.015343"/>
+      <testsuite name="App\Proj\RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" tests="4" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="0.003095">
+        <testcase name="testGetRoomData" class="App\Proj\RoomHandlerTest" classname="App.Proj.RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" line="75" assertions="2" time="0.001816"/>
+        <testcase name="testMoveBlocked" class="App\Proj\RoomHandlerTest" classname="App.Proj.RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" line="87" assertions="2" time="0.000477"/>
+        <testcase name="testMove" class="App\Proj\RoomHandlerTest" classname="App.Proj.RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" line="103" assertions="1" time="0.000401"/>
+        <testcase name="testMoveInvalidRoom" class="App\Proj\RoomHandlerTest" classname="App.Proj.RoomHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/RoomHandlerTest.php" line="118" assertions="2" time="0.000401"/>
       </testsuite>
-      <testsuite name="App\Proj\StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.000317">
-        <testcase name="testConstruct" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="18" assertions="1" time="0.000317"/>
+      <testsuite name="App\Proj\StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" tests="13" assertions="24" errors="0" warnings="0" failures="0" skipped="0" time="0.021667">
+        <testcase name="testSaveGameDataDatabase" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="52" assertions="1" time="0.012460"/>
+        <testcase name="testSaveAndGetDatabase" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="74" assertions="1" time="0.000720"/>
+        <testcase name="testSaveGameDataRoom" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="96" assertions="3" time="0.000754"/>
+        <testcase name="testSaveAndGetRoom" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="116" assertions="2" time="0.000689"/>
+        <testcase name="testGetRoomData" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="133" assertions="1" time="0.000664"/>
+        <testcase name="testSaveGameDataInventory" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="149" assertions="1" time="0.000679"/>
+        <testcase name="testSaveAndGetInventory" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="165" assertions="3" time="0.000698"/>
+        <testcase name="testGetRoomFromStorage" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="184" assertions="2" time="0.000676"/>
+        <testcase name="testGetItemStatus" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="207" assertions="1" time="0.000663"/>
+        <testcase name="testFindItemFromStorage" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="234" assertions="3" time="0.000676"/>
+        <testcase name="testIsSelected" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="263" assertions="1" time="0.000698"/>
+        <testcase name="testClearStorage" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="285" assertions="3" time="0.000972"/>
+        <testcase name="testClearSavefile" class="App\Proj\StorageHandlerTest" classname="App.Proj.StorageHandlerTest" file="/home/alehog/dbwebb-kurser/mvc/me/report/tests/Proj/StorageHandlerTest.php" line="308" assertions="2" time="0.001319"/>
       </testsuite>
     </testsuite>
   </testsuite>

@@ -94,7 +94,7 @@ class RoomHandlerTest extends TestCase
 
         // Test
         $this->assertFalse($result['success']);
-        $this->assertEquals("No way!", $result['message']);
+        $this->assertEquals("The door is locked.", $result['message']);
     }
 
     /**

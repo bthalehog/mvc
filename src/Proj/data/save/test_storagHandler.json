@@ -1,0 +1,25 @@
+{
+    "database": {
+        "rooms": [
+            {
+                "id": "room_one",
+                "name": "Janitor's closet",
+                "items": [
+                    {
+                        "item": "door",
+                        "status": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "room": {
+        "id": "room_one",
+        "name": "Janitor's closet"
+    },
+    "inventory": {
+        "items": [],
+        "selectedItem": null
+    },
+    "objectStates": []
+}

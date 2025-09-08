@@ -9,7 +9,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
  */
 class StorageHandler
 {
-    private static string $saveFile = __DIR__ . '/data/save/storageHandler.json';
+    protected static string $saveFile = __DIR__ . '/data/save/storageHandler.json';
 
     public function __construct(string $file = 'storageHandler.json')
     {
@@ -177,13 +177,12 @@ class StorageHandler
 
     /**
      * Clear savefile (storage)
+     * Updated to relative path for testing-purposes
      * @return void
      */
     public static function clearSaveFile(): void
-    {   
-        $storageFile = __DIR__ . '/../Proj/data/save/storageHandler.json';
-        
-        file_put_contents($storageFile, '{}');
+    {        
+        file_put_contents(self::$saveFile, '{}');
     }
 
     /**
@@ -207,55 +206,6 @@ class StorageHandler
     public static function clearCache(): void {
         $cache = new FilesystemAdapter();
         $cache->clear();
-    }
-
-    // Remodel to save the inventory to state for use as database
-
-    /**
-     * setObjectState
-     * @return bool from saveGameData();
-     */
-    public static function setObjectState($roomId, $itemName, $state) {
-        $game = self::getGameData();
-
-        // Set object states
-        if (!isset($game['objectStates'])) {
-            $game['objectStates']= [];
-        }
-
-        $key = "room_{$roomId}_item_{$itemName}";
-        $game['objectStates'][$key] = $state;
-        
-        return self::saveGameData(null, null, $game['objectStates']); // Now update specific part
-    }
-
-    /**
-     * Get object state
-     * @return mixed array or null
-     */
-    public static function getObjectState($roomId, $itemName): mixed {
-        $game = self::getGameData();
-
-        // Set object states
-        if (!isset($game['objectStates'])) {
-            return null;
-        }
-
-        $key = "room_{$roomId}_item_{$itemName}";
-
-        return $game['objectStates']['key'] ?? null;
-    }
-
-    /**
-     * Set item status
-     * @return bool
-     */
-    public static function setItemStatus($roomId, $itemName, $status): bool {
-        // Add a try
-        $currentItem = self::getItem($roomId, $itemName);
-        $currentItem->status = $status;
-
-        return true;
     }
 
     /**
