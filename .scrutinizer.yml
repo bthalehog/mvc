@@ -3,7 +3,6 @@ imports:
 
 filter:
     excluded_paths: [vendor/*, tests/*, src/Controller/*, src/Cards/*, src/Repository/*, src/Entity/*]
-    included_paths: [src/Proj/*]
 build:
     image: default-bionic
 
