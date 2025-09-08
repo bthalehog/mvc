@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1757300626">
-  <project timestamp="1757300626">
+<coverage generated="1757358347">
+  <project timestamp="1757358347">
     <file name="/home/alehog/dbwebb-kurser/mvc/me/report/src/Kernel.php">
       <class name="App\Kernel" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -11,10 +11,10 @@
       <class name="App\Proj\Inventory" namespace="global">
         <metrics complexity="17" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="25" elements="36" coveredelements="30"/>
       </class>
-      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="24"/>
-      <line num="20" type="stmt" count="24"/>
-      <line num="27" type="method" name="getAllItems" visibility="public" complexity="1" crap="1" count="18"/>
-      <line num="28" type="stmt" count="18"/>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="25"/>
+      <line num="20" type="stmt" count="25"/>
+      <line num="27" type="method" name="getAllItems" visibility="public" complexity="1" crap="1" count="19"/>
+      <line num="28" type="stmt" count="19"/>
       <line num="35" type="method" name="addItem" visibility="public" complexity="1" crap="1" count="8"/>
       <line num="37" type="stmt" count="8"/>
       <line num="39" type="stmt" count="8"/>
@@ -40,10 +40,10 @@
       <line num="87" type="stmt" count="4"/>
       <line num="91" type="stmt" count="4"/>
       <line num="97" type="stmt" count="1"/>
-      <line num="104" type="method" name="getSelectedItem" visibility="public" complexity="3" crap="3" count="17"/>
-      <line num="105" type="stmt" count="17"/>
+      <line num="104" type="method" name="getSelectedItem" visibility="public" complexity="3" crap="3" count="18"/>
+      <line num="105" type="stmt" count="18"/>
       <line num="106" type="stmt" count="4"/>
-      <line num="109" type="stmt" count="15"/>
+      <line num="109" type="stmt" count="16"/>
       <line num="116" type="method" name="clearInventory" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="117" type="stmt" count="0"/>
       <line num="118" type="stmt" count="0"/>
@@ -51,11 +51,11 @@
     </file>
     <file name="/home/alehog/dbwebb-kurser/mvc/me/report/src/Proj/RoomHandler.php">
       <class name="App\Proj\RoomHandler" namespace="global">
-        <metrics complexity="14" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="21" elements="30" coveredelements="21"/>
+        <metrics complexity="14" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="23" elements="30" coveredelements="24"/>
       </class>
-      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
+      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <line num="15" type="stmt" count="1"/>
       <line num="21" type="method" name="getRoomData" visibility="public" complexity="5" crap="5.27" count="1"/>
       <line num="23" type="stmt" count="1"/>
       <line num="25" type="stmt" count="1"/>
@@ -83,48 +83,48 @@
       <line num="71" type="stmt" count="0"/>
       <line num="76" type="stmt" count="1"/>
       <line num="79" type="stmt" count="1"/>
-      <metrics loc="82" ncloc="68" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="21" elements="30" coveredelements="21"/>
+      <metrics loc="82" ncloc="68" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="23" elements="30" coveredelements="24"/>
     </file>
     <file name="/home/alehog/dbwebb-kurser/mvc/me/report/src/Proj/StorageHandler.php">
       <class name="App\Proj\StorageHandler" namespace="global">
         <metrics complexity="42" methods="15" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="83" coveredstatements="67" elements="98" coveredelements="74"/>
       </class>
-      <line num="14" type="method" name="__construct" visibility="public" complexity="2" crap="2.03" count="17"/>
-      <line num="16" type="stmt" count="17"/>
-      <line num="18" type="stmt" count="17"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="2" crap="2.03" count="19"/>
+      <line num="16" type="stmt" count="19"/>
+      <line num="18" type="stmt" count="19"/>
       <line num="19" type="stmt" count="0"/>
-      <line num="22" type="stmt" count="17"/>
-      <line num="25" type="stmt" count="17"/>
-      <line num="32" type="method" name="initializeDatabase" visibility="private" complexity="3" crap="3" count="17"/>
-      <line num="33" type="stmt" count="17"/>
-      <line num="36" type="stmt" count="17"/>
+      <line num="22" type="stmt" count="19"/>
+      <line num="25" type="stmt" count="19"/>
+      <line num="32" type="method" name="initializeDatabase" visibility="private" complexity="3" crap="3" count="19"/>
+      <line num="33" type="stmt" count="19"/>
+      <line num="36" type="stmt" count="19"/>
       <line num="37" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
       <line num="40" type="stmt" count="1"/>
       <line num="41" type="stmt" count="1"/>
-      <line num="50" type="method" name="saveGameData" visibility="public" complexity="5" crap="5" count="13"/>
-      <line num="52" type="stmt" count="13"/>
-      <line num="54" type="stmt" count="13"/>
-      <line num="55" type="stmt" count="13"/>
-      <line num="58" type="stmt" count="13"/>
-      <line num="59" type="stmt" count="13"/>
-      <line num="60" type="stmt" count="13"/>
-      <line num="61" type="stmt" count="13"/>
-      <line num="62" type="stmt" count="13"/>
-      <line num="65" type="stmt" count="13"/>
-      <line num="66" type="stmt" count="13"/>
-      <line num="69" type="stmt" count="13"/>
-      <line num="70" type="stmt" count="5"/>
-      <line num="73" type="stmt" count="13"/>
-      <line num="81" type="method" name="getGameData" visibility="public" complexity="2" crap="2.03" count="17"/>
-      <line num="83" type="stmt" count="17"/>
+      <line num="50" type="method" name="saveGameData" visibility="public" complexity="5" crap="5" count="14"/>
+      <line num="52" type="stmt" count="14"/>
+      <line num="54" type="stmt" count="14"/>
+      <line num="55" type="stmt" count="14"/>
+      <line num="58" type="stmt" count="14"/>
+      <line num="59" type="stmt" count="14"/>
+      <line num="60" type="stmt" count="14"/>
+      <line num="61" type="stmt" count="14"/>
+      <line num="62" type="stmt" count="14"/>
+      <line num="65" type="stmt" count="14"/>
+      <line num="66" type="stmt" count="14"/>
+      <line num="69" type="stmt" count="14"/>
+      <line num="70" type="stmt" count="6"/>
+      <line num="73" type="stmt" count="14"/>
+      <line num="81" type="method" name="getGameData" visibility="public" complexity="2" crap="2.03" count="19"/>
+      <line num="83" type="stmt" count="19"/>
       <line num="85" type="stmt" count="0"/>
-      <line num="88" type="stmt" count="17"/>
-      <line num="89" type="stmt" count="17"/>
-      <line num="91" type="stmt" count="17"/>
-      <line num="98" type="method" name="getDatabaseFromStorage" visibility="public" complexity="1" crap="1" count="9"/>
-      <line num="99" type="stmt" count="9"/>
-      <line num="101" type="stmt" count="9"/>
+      <line num="88" type="stmt" count="19"/>
+      <line num="89" type="stmt" count="19"/>
+      <line num="91" type="stmt" count="19"/>
+      <line num="98" type="method" name="getDatabaseFromStorage" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="99" type="stmt" count="10"/>
+      <line num="101" type="stmt" count="10"/>
       <line num="108" type="method" name="updateDatabaseInStorage" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="109" type="stmt" count="0"/>
       <line num="110" type="stmt" count="0"/>
@@ -153,12 +153,12 @@
       <line num="175" type="stmt" count="1"/>
       <line num="183" type="method" name="clearSaveFile" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="185" type="stmt" count="1"/>
-      <line num="192" type="method" name="clearStorage" visibility="public" complexity="1" crap="1" count="13"/>
-      <line num="194" type="stmt" count="13"/>
-      <line num="195" type="stmt" count="13"/>
-      <line num="196" type="stmt" count="13"/>
-      <line num="197" type="stmt" count="13"/>
-      <line num="199" type="stmt" count="13"/>
+      <line num="192" type="method" name="clearStorage" visibility="public" complexity="1" crap="1" count="14"/>
+      <line num="194" type="stmt" count="14"/>
+      <line num="195" type="stmt" count="14"/>
+      <line num="196" type="stmt" count="14"/>
+      <line num="197" type="stmt" count="14"/>
+      <line num="199" type="stmt" count="14"/>
       <line num="206" type="method" name="clearCache" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="207" type="stmt" count="0"/>
       <line num="208" type="stmt" count="0"/>
@@ -189,6 +189,6 @@
       <line num="270" type="stmt" count="0"/>
       <metrics loc="273" ncloc="199" classes="1" methods="15" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="83" coveredstatements="67" elements="98" coveredelements="74"/>
     </file>
-    <metrics files="4" loc="488" ncloc="359" classes="3" methods="25" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="139" coveredstatements="113" elements="164" coveredelements="125"/>
+    <metrics files="4" loc="488" ncloc="359" classes="3" methods="25" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="139" coveredstatements="115" elements="164" coveredelements="128"/>
   </project>
 </coverage>

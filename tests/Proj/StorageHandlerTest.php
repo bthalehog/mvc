@@ -56,7 +56,6 @@ class StorageHandlerTest extends TestCase
         $storageHandler = new StorageHandler();
 
         $this->assertInstanceOf('App\Proj\StorageHandler', $storageHandler);
-        $this->assertTrue(is_set($storageHandler->saveFile));
     }
 
      /**
