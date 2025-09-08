@@ -70,6 +70,20 @@ class RoomHandlerTest extends TestCase
     }
 
     /**
+     * Test constructing RoomHandler-object
+     */
+    public function testConstructObject()
+    {   
+        // Create object
+
+        $roomHandler = new RoomHandler();
+
+        $this->assertInstanceOf('App\Proj\RoomHandler', $roomHandler);
+        $this->assertInstanceOf('App\Proj\StorageHandler', $roomHandler->storageHandler);
+        $this->assertEquals(null, $roomHandler->room);
+    }
+
+    /**
      * Test get room data
      */
     public function testGetRoomData()
@@ -108,6 +122,7 @@ class RoomHandlerTest extends TestCase
         // Move (start in room )
         $result = RoomHandler::move("east", $currentRoomId);
 
+        // FInd new room and verify room_two??
         // Test
         $this->assertTrue($result['success']);
     }

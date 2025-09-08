@@ -336,7 +336,7 @@ $this->assertArrayNotHasKey('room', $gameDataCleared);
 Mock databases
 TEmporare test-dir for test spec storageHandler
 Added unit test for storageHandler
-
+Possible to change paths for scrutinizer search in .yml but have to push to main before can implement!!!
 TODO:
 
 Raise tests to 90%
@@ -347,3 +347,8 @@ Same fix for X as for forklift, resetting interaction if unsync
 Skapa en separat navbar för projektet som enbart innehåller länkarna för projektet.
 Det skall finnas badges som är klickbara och leder till uppdaterade Scrutinizer rapporter för build, coverage och quality.
 Flytta setup-launch anvisning till README
+
+test ClearCache
+test updateDatabaseInStorage
+test constructor
+test getItemStatus

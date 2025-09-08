@@ -737,6 +737,31 @@ th {
 /* Kmom10 Project */
 
 /* Game start view */
+.projectNavigation {
+    height: 5vh;
+    width: calc(100% - 2rem);
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1rem ridge purple;
+    gap: 2rem;
+}
+
+.projectNavigation a {
+    color: goldenrod;
+    border: 5px ridge goldenrod !important;
+    font-size: x-large;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 0.5rem;
+    height: auto;
+    width: 20%;
+    background-color: purple;
+    font-family: 'Pixelify Sans', sans-serif;
+    margin-top: 0.5rem;
+}
+
 .projectBody {
     background-color: darkslategrey;
     object-fit: cover;

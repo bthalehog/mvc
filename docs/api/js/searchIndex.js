@@ -841,16 +841,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ProjectController.html#method_objectInteraction"
         },                {
-            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003A\u0024storageHandler",
-            "name": "storageHandler",
-            "summary": "",
-            "url": "classes/App-Controller-ProjectController.html#property_storageHandler"
-        },                {
-            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003A\u0024roomHandler",
-            "name": "roomHandler",
-            "summary": "",
-            "url": "classes/App-Controller-ProjectController.html#property_roomHandler"
-        },                {
             "fqsen": "\\App\\Controller\\ReportsController",
             "name": "ReportsController",
             "summary": "",
@@ -1191,11 +1181,6 @@ Search.appendIndex(
             "summary": "Get\u0020room\u0020data.",
             "url": "classes/App-Proj-RoomHandler.html#method_getRoomData"
         },                {
-            "fqsen": "\\App\\Proj\\RoomHandler\u003A\u003AgetAllRooms\u0028\u0029",
-            "name": "getAllRooms",
-            "summary": "Get\u0020all\u0020rooms\u0020\/\u0020load\u0020database.",
-            "url": "classes/App-Proj-RoomHandler.html#method_getAllRooms"
-        },                {
             "fqsen": "\\App\\Proj\\RoomHandler\u003A\u003Amove\u0028\u0029",
             "name": "move",
             "summary": "Handle\u0020user\u0020move.",
@@ -1241,26 +1226,6 @@ Search.appendIndex(
             "summary": "Get\u0020inventory\u0020from\u0020storage.",
             "url": "classes/App-Proj-StorageHandler.html#method_getInventoryFromStorage"
         },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AupdateRoom\u0028\u0029",
-            "name": "updateRoom",
-            "summary": "Update\u0020room\u0020in\u0020storage",
-            "url": "classes/App-Proj-StorageHandler.html#method_updateRoom"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AupdateInventory\u0028\u0029",
-            "name": "updateInventory",
-            "summary": "Update\u0020inventory\u0020in\u0020storage",
-            "url": "classes/App-Proj-StorageHandler.html#method_updateInventory"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AupdateObjectStates\u0028\u0029",
-            "name": "updateObjectStates",
-            "summary": "Update\u0020object\u0020states\u0020in\u0020storage",
-            "url": "classes/App-Proj-StorageHandler.html#method_updateObjectStates"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AupdateItemStatus\u0028\u0029",
-            "name": "updateItemStatus",
-            "summary": "Update\u0020item\u0020status",
-            "url": "classes/App-Proj-StorageHandler.html#method_updateItemStatus"
-        },                {
             "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AgetRoomFromStorage\u0028\u0029",
             "name": "getRoomFromStorage",
             "summary": "Get\u0020room\u0020from\u0020storage",
@@ -1271,29 +1236,9 @@ Search.appendIndex(
             "summary": "Get\u0020room\u0020data\u0020\u0028not\u0020storage\u0020file\u0029",
             "url": "classes/App-Proj-StorageHandler.html#method_getRoomData"
         },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AgetRoomStatusFromStorage\u0028\u0029",
-            "name": "getRoomStatusFromStorage",
-            "summary": "Get\u0020room\u0020status\u0020from\u0020storage",
-            "url": "classes/App-Proj-StorageHandler.html#method_getRoomStatusFromStorage"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AsetItem\u0028\u0029",
-            "name": "setItem",
-            "summary": "Set\u0020item\u0020to\u0020storage",
-            "url": "classes/App-Proj-StorageHandler.html#method_setItem"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AgetItem\u0028\u0029",
-            "name": "getItem",
-            "summary": "Get\u0020item\u0020from\u0020storage",
-            "url": "classes/App-Proj-StorageHandler.html#method_getItem"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AremoveItem\u0028\u0029",
-            "name": "removeItem",
-            "summary": "Remove\u0020item",
-            "url": "classes/App-Proj-StorageHandler.html#method_removeItem"
-        },                {
             "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AclearSaveFile\u0028\u0029",
             "name": "clearSaveFile",
-            "summary": "Clear\u0020savefile\u0020\u0028storage\u0029",
+            "summary": "Clear\u0020savefile\u0020\u0028storage\u0029\nUpdated\u0020to\u0020relative\u0020path\u0020for\u0020testing\u002Dpurposes",
             "url": "classes/App-Proj-StorageHandler.html#method_clearSaveFile"
         },                {
             "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AclearStorage\u0028\u0029",
@@ -1305,26 +1250,6 @@ Search.appendIndex(
             "name": "clearCache",
             "summary": "Clear\u0020cache",
             "url": "classes/App-Proj-StorageHandler.html#method_clearCache"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AsetObjectState\u0028\u0029",
-            "name": "setObjectState",
-            "summary": "setObjectState",
-            "url": "classes/App-Proj-StorageHandler.html#method_setObjectState"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AgetObjectState\u0028\u0029",
-            "name": "getObjectState",
-            "summary": "Get\u0020object\u0020state",
-            "url": "classes/App-Proj-StorageHandler.html#method_getObjectState"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AmatchItemState\u0028\u0029",
-            "name": "matchItemState",
-            "summary": "Check\u0020if\u0020item\u0020and\u0020object\u0020is\u0020match",
-            "url": "classes/App-Proj-StorageHandler.html#method_matchItemState"
-        },                {
-            "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AsetItemStatus\u0028\u0029",
-            "name": "setItemStatus",
-            "summary": "Set\u0020item\u0020status",
-            "url": "classes/App-Proj-StorageHandler.html#method_setItemStatus"
         },                {
             "fqsen": "\\App\\Proj\\StorageHandler\u003A\u003AgetItemStatus\u0028\u0029",
             "name": "getItemStatus",

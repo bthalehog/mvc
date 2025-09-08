@@ -46,6 +46,19 @@ class StorageHandlerTest extends TestCase
         }
     }
 
+    /**
+     * Test constructing StorageHandler-object
+     */
+    public function testConstructObject()
+    {   
+        // Create object
+
+        $storageHandler = new StorageHandler();
+
+        $this->assertInstanceOf('App\Proj\StorageHandler', $storageHandler);
+        $this->assertTrue(is_set($storageHandler->saveFile));
+    }
+
      /**
      * Test saveGameData with database-arg
      */
