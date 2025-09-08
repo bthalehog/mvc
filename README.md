@@ -15,11 +15,26 @@ The repo holds information on repo activity and tagging for all stages of the co
 
 ## Clone and start
 
-To clone this repository:  
-- Install symfony, encore, etc...  
-- Save the .... into your ... folder  
-- Open terminal - sype symfony:start server  
-- Browse to 127.0.0.1:8000  
+Install the following:
+    - PHP 8.1 or higher
+    - Composer
+    - Git
+    - Node.js
+    - Encore
+    - Symfony  
+                   
+Clone the repository  
+    -  git clone 'repository-directory'  
+    - cd 'project-directory'  
+                         
+Install dependencies  
+    - composer install  
+    - npm install  
+                    
+Run build and launch   
+    - npm run build  
+    - symfony server:start  
+    - Open in browser 'http://127.0.0.1:8000'  
 
 ## Action log
 
@@ -97,6 +112,8 @@ To clone this repository:
 20250904 New tag v10.0.8, Added checks for forklift and radio in js clickedItem, updated objectInteraction, added finalMove-check, added about-route, reset on deathtrap and final_move.
 20250906 New tag v10.0.9, Updated README, key-selected click interaction with forklift fixed, all resets working.  
 20250907 New tag v10.1.0, Cleared unused functions, added unittest for Inventory and RoomHandler  
+20250908 New tag v10.1.1, Added unittest for StorageHandler  
+20250908 New tag v10.1.1, Updated readme  
 
 ### Badges earned
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bthalehog/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bthalehog/mvc/?branch=main)

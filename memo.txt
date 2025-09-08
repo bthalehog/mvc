@@ -335,12 +335,15 @@ Added unittest for inventory and RoomHandler
 $this->assertArrayNotHasKey('room', $gameDataCleared);
 Mock databases
 TEmporare test-dir for test spec storageHandler
+Added unit test for storageHandler
 
 TODO:
 
-Test code
+Raise tests to 90%
 run scrutinizer
 add badges to README
 write report
-unit test StroageHanlder, build mock files for comparison
 Same fix for X as for forklift, resetting interaction if unsync
+Skapa en separat navbar för projektet som enbart innehåller länkarna för projektet.
+Det skall finnas badges som är klickbara och leder till uppdaterade Scrutinizer rapporter för build, coverage och quality.
+Flytta setup-launch anvisning till README
