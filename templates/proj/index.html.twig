@@ -24,59 +24,62 @@
 </head>
 
 <body class="projectBody">
+  <div class="gameContainer">
+    {% block body %}
 
-  {% block body %}
+    {% endblock %}
 
-  {% endblock %}
+    {% if clearClickers %}
+      <script>
+        console.log("Clearing clickers..");
 
-  {% if clearClickers %}
-    <script>
-      console.log("Clearing clickers..");
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+            let key = localStorage.key(i);
 
-      for (let i = localStorage.length - 1; i >= 0; i--) {
-          let key = localStorage.key(i);
+            if (key && key.includes('-') && !key.includes('.')) {
+                console.log("Removing", key);
+                localStorage.removeItem(key);
+            }
+        }
 
-          if (key && key.includes('-') && !key.includes('.')) {
-              console.log("Removing", key);
-              localStorage.removeItem(key);
-          }
-      }
+        localStorage.removeItem('currentMessage');
 
-      localStorage.removeItem('currentMessage');
+        // Reset clickers object
+        clickers = {};
 
-      // Reset clickers object
-      clickers = {};
-
-      console.log("Clickers cleared on reset");
-    </script>
-  {% endif %}
-</body>
-
-<div id="componentsHolder" class="componentsHolder">
-  {% block nav %}
-    <nav class="gameNav">
-      <form method="POST" action="{{ path('move') }}">
-        <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'room_one' }}">
-        
-        <button type="submit" id="northButton" class="directionButton" name="direction" value="north">↑</button>
-        <label for="northButton"></label>
-
-        <button type="submit" id="southButton" class="directionButton" name="direction" value="south">↓</button>
-        <label for="southButton"></label>
-
-        <button type="submit" id="westButton" class="directionButton" name="direction" value="west">←</button>
-        <label for="westButton"></label>
-
-        <button type="submit" id="eastButton" class="directionButton" name="direction" value="east">→</button>
-        <label for="eastButton"></label>
-      </form>
-    </nav>
-  {% endblock %}
-
-  {% block inventory %}
-    {% if inventory is defined %}
-      {% include 'proj/inventory.html.twig' %}
+        console.log("Clickers cleared on reset");
+      </script>
     {% endif %}
-  {% endblock %}
-</div>
+    
+    {% if app.request.get('_route') != 'proj_about' %}
+      <div id="componentsHolder" class="componentsHolder">
+        {% block nav %}
+          <nav class="gameNav">
+            <form method="POST" action="{{ path('move') }}">
+              <input type="hidden" name="currentRoomId" value="{{ room.id ?? 'room_one' }}">
+              
+              <button type="submit" id="northButton" class="directionButton" name="direction" value="north">↑</button>
+              <label for="northButton"></label>
+
+              <button type="submit" id="southButton" class="directionButton" name="direction" value="south">↓</button>
+              <label for="southButton"></label>
+
+              <button type="submit" id="westButton" class="directionButton" name="direction" value="west">←</button>
+              <label for="westButton"></label>
+
+              <button type="submit" id="eastButton" class="directionButton" name="direction" value="east">→</button>
+              <label for="eastButton"></label>
+            </form>
+          </nav>
+        {% endblock %}
+
+        {% block inventory %}
+          {% if inventory is defined %}
+            {% include 'proj/inventory.html.twig' %}
+          {% endif %}
+        {% endblock %}
+      </div>
+    {% endif %}
+  </div>
+</body>
 </html>

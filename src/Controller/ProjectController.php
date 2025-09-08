@@ -52,7 +52,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/start_adventure.html.twig', $data);
     }
 
-    #[Route("/proj/about", name: "about")]
+    #[Route("/proj/about", name: "proj_about")]
     public function about(): Response
     {
         // Set headline
@@ -501,6 +501,23 @@ final class ProjectController extends AbstractController
                 ]);
             }
 
+            // Get X item
+            $xItem = null;
+            
+            foreach($roomData['items'] as $item) {
+                if ($item ['item'] === 'x') {
+                    $xItem = $item;
+                    break;
+                }
+            }
+
+            if (!$xItem) {
+                return $this->json([
+                    'success' => false,
+                    'message' => "X not found"
+                ]);
+            }
+
             // Key items status check
             $radioStatus = 0;
             $forkliftStatus = 0;
@@ -522,8 +539,37 @@ final class ProjectController extends AbstractController
                     'redirectTo' => 'final_move'
                 ]);
             } else {
+                // Get X clickcount
+                $currentClickCount = $xItem['clickCount'] ?? 0;
+                $currentClickCount++; // Or handled in clickCount already? am I doubling here?
+
+                $message = "";
+                if ($currentClickCount === 1) {
+                    $message = $xItem['look'];
+                } elseif ($currentClickCount === 2) {
+                    $message = $xItem['investigate'];
+                } else {
+                    $message = $xItem['interact'];
+                }
+
+                // Update clickCount
+                foreach($database['rooms'] as &$room) {
+                    if($room['id'] === $roomId && isset($room['items'])) {
+                        foreach($room['items'] as &$item) {
+                            if ($item['item'] === "x") {
+                                $item['clickCount'] = $currentClickCount;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+
+                $inventory = StorageHandler::getInventoryFromStorage();
+                StorageHandler::saveGameData(null, $inventory, null, $database);
+
                 return $this->json([
                     'success' => true,
+                    'infoDisplay' => $message,
                     'message' => true
                 ]);
             }

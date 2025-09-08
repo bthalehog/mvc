@@ -2,6 +2,7 @@
 
 namespace App\Proj;
 
+// For cache handling
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
@@ -99,21 +100,6 @@ class StorageHandler
         $gameData = self::getGameData();
 
         return $gameData['database'] ?? [];
-    }
-
-    /**
-     * Update database in storage
-     * @return bool from saveGameData()
-     */
-    public static function updateDatabaseInStorage($database): bool {
-        $gameData = self::getGameData();
-        $gameData['database'] = $database;
-
-        $room = $gameData['room'];
-        $inventoryData = $gameData['inventory'] ?? ['items' => [], 'selectedItem' => null];
-        $inventory = new Inventory($inventoryData['items'] ?? []);
-
-        return self::saveGameData($room, $inventory);
     }
 
     /**

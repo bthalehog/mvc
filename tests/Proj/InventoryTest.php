@@ -212,4 +212,27 @@ class InventoryTest extends TestCase
         // Test
         $this->assertNull($selected);
     }
+
+    /**
+     * Construct object and verify that the object has the expected
+     * properties.
+     */
+    public function testClearInventory(): void
+    {   
+        // Add to inventory
+        $this->inventory->addItem(['item' => 'key', 'description' => 'A small key']);
+        
+        // Verify
+        $this->assertCount(1, $this->inventory->getAllItems());
+        $this->assertEquals("key", $this->inventory->getAllItems()[0]['item']);
+        
+        // Clear
+        $this->inventory->clearInventory();
+        
+        // Test
+        $this->assertCount(0, $this->inventory->getAllItems());
+        $this->assertEmpty($this->inventory->getAllItems());
+    }
+
+    
 }

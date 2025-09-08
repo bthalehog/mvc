@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use App\Proj\Inventory;
 use App\Proj\RoomHandler;
 
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+
 /**
  * Test cases for class StorageHandler.
  */
@@ -331,5 +333,35 @@ class StorageHandlerTest extends TestCase
         // Test
         $this->assertEmpty($gameDataCleared);
         $this->assertArrayNotHasKey('room', $gameDataCleared);
-    } 
+    }
+
+    /**
+     * Test clearCache
+     */
+    public function testClearCache(): void 
+    {
+        // Create cache
+        $cache = new FileSystemAdapter();
+
+        // Add data to cache
+        // This seem to be the solution "GET", cache has no setter
+        $cacheItem = $cache->getItem('test_key');
+        $cacheItem->set('test_value');
+        $cache->save($cacheItem);
+
+        $cacheItem2 = $cache->getItem('other_test_key');
+        $cacheItem2->set('other_test_value');
+        $cache->save($cacheItem2);
+
+        // Verify has data
+        $this->assertTrue($cache->hasItem('test_key'));
+        $this->assertTrue($cache->hasItem('other_test_key'));
+
+        // Clear
+        StorageHandler::clearCache();
+
+        // Test
+        $this->assertFalse($cache->hasItem('test_key'));
+        $this->assertFalse($cache->hasItem('other_test_key'));
+    }
 }

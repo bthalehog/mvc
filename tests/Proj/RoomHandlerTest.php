@@ -125,6 +125,7 @@ class RoomHandlerTest extends TestCase
         // FInd new room and verify room_two??
         // Test
         $this->assertTrue($result['success']);
+        $this->assertEquals('room_three', $result['redirect']);
     }
 
     /**
@@ -138,5 +139,18 @@ class RoomHandlerTest extends TestCase
         // Test
         $this->assertFalse($result['success']);
         $this->assertEquals("No such room.", $result['message']);
+    }
+
+    /**
+     * Test move from none-existans room.
+     */
+    public function testMoveInvalidDirection()
+    {       
+        // Move (start in room )
+        $result = RoomHandler::move("south", "room_one");
+
+        // Test
+        $this->assertFalse($result['success']);
+        $this->assertEquals("No way!", $result['message']);
     }
 }

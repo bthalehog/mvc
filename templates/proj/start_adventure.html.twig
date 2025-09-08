@@ -3,13 +3,14 @@
 {% block body %}
     <h1 class="roomName">Project Adventure Game</h1>
 
-      <div class="roomExplanation">
+      <div class="roomStartExplanation">
         {{ info }}
       </div>
       
       <div class="roomExplanation">
         {{ rules }}
+
+        <button id="startButton" class="startButton" onclick="window.location.href='{{ path('room_one') }}'">Let's go!</button>
       </div>
 
-      <button id="startButton" class="startButton" onclick="window.location.href='{{ path('room_one') }}'">Let's go!</button>
 {% endblock %}

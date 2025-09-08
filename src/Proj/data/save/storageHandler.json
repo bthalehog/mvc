@@ -221,11 +221,65 @@
         ]
     },
     "room": {
-        "id": "proj",
-        "info": "You wake up in a strange room with a very, I mean VERY, strong urge to immediately escape.",
-        "rules": "Use the arrow buttons to navigate, click to interact with objects",
-        "inventory": {},
-        "clearClickers": false
+        "id": "room_one",
+        "name": "Janitor's closet",
+        "info": "You get a hold of your surroundings, you seem to be in the janitor's closet, you rattle the door handle only to find it is locked!",
+        "items": [
+            {
+                "item": "key",
+                "look": "A coat",
+                "investigate": "There is a key in one of the pockets",
+                "interact": "You pick up the key",
+                "use_with": "forklift",
+                "accept": null,
+                "take": "yes",
+                "graphics": "\ud83d\udd11"
+            },
+            {
+                "item": "wire",
+                "look": "There is something in the bin.",
+                "investigate": "Aah metal, the fabric of tools!",
+                "interact": "You found a paper-clip!",
+                "use_with": "door",
+                "accept": null,
+                "take": "yes",
+                "graphics": "\ud83d\udcce"
+            },
+            {
+                "item": "box",
+                "look": "There is a beverage box on one of the shelves.",
+                "investigate": "It has potential..",
+                "interact": "Congratulations, proud owner of empty beverage box.",
+                "use_with": "fountain",
+                "accept": null,
+                "take": "yes",
+                "graphics": "\ud83e\uddc3"
+            },
+            {
+                "item": "door_one",
+                "look": "The way out of here.",
+                "investigate": "It seem locked from the outside.",
+                "interact": "Way to MacGyver!",
+                "use_with": null,
+                "accept": "wire",
+                "handshake": "Way to go MacGyver!",
+                "take": "no",
+                "graphics": null,
+                "status": 0
+            }
+        ],
+        "directions": {
+            "north": "room_two"
+        },
+        "gates": {
+            "north": "door_one"
+        },
+        "graphics": [
+            {
+                "background": "room1background.png"
+            }
+        ],
+        "clue": "Well, there is a door..."
     },
     "inventory": {
         "items": [],
