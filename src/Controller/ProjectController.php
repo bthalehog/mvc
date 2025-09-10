@@ -16,6 +16,8 @@ use App\Proj\Inventory;
 final class ProjectController extends AbstractController
 {   
     private Inventory $inventory;
+    private StorageHandler $storageHandler;
+    private array $room;
 
     // Added for building inventory and storage
     public function __construct() {
@@ -101,7 +103,7 @@ final class ProjectController extends AbstractController
         ";
 
         $install = "<ul class='about'>
-                <li><strong>Install the following:</li>
+                <li>Install the following:</li>
                     <ul>
                         <li>PHP 8.1 or higher</li>
                         <li>Composer</li>
@@ -141,7 +143,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/about.html.twig', $data);
     }
 
-    #[Route('/project/room_one', name: 'room_one')]
+    #[Route('/proj/room_one', name: 'room_one')]
     public function roomOne(): Response
     {
         // $roomOne = RoomHandler::getRoomData("room_one");
@@ -167,7 +169,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/room_one.html.twig', $data);
     }
 
-    #[Route('/project/room_two', name: 'room_two')]
+    #[Route('/proj/room_two', name: 'room_two')]
     public function roomTwo(): Response
     {
         // Get room data
@@ -190,7 +192,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/room_two.html.twig', $data);
     }
 
-    #[Route('/project/room_three', name: 'room_three')]
+    #[Route('/proj/room_three', name: 'room_three')]
     public function roomThree(): Response
     {
         // Get room data
@@ -213,7 +215,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/room_three.html.twig', $data);
     }
 
-    #[Route('/project/deathtrap', name: 'deathtrap')]
+    #[Route('/proj/deathtrap', name: 'deathtrap')]
     public function deathTrap(): Response
     {   
         // $deathTrap = RoomHandler::getRoomData("deathtrap");
@@ -240,7 +242,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/deathtrap.html.twig', $data);
     }
 
-    #[Route('/project/final_move', name: 'final_move')]
+    #[Route('/proj/final_move', name: 'final_move')]
     public function finalMove(): Response
     {
         // Get room data
@@ -268,7 +270,7 @@ final class ProjectController extends AbstractController
         return $this->render('proj/final_move.html.twig', $data);
     }
 
-    #[Route('/project/move', name: 'move')]
+    #[Route('/proj/move', name: 'move')]
     public function mover(Request $request): Response
     {
         // Get direction from input
@@ -289,7 +291,7 @@ final class ProjectController extends AbstractController
         }
     }
 
-    #[Route('/project/inventory', name: 'inventory')]
+    #[Route('/proj/inventory', name: 'inventory')]
     public function inventory(Request $request): Response
     {   
         if ($request->isMethod('POST')) 
@@ -328,13 +330,13 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/project/inventory/add', name: 'inventory_add')]
+    #[Route('/proj/inventory/add', name: 'inventory_add')]
     public function inventoryAdd(Request $request): Response
     {   
         // Get room id for routing
         $currentRoom = StorageHandler::getRoomData();
         
-        if ($request->isMethod('GET')) 
+        if ($request->isMethod('GET'))
         {
             // Get data (query)
             $itemName = $request->query->get('itemName');
@@ -396,7 +398,7 @@ final class ProjectController extends AbstractController
         return $this->redirectToRoute($roomNumber);
     }
 
-    #[Route('/project/api/objectInteraction/{roomId}/{itemName}', name: 'object_interaction', methods: ['GET'])]
+    #[Route('/proj/api/objectInteraction/{roomId}/{itemName}', name: 'object_interaction', methods: ['GET'])]
     public function objectInteraction($roomId, $itemName, Request $request): JsonResponse
     {   
         // Handle status on radio

@@ -101,7 +101,7 @@ function clickedItem(roomNumber, clickedItem) {
         showMessage(fullItem.interact);
 
         // GET request
-        const url = `/project/inventory/add?itemName=${encodeURIComponent(fullItem.item)}&roomNumber=${roomNumber}`;
+        const url = `./inventory/add?itemName=${encodeURIComponent(fullItem.item)}&roomNumber=${roomNumber}`; // turned /proj/inventory into ./inventory
         console.log('Redirect to: ', url);
         console.log('Item sent: ', fullItem.item);
         console.log('Room ', roomNumber)
@@ -160,7 +160,7 @@ function objectInteraction(roomId, itemName) {
     }
 
     // GET to route for object interaction
-    fetch(`/project/api/objectInteraction/${roomId}/${encodeURIComponent(itemName)}`)
+    fetch(`./api/objectInteraction/${roomId}/${encodeURIComponent(itemName)}`) // Turned into ./api instead of /proj/api
     .then(response => {
         console.log("Response status:", response.status);
         console.log("Response headers:", response.headers);
@@ -180,7 +180,7 @@ function objectInteraction(roomId, itemName) {
             showMessage(data.infoDisplay || data.message);
 
             if (data.redirectTo) {
-                window.location.href = `/project/${data.redirectTo}`;
+                window.location.href = `./${data.redirectTo}`; // changed  proj/ to ./
                 return;
             }
         } catch (error) {
@@ -195,7 +195,7 @@ function objectInteraction(roomId, itemName) {
 }
 
 function selectInventoryItem(itemName) {
-    fetch(`/project/inventory`, {
+    fetch(`./inventory`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

@@ -9,8 +9,7 @@
   {% endblock %}
 
   {% block javascripts %}
-      {{ encore_entry_script_tags('app') }}
-      {% block importmap %}{{ importmap('app') }}{% endblock %}
+      {{ encore_entry_script_tags('proj') }}
   {% endblock %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,8 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
   
   <nav class="projectNavigation">
-      <a href="/proj">Play</a>
-      <a href="/proj/about">About</a>
+      <a href="{{ path('proj') }}">Play</a>
+      <a href="{{ path('proj_about') }}">About</a>
   </nav>
 </head>
 

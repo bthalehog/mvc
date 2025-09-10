@@ -1,0 +1,5 @@
+After installing make sure to run:
+    chmod 664 src/Proj/data/save/storageHandler.json
+    chmod 775 src/Proj/data/save
+
+This enables saveFile and game persistency

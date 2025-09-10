@@ -21,7 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('project', './assets/js/adventure.js')
+    .addEntry('proj', './assets/js/adventure.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -73,6 +73,15 @@ Encore
     .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[ext]'
+    })
+    // Added for server
+    .copyFiles({
+        from: './assets/data',
+        to: 'data/[path][name].[ext]'
+    })
+    .copyFiles({
+        from: './assets/audio',
+        to: 'data/[path][name].[ext]'
     })
 ;
 

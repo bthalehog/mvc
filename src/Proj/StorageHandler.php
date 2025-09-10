@@ -17,7 +17,7 @@ class StorageHandler
         $saveDir = __DIR__ . '/data/save/';
 
         if (!is_dir($saveDir)) {
-            mkdir($saveDir, 0775, true); // 0775 for webserver access (0777 for all full)
+            mkdir($saveDir, 0775, true); // 0755 for local, 0775 for webserver access (0777 for all full)
         }
 
         self::$saveFile = $saveDir . $file; // Need file here not saveFile
@@ -71,7 +71,9 @@ class StorageHandler
             $gameData['database'] = $database;
         }
 
-        return file_put_contents(self::$saveFile, json_encode($gameData, JSON_PRETTY_PRINT));
+        $result = file_put_contents(self::$saveFile, json_encode($gameData, JSON_PRETTY_PRINT));
+        // chmod(self::saveFile, 0664);
+        return $result;
     }
 
     // Might not need this after saving database to file
@@ -169,6 +171,7 @@ class StorageHandler
     public static function clearSaveFile(): void
     {        
         file_put_contents(self::$saveFile, '{}');
+        // chmod(self::saveFile, 0664);
     }
 
     /**

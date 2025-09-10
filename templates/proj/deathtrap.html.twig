@@ -5,10 +5,10 @@
   <h3 class="roomName">{{ room.name }}</h3>
 
   <div class="roomView">
-    <img src="{{ asset('img/game_graphics/' ~ "deathtrap.png") }}" class="roomImage"> alt="{{ room.name }}">
+    <img src="{{ asset('img/game_graphics/' ~ "deathtrap.png") }}" class="roomImage" alt="{{ room.name }}">
   </div>
 
   <h4 id="infoDisplay" class="roomExplanation">{{ room.info }}</h4>
 
-  <button type="submit" class="startButton" onclick="window.location.href='/proj'">Play again</button>
+  <button type="submit" class="startButton" onclick="window.location.href='{{ path('proj') }}'">Play again</button>
 {% endblock %}

@@ -340,4 +340,16 @@ Possible to change paths for scrutinizer search in .yml but have to push to main
 FileSystemAdapter-API, no setter for testing, reverse-get to set, three step
 Fixed X-clickError in objectInteraction, fixed pop-up size to accomodate clickable areas.
 Refitted imae clickable areas after layout changes.
-To DO: fix pop-up size
+
+
+Fix server adaptation:
+    realtive symfony paths
+    build directories in webpack.configbut 
+    sync on AssetsMapper or Encore (went with encore)
+    any minor error will cause symfony to crash in build mode
+
+    Made dir and file writable:
+        chmod 775 src/Proj/data/save/   (7 = full access: read, write, exe)
+        chmod 666 src/Proj/data/save/storageHandler.json (6 = read write, 4 read only for others)
+
+    Added hardcode chmod to saveGameData (chmod(self::saveFile, 0664);)
