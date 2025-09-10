@@ -32,9 +32,15 @@ Install dependencies
     - npm install  
                     
 Run build and launch   
-    - npm run build  
-    - symfony server:start  
-    - Open in browser 'http://127.0.0.1:8000'  
+    - npm run build 
+    - Run in terminal (this enables saveFile and game persistency):
+        chmod 664 src/Proj/data/save/storageHandler.json
+        chmod 775 src/Proj/data/save
+    - Upload to server and open server in brower
+OR (if in dev mode):
+    - npm run dev
+    - symfony server:start
+    - Open in browser 'http://127.0.0.1:8000' (adress might vary with your setup)
 
 ## Action log
 
@@ -116,6 +122,8 @@ Run build and launch
 20250908 New tag v10.1.2, Updated readme, added report embryo   
 20250908 New tag v10.1.3, Added internal navigation, added constructor unit-test.  
 20250908 New tag v10.1.4, Unit test updated, project code coverage 90+, finalizing report.  
+20250908 New tag v10.1.5, Migrating to server
+20250908 New tag v10.1.6, Migration errors fixed, chmod instruction added for saveGameData permission to write to file, symfony and relative paths implemented.  
 
 
 ### Badges earned for kmom10
