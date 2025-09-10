@@ -38,7 +38,8 @@ class MyControllerTwig extends AbstractController
             "report2" => "mvc_kmom02_report.txt",
             "report3" => "mvc_kmom03_report.txt",
             "report4" => "mvc_kmom04_report.txt",
-            "report5" => "mvc_kmom05_report.txt"
+            "report5" => "mvc_kmom05_report.txt",
+            "report10" => "mvc_kmom10_report.txt"
         ];
 
         $selector = isset($_GET['reportId']) ? $_GET['reportId'] : null;
