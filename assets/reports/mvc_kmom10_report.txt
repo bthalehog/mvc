@@ -1,0 +1,98 @@
+<article class="hashView">
+
+    <h2>MVC Kmom10</h2>
+        <h3>Krav 1-3</h3>
+        <h4>Innehåll och utseende</h4>
+		För att se till att verkligen separera projektet från resten av sidan rent stilmässigt och ge känslan av en "fristående" app (spel) valde jag ett pop-up (inte ultimat för mobilanvändare).
+		Jag skapade en basmall av "twig"-templates för index och specifika rum (såhär i efterhand kunde jag nog använt en enda rumsmall mer dynamisk istället än fyra identiska om jag inte använt
+		"html-clickable areas", eller om jag kunnat lagra dessa som variabler i varje rum). Jag skapade även twig-html för rummen haphazardous_event och final_move, de två rum som skilde sig i layout 
+		från övriga spelsidor. För att skapa den önskade pixelgrafiken använde jag AI för att generera bilder som matchade mitt utbrytarscenario. färgpaletten sattes samman av starka färger (kontrasterar mot övrigt svartvitt tema). Till detta letade jag upp ett teckensnitt som matchade grafiken och skapade en enkel "about"-sida med 
+		hårdkodad information om spelet samt en "walkthrough". Jag hade inledningsvis en ganska sparsmakad styling som jag sedan korrigerade för att passa det ändrade formatet på pop-up i slutet av uppgiften<br>
+
+		<h4>Krav 2 - Äventyrsspel</h4>
+		Jag valde ett klassist äventyrsspel i vilket spelaren vaknar upp i ett rum och ska ta sig ut.<br>
+		<br>
+		Jag började med att bygga en databas (json) för de rum jag skulle behöva. Initialt hade jag en klass för rumshantering (RoomHandler) och en för persistency (StorageHandler) men efter att 
+		jag insett att jag behövde spelar-specifika instanser av databasen för varje försök valde jag att omarbeta mina StorageHandler-metoder till att alltid arbeta mot den för spelare aktuella lagringsfilen.
+		Detta innebar att behovet av min RoomHandler blev mindre och mindre och det slutade med att den nu har två metoder kvar (move - för navigering mellan rum) och getRoomData() (som en rest av ett tidigare 
+		rumsdataupplägg).<br>
+		<br>
+		Jag skapade en klass för spelets inventory i vilken data från databasen hämtades för att fylla databasen med itemData. Jag ville i denna uppgift få en mer dynamisk upplevelse än jag fått i mitt kortspel 
+		(allt skedde bakom kulisserna) och valde att hantera inventory från frontend med js i min hjälpmodul adventure.js. Därefter skapade jag några separata router för inventory för att kunna hantera operationer mot databasen.<br>
+		<br>
+		Efter att ha beslutat att varje rums "gates" också skulle sparas som "items" i varje room påbörjade jag navigerings-logik (knappbaserad) som innebar att ett sätt att ändra föremåls status blev centralt. 
+		Även detta ledde till en del omarbetning och flera av de metoder jag tagit fram för att hantera "itemStatus" kunde i slutändan helt raderas efter att ha migrerat mycket av den funktionaliteten till 
+		"StorageHandler".<br>
+		<br>
+		När jag väl fått till navigeringen gav jag mig på att försöka skapa klickbara ytor i varje rumsbild. Jag hade mycket svårt att få områdena att inte bli statiska och "stanna kvar" när jag ändrar pop-up-storlek, 
+		jag löste detta genom att alltid spela i full-screen för att drift-off skulle bli minimal. I slutet av arbetet ändrade jag sedan så att pop-up omedelbart var fullskärmsstor och korrigerade de klickbara ytornas 
+		position, detta skulle jag gjort redan från början. Jag kopplade varje klickbart område, som jag la i respektive template (kunde sparat alla i databasen och renderat dynamiskt kanske) och kopplade en 
+		js-funktion för "clickedItem". Denna "clickedItem" håller på respektive föremåls "klickningar" och förser spelare med mer och mer detaljerad information i takt med att denne undersöker föremålen ("look", "investigate", "interact").
+		<br>
+		Jag gjorde ytterligare en funktion för objektinteraktion där olika objekts "accept" och "use" variabler användes som en handskakning för att trigga exempelvisa öppnandet av en "gate". Jag hade problem länge med 
+		att spelet havererade om man klickad i "otakt", tillexempel behöver man klicka på trucken med nyckeln vald för att starta denna. Om man gjorde det efter att ha först ha klickat utan nyckeln vald hamnade klicken 
+		"ur fas" och statusändringen skedde aldrig. Jag löste detta genom att lägga i villkor i "objectInteraction" och "clickedItems" samt tillföra en "clearClickers"-funktion och ett villkor för initiering av denna vid 
+		rendering av sida. Dessa ändringar medförde att min route för "objectInteraction" i "controllern" växte och blev lite väl komplicerad och lång. Jag hade säkert kunna flytta ut mycket av logiken till separata funktioner i efterhand 
+		för att hålla komplexiteten nere (något jag kämpat med i kmom06 tidigare - cyklomatisk komplexitet).<br>
+		<br>
+		Under omarbetningen av "StorageHandler" valde jag också att hela tiden hämta databasen från "saveFile" och extrahera objekt därifrån, det gjorde metodbyggandet snabbt. Jag gjorde "Inventory" och "StorageHandler" till objekt som 
+		kan instantieras men arbetade hela tiden mot items som arrayer från databasen. Hade jag tänkt ett varv till hade jag istället gjort en klass även av dessa så jag kunde varit stringent.<br>
+		<br>
+		Utöver tre navigerbara rum har spelet även ett "haphazardous_event" ("GAME OVER") som triggas efter att spelaren är för nyfiken, detta leder även till att all "storage" rensas.
+		<br>
+		För att ta sig ut måste spelaren i det sista rummet aktivera två föremål och därefter interagera med ett tredje (alltså status check av två föremål för att handskak ska ske med det tredje).
+		Det ena föremålet är en radio som spelar en chiptune när föremålet interageras med tre gånger. Jag är lite missnöjd med att jag inte lyckades få ljudet persistent utan det avbryts när annan interaktion 
+		sker (statusen förblir aktiverad dock).<br>
+		<br>
+		Jag tror att jag skapade mig en del merarbete genom att göra json-databasen då jag antar att Repository hade fungerat lika bra eller bättre, fördelen med json får sägas vara databasens överskådlighet och 
+		enkla uppdateringsamt möjligheten att omedelbart kunna följa statusuppdateringar hos objekt genom att se .json-filen uppdateras i realtid.<br>
+		<br>
+		Efter att jag lyckats få spelflödet att fungera och spelat igenom det på alla tänkbara vis påbörjade jag enhetstestning. Jag har sedan tidigare haft problem med att reducera cyklomatisk komplexitet under 
+		kmom06 och tyckte att alla de olika testprogrammen var svåra att hålla isär. Nu tvingades jag till en välbehövlig återblick och körde igenom enhetstestmomentet igen. Jag lyckades snabbt få hyfsad kodtäckning 
+		på "Inventory" och "RoomHandler"-klasserna. "StorageHandler" krävde dock en del extra arbete tack vare att jag valt en "savefile" som lösning och därför behövde använda en del "mock"-objekt för att testa 
+		databashantering och raderingen av cache och "game state".<br>
+		<br>
+		Jag gjorde mig denna gången tjänsten att innan testerna gå igenom mina klasser och "controllern" för att utreda om där var några metoder som inte använder. Det visade sig vara flera stycken vars syften ersatts 
+		under utvecklingens gång, detta gjorde att jag behövde skriva något färre tester och jag kunde till slut nå en kodtäckning om ca 80% i snitt. Jag fick också göra ett litet djupdyk i att gå in och filtrera bland 
+		sökvägar för tester och vad som skulle köras i såväl .yml som composer.json och phpconfig, för att inte få med alla resultat från tidigare kursmoment i rapporten. Välbehövligt omtag.<br>
+		<br>
+		Enhetstesterna för mitt upplägg med savefile gjorde också att jag lärde mig ett antal nya asserts för filer (fileexists, content osv). Jag försökte ett tag använda den vanliga databasen för testning min fick 
+		till slut skapa en dedikerad dir för testerna då "clearSavefile" strulade och inte hade tillgång till "StorageHandler::$saveFile" ("protected") inifrån testklassen.<br>
+		<br>
+		Mitt val av lagring på fil innebar även att jag fick dyka ner lite i "FileSystemAdapter" för att kunna hantera "cache" vid reset. Under enhetstesterna innebar detta vidare bekantskap med API:et för att göra 
+		"set()" (API:t har ingen sån metod utan använder en sorts trestegs get/set-kombo som kan skriva på olika sätt).<br>
+
+		<h4>Krav 3 - Repo och dokumentation</h4>
+		Jag uppdaterade den redan befintliga readme-filen med en beskrivning samt en instruktion i hur man klonar repot. Därefter skrev jag doc-blocks för alla mina metoder och funktioner och generarde dokumentation me phpdoc. 
+		Till sist gav jag mig in i metrics-biten och körde ytterligare en build i scrutinizer för att få tillgång till de badges jag behövde infoga i min readme-fil.<br>
+		<br>
+		Under detta förfarande gick ett ljus angående "scrutinizer"-förarandet upp för mig. Anledningen till att jag inte fick någon förändring på mina förbättringar under kmom06 var att jag
+		hela tiden kört testerna mot "main" men "pushat" massa versionstaggar utan att göra någon "push" till "main" emellan. Detta innebar att "scrutinizer" bara kört samma tester, på samma kod, enligt samma instruktion hela tiden. 
+		Detta uppdagades då inga nya klasser adderades till de kontrollerade. Under testerna av "Cardgame"-klasserna gjordes bara interna ändringar, inga nya filer tillfördes, därför märktes det aldrig av och jag 
+		uppfattade inte att felet låg där.<br>
+		<br>
+		<br>Jag skrev därefter kompletterande enhetstester för att nå 90% kodtäckning genom att undersöka respektive klass kodtäckningsöversikt och punktbekämpa icke-upptagna områden. Jag tycker att enhetstesterna är ganska behagliga, man följer de metoder man har och testar igenom de olika return-statements de genererar. Jag hade problem med att testa vissa "return null" eftersom att de var avhängiga intern logik i constructorer (initialize database och saveFile). Codecoverage-sidan där man kan gå in och se exakt vilka rader man "betat av" med sin testkod är guld värd.
+		Jag har också i och med "savefile"-användningen fått upp ögonen för ett antal ny asserts.<br>		
+        
+		<h4> Migrering till server </h4>
+		Här stötte jag på mest problem, i slutändan visade det sig att det var för att jag på servern inte hade skrivrättigheter till de filer jag använde för att spara data. Det innebar ett dygns felsökning och jag var inne och petade i allt för att få det att funka. 
+		Till slut fick jag göra en pull på min förra tag och börja om med enbart de åtgärder jag kunde se gav utdelning och sen force push till main när jag var klar och hade en fungerande version.<br>
+		<br>
+		Jag försökte ha chmod hårdkodad i "saveGameData"-funktionen men det gillade inte Symfony eller servern så det fick bli en del av instruktionen vid "installation", att köra chmod för "saveFolder" och "saveFile". 
+		Det gav i vart fall bra förståelse för vad som händer i de respektive miljöerna, något jag inte reflekterat så mycket över tidigare.<br>
+		<br>
+		Det enda jag nu inte lyckats få att funka är min playAudio()-funktion (i adventure.js). 
+		Jag har testat att ta bort spärrar för autouppspelning i min browser men den vägrar ändå spela musiken. Spelet fungerar fint att spela ändå med bara textoutput.
+		
+		<h3>Tankar om kursen</h3>
+		Ännu en bra kurs med genomtänkt utbildningsmaterial. Nu har vi fått se att även PHP kan uppföra sig ganska dynamiskt med hjälp av symfony och lite frontend-stöd från js. Det kanske roligaste examinationsmomentet 
+		så här långt i kursen men tog betydligt längre tid än 40 timmar, kanske för att jag valde lite oortodoxa lösningar och skapade mig själv en del merarbete på flera håll.<br>
+		<br>
+		Jag tycker att kursmaterialet upplevts som mer samlat än vissa av de tidigaste kurserna, det innebär enklare navigation och lättare att hitta. Det enda som fortfarande är lite lurigt är utspridda 
+		inlämningsinstruktioner (uppgiftsspecifik/allmänna på olika ställen ibland). Under hela kursen MVC med php och symfony tycker jag att jag kunnat tillämpa tänk från våra Webbapp-kurs som jag också 
+		upplever är en typ av MVC-upplägg men med annat språk som bas. Jag tror också nu att jag stångats med tillräckligt många ramverk för att förstå att jag inte kan undgå dem och att de faktiskt inte 
+		är så tokig, till exempel för att exludera delar av en bastemplate vid navigation på dess underordnade sidor. Jag tror det vore fördelaktigt om alla i programmet ingående kurser skulle följa samma 
+		"standard" i utformning, jag lägger ganska mycket tid på att hitta "var såg jag det någonstans?" i materialet emellanåt (inte specifikt för denna kurs dock).<br>
+		<br>
+		Efter att ha gjort migreringen hade vi gärna kunnat gå igenom fler "fallgropar" vid migrering eftersom att jag utgår från att det är ett vanligt problem. Utvecklingsmiljön är väldigt förlåtande medan servermiljön är okuvlig.  
+</article>

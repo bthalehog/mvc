@@ -220,7 +220,7 @@ function playAudio(trackName) {
     console.log(`Element created`);
     console.log(`Track ${trackName}`)
 
-    jukebox.src = `/assets/audio/${trackName}`;
+    jukebox.src = `./assets/audio/${trackName}`;
     jukebox.preload = 'auto';
     jukebox.controls = false;
     jukebox.volume = 0.5;

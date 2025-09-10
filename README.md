@@ -122,8 +122,9 @@ OR (if in dev mode):
 20250908 New tag v10.1.2, Updated readme, added report embryo   
 20250908 New tag v10.1.3, Added internal navigation, added constructor unit-test.  
 20250908 New tag v10.1.4, Unit test updated, project code coverage 90+, finalizing report.  
-20250908 New tag v10.1.5, Migrating to server
-20250908 New tag v10.1.6, Migration errors fixed, chmod instruction added for saveGameData permission to write to file, symfony and relative paths implemented.  
+20250910 New tag v10.1.5, Migrating to server  
+20250910 New tag v10.1.6, Migration errors fixed, chmod instruction added for saveGameData permission to write to file, symfony and relative paths implemented.  
+20250910 New tag v10.1.7, Updated report, handing in.    
 
 
 ### Badges earned for kmom10
